@@ -4,6 +4,7 @@ import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import architectspalette.core.registry.util.StoneBlockSet.SetComponent;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -14,16 +15,17 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class APLootTables extends LootTableProvider {
-    public APLootTables(PackOutput pack) {
-        super(pack, Collections.emptySet(), List.of(new SubProviderEntry(APBlockLoot::new, LootContextParamSets.BLOCK)));
+    public APLootTables(PackOutput pack, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(pack, Collections.emptySet(), List.of(new SubProviderEntry(APBlockLoot::new, LootContextParamSets.BLOCK)), lookupProvider);
     }
 
     private static class APBlockLoot extends BlockLootSubProvider {
 
-        protected APBlockLoot() {
-            super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags());
+        protected APBlockLoot(HolderLookup.Provider lookupProvider) {
+            super(Collections.emptySet(), FeatureFlags.REGISTRY.allFlags(), lookupProvider);
         }
 
         @Override
