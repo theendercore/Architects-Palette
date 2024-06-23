@@ -56,8 +56,8 @@ public class WarpingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation name) {
-        this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name)).rewards(AdvancementRewards.Builder.recipe(name)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new Result(name, this.result, this.ingredients, this.dimension, this.advancement, new ResourceLocation(name.getNamespace(), "recipes/" + name.getPath())));
+        this.advancement.parent(ResourceLocation.withDefaultNamespace("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name)).rewards(AdvancementRewards.Builder.recipe(name)).requirements(RequirementsStrategy.OR);
+        consumer.accept(new Result(name, this.result, this.ingredients, this.dimension, this.advancement, ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "recipes/" + name.getPath())));
 
     }
 

@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+import static architectspalette.core.ArchitectsPalette.rl;
 import static architectspalette.core.event.RegisterModelLoadersEventHandler.MODELTYPE_BOARDS;
 import static architectspalette.core.registry.APBlocks.boards;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
@@ -35,7 +36,7 @@ public class Blockstates extends BlockStateProvider {
     private static BlockNode currentNode;
     private final ExistingFileHelper fileHelper;
 
-    private static final ResourceLocation dummy = new ResourceLocation("dummy:dummy");
+    private static final ResourceLocation dummy = ResourceLocation.parse("dummy:dummy");
     private static ResourceLocation currentModelName = dummy;
 
     public Blockstates(PackOutput gen, String modid, ExistingFileHelper exFileHelper) {
@@ -49,7 +50,7 @@ public class Blockstates extends BlockStateProvider {
             //This seems like a bad idea, but it could be a really good idea.
             public BlockModelBuilder getBuilder(String path) {
                 Preconditions.checkNotNull(path, "Path must not be null");
-                ResourceLocation outputLoc = extendWithFolder(path.contains(":") ? new ResourceLocation(path) : new ResourceLocation(modid, path));
+                ResourceLocation outputLoc = extendWithFolder(path.contains(":") ? ResourceLocation.parse(path) : ResourceLocation.fromNamespaceAndPath(modid, path));
                 this.existingFileHelper.trackGenerated(outputLoc, MODEL);
                 var present = generatedModels.get(outputLoc);
                 if (present == null) {
@@ -74,7 +75,7 @@ public class Blockstates extends BlockStateProvider {
                 if (rl.getPath().contains("/")) {
                     return rl;
                 }
-                return new ResourceLocation(rl.getNamespace(), folder + "/" + rl.getPath());
+                return ResourceLocation.fromNamespaceAndPath(rl.getNamespace(), folder + "/" + rl.getPath());
             }
         };
     }
@@ -125,23 +126,23 @@ public class Blockstates extends BlockStateProvider {
 
 
     private static ResourceLocation inBlockFolder(ResourceLocation original) {
-        return new ResourceLocation(original.getNamespace(), "block/" + original.getPath());
+        return ResourceLocation.fromNamespaceAndPath(original.getNamespace(), "block/" + original.getPath());
     }
     private static ResourceLocation inBlockFolder(ResourceLocation original, String append) {
-        return new ResourceLocation(original.getNamespace(), "block/" + original.getPath() + append);
+        return ResourceLocation.fromNamespaceAndPath(original.getNamespace(), "block/" + original.getPath() + append);
     }
     private static ResourceLocation inFolder(ResourceLocation original, String folder) {
-        return new ResourceLocation(original.getNamespace(), folder + "/" + original.getPath());
+        return ResourceLocation.fromNamespaceAndPath(original.getNamespace(), folder + "/" + original.getPath());
     }
     private static ResourceLocation append(ResourceLocation original, String append) {
-        return new ResourceLocation(original.getNamespace(), original.getPath() + append);
+        return ResourceLocation.fromNamespaceAndPath(original.getNamespace(), original.getPath() + append);
     }
     private static ResourceLocation bottom(ResourceLocation original) {return inBlockFolder(original, "_bottom"); }
     private static ResourceLocation top(ResourceLocation original) { return inBlockFolder(original, "_top"); }
     private static ResourceLocation side(ResourceLocation original) { return inBlockFolder(original, "_side");}
 
     private static ResourceLocation inMinecraftBlock(String name) {
-        return new ResourceLocation("minecraft", "block/" + name);
+        return ResourceLocation.fromNamespaceAndPath("minecraft", "block/" + name);
     }
 
     private static String fileName(ResourceLocation block) {
@@ -153,7 +154,7 @@ public class Blockstates extends BlockStateProvider {
     }
 
     private static ResourceLocation modResourceLocation(String name) {
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, name);
+        return rl(name);
     }
 
     private static int getYRotation(Direction direction) {
@@ -509,7 +510,7 @@ public class Blockstates extends BlockStateProvider {
         private String wrapper_type;
         private BlockModelBuilder wrapped_model;
         public WrappedModelLoaderBuilder(T parent, ExistingFileHelper existingFileHelper) {
-            super(ArchitectsPalette.rl("wrapped"), parent, existingFileHelper);
+            super(rl("wrapped"), parent, existingFileHelper);
         }
 
         public BlockModelBuilder setWrapper(String type, BlockModelBuilder builder) {

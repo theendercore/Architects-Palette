@@ -19,9 +19,11 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Arrays;
 import java.util.List;
 
+import static architectspalette.core.ArchitectsPalette.rl;
+
 public class WarpingRecipeCategory implements IRecipeCategory<WarpingRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(ArchitectsPalette.MOD_ID, "warping");
+    public static final ResourceLocation UID = rl("warping");
 
     private final Component title;
     private final IDrawable background;
@@ -29,7 +31,7 @@ public class WarpingRecipeCategory implements IRecipeCategory<WarpingRecipe> {
 
     public WarpingRecipeCategory(IGuiHelper helper) {
         title = Component.translatable(ArchitectsPalette.MOD_ID + ".info.warping_recipe_title");
-        background = helper.createDrawable(new ResourceLocation(ArchitectsPalette.MOD_ID, "textures/gui/warping_recipe.png"), 0, 0, 117, 57);
+        background = helper.createDrawable(rl("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get()));
     }
 

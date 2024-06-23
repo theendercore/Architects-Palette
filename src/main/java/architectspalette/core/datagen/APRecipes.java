@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import static architectspalette.core.ArchitectsPalette.rl;
 import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.APItems.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
@@ -304,7 +305,7 @@ public class APRecipes extends RecipeProvider {
     }
 
     private static ResourceLocation smeltingName(ItemLike item, ItemLike from) {
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, "smelting/" + getItemName(item));
+        return rl("smelting/" + getItemName(item));
     }
 
     private static final Map<String, Boolean> stonecuttingMap = new HashMap<>();
@@ -313,13 +314,13 @@ public class APRecipes extends RecipeProvider {
         if (stonecuttingMap.put(string, true) != null) {
             string += "_from_" + getItemName(from);
         }
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, "stonecutting/" + string);
+        return rl("stonecutting/" + string);
     }
     private static ResourceLocation warpingName(Block item, Block from) {
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, "warping/" + getItemName(item) + "_from_" + getItemName(from) + "_warping");
+        return rl("warping/" + getItemName(item) + "_from_" + getItemName(from) + "_warping");
     }
     private static ResourceLocation blastingName(ItemLike item, ItemLike from) {
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, "blasting/" + getItemName(item) + "_from_" + getItemName(from) + "_blasting");
+        return rl("blasting/" + getItemName(item) + "_from_" + getItemName(from) + "_blasting");
     }
 
     private static void quickWarpingRecipe(Consumer<FinishedRecipe> consumer, Block result, Block from, ResourceKey<Level> dimension) {
@@ -366,7 +367,7 @@ public class APRecipes extends RecipeProvider {
     }
 
     private static ResourceLocation modId(String name) {
-        return new ResourceLocation(ArchitectsPalette.MOD_ID, name);
+        return rl(name);
     }
 
     private static int getStoneCuttingCount(BlockType type) {

@@ -1,14 +1,15 @@
 package architectspalette.core.integration.advancement;
 
-import architectspalette.core.ArchitectsPalette;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
+import static architectspalette.core.ArchitectsPalette.rl;
+
 public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.Instance> {
 
-    private static final ResourceLocation ID = new ResourceLocation(ArchitectsPalette.MOD_ID, "carve_totem");
+    private static final ResourceLocation ID = rl("carve_totem");
 
     public ResourceLocation getId() {
         return ID;

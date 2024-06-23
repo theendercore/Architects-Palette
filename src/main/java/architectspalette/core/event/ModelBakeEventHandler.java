@@ -35,7 +35,7 @@ public class ModelBakeEventHandler {
     public static void onModelBake(ModelEvent.ModifyBakingResult event) {
         Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
 //
-//        SpriteShift birchShift = new SpriteShift(new ResourceLocation(ArchitectsPalette.MOD_ID, "block/birch_boards"), new ResourceLocation(ArchitectsPalette.MOD_ID, "block/birch_boards_odd"));
+//        SpriteShift birchShift = new SpriteShift(rl("block/birch_boards"), rl("block/birch_boards_odd"));
 //        register(APBlocks.BIRCH_BOARDS, model -> new BoardModel(model, birchShift));
 
         //Note; Not all model swaps are registered here.
@@ -58,8 +58,8 @@ public class ModelBakeEventHandler {
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
     @SuppressWarnings("unused")
     public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation blockToRegister, ResourceLocation baseBoardBlock) {
-        var inBlockFolder = new ResourceLocation(baseBoardBlock.getNamespace(),"block/" + baseBoardBlock.getPath());
-        var odd = new ResourceLocation(inBlockFolder.getNamespace(), inBlockFolder.getPath() + "_odd");
+        var inBlockFolder = ResourceLocation.fromNamespaceAndPath(baseBoardBlock.getNamespace(),"block/" + baseBoardBlock.getPath());
+        var odd = ResourceLocation.fromNamespaceAndPath(inBlockFolder.getNamespace(), inBlockFolder.getPath() + "_odd");
         register(supplier, blockToRegister, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
     }
 

@@ -7,6 +7,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static architectspalette.core.ArchitectsPalette.rl;
+
 @Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID)
 public class MissingMappingsEventHandler {
 
@@ -22,7 +24,7 @@ public class MissingMappingsEventHandler {
                 //trace(name + " is from the mod");
                 if (e.getKey().getPath().contains("limestone")) {
                     String newpath = e.getKey().getPath().replace("limestone", "myonite");
-                    ResourceLocation newresource = new ResourceLocation(ArchitectsPalette.MOD_ID, newpath);
+                    ResourceLocation newresource = rl(newpath);
                     if (e.getRegistry().containsKey(newresource)) {
                         e.remap(e.getRegistry().getValue(newresource));
                         ArchitectsPalette.LOGGER.warn("Remapping {} to {}", e.getKey().toString(), newresource.toString());
@@ -31,14 +33,14 @@ public class MissingMappingsEventHandler {
                 else {
                     if (e.getKey().getPath().contains("heavy_dripstone") && !e.getKey().getPath().contains("bricks")) {
                         ArchitectsPalette.LOGGER.warn("Remapping Heavy Dripstone to Heavy Dripstone Bricks");
-                        e.remap(e.getRegistry().getValue(new ResourceLocation(ArchitectsPalette.MOD_ID, "heavy_dripstone_bricks")));
+                        e.remap(e.getRegistry().getValue(rl("heavy_dripstone_bricks")));
                     }
                 }
                 if (name.contains("albert")) {
                     ///trace("contains albert");
                     String newpath = name.replace("albert", "moonshale");
                     //trace(newpath);
-                    ResourceLocation newresource = new ResourceLocation(ArchitectsPalette.MOD_ID, newpath);
+                    ResourceLocation newresource = rl(newpath);
                     e.remap(e.getRegistry().getValue(newresource));
                     if (e.getRegistry().containsKey(newresource)) {
 

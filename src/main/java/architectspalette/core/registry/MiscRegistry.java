@@ -6,7 +6,6 @@ import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,6 +17,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import static architectspalette.core.ArchitectsPalette.rl;
+
 @Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MiscRegistry {
 
@@ -28,7 +29,7 @@ public class MiscRegistry {
     public static final TagKey<Block> NUBS = blockTag("nubs");
 
     public static TagKey<Block> blockTag(String name) {
-        return TagKey.create(Registries.BLOCK, new ResourceLocation(ArchitectsPalette.MOD_ID + ":" + name));
+        return TagKey.create(Registries.BLOCK, rl(name));
     }
 
     //Particles

@@ -96,7 +96,7 @@ public class WarpingRecipe implements Recipe<Container> {
                     GsonHelper.getAsJsonArray(json, "ingredient") : GsonHelper.getAsJsonObject(json, "ingredient");
             final Ingredient input = Ingredient.fromJson(inputElement);
             final ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-            final ResourceLocation dimensionId = new ResourceLocation(GsonHelper.getAsString(json, "dimension"));
+            final ResourceLocation dimensionId = ResourceLocation.parse(GsonHelper.getAsString(json, "dimension"));
 
             return new WarpingRecipe(recipeId, input, output, dimensionId);
         }

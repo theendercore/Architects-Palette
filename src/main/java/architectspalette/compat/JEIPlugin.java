@@ -25,12 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static architectspalette.core.ArchitectsPalette.rl;
 import static architectspalette.core.registry.APBlocks.*;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
 
-    private static final ResourceLocation PLUGIN_ID = new ResourceLocation(ArchitectsPalette.MOD_ID, "jei_plugin");
+    private static final ResourceLocation PLUGIN_ID = rl("jei_plugin");
     public static final RecipeType<WarpingRecipe> WARPING = RecipeType.create(ArchitectsPalette.MOD_ID, "warping", WarpingRecipe.class);
 
     @Override

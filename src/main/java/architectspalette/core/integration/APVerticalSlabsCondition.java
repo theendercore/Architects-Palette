@@ -1,7 +1,6 @@
 package architectspalette.core.integration;
 
 import architectspalette.content.blocks.VerticalSlabBlock;
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.config.APConfig;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
@@ -10,10 +9,12 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import net.minecraftforge.fml.ModList;
 
+import static architectspalette.core.ArchitectsPalette.rl;
+
 public class APVerticalSlabsCondition implements ICondition {
 
 	public static APVerticalSlabsCondition instance = new APVerticalSlabsCondition();
-	private static final ResourceLocation ID = new ResourceLocation(ArchitectsPalette.MOD_ID, "enable_vertical_slabs");
+	private static final ResourceLocation ID = rl("enable_vertical_slabs");
 	
 	@Override
 	public ResourceLocation getID() {

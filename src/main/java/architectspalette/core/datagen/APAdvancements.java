@@ -49,7 +49,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .display(APBlocks.CHISELED_ABYSSALINE_BRICKS.get().asItem(),
                         getTranslationKey("advancement.root"),
                         getTranslationKey("advancement.root.desc"),
-                        new ResourceLocation("architects_palette:textures/block/myonite_bricks.png"),
+                        ResourceLocation.parse("architects_palette:textures/block/myonite_bricks.png"),
                         FrameType.TASK, false, false, false)
                 .addCriterion("craftingtable", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
                 .save(advancementConsumer, getNameId("main/root"), existingFileHelper);

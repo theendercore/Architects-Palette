@@ -1,6 +1,5 @@
 package architectspalette.core.model.util;
 
-import architectspalette.core.ArchitectsPalette;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
@@ -9,6 +8,8 @@ import net.minecraft.world.inventory.InventoryMenu;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+
+import static architectspalette.core.ArchitectsPalette.rl;
 
 public class SpriteShift {
 
@@ -25,7 +26,7 @@ public class SpriteShift {
         return shift;
     }
     public static SpriteShift getShift(String from_block, String to_block) {
-        return getShift(new ResourceLocation(ArchitectsPalette.MOD_ID, from_block), new ResourceLocation(ArchitectsPalette.MOD_ID, to_block));
+        return getShift(rl(from_block), rl(to_block));
     }
 
     public static void onTexturesDoneStitching() {
