@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class QuadHelper {
 
     public static final VertexFormat FORMAT = DefaultVertexFormat.BLOCK;
-    public static final int VERTEX_STRIDE = FORMAT.getIntegerSize();
+    public static final int VERTEX_STRIDE = FORMAT.getVertexSize(); //(ender) I have no idea what this should be. :)
 
     public static final int X_OFFSET = 0;
     public static final int Y_OFFSET = 1;
