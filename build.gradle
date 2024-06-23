@@ -13,13 +13,20 @@ base {
     archivesName = "${mod_build_name}-${minecraft_version}"
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+// Mojang ships Java 21 to end users in 1.20.6+, so your mod should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 //Add datagen and asset repo to resources folder when built
 sourceSets.main.resources {
     srcDirs += 'src/ap-assets/resources'
     srcDirs += 'src/generated/resources'
+}
+
+// if this is not here "resources" will not be included (thanks forge-gradle)
+sourceSets.each {
+    def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
+    it.output.resourcesDir = dir
+    it.java.destinationDirectory = dir
 }
 
 //println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -36,7 +43,7 @@ minecraft {
             property 'forge.logging.markers', ''
             property 'forge.logging.console.level', 'debug'
 
-            arg "--mixin="+project.mod_id+".mixins.json"
+            arg "--mixin=${project.mod_id}.mixins.json"
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -99,13 +106,18 @@ dependencies {
         jarJar.ranged(it, "[0.3.5,)")
     }
 
+
+    // removing fg.deobf is a hack fix for gradle not loading at all once again thank forge-gradle :)
     //Copied from https://github.com/mezz/JustEnoughItems/wiki/Getting-Started-%5B1.13-and-Up%5D
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    compileOnly ("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly ("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    runtimeOnly ("mezz.jei:jei-${minecraft_version}-common:${jei_version}")
+    runtimeOnly ("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    // this fixes the problem of forge not booting, i dont know why this is needed, thanks forge-gradle :) (I learnt why this is need, its a hacky fix for dependency hell)
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
 }
 mixin {
     add sourceSets.main, "${project.mod_id}.refmap.json"
