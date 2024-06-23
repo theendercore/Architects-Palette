@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import static architectspalette.core.ArchitectsPalette.rl;
 
 public class APCriterion {
+    //this is here to just initialize things
+    public static void init() {}
 
     public static CarveTotemTrigger CARVE_TOTEM = register(rl("carve_totem"),new CarveTotemTrigger());
 

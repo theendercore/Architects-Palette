@@ -71,7 +71,8 @@ public class ArchitectsPalette {
         APTrades.registerTrades();
 
         // Is this okay to go here?
-        APCriterion.register();
+        // (ender) I mean that's kind what vanilla does so probably
+        APCriterion.init();
     }
 
     void registerRecipeSerializers(IEventBus bus) {
