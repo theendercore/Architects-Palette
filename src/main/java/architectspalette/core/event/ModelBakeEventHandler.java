@@ -33,7 +33,7 @@ public class ModelBakeEventHandler {
 
     @SubscribeEvent
     public static void onModelBake(ModelEvent.ModifyBakingResult event) {
-        Map<ResourceLocation, BakedModel> modelRegistry = event.getModels();
+        Map<ModelResourceLocation, BakedModel> modelRegistry = event.getModels();
 //
 //        SpriteShift birchShift = new SpriteShift(rl("block/birch_boards"), rl("block/birch_boards_odd"));
 //        register(APBlocks.BIRCH_BOARDS, model -> new BoardModel(model, birchShift));
@@ -63,11 +63,11 @@ public class ModelBakeEventHandler {
         register(supplier, blockToRegister, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
     }
 
-    private static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry, List<ModelResourceLocation> locations, Function<BakedModel, T> modelFactory) {
+    private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, List<ModelResourceLocation> locations, Function<BakedModel, T> modelFactory) {
         locations.forEach( location -> swapModels(modelRegistry, location, modelFactory));
     }
 
-    private static <T extends BakedModel> void swapModels(Map<ResourceLocation, BakedModel> modelRegistry, ModelResourceLocation location, Function<BakedModel, T> modelFactory) {
+    private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, ModelResourceLocation location, Function<BakedModel, T> modelFactory) {
         modelRegistry.put(location, modelFactory.apply(modelRegistry.get(location)));
     }
 
