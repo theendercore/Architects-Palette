@@ -31,7 +31,7 @@ public class GreenFireBlock extends BaseFireBlock {
 
     //It's the little things. Pick block on the fire will give you flint and steel to light one. Vanilla doesn't do this.
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return new ItemStack(Items.FLINT_AND_STEEL);
     }
 
