@@ -27,7 +27,7 @@ public class GatherData {
             generator.addProvider(true, blocktagger);
             generator.addProvider(true, new APItemTags(pack, event.getLookupProvider(), blocktagger, event.getExistingFileHelper()));
             generator.addProvider(true, new APLootTables(pack));
-            generator.addProvider(true, new APRecipes(pack));
+            generator.addProvider(true, new APRecipes(pack, event.getLookupProvider()));
 
             generator.addProvider(true, new DatapackBuiltinEntriesProvider(pack, event.getLookupProvider(),
                     APInternalData.getRegistrySetBuilder(),
