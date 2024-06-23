@@ -101,7 +101,7 @@ public class CageLanternBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult hit) {
         BlockState newState = state.setValue(INVERTED, !state.getValue(INVERTED));
         worldIn.setBlock(pos, newState.setValue(LIT, getLitState(newState, worldIn, pos)), 2);
 
