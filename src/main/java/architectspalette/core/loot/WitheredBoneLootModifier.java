@@ -1,8 +1,7 @@
 package architectspalette.core.loot;
 
-import architectspalette.core.ArchitectsPalette;
 import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.Entity;
@@ -23,7 +22,7 @@ public class WitheredBoneLootModifier extends LootModifier {
     private final Item replacedItem;
     private final Item boneItem;
 
-    public static final Supplier<Codec<WitheredBoneLootModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.create(inst -> codecStart(inst)
+    public static final Supplier<MapCodec<WitheredBoneLootModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.mapCodec(inst -> codecStart(inst)
         .and(
             inst.group(
                 ForgeRegistries.ITEMS.getCodec().fieldOf("replaces").forGetter((m) -> m.replacedItem),
@@ -58,7 +57,7 @@ public class WitheredBoneLootModifier extends LootModifier {
     }
 
     @Override
-    public Codec<? extends IGlobalLootModifier> codec()
+    public MapCodec<? extends IGlobalLootModifier> codec()
     {
         return CODEC.get();
     }
