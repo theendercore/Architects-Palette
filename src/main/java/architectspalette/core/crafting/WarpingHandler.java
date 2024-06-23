@@ -1,10 +1,14 @@
 package architectspalette.core.crafting;
 
+import architectspalette.core.registry.APRecipes;
 import architectspalette.core.registry.APSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
@@ -36,28 +40,22 @@ public class WarpingHandler {
 //        }
 //    }
 
-    //New
-    public static class TransformationInv extends RecipeWrapper {
-        public TransformationInv() {
-            super(new ItemStackHandler(1));
-        }
-    }
+    public static SingleRecipeInput transformationInv;
 
-    public static TransformationInv transformationInv = new TransformationInv();
-
-    private static Optional<WarpingRecipe> getRecipe(ItemStack item, Level world) {
-        transformationInv.setItem(0, item);
-        return WarpingRecipe.TYPE.find(transformationInv, world);
+    private static Optional<RecipeHolder<WarpingRecipe>> getRecipe(ItemStack item, Level world) {
+        transformationInv = new SingleRecipeInput(item);
+        return world.getRecipeManager()
+                    .getRecipeFor(APRecipes.WARPING.get(), new SingleRecipeInput(item), world);
     }
 
     public static ItemStack getTransformedItem(ItemStack itemIn, Level world) {
-        Optional<WarpingRecipe> recipe = getRecipe(itemIn, world);
+        Optional<RecipeHolder<WarpingRecipe>> recipe = getRecipe(itemIn, world);
 //        if (recipe.isPresent()) {
 //            return recipe.get().getCraftingResult(transformationInv);
 //        }
 //        return null;
         //intellij decided it could replace the above with this, kinda nuts
-        return recipe.map(warpingRecipe -> warpingRecipe.assemble(transformationInv, world.getServer().registryAccess())).orElse(null);
+        return recipe.map(warpingRecipe -> warpingRecipe.value().assemble(transformationInv, world.getServer().registryAccess())).orElse(null);
     }
 
 

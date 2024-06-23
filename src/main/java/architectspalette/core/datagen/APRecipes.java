@@ -324,7 +324,7 @@ public class APRecipes extends RecipeProvider {
     }
 
     private static void quickWarpingRecipe(RecipeOutput output, Block result, Block from, ResourceKey<Level> dimension) {
-        new WarpingRecipeBuilder(result.asItem(), dimension, Ingredient.of(from))
+        new WarpingRecipeBuilder(Ingredient.of(from), result, dimension.location())
                 .unlockedBy(getHasName(from), has(from))
                 .save(output, warpingName(result, from));
     }

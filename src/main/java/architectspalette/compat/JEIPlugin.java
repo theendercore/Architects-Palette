@@ -4,6 +4,7 @@ import architectspalette.content.blocks.BigBrickBlock;
 import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.crafting.WarpingRecipe;
+import architectspalette.core.registry.APRecipes;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import mezz.jei.api.IModPlugin;
@@ -17,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
@@ -32,7 +34,7 @@ import static architectspalette.core.registry.APBlocks.*;
 public class JEIPlugin implements IModPlugin {
 
     private static final ResourceLocation PLUGIN_ID = rl("jei_plugin");
-    public static final RecipeType<WarpingRecipe> WARPING = RecipeType.create(ArchitectsPalette.MOD_ID, "warping", WarpingRecipe.class);
+    public static final RecipeType<RecipeHolder<WarpingRecipe>> WARPING = RecipeType.createFromVanilla(APRecipes.WARPING.get());
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -52,7 +54,7 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         //Register recipes
-        registration.addRecipes(WARPING, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(WarpingRecipe.TYPE));
+        registration.addRecipes(WARPING, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(APRecipes.WARPING.get()));
 
         //Register item info
         builder()

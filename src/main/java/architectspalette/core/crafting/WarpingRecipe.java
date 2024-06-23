@@ -1,37 +1,31 @@
 package architectspalette.core.crafting;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import architectspalette.core.registry.APRecipes;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
+import static architectspalette.core.registry.APRecipes.WARPING_SERIALIZER;
 
-public class WarpingRecipe implements Recipe<Container> {
-
-    public static final Serializer SERIALIZER = new Serializer();
-    public static WarpingRecipe.WarpRecipeType TYPE = new WarpRecipeType();
-
+// (ender) I used SingleRecipeInput since I didn't think it needs to have mor then one item input,
+// but you can blame me if this breaks stuff
+public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     private final Ingredient input;
     private final ItemStack output;
     private final ResourceLocation dimension;
-    private final ResourceLocation id;
 
-    public WarpingRecipe(ResourceLocation id, Ingredient input, ItemStack output, ResourceLocation dimension) {
+    public WarpingRecipe(Ingredient input, ItemStack output, ResourceLocation dimension) {
         this.input = input;
         this.output = output;
         this.dimension = dimension;
-        this.id = id;
     }
-
     public ResourceLocation getDimension() {
         return this.dimension;
     }
@@ -41,18 +35,17 @@ public class WarpingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public boolean matches(Container inv, Level worldIn) {
-        return this.input.test(inv.getItem(0)) && (this.dimension.compareTo(worldIn.dimension().location()) == 0);
-    }
-
-    @Override
     public boolean isSpecial() {
         return true;
     }
 
     @Override
-    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
-        return this.getResultItem(registryAccess).copy();
+    public boolean matches(SingleRecipeInput input, Level level) {
+        return this.input.test(input.getItem(0)) && (this.dimension.compareTo(level.dimension().location()) == 0);
+    }
+
+    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider provider) {
+        return this.getResultItem(provider).copy();
     }
 
     @Override
@@ -61,9 +54,10 @@ public class WarpingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return this.output;
     }
+
     public ItemStack getResult() {
         return this.output;
     }
@@ -74,63 +68,64 @@ public class WarpingRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ResourceLocation getId() {
-        return this.id;
+    public RecipeType<?> getType() {
+        return APRecipes.WARPING.get();
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return SERIALIZER;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return WarpingRecipe.TYPE;
+        return WARPING_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<WarpingRecipe> {
-        @Override
-        public WarpingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        public static final MapCodec<WarpingRecipe> CODEC = RecordCodecBuilder.mapCodec(
+                instance -> instance.group(
+                                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(recipe -> recipe.input),
+                                ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                                ResourceLocation.CODEC.fieldOf("dimension").forGetter(recipe -> recipe.dimension)
+                        )
+                        .apply(instance, WarpingRecipe::new)
+        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> STREAM_CODEC =  StreamCodec.composite(
+                Ingredient.CONTENTS_STREAM_CODEC,
+                recipe -> recipe.input,
+                ItemStack.STREAM_CODEC,
+                recipe -> recipe.output,
+                ResourceLocation.STREAM_CODEC,
+                recipe -> recipe.dimension,
+                WarpingRecipe::new
+        );
 
-            final JsonElement inputElement = GsonHelper.isArrayNode(json, "ingredient") ?
-                    GsonHelper.getAsJsonArray(json, "ingredient") : GsonHelper.getAsJsonObject(json, "ingredient");
-            final Ingredient input = Ingredient.fromJson(inputElement);
-            final ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-            final ResourceLocation dimensionId = ResourceLocation.parse(GsonHelper.getAsString(json, "dimension"));
-
-            return new WarpingRecipe(recipeId, input, output, dimensionId);
-        }
-
-        @Nullable
-        @Override
-        public WarpingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-
-            final Ingredient input = Ingredient.fromNetwork(buffer);
-            final ItemStack output = buffer.readItem();
-            final ResourceLocation dimensionId = buffer.readResourceLocation();
-
-            return new WarpingRecipe(recipeId, input, output, dimensionId);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, WarpingRecipe recipe) {
-            recipe.input.toNetwork(buffer);
-            buffer.writeItem(recipe.output);
-            buffer.writeResourceLocation(recipe.dimension);
-        }
-    }
-
-    public static class WarpRecipeType implements RecipeType<WarpingRecipe> {
+        // (ender) In case the codec above doesn't work, this is how you could write it.
+//                StreamCodec.of(
+//                WarpingRecipe2.Serializer::toNetwork, WarpingRecipe2.Serializer::fromNetwork
+//        );
 
         @Override
-        public String toString() {
-            return "warping";
+        public MapCodec<WarpingRecipe> codec() {
+            return CODEC;
         }
 
-        public <C extends Container> Optional<WarpingRecipe> find(C inv, Level world) {
-            return world.getRecipeManager()
-                    .getRecipeFor(WarpingRecipe.TYPE, inv, world);
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
 
+//        private static WarpingRecipe2 fromNetwork(RegistryFriendlyByteBuf buf) {
+//            String s = buf.readUtf();
+//            CraftingBookCategory craftingbookcategory = buf.readEnum(CraftingBookCategory.class);
+//            ShapedRecipePattern shapedrecipepattern = ShapedRecipePattern.STREAM_CODEC.decode(buf);
+//            ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
+//            boolean flag = buf.readBoolean();
+//            return new ShapedRecipe(s, craftingbookcategory, shapedrecipepattern, itemstack, flag);
+//        }
+//
+//        private static void toNetwork(RegistryFriendlyByteBuf buf, WarpingRecipe2 recipe) {
+//            buf.writeUtf(recipe.group);
+//            buf.writeEnum(recipe.category);
+//            ShapedRecipePattern.STREAM_CODEC.encode(buf, recipe.pattern);
+//            ItemStack.STREAM_CODEC.encode(buf, recipe.result);
+//            buf.writeBoolean(recipe.showNotification);
+//        }
     }
 }

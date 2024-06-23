@@ -1,46 +1,42 @@
 package architectspalette.core.datagen;
 
 import architectspalette.core.crafting.WarpingRecipe;
-import com.google.common.collect.Lists;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WarpingRecipeBuilder implements RecipeBuilder {
+    private final Ingredient input;
+    private final Item output;
+    private final ResourceLocation dimension;
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    private final ResourceKey<Level> dimension;
-    private final Item result;
-    private final List<Ingredient> ingredients = Lists.newArrayList();;
-    private final Advancement.Builder advancement = Advancement.Builder.advancement();
-
-    public WarpingRecipeBuilder(Item result, ResourceKey<Level> dimension, Ingredient... ingredients) {
+    public WarpingRecipeBuilder(Ingredient input, ItemLike output, ResourceLocation dimension) {
+        this.input = input;
+        this.output = output.asItem();
         this.dimension = dimension;
-        this.result = result;
-        this.ingredients.addAll(Arrays.asList(ingredients));
+    }
+
+    public static WarpingRecipeBuilder warping(Ingredient input, ItemLike output, ResourceLocation dimension) {
+        return new WarpingRecipeBuilder(input, output , dimension);
     }
 
 
-    @Override
-    public RecipeBuilder unlockedBy(String p_176496_, CriterionTriggerInstance p_176497_) {
-        this.advancement.addCriterion(p_176496_, p_176497_);
+    public WarpingRecipeBuilder unlockedBy(String p_176810_, Criterion<?> p_298188_) {
+        this.criteria.put(p_176810_, p_298188_);
         return this;
     }
 
@@ -51,71 +47,24 @@ public class WarpingRecipeBuilder implements RecipeBuilder {
 
     @Override
     public Item getResult() {
-        return result;
+        return this.output;
     }
 
     @Override
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation name) {
-        this.advancement.parent(ResourceLocation.withDefaultNamespace("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name)).rewards(AdvancementRewards.Builder.recipe(name)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new Result(name, this.result, this.ingredients, this.dimension, this.advancement, ResourceLocation.fromNamespaceAndPath(name.getNamespace(), "recipes/" + name.getPath())));
-
+    public void save(RecipeOutput output, ResourceLocation name) {
+        this.ensureValid(name);
+        Advancement.Builder advancement$builder = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name))
+                .rewards(AdvancementRewards.Builder.recipe(name))
+                .requirements(AdvancementRequirements.Strategy.OR);
+        this.criteria.forEach(advancement$builder::addCriterion);
+        WarpingRecipe warpingRecipe = new WarpingRecipe(this.input, new ItemStack(this.output), this.dimension);
+        output.accept(name, warpingRecipe, advancement$builder.build(name.withPrefix("recipes/warping/")));
     }
 
-
-    public static class Result implements FinishedRecipe {
-
-
-        private final ResourceLocation name;
-        private final Item result;
-        private final List<Ingredient> ingredients;
-        private final Advancement.Builder advancement;
-        private final ResourceLocation advancementName;
-        private final ResourceKey<Level> dimension;
-
-        public Result(ResourceLocation name, Item result, List<Ingredient> ingredients, ResourceKey<Level> dimension, Advancement.Builder advancement, ResourceLocation advancementName) {
-            this.name = name;
-            this.result = result;
-            this.ingredients = ingredients;
-            this.advancement = advancement;
-            this.advancementName = advancementName;
-            this.dimension = dimension;
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            JsonArray jsonarray = new JsonArray();
-
-            for(Ingredient ingredient : this.ingredients) {
-                jsonarray.add(ingredient.toJson());
-            }
-            json.add("ingredient", jsonarray);
-
-            JsonObject item = new JsonObject();
-            item.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString());
-            json.add("result", item);
-            json.addProperty("dimension", dimension.location().toString());
-        }
-
-        @Override
-        public ResourceLocation getId() {
-            return name;
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return WarpingRecipe.SERIALIZER;
-        }
-
-        @Nullable
-        @Override
-        public JsonObject serializeAdvancement() {
-            return this.advancement.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return advancementName;
+    private void ensureValid(ResourceLocation name) {
+        if (this.criteria.isEmpty()) {
+            throw new IllegalStateException("No way of obtaining recipe " + name);
         }
     }
 }

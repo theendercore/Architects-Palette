@@ -1,6 +1,7 @@
 package architectspalette.core;
 
 import architectspalette.core.config.APConfig;
+import architectspalette.core.registry.APRecipes;
 import architectspalette.core.crafting.WarpingRecipe;
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.integration.APTrades;
@@ -50,11 +51,12 @@ public class ArchitectsPalette {
         APBlocks.BLOCKS.register(modEventBus);
         APItems.ITEMS.register(modEventBus);
         APFeatures.FEATURES.register(modEventBus);
+        APRecipes.RECIPE_TYPES.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, this::setupCommon);
         modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
 
-        registerRecipeSerializers(modEventBus);
+//        registerRecipeSerializers(modEventBus);
         registerLootSerializers(modEventBus);
         // Biomes need to be registered before features.
         registerBiomeSerializers(modEventBus);
@@ -75,19 +77,19 @@ public class ArchitectsPalette {
         APCriterion.init();
     }
 
-    void registerRecipeSerializers(IEventBus bus) {
-        //Register the recipe type
-        DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ArchitectsPalette.MOD_ID);
-        RegistryObject<RecipeType<WarpingRecipe>> WARPING = RECIPE_TYPES.register(WarpingRecipe.TYPE.toString(), () -> new RecipeType<>() {
-        });
-
-        //Register the serializer
-        DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ArchitectsPalette.MOD_ID);
-        RegistryObject<WarpingRecipe.Serializer> WARPING_S = RECIPE_SERIALIZERS.register(WarpingRecipe.TYPE.toString(), () -> WarpingRecipe.SERIALIZER);
-
-        RECIPE_TYPES.register(bus);
-        RECIPE_SERIALIZERS.register(bus);
-    }
+//    void registerRecipeSerializers(IEventBus bus) {
+//        //Register the recipe type
+//        DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, ArchitectsPalette.MOD_ID);
+//        RegistryObject<RecipeType<WarpingRecipe>> WARPING = RECIPE_TYPES.register(WarpingRecipe.TYPE.toString(), () -> new RecipeType<>() {
+//        });
+//
+//        //Register the serializer
+//        DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ArchitectsPalette.MOD_ID);
+//        RegistryObject<WarpingRecipe.Serializer> WARPING_S = RECIPE_SERIALIZERS.register(WarpingRecipe.TYPE.toString(), () -> WarpingRecipe.SERIALIZER);
+//
+//        RECIPE_TYPES.register(bus);
+//        RECIPE_SERIALIZERS.register(bus);
+//    }
 
     void registerLootSerializers(IEventBus bus) {
         DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ArchitectsPalette.MOD_ID);
