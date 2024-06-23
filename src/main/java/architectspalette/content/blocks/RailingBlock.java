@@ -1,5 +1,6 @@
 package architectspalette.content.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class RailingBlock extends CrossCollisionBlock {
+    public static final MapCodec<RailingBlock> CODEC = simpleCodec(RailingBlock::new);
 
     private final VoxelShape[] occlusionByIndex;
 
@@ -23,6 +25,10 @@ public class RailingBlock extends CrossCollisionBlock {
         super(2.0F, 2.0F, 8, 8, 10.0F, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(NORTH, false).setValue(EAST, false).setValue(SOUTH, false).setValue(WEST, false).setValue(WATERLOGGED, false));
         this.occlusionByIndex = this.makeShapes(2.0F, 1.0F, 8, 8, 8);
+    }
+    @Override
+    protected MapCodec<? extends RailingBlock> codec() {
+        return CODEC;
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

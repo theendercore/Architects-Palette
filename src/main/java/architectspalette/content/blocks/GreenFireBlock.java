@@ -1,6 +1,8 @@
 package architectspalette.content.blocks;
 
+import architectspalette.content.blocks.util.HorizontalFacingBlock;
 import architectspalette.core.registry.MiscRegistry;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
@@ -11,15 +13,20 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 
 public class GreenFireBlock extends BaseFireBlock {
-
+    public static final MapCodec<GreenFireBlock> CODEC = simpleCodec(GreenFireBlock::new);
     //More or less a copy of SoulFireBlock. Just appropriated for its new purpose.
     public GreenFireBlock(Properties properties) {
         //Does three damage because I think it's funny
         super(properties, 3.0F);
+    }
+    @Override
+    protected MapCodec<? extends GreenFireBlock> codec() {
+        return CODEC;
     }
 
     //It's the little things. Pick block on the fire will give you flint and steel to light one. Vanilla doesn't do this.
