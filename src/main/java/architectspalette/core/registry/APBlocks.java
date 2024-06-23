@@ -10,7 +10,7 @@ import architectspalette.content.blocks.entrails.DrippyBlock;
 import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
-import architectspalette.content.worldgen.features.TwistedTree;
+import architectspalette.content.worldgen.features.APTreeGrowers;
 import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -206,7 +206,7 @@ public class APBlocks {
             () -> new    ButtonBlock(APBlockProperties.TwistedWood(true), BlockSetType.OAK, 30, true), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
     public static final RegistryObject<Block> TWISTED_PRESSURE_PLATE = createBlock("twisted_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, APBlockProperties.TwistedWood(true), BlockSetType.OAK), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-    public static final RegistryObject<Block>        TWISTED_SAPLING = createBlock("twisted_sapling", () -> new SaplingBlock(new TwistedTree(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), CreativeModeTabs.NATURAL_BLOCKS);
+    public static final RegistryObject<Block>        TWISTED_SAPLING = createBlock("twisted_sapling", () -> new SaplingBlock(APTreeGrowers.WARPED_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), CreativeModeTabs.NATURAL_BLOCKS);
     public static final RegistryObject<Block> POTTED_TWISTED_SAPLING = createPottedPlant(TWISTED_SAPLING);
 
     // Basalt Tiles
