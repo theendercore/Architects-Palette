@@ -221,7 +221,7 @@ public class APRecipes extends RecipeProvider {
                         var slab = n.getSibling(SLAB).get();
                         //Craft from slabs
                         //I have no idea how this shit works
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.instance)
+                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
                                 .recipe((c) -> {
                                     ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 3)
                                             .pattern("x")
@@ -234,7 +234,7 @@ public class APRecipes extends RecipeProvider {
                                 })
                                 .save(output, modId("vslabs/" + n.getName()));
                         //Revert to slab from vslab
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.instance)
+                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
                                 .recipe((c) -> {
                                     ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
                                             .group("vertical_slab_revert")
@@ -244,7 +244,7 @@ public class APRecipes extends RecipeProvider {
                                 })
                                 .save(output, modId("vslabs/" + n.getName() + "_revert"));
                         //Stonecut from block to vslab
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.instance)
+                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
                                 .recipe((c) -> {
                                     SingleItemRecipeBuilder.stonecutting(getStonecuttingIngredients(n), BUILDING_BLOCKS, block, 2)
                                             .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))

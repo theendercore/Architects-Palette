@@ -8,12 +8,11 @@ import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.registry.*;
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -60,7 +59,8 @@ public class ArchitectsPalette {
         // Biomes need to be registered before features.
         registerBiomeSerializers(modEventBus);
 
-        CraftingHelper.register(new APVerticalSlabsCondition.Serializer());
+        DeferredRegister.create(ForgeRegistries.CONDITION_SERIALIZERS, MOD_ID)
+                .register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -89,8 +89,8 @@ public class ArchitectsPalette {
     }
 
     void registerLootSerializers(IEventBus bus) {
-        DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ArchitectsPalette.MOD_ID);
-        RegistryObject<Codec<WitheredBoneLootModifier>> WITHER_SKELETON_DROPS = LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
+        DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ArchitectsPalette.MOD_ID);
+        RegistryObject<MapCodec<WitheredBoneLootModifier>> WITHER_SKELETON_DROPS = LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
 
         LOOT.register(bus);
     }
