@@ -2,16 +2,15 @@ package architectspalette.content.blocks;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.AbstractGlassBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 import static net.minecraft.world.level.block.RotatedPillarBlock.AXIS;
 
-public class GlassLikePillarBlock extends AbstractGlassBlock {
-
+public class GlassLikePillarBlock extends TransparentBlock {
     public GlassLikePillarBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
