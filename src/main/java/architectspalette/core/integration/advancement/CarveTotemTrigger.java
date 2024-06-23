@@ -1,41 +1,40 @@
 package architectspalette.core.integration.advancement;
 
-import com.google.gson.JsonObject;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.ResourceLocation;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 
-import static architectspalette.core.ArchitectsPalette.rl;
+import java.util.Optional;
 
-public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.Instance> {
+public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.TriggerInstance> {
 
-    private static final ResourceLocation ID = rl("carve_totem");
-
-    public ResourceLocation getId() {
-        return ID;
+    @Override
+    public Codec<CarveTotemTrigger.TriggerInstance> codec() {
+        return CarveTotemTrigger.TriggerInstance.CODEC;
     }
 
     public void trigger(ServerPlayer player) {
-        this.trigger(player, Instance::test);
+        this.trigger(player, TriggerInstance::test);
     }
 
-    @Override
-    protected Instance createInstance(JsonObject json, ContextAwarePredicate context, DeserializationContext conditionsParser) {
-        return new CarveTotemTrigger.Instance(context);
-    }
 
-    public static class Instance extends AbstractCriterionTriggerInstance {
-
-        public Instance(ContextAwarePredicate context) {
-            super(CarveTotemTrigger.ID, context);
-        }
-
-        public static CarveTotemTrigger.Instance simple() {
-            return new CarveTotemTrigger.Instance(ContextAwarePredicate.ANY);
-        }
+    public record TriggerInstance(Optional<ContextAwarePredicate> player) implements SimpleInstance {
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create((p_325204_) -> {
+            return p_325204_.group(
+                    EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CarveTotemTrigger.TriggerInstance::player)
+            ).apply(p_325204_, CarveTotemTrigger.TriggerInstance::new);
+        });
 
         public boolean test() {
             return true;
+        }
+
+        @Override
+        public Optional<ContextAwarePredicate> player() {
+            return this.player;
         }
     }
 }
