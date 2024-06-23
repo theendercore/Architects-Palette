@@ -82,7 +82,7 @@ public class StoneBlockSet implements Supplier<Block> {
     }
 
     private Block.Properties properties() {
-        return Block.Properties.copy(getPart(BLOCK));
+        return BlockBehaviour.Properties.ofFullCopy(getPart(BLOCK));
     }
 
     //Convenience function so it matches RegistryObjects
