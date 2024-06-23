@@ -70,8 +70,8 @@ public class RegisterModelLoadersEventHandler {
         }
 
         @Override
-        public BakedModel bake(IGeometryBakingContext context, ModelBaker bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-            BakedModel baked = wrappedModel.bake(bakery, wrappedModel, spriteGetter, modelState, modelLocation, context.useBlockLight());
+        public BakedModel bake(IGeometryBakingContext context, ModelBaker bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
+            BakedModel baked = wrappedModel.bake(bakery, wrappedModel, spriteGetter, modelState, context.useBlockLight());
             return wrapper.apply(context, baked, wrappedModel);
         }
 
