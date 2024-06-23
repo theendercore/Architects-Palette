@@ -1,10 +1,13 @@
 package architectspalette.core.integration.advancement;
 
+import architectspalette.core.integration.APCriterion;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.SlideDownBlockTrigger;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
@@ -27,6 +30,10 @@ public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.
                     EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(CarveTotemTrigger.TriggerInstance::player)
             ).apply(p_325204_, CarveTotemTrigger.TriggerInstance::new);
         });
+
+        public static Criterion<CarveTotemTrigger.TriggerInstance> simple(){
+            return APCriterion.CARVE_TOTEM.createCriterion(new TriggerInstance(Optional.empty()));
+        }
 
         public boolean test() {
             return true;
