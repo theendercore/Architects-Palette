@@ -110,7 +110,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     //This needs to be in the final node because otherwise it would keep the builders in memory.
     private BlockBehaviour.Properties getProperties() {
         //TODO: Add property modifiers (Property Consumer)
-        return BlockBehaviour.Properties.copy(parent.block.get());
+        return BlockBehaviour.Properties.ofFullCopy(parent.block.get());
     }
 
     //This too

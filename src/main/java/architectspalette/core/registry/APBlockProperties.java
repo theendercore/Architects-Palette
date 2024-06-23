@@ -19,7 +19,7 @@ import static architectspalette.core.registry.APBlocks.*;
 
 public class APBlockProperties {
 	private static Block.Properties AbyssalineBase() {
-		return Block.Properties.copy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
+		return Block.Properties.ofFullCopy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
 			.emissiveRendering(AbyssalineHelper::needsPostProcessing)
 			.hasPostProcess(AbyssalineHelper::needsPostProcessing)
 			.isValidSpawn(AbyssalineHelper::allowsMobSpawning)
@@ -57,10 +57,10 @@ public class APBlockProperties {
 	}
 
 	public static final Block.Properties FLINT = stoneBase().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 16.0F).requiresCorrectToolForDrops();
-	public static final Block.Properties MYONITE = Block.Properties.copy(Blocks.STONE);
+	public static final Block.Properties MYONITE = Block.Properties.ofFullCopy(Blocks.STONE);
 	public static final Block.Properties SUNMETAL = Block.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F, 8.0F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops();
 	 // Should be less slippery?
-	public static final Block.Properties BUILDING_ICE = Block.Properties.copy(Blocks.PACKED_ICE).friction(0.8F);
+	public static final Block.Properties BUILDING_ICE = Block.Properties.ofFullCopy(Blocks.PACKED_ICE).friction(0.8F);
 	 // As Prismarine
 	public static final Block.Properties OLIVESTONE = stoneBase().mapColor(MapColor.TERRACOTTA_GREEN).strength(1.5F, 6.0F).requiresCorrectToolForDrops();
 	 // As Nether Bricks
@@ -69,7 +69,7 @@ public class APBlockProperties {
 	public static final Block.Properties ENTWINE = stoneBase().mapColor(MapColor.COLOR_CYAN).strength(3.0F, 6.0F).sound(APSounds.APSoundTypes.ENTWINE).requiresCorrectToolForDrops();
 	public static final Block.Properties ENDER_PEARL = stoneBase().mapColor(MapColor.COLOR_CYAN).strength(1.5F).sound(APSounds.APSoundTypes.ENDER_PEARL);
 	public static final BlockBehaviour.Properties PLATING = metalBase().mapColor(MapColor.STONE).strength(4.0F, 10.0F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops();
-	public static final BlockBehaviour.Properties NETHER_CRYSTAL = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel(e -> 12).requiresCorrectToolForDrops().strength(1.2f);
+	public static final BlockBehaviour.Properties NETHER_CRYSTAL = BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).lightLevel(e -> 12).requiresCorrectToolForDrops().strength(1.2f);
 	public static final BlockBehaviour.Properties NETHER_BRASS = metalBase().mapColor(MapColor.COLOR_YELLOW).strength(4.0F, 10.0F).sound(SoundType.COPPER).requiresCorrectToolForDrops();
 
 	public static final BlockBehaviour.Properties ESOTERRACK = stoneBase().mapColor(MapColor.RAW_IRON).requiresCorrectToolForDrops().strength(0.4F).sound(SoundType.NETHERRACK);
@@ -120,14 +120,14 @@ public class APBlockProperties {
 			.strength(2.0F)
 			.sound(SoundType.WOOD);
 
-	public static final BlockBehaviour.Properties ORACLE = BlockBehaviour.Properties.copy(Blocks.PURPUR_BLOCK)
+	public static final BlockBehaviour.Properties ORACLE = BlockBehaviour.Properties.ofFullCopy(Blocks.PURPUR_BLOCK)
 			.sound(SoundType.STONE);
 
-	public static final BlockBehaviour.Properties ORACLE_LAMP = BlockBehaviour.Properties.copy(Blocks.PURPUR_BLOCK)
+	public static final BlockBehaviour.Properties ORACLE_LAMP = BlockBehaviour.Properties.ofFullCopy(Blocks.PURPUR_BLOCK)
 			.sound(SoundType.STONE)
 			.lightLevel((state) -> 16);
 
-	public static final BlockBehaviour.Properties CEREBRAL = BlockBehaviour.Properties.copy(Blocks.END_STONE_BRICKS)
+	public static final BlockBehaviour.Properties CEREBRAL = BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS)
 			.sound(SoundType.DEEPSLATE_TILES);
 
 	// This makes a new property each time so that setting the door to not solid doesn't interfere.
@@ -143,7 +143,7 @@ public class APBlockProperties {
 		return p;
 	}
 
-	public static final BlockBehaviour.Properties SUNSTONE = BlockBehaviour.Properties.copy(Blocks.BASALT)
+	public static final BlockBehaviour.Properties SUNSTONE = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT)
 //			.setOpaque(SunstoneBlock::isOpaque).variableOpacity()
 			.lightLevel(SunstoneBlock::lightValue);
 			//Causes really wack lighting
