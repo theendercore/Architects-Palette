@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 
@@ -98,11 +100,9 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
         return null;
     }
 
-    static InteractionResult onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
+    static ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.getItem() instanceof HoneycombItem) {
             Optional<BlockState> waxed = APWeatheringCopper.getWaxed(state);
-
             if (waxed.isPresent()) {
                 if (player instanceof ServerPlayer) {
                     CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, pos, stack);
@@ -112,10 +112,10 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
                 world.setBlock(pos, waxed.get(), 11);
                 //idk what this is but its from honeycomb code
                 world.levelEvent(player, 3003, pos, 0);
-                return InteractionResult.sidedSuccess(world.isClientSide);
+                return ItemInteractionResult.sidedSuccess(world.isClientSide);
             }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
 

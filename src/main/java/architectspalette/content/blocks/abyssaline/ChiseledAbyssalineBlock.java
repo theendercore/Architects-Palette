@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -61,23 +62,22 @@ public class ChiseledAbyssalineBlock extends Block implements IAbyssalineChargea
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult traceResult) {
-		ItemStack stack = player.getItemInHand(hand);
+	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (!this.isCharged(state) && stack.getItem() == KEY) {
 			if(!player.isCreative())
 				stack.shrink(1);
 			world.setBlockAndUpdate(pos, this.getStateWithCharge(state, true));
 			var sound = (this == APBlocks.CHISELED_HADALINE_BRICKS.get()) ? APSounds.HADALINE_ACTIVATE.get() : SoundEvents.CONDUIT_ACTIVATE;
 			world.playSound(null, pos, sound, SoundSource.BLOCKS, 0.5F, new Random().nextFloat() * 0.2F + 0.8F);
-			return InteractionResult.SUCCESS;
+			return ItemInteractionResult.SUCCESS;
 		}
 		else if (this.isCharged(state) && stack.isEmpty()) {
 			world.setBlockAndUpdate(pos, this.getStateWithCharge(state, false));
 			world.playSound(null, pos, SoundEvents.CONDUIT_DEACTIVATE, SoundSource.BLOCKS, 0.5F, new Random().nextFloat() * 0.2F + 0.8F);
 			if(!player.isCreative() || (player.getInventory().countItem(KEY) <= 0))
 				player.addItem(new ItemStack(KEY));
-			return InteractionResult.SUCCESS;
+			return ItemInteractionResult.SUCCESS;
 		}
-		return InteractionResult.PASS;
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 }
