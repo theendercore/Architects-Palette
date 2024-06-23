@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class AbyssalineStairsBlock extends StairBlock implements IAbyssalineChargeable {
 
-	public AbyssalineStairsBlock(Supplier<BlockState> state, Properties properties) {
+	public AbyssalineStairsBlock(BlockState state, Properties properties) {
 		super(state, properties);
 		this.registerDefaultState(this.getStateDefinition().any().setValue(AbyssalineBlock.CHARGED, false));
 	}

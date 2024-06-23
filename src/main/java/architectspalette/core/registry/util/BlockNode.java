@@ -378,7 +378,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
             case WALL -> new WallBlock(properties);
             case SLAB -> new SlabBlock(properties);
             case VERTICAL_SLAB -> new VerticalSlabBlock(properties);
-            case STAIRS -> new StairBlock(base::defaultBlockState, properties);
+            case STAIRS -> new StairBlock(base.defaultBlockState(), properties);
             case FENCE -> new FenceBlock(properties);
             case PILLAR -> new RotatedPillarBlock(properties);
             case NUB -> new NubBlock(properties);
