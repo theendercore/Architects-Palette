@@ -176,8 +176,8 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, PathComputationType type) {
-		return type == PathComputationType.WATER && worldIn.getFluidState(pos).is(FluidTags.WATER); 
+	public boolean isPathfindable(@Nonnull BlockState state, PathComputationType type) {
+		return type == PathComputationType.WATER && state.getFluidState().is(FluidTags.WATER);
 	}
 
 	public enum VerticalSlabType implements StringRepresentable {

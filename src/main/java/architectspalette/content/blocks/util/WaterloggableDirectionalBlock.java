@@ -53,10 +53,4 @@ public class WaterloggableDirectionalBlock extends DirectionalFacingBlock implem
 
         return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
     }
-
-    @Override
-    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter worldIn, @Nonnull BlockPos pos, PathComputationType type) {
-        if (type == PathComputationType.WATER) return worldIn.getFluidState(pos).is(FluidTags.WATER);
-        return super.isPathfindable(state, worldIn, pos, type);
-    }
 }
