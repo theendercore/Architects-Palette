@@ -6,13 +6,16 @@ plugins {
 minecraft {
     version(minecraft_version)
     def aw = file("src/main/resources/${mod_id}.accesswidener")
-    if(aw.exists()){
+    if (aw.exists()) {
         accessWideners(aw)
     }
 }
 
 dependencies {
-    compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 }
 
 configurations {
