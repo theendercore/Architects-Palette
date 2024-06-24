@@ -1,6 +1,5 @@
 package architectspalette.core.registry;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.config.APConfig;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,9 +14,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import static architectspalette.core.APConstants.MOD_ID;
+
 public class APBiomeModifiers {
     public static final DeferredRegister<MapCodec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZER =
-            DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, ArchitectsPalette.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, MOD_ID);
 
     public static RegistryObject<MapCodec<APUndergroundDecorationBiomeModifier>> UNDERGROUND_DECORATION_MODIFIER = BIOME_MODIFIER_SERIALIZER.register("underground_decoration", () ->
         RecordCodecBuilder.mapCodec(builder -> builder.group(

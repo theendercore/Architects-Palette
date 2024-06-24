@@ -1,6 +1,5 @@
 package architectspalette.core.datagen;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.MiscRegistry;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -20,11 +19,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
+import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.registry.APBlocks.*;
 
 public class APBlockTags extends BlockTagsProvider {
     public APBlockTags(PackOutput pack, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pack, completableFuture, ArchitectsPalette.MOD_ID, existingFileHelper);
+        super(pack, completableFuture, MOD_ID, existingFileHelper);
     }
 
 

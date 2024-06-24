@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -13,7 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class TradingEventHandler {
 
      // this + Profession -> Map of trades for that profession, Map + Trade level -> List of trades of that level

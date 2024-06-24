@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.APSounds;
 import architectspalette.core.registry.MiscRegistry;
 import net.minecraft.core.Direction;
@@ -20,7 +19,9 @@ import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ProjectileImpactEventHandler {
 
     // Used in evil arrow mixin

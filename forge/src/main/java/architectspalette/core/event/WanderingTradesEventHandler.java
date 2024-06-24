@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.config.APConfig;
 import architectspalette.core.registry.APBlocks;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -12,7 +11,9 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class WanderingTradesEventHandler {
 
     @SubscribeEvent

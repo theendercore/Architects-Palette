@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.util.SpriteShift;
 import com.google.gson.JsonDeserializationContext;
@@ -25,7 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RegisterModelLoadersEventHandler {
 
     public static final String MODELTYPE_BOARDS = "boards";

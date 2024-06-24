@@ -11,7 +11,6 @@ import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
 import architectspalette.content.worldgen.features.APTreeGrowers;
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.sounds.SoundEvents;
@@ -29,6 +28,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
+import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.registry.util.BlockNode.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
@@ -42,7 +42,7 @@ import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
 public class APBlocks {
     public static final ArrayList<BlockNode> boards = new ArrayList<>();
 
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ArchitectsPalette.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
 
     // Abyssaline
     public static final RegistryObject<Block> ABYSSALINE = createBlock("abyssaline", () -> new AbyssalineBlock(APBlockProperties.ABYSSALINE));

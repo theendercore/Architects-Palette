@@ -2,7 +2,6 @@ package architectspalette.core.registry;
 
 import architectspalette.content.worldgen.features.CrystalClusterFeature;
 import architectspalette.content.worldgen.features.configs.CrystalClusterConfig;
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.util.FeatureWrapper;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.block.Blocks;
@@ -16,13 +15,15 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
 
+import static architectspalette.core.APConstants.MOD_ID;
+
 public class APFeatures {
     // Features have 3 levels of abstraction.
     // Feature: the thing that does the generation.
     // ConfiguredFeature: Feature + Configuration, e.g. how big it is or which BlockStates, etc.
     // PlacedFeature: ConfiguredFeature + placement options, e.g. diamonds go at the bottom of the world
 
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, ArchitectsPalette.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
 
     public static final RegistryObject<Feature<CrystalClusterConfig>> CRYSTAL_CLUSTER = FEATURES.register("crystal_cluster", () -> new CrystalClusterFeature(CrystalClusterConfig.CODEC));
 

@@ -19,11 +19,13 @@ import net.minecraftforge.common.data.ForgeAdvancementProvider;
 
 import java.util.function.Consumer;
 
+import static architectspalette.core.APConstants.MOD_ID;
+
 
 public class APAdvancements implements ForgeAdvancementProvider.AdvancementGenerator {
 
     private static MutableComponent getTranslationKey(String key, Object... args) {
-        return Component.translatable(ArchitectsPalette.MOD_ID + "." + key, args);
+        return Component.translatable(MOD_ID + "." + key, args);
     }
 
     private ResourceLocation getNameId(String id) {

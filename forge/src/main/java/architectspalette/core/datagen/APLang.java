@@ -1,13 +1,14 @@
 package architectspalette.core.datagen;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
+import static architectspalette.core.APConstants.MOD_ID;
+
 public class APLang extends LanguageProvider {
     public APLang(PackOutput pack) {
-        super(pack, ArchitectsPalette.MOD_ID, "auto_generated");
+        super(pack, MOD_ID, "auto_generated");
     }
 
     @Override

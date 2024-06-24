@@ -1,6 +1,5 @@
 package architectspalette.core.registry;
 
-import architectspalette.core.ArchitectsPalette;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
@@ -9,10 +8,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.ArchitectsPalette.rl;
 
 public class APSounds {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, ArchitectsPalette.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
 
     private static RegistryObject<SoundEvent> register(String key) {
         return SOUNDS.register(key, () -> SoundEvent.createVariableRangeEvent(rl(key)));

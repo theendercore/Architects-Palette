@@ -1,7 +1,6 @@
 package architectspalette.core.registry;
 
 import architectspalette.content.particles.WizardParticle;
-import architectspalette.core.ArchitectsPalette;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -17,9 +16,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.ArchitectsPalette.rl;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MiscRegistry {
 
     // Tags
@@ -33,7 +33,7 @@ public class MiscRegistry {
     }
 
     //Particles
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, ArchitectsPalette.MOD_ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final RegistryObject<SimpleParticleType> GREEN_FLAME = PARTICLE_TYPES.register("green_flame", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> WIZARDLY_DEFENSE_BLAST = PARTICLE_TYPES.register("bounce", () -> new SimpleParticleType(false));
 

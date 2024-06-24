@@ -1,6 +1,5 @@
 package architectspalette.core.datagen;
 
-import architectspalette.core.ArchitectsPalette;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -13,9 +12,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+import static architectspalette.core.APConstants.MOD_ID;
+
 public class APItemTags extends ItemTagsProvider {
     public APItemTags(PackOutput pack, CompletableFuture<HolderLookup.Provider> cf, TagsProvider<Block> blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pack, cf, blockTagsProvider.contentsGetter(), ArchitectsPalette.MOD_ID, existingFileHelper);
+        super(pack, cf, blockTagsProvider.contentsGetter(), MOD_ID, existingFileHelper);
         //super(generator, blockTagsProvider, modId, existingFileHelper);
     }
 

@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.HazardModel;
 import architectspalette.core.model.SheetMetalModel;
@@ -26,7 +25,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelBakeEventHandler {
 
     private static final Map<Entry, Function<BakedModel, ? extends BakedModel>> customBlockModels = new HashMap<>();
