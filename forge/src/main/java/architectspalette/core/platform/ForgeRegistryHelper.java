@@ -1,7 +1,10 @@
 package architectspalette.core.platform;
 
 import architectspalette.core.APConstants;
+import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.platform.services.IRegistryHelper;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,10 +15,12 @@ import java.util.function.Supplier;
 public class ForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, APConstants.MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, APConstants.MOD_ID);
+
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type) {
+    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab> group) {
         Supplier<T> item = ITEMS.register(name, type);
-        CREATIVE_TAB_ITEMS.add(item);
+        addCreativeTabItems(group, item);
+        CreativeModeTabEventHandler.assignItemToTab(item, group);
         return item;
     }
 

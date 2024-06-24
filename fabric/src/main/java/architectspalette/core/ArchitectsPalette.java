@@ -1,5 +1,6 @@
 package architectspalette.core;
 
+import architectspalette.core.event.CreativeModeTabEventHandler;
 import net.fabricmc.api.ModInitializer;
 
 public class ArchitectsPalette implements ModInitializer {
@@ -8,5 +9,7 @@ public class ArchitectsPalette implements ModInitializer {
     public void onInitialize() {
         APConstants.LOGGER.info("Hello Fabric world!");
         APCommonClass.init();
+
+        CreativeModeTabEventHandler.init();
     }
 }

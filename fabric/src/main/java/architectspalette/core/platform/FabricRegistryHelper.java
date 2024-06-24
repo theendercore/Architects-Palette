@@ -3,6 +3,8 @@ package architectspalette.core.platform;
 import architectspalette.core.platform.services.IRegistryHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -13,10 +15,10 @@ import static architectspalette.core.APConstants.modLoc;
 // Note: Registry entries MUST!!! be stored in a local variable before being put in a supplier
 public class FabricRegistryHelper implements IRegistryHelper {
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type) {
+    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab> group) {
         T item = Registry.register(BuiltInRegistries.ITEM, modLoc(name), type.get());
         Supplier<T> supplierItem = () -> item;
-        CREATIVE_TAB_ITEMS.add(supplierItem);
+        addCreativeTabItems(group, supplierItem);
         return supplierItem;
     }
 

@@ -1,6 +1,7 @@
 package architectspalette.core.event;
 
 import architectspalette.content.blocks.VerticalSlabBlock;
+import architectspalette.core.platform.ForgeRegistryHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.ItemLike;
@@ -31,6 +32,7 @@ public class CreativeModeTabEventHandler {
 
     @SubscribeEvent
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
+        //Why would you do this?
         int i = 0;
         for (Supplier<? extends ItemLike> item : items) {
             if (event.getTabKey() == tabs.get(i)) {
@@ -40,9 +42,11 @@ public class CreativeModeTabEventHandler {
             }
             i++;
         }
-//        tabs.clear();
-//        items.clear();
-    }
 
+        List<Supplier<? extends ItemLike>> itemlist = ForgeRegistryHelper.CREATIVE_TAB_ITEMS_MAP.get(event.getTabKey());
+        if (itemlist != null) {
+            event.acceptAll(itemlist.stream().map((it) -> it.get().asItem().getDefaultInstance()).toList());
+        }
+    }
 
 }
