@@ -8,7 +8,7 @@ public class APConstants {
 
     public static final String MOD_ID = "architects_palette";
     public static final String MOD_NAME = "ArchitectsPalette";
-    public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     public static ResourceLocation modLoc(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);

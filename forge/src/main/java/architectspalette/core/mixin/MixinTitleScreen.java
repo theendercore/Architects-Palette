@@ -14,7 +14,7 @@ public class MixinTitleScreen {
     @Inject(at = @At("HEAD"), method = "init()V")
     private void init(CallbackInfo info) {
 
-        APConstants.LOG.info("This line is printed by an example mod mixin from Forge!");
-        APConstants.LOG.info("MC Version: {}", Minecraft.getInstance().getVersionType());
+        APConstants.LOGGER.info("This line is printed by an example mod mixin from Forge!");
+        APConstants.LOGGER.info("MC Version: {}", Minecraft.getInstance().getVersionType());
     }
 }

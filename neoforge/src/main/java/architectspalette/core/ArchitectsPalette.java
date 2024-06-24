@@ -14,7 +14,7 @@ public class ArchitectsPalette {
         // project.
 
         // Use NeoForge to bootstrap the Common mod.
-        APConstants.LOG.info("Hello NeoForge world!");
+        APConstants.LOGGER.info("Hello NeoForge world!");
         APCommonClass.init();
 
     }
