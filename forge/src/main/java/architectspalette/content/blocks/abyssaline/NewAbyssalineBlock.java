@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.abyssaline;
+package architectspalette.content.blocks.abyssaline;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

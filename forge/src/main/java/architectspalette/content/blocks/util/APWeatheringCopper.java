@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.util;
+package architectspalette.content.blocks.util;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;

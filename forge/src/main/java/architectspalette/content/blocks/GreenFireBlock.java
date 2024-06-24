@@ -1,6 +1,5 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
-import architectspalette.content.blocks.util.HorizontalFacingBlock;
 import architectspalette.core.registry.MiscRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;

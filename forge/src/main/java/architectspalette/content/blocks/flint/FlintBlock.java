@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.flint;
+package architectspalette.content.blocks.flint;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

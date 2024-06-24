@@ -1,4 +1,4 @@
-package architectspalette.core.content.worldgen.features.configs;
+package architectspalette.content.worldgen.features.configs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.entrails;
+package architectspalette.content.blocks.entrails;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;

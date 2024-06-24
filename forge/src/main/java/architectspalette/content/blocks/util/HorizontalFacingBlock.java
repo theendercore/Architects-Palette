@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.util;
+package architectspalette.content.blocks.util;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Direction;

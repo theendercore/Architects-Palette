@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;

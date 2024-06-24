@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import architectspalette.content.blocks.util.HorizontalFacingBlock;
 import architectspalette.core.util.ShapeRotator;

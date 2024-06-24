@@ -1,4 +1,4 @@
-package architectspalette.core.content.worldgen.features;
+package architectspalette.content.worldgen.features;
 
 import architectspalette.core.ArchitectsPalette;
 import net.minecraft.core.registries.Registries;

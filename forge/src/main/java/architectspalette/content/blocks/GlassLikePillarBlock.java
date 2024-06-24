@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;

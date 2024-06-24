@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.abyssaline;
+package architectspalette.content.blocks.abyssaline;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;

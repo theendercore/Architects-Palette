@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.abyssaline;
+package architectspalette.content.blocks.abyssaline;
 
 import architectspalette.core.registry.util.IBlockSetBase;
 import architectspalette.core.registry.util.StoneBlockSet;

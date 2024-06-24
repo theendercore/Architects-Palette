@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Block;

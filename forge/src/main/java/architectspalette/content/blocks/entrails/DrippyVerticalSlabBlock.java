@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.entrails;
+package architectspalette.content.blocks.entrails;
 
 import architectspalette.content.blocks.VerticalSlabBlock;
 import net.minecraft.core.BlockPos;

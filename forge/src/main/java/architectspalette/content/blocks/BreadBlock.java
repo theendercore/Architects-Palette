@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;

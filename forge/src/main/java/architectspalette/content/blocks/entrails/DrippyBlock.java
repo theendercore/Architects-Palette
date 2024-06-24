@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.entrails;
+package architectspalette.content.blocks.entrails;
 
 import architectspalette.core.registry.util.IBlockSetBase;
 import architectspalette.core.registry.util.StoneBlockSet;

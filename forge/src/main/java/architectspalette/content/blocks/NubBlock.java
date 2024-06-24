@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import architectspalette.content.blocks.util.APWeatheringCopper;
 import architectspalette.content.blocks.util.WaterloggableDirectionalBlock;

@@ -1,4 +1,4 @@
-package architectspalette.core.content.particles;
+package architectspalette.content.particles;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import org.joml.AxisAngle4f;

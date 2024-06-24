@@ -1,4 +1,4 @@
-package architectspalette.core.content.worldgen.features;
+package architectspalette.content.worldgen.features;
 
 import architectspalette.content.worldgen.features.configs.CrystalClusterConfig;
 import architectspalette.core.registry.MiscRegistry;

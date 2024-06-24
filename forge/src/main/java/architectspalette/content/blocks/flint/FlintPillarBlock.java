@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.flint;
+package architectspalette.content.blocks.flint;
 
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
 import net.minecraft.core.BlockPos;

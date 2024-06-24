@@ -1,6 +1,5 @@
-package architectspalette.core.content.blocks.abyssaline;
+package architectspalette.content.blocks.abyssaline;
 
-import architectspalette.content.blocks.NubBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

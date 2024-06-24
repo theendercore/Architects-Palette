@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.abyssaline;
+package architectspalette.content.blocks.abyssaline;
 
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APSounds;

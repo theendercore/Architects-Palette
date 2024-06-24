@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks.util;
+package architectspalette.content.blocks.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

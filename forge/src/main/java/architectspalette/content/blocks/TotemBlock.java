@@ -1,4 +1,4 @@
-package architectspalette.core.content.blocks;
+package architectspalette.content.blocks;
 
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.registry.APBlocks;
