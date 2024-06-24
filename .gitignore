@@ -11,7 +11,8 @@ out
 *.ipr
 *.iws
 *.iml
-.idea
+.idea/*
+!.idea/scopes
 
 # gradle
 build
@@ -20,7 +21,7 @@ build
 # other
 eclipse
 run
-src/main/resources/genscripts
+runs
 
 # Files from Forge MDK
 forge*changelog.txt
