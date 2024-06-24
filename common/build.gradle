@@ -14,6 +14,7 @@ minecraft {
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
 
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
     // compile against the JEI API but do not include it at runtime
     compileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 }

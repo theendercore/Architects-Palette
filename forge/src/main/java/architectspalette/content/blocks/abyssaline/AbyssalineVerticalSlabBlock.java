@@ -1,5 +1,6 @@
 package architectspalette.content.blocks.abyssaline;
 
+import architectspalette.content.blocks.VerticalSlabBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
