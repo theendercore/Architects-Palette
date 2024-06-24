@@ -1,18 +1,15 @@
 package architectspalette.core;
 
 import architectspalette.core.config.APConfig;
+import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APRecipes;
-import architectspalette.core.crafting.WarpingRecipe;
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.registry.*;
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -26,28 +23,17 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
 
-@Mod(value = ArchitectsPalette.MOD_ID)
+import static architectspalette.core.APConstants.MOD_ID;
+
+@Mod(value = MOD_ID)
 public class ArchitectsPalette {
-    public static final String MOD_ID = "architects_palette";
-    public static final Logger LOGGER = LogUtils.getLogger();
-    public static ArchitectsPalette instance;
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public ArchitectsPalette() {
-        // This method is invoked by the Forge mod loader when it is ready
-        // to load your mod. You can access Forge and Common code in this
-        // project.
-
-        // Use Forge to bootstrap the Common mod.
-//        APConstants.LOG.info("Hello Forge world!");
-//        APCommonClass.init();
-
-        instance = this;
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
@@ -57,7 +43,8 @@ public class ArchitectsPalette {
         MiscRegistry.PARTICLE_TYPES.register(modEventBus);
         APSounds.SOUNDS.register(modEventBus);
         APBlocks.BLOCKS.register(modEventBus);
-        APItems.ITEMS.register(modEventBus);
+        ForgeRegistryHelper.ITEMS.register(modEventBus);
+//        ForgeRegistryHelper.BLOCKS.register(modEventBus);
         APFeatures.FEATURES.register(modEventBus);
         APRecipes.RECIPE_TYPES.register(modEventBus);
 
@@ -73,6 +60,8 @@ public class ArchitectsPalette {
                 .register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        APCommonClass.init();
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {
@@ -100,7 +89,7 @@ public class ArchitectsPalette {
 //    }
 
     void registerLootSerializers(IEventBus bus) {
-        DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, ArchitectsPalette.MOD_ID);
+        DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
         RegistryObject<MapCodec<WitheredBoneLootModifier>> WITHER_SKELETON_DROPS = LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
 
         LOOT.register(bus);

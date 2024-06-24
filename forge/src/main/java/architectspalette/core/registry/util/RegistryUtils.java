@@ -4,8 +4,9 @@ import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.ModelBakeEventHandler;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.util.SpriteShift;
+import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APBlocks;
-import architectspalette.core.registry.APItems;
+import architectspalette.core.registry.APItemsFG;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -21,13 +22,13 @@ public class RegistryUtils {
 
 
 	public static RegistryObject<Item> createItem(String name) {
-		return createItem(name, APItems::resourceItem);
+		return createItem(name, APItemsFG::resourceItem);
 	}
 	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier) {
 		return createItem(name, supplier, CreativeModeTabs.INGREDIENTS);
 	}
 	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier, ResourceKey<CreativeModeTab> group) {
-		RegistryObject<I> item = APItems.ITEMS.register(name, supplier);
+		RegistryObject<I> item = ForgeRegistryHelper.ITEMS.register(name, supplier);
 		CreativeModeTabEventHandler.assignItemToTab(item, group);
 		return item;
 	}
@@ -39,7 +40,7 @@ public class RegistryUtils {
 	@SafeVarargs
 	public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, ResourceKey<CreativeModeTab>... group) {
 		RegistryObject<B> block = APBlocks.BLOCKS.register(name, supplier);
-		APItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+		ForgeRegistryHelper.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
 		if (group != null) CreativeModeTabEventHandler.assignItemToTab(block, group);
 		return block;
 	}

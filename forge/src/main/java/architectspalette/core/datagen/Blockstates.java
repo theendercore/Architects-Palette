@@ -4,7 +4,6 @@ import architectspalette.content.blocks.BreadBlock;
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
-import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BlockNode;
@@ -118,8 +117,8 @@ public class Blockstates extends BlockStateProvider {
         breadBlock(APBlocks.BREAD_BLOCK.get());
         breadSlab(APBlocks.BREAD_BLOCK.getChild(SLAB).get());
 
-        itemModels().basicItem(APItems.ORACLE_JELLY.getId());
-        itemModels().basicItem(APItems.CEREBRAL_PLATE.getId());
+        itemModels().basicItem(APItems.ORACLE_JELLY.get());
+        itemModels().basicItem(APItems.CEREBRAL_PLATE.get());
 
 
     }

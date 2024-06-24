@@ -1,15 +1,16 @@
 package architectspalette.core.event;
 
-import architectspalette.core.ArchitectsPalette;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.MissingMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import static architectspalette.core.APConstants.MOD_ID;
+import static architectspalette.core.APConstants.LOGGER;
 import static architectspalette.core.ArchitectsPalette.rl;
 
-@Mod.EventBusSubscriber(modid = ArchitectsPalette.MOD_ID)
+@Mod.EventBusSubscriber(modid = MOD_ID)
 public class MissingMappingsEventHandler {
 
     //private static void trace(String string) {ArchitectsPalette.LOGGER.warn(string);}
@@ -20,19 +21,19 @@ public class MissingMappingsEventHandler {
         event.getAllMappings(ForgeRegistries.Keys.ITEMS).forEach((e) -> {
             var name = e.getKey().getPath();
             //trace("mapping " + name);
-            if (e.getKey().getNamespace().equals(ArchitectsPalette.MOD_ID)) {
+            if (e.getKey().getNamespace().equals(MOD_ID)) {
                 //trace(name + " is from the mod");
                 if (e.getKey().getPath().contains("limestone")) {
                     String newpath = e.getKey().getPath().replace("limestone", "myonite");
                     ResourceLocation newresource = rl(newpath);
                     if (e.getRegistry().containsKey(newresource)) {
                         e.remap(e.getRegistry().getValue(newresource));
-                        ArchitectsPalette.LOGGER.warn("Remapping {} to {}", e.getKey().toString(), newresource.toString());
+                        LOGGER.warn("Remapping {} to {}", e.getKey().toString(), newresource.toString());
                     }
                 }
                 else {
                     if (e.getKey().getPath().contains("heavy_dripstone") && !e.getKey().getPath().contains("bricks")) {
-                        ArchitectsPalette.LOGGER.warn("Remapping Heavy Dripstone to Heavy Dripstone Bricks");
+                        LOGGER.warn("Remapping Heavy Dripstone to Heavy Dripstone Bricks");
                         e.remap(e.getRegistry().getValue(rl("heavy_dripstone_bricks")));
                     }
                 }
@@ -43,8 +44,7 @@ public class MissingMappingsEventHandler {
                     ResourceLocation newresource = rl(newpath);
                     e.remap(e.getRegistry().getValue(newresource));
                     if (e.getRegistry().containsKey(newresource)) {
-
-                        ArchitectsPalette.LOGGER.warn("Remapping {} to {}", e.getKey().toString(), newresource.toString());
+                        LOGGER.warn("Remapping {} to {}", e.getKey().toString(), newresource.toString());
                     }
                 }
             }
