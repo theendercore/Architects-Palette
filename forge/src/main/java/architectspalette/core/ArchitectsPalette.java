@@ -59,6 +59,9 @@ public class ArchitectsPalette {
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {
+        // (ender) Thanks forge :)
+        APCommonClass.earlyInit();
+
         APBlockProperties.registerFlammables();
         APTrades.registerTrades();
     }

@@ -25,15 +25,17 @@ public class APCommonClass {
         MiscRegistry.init();
 
         APRecipes.init();
-        APCriterion.init();
 
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
             APConstants.LOGGER.info("Hello to examplemod");
         }
     }
+    public static void earlyInit() {
+        APCriterion.init();
+    }
 
 
-    // (ender) I have no idea if this can go in the same call as init, but I will see :)
+    // (ender) I have no idea if this can go in the same calls as init, but I will see :)
     public static void initClient() {
 
     }
