@@ -1,17 +1,10 @@
 package architectspalette.core.registry;
 
-import architectspalette.content.particles.WizardParticle;
-import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -19,7 +12,6 @@ import net.minecraftforge.registries.RegistryObject;
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.ArchitectsPalette.rl;
 
-@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MiscRegistry {
 
     // Tags
@@ -37,9 +29,4 @@ public class MiscRegistry {
     public static final RegistryObject<SimpleParticleType> GREEN_FLAME = PARTICLE_TYPES.register("green_flame", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> WIZARDLY_DEFENSE_BLAST = PARTICLE_TYPES.register("bounce", () -> new SimpleParticleType(false));
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(GREEN_FLAME.get(), FlameParticle.Provider::new);
-        event.registerSpriteSet(WIZARDLY_DEFENSE_BLAST.get(), WizardParticle.Provider::new);
-    }
 }
