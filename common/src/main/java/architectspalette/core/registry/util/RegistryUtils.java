@@ -15,8 +15,8 @@ import static architectspalette.core.APConstants.mcLoc;
 
 public class RegistryUtils {
     // (ender) yes forge AT's the Tab reg keys, and not im not doing that, this ref is fine
-    static final ResourceKey<CreativeModeTab> INGREDIENTS_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("ingredients"));
-    static final ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("building_blocks"));
+    public static final ResourceKey<CreativeModeTab> INGREDIENTS_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("ingredients"));
+    public static final ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("building_blocks"));
 
     public static Item resourceItem() {
         return new Item(new Item.Properties());
