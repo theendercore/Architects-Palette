@@ -1,12 +1,11 @@
 package architectspalette.core;
 
 import architectspalette.core.config.APConfig;
-import architectspalette.core.platform.ForgeRegistryHelper;
-import architectspalette.core.registry.APRecipes;
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
+import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
@@ -38,14 +37,12 @@ public class ArchitectsPalette {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 //        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
+        APCommonClass.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
+        ForgeRegistryHelper.register(modEventBus);
 
         MiscRegistry.PARTICLE_TYPES.register(modEventBus);
-        APSounds.SOUNDS.register(modEventBus);
         APBlocks.BLOCKS.register(modEventBus);
-
-        ForgeRegistryHelper.register(modEventBus);
-//        ForgeRegistryHelper.BLOCKS.register(modEventBus);
 
         APFeatures.FEATURES.register(modEventBus);
         APRecipes.RECIPE_TYPES.register(modEventBus);
@@ -62,8 +59,6 @@ public class ArchitectsPalette {
                 .register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        APCommonClass.init();
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {

@@ -1,33 +1,32 @@
 package architectspalette.core.registry;
 
+import architectspalette.core.platform.Services;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
-import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.ArchitectsPalette.rl;
+import java.util.function.Supplier;
+
+import static architectspalette.core.APConstants.modLoc;
 
 public class APSounds {
-    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
+    public static void init(){}
 
-    private static RegistryObject<SoundEvent> register(String key) {
-        return SOUNDS.register(key, () -> SoundEvent.createVariableRangeEvent(rl(key)));
+    private static Supplier<SoundEvent> register(String key) {
+        return Services.REGISTRY.registerSoundEvent(key, () -> SoundEvent.createVariableRangeEvent(modLoc(key)));
     }
 
-    public static final RegistryObject<SoundEvent> BLOCK_ENTWINE_PLACE = register("block.entwine.place");
-    public static final RegistryObject<SoundEvent> BLOCK_ENTWINE_HIT = register("block.entwine.hit");
+    public static final Supplier<SoundEvent> BLOCK_ENTWINE_PLACE = register("block.entwine.place");
+    public static final Supplier<SoundEvent> BLOCK_ENTWINE_HIT = register("block.entwine.hit");
 
-    public static final RegistryObject<SoundEvent> ITEM_WARPS = register("block.warping.item_warps");
-    public static final RegistryObject<SoundEvent> CAGE_LANTERN_TOGGLE_ON = register("block.cage_lantern.toggle_on");
-    public static final RegistryObject<SoundEvent> CAGE_LANTERN_TOGGLE_OFF = register("block.cage_lantern.toggle_off");
+    public static final Supplier<SoundEvent> ITEM_WARPS = register("block.warping.item_warps");
+    public static final Supplier<SoundEvent> CAGE_LANTERN_TOGGLE_ON = register("block.cage_lantern.toggle_on");
+    public static final Supplier<SoundEvent> CAGE_LANTERN_TOGGLE_OFF = register("block.cage_lantern.toggle_off");
 
-    public static final RegistryObject<SoundEvent> WIZARD_BLAST = register("block.wizard_deflect");
+    public static final Supplier<SoundEvent> WIZARD_BLAST = register("block.wizard_deflect");
 
-    public static final RegistryObject<SoundEvent> HADALINE_ACTIVATE = register("block.chiseled_hadaline.activate");
+    public static final Supplier<SoundEvent> HADALINE_ACTIVATE = register("block.chiseled_hadaline.activate");
 
     public static class APSoundTypes {
         public static final SoundType ENTWINE = new LazySoundType(

@@ -2,6 +2,7 @@ package architectspalette.core;
 
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APItems;
+import architectspalette.core.registry.APSounds;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 
@@ -16,11 +17,8 @@ public class APCommonClass {
     // code that gets invoked by the entry point of the loader specific projects.
     public static void init() {
 
-        APConstants.LOGGER.info("Hello from Common init on {}! we are currently in a {} environment!", Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
-        APConstants.LOGGER.info("The ID for diamonds is {}", BuiltInRegistries.ITEM.getKey(Items.DIAMOND));
-
+        APSounds.init();
         APItems.init();
-
 
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
             APConstants.LOGGER.info("Hello to examplemod");

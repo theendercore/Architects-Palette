@@ -4,6 +4,7 @@ import architectspalette.core.platform.services.IRegistryHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -25,6 +26,12 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> Supplier<T> registerBlockNoItem(String name, Supplier<T> type) {
         T block = Registry.register(BuiltInRegistries.BLOCK, modLoc(name), type.get());
+        return () -> block;
+    }
+
+    @Override
+    public <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type) {
+        T block = Registry.register(BuiltInRegistries.SOUND_EVENT, modLoc(name), type.get());
         return () -> block;
     }
 }
