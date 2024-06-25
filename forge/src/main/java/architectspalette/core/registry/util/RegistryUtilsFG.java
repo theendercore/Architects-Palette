@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class RegistryUtils {
+public class RegistryUtilsFG {
 
 
 

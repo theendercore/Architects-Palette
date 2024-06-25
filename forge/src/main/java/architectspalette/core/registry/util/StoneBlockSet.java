@@ -209,7 +209,7 @@ public class StoneBlockSet implements Supplier<Block> {
     }
 
     private RegistryObject<Block> makePart(SetComponent part) {
-        return RegistryUtils.createBlock(part.getName(material_name), () -> {
+        return RegistryUtilsFG.createBlock(part.getName(material_name), () -> {
             Block block = getPart(BLOCK);
             if (block instanceof IBlockSetBase base) {
                 return base.getBlockForPart(part, properties(), block);

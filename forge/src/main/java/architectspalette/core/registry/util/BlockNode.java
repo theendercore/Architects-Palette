@@ -116,7 +116,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     //This too
     private RegistryObject<Block> makeBlock(String blockName) {
         String name = blockName == null ? modifyBlockNameForType(type, this.parent.getName()) : blockName;
-        return RegistryUtils.createBlock(name, () -> {
+        return RegistryUtilsFG.createBlock(name, () -> {
             Block block = parent.block.get();
             if (block instanceof IBlockSetBase base) {
                 return base.getBlockForType(type, getProperties(), block);

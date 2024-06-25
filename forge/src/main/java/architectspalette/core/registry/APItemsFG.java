@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraftforge.registries.RegistryObject;
 
-import static architectspalette.core.registry.util.RegistryUtils.createItem;
+import static architectspalette.core.registry.util.RegistryUtilsFG.createItem;
 
 public class APItemsFG {
 //    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ArchitectsPalette.MOD_ID);

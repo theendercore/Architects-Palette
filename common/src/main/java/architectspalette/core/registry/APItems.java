@@ -1,9 +1,10 @@
 package architectspalette.core.registry;
 
-import architectspalette.core.platform.Services;
 import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
+
+import static architectspalette.core.registry.util.RegistryUtils.createItem;
 
 public class APItems {
     public static void init(){}
@@ -31,11 +32,4 @@ public class APItems {
     public static final Supplier<Item> ORACLE_JELLY = createItem("oracle_jelly");
     public static final Supplier<Item> CEREBRAL_PLATE = createItem("cerebral_plate");
 
-    public static final Supplier<Item> createItem(String name) {
-        return Services.REGISTRY.registerItem(name, APItems::resourceItem);
-    }
-
-    public static Item resourceItem() {
-        return new Item(new Item.Properties());
-    }
 }
