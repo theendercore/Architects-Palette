@@ -20,7 +20,7 @@ import static architectspalette.core.APConstants.MOD_ID;
 public class CreativeModeTabEventHandler {
 
 
-    // (ender) If there is still more than ~20 lines in this file after the port i forger and should get yelled at
+    // (ender) If there is still more than ~20 lines in this file after the port. I forgor and should get yelled at
 
     private static final List<Supplier<? extends ItemLike>> items = new ArrayList<>();
     private static final List<ResourceKey<CreativeModeTab>> tabs = new ArrayList<>();
