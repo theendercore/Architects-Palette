@@ -12,7 +12,7 @@ import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
 import static architectspalette.core.registry.APBlocksFG.*;
 
 @OnlyIn(Dist.CLIENT)
-public class APRenderLayers {
+public class APRenderLayersFG {
 
     //"use json for it" yeah nice try forge. i know you won't take this out.
     //if you add dynamic render layers, then we'll talk.
@@ -25,20 +25,20 @@ public class APRenderLayers {
         ItemBlockRenderTypes.setRenderLayer(APBlocksFG.TWISTED_TRAPDOOR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(APBlocksFG.TWISTED_SAPLING.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(APBlocksFG.POTTED_TWISTED_SAPLING.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.REDSTONE_CAGE_LANTERN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.GLOWSTONE_CAGE_LANTERN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ALGAL_CAGE_LANTERN.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ACACIA_TOTEM_WING.get(), RenderType.cutout());
-
-        ItemBlockRenderTypes.setRenderLayer(HELIODOR_ROD.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(EKANITE_ROD.get(), RenderType.translucent());
-        ItemBlockRenderTypes.setRenderLayer(MONAZITE_ROD.get(), RenderType.translucent());
-
-        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_FIRE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_TORCH.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_WALL_TORCH.get(), RenderType.cutout());
+//
+//        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.REDSTONE_CAGE_LANTERN.get(), RenderType.cutout());
+//        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.GLOWSTONE_CAGE_LANTERN.get(), RenderType.cutout());
+//        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ALGAL_CAGE_LANTERN.get(), RenderType.cutout());
+//
+//        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ACACIA_TOTEM_WING.get(), RenderType.cutout());
+//
+//        ItemBlockRenderTypes.setRenderLayer(HELIODOR_ROD.get(), RenderType.translucent());
+//        ItemBlockRenderTypes.setRenderLayer(EKANITE_ROD.get(), RenderType.translucent());
+//        ItemBlockRenderTypes.setRenderLayer(MONAZITE_ROD.get(), RenderType.translucent());
+//
+//        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_FIRE.get(), RenderType.cutout());
+//        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_TORCH.get(), RenderType.cutout());
+//        ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_WALL_TORCH.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_CHAIN.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(NETHER_BRASS_LANTERN.get(), RenderType.cutout());
 

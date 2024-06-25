@@ -79,6 +79,6 @@ public class ArchitectsPalette {
 
     void setupClient(final FMLClientSetupEvent event) {
         APCommonClass.initClient();
-        APRenderLayers.setupRenderLayers();
+        APRenderLayersFG.setupRenderLayers();
     }
 }

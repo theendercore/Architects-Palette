@@ -1,5 +1,6 @@
 package architectspalette.core.platform.services;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
@@ -49,4 +50,6 @@ public interface IRegistryHelper {
     <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
     <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
+
+    void registerRenderLayer(Block block, RenderType type);
 }

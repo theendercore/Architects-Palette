@@ -35,6 +35,6 @@ public class APCommonClass {
 
     // (ender) I have no idea if this can go in the same calls as init, but I will see :)
     public static void initClient() {
-
+        APRenderLayers.setupRenderLayers();
     }
 }
