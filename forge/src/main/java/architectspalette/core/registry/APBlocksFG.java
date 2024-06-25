@@ -35,6 +35,7 @@ import static architectspalette.core.registry.util.StoneBlockSet.SetGroup.*;
 import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
 
 public class APBlocksFG {
+    public static void init(){}
     public static final ArrayList<BlockNode> boards = new ArrayList<>();
 
 
