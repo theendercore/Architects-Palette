@@ -37,13 +37,7 @@ public interface IRegistryHelper {
 
     <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, @Nullable ResourceKey<CreativeModeTab> group);
 
-    default <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type, @Nullable ResourceKey<CreativeModeTab> group) {
-        Supplier<T> block = registerBlockNoItem(name, type);
-        registerItem(name, () -> new BlockItem(block.get(), new Item.Properties()), group);
-        return block;
-    }
-
-    <T extends Block> Supplier<T> registerBlockNoItem(String name, Supplier<T> type);
+    <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type);
 
     <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type);
 

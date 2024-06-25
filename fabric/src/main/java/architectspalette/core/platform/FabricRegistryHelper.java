@@ -39,7 +39,7 @@ public class FabricRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public <T extends Block> Supplier<T> registerBlockNoItem(String name, Supplier<T> type) {
+    public <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type) {
         T block = Registry.register(BuiltInRegistries.BLOCK, modLoc(name), type.get());
         return () -> block;
     }
