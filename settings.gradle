@@ -60,4 +60,4 @@ rootProject.name = 'Architects-Palette'
 include("common")
 include("fabric")
 include("forge")
-include("neoforge")
+//include("neoforge") // (ender) commented out neo cuz it makes the build slow as skulls
