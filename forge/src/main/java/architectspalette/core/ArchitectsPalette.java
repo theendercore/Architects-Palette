@@ -38,7 +38,7 @@ public class ArchitectsPalette {
 //        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         APCommonClass.init();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
+//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
         ForgeRegistryHelper.register(modEventBus);
 
         MiscRegistry.PARTICLE_TYPES.register(modEventBus);

@@ -1,6 +1,7 @@
 package architectspalette.core.platform;
 
 import architectspalette.core.APConstants;
+import architectspalette.core.config.APConfig;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.platform.services.IRegistryHelper;
 import net.minecraft.resources.ResourceKey;
@@ -9,6 +10,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -20,6 +23,11 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, APConstants.MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, APConstants.MOD_ID);
+
+    @Override
+    public void resisterConfig() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
+    }
 
     public static void register(IEventBus modEventBus) {
         SOUNDS.register(modEventBus);

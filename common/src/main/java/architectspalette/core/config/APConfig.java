@@ -1,9 +1,7 @@
 package architectspalette.core.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
 public class APConfig {
 
     public static ForgeConfigSpec COMMON_CONFIG;
