@@ -3,6 +3,8 @@ package architectspalette.core.platform;
 import architectspalette.core.APConstants;
 import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.services.IRegistryHelper;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
@@ -93,5 +95,11 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
         return RECIPE_TYPES.register(name, type);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void setRenderLayer(Block block, RenderType type) {
+        ItemBlockRenderTypes.setRenderLayer(block, type);
     }
 }

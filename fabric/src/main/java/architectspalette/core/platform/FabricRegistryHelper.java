@@ -3,7 +3,9 @@ package architectspalette.core.platform;
 import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.services.IRegistryHelper;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -82,5 +84,10 @@ public class FabricRegistryHelper implements IRegistryHelper {
     public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
         T recipeType = Registry.register(BuiltInRegistries.RECIPE_TYPE, modLoc(name), type.get());
         return () -> recipeType;
+    }
+
+    @Override
+    public void setRenderLayer(Block block, RenderType type) {
+        BlockRenderLayerMap.INSTANCE.putBlock(block, type);
     }
 }
