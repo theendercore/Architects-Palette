@@ -13,7 +13,7 @@ public class APTrades {
 
     public static void registerTrades() {
         if (APConfig.VILLAGER_TRADES_ENABLED.get()) {
-            // stack, price, count, max uses, xp, multiplier (or I hope it's this)
+            // (ender) stack, price, count, max uses, xp, multiplier (or I hope it's this)
 
             // Fish Blocks
             add_trade(FISHERMAN, 2, new ItemsForEmeralds(new ItemStack(APBlocks.COD_LOG.get()), 2, 8, 6, 4, 0.05f));
