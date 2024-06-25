@@ -4,7 +4,6 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -35,7 +34,7 @@ public interface IRegistryHelper {
         }
     }
 
-    <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, @Nullable ResourceKey<CreativeModeTab> group);
+    <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, @Nullable ResourceKey<CreativeModeTab>... group);
 
     <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type);
 

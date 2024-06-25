@@ -31,10 +31,14 @@ public class FabricRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab> group) {
+    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
         T item = Registry.register(BuiltInRegistries.ITEM, modLoc(name), type.get());
         Supplier<T> supplierItem = () -> item;
-        addCreativeTabItems(group, supplierItem);
+        if (groups != null) {
+            for (ResourceKey<CreativeModeTab> tab : groups) {
+                addCreativeTabItems(tab, supplierItem);
+            }
+        }
         return supplierItem;
     }
 

@@ -2,7 +2,6 @@ package architectspalette.core.platform;
 
 import architectspalette.core.APConstants;
 import architectspalette.core.config.APConfig;
-import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.platform.services.IRegistryHelper;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -51,10 +50,13 @@ public class ForgeRegistryHelper implements IRegistryHelper {
 
 
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab> group) {
+    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
         Supplier<T> item = ITEMS.register(name, type);
-        addCreativeTabItems(group, item);
-        CreativeModeTabEventHandler.assignItemToTab(item, group);
+        if (groups != null) {
+            for (ResourceKey<CreativeModeTab> tab : groups) {
+                addCreativeTabItems(tab, type);
+            }
+        }
         return item;
     }
 
