@@ -4,7 +4,6 @@ import architectspalette.core.registry.MiscRegistry;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
@@ -12,9 +11,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 
 public class GreenFireBlock extends BaseFireBlock {
     public static final MapCodec<GreenFireBlock> CODEC = simpleCodec(GreenFireBlock::new);
@@ -29,8 +26,9 @@ public class GreenFireBlock extends BaseFireBlock {
     }
 
     //It's the little things. Pick block on the fire will give you flint and steel to light one. Vanilla doesn't do this.
+    // (ender) so forge adds a custom getCloneItemStack method, why?
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
         return new ItemStack(Items.FLINT_AND_STEEL);
     }
 
