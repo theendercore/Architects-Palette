@@ -229,10 +229,10 @@ public class APBlocksFG {
 
     // Acacia Totems
 //    public static final RegistryObject<TotemWingBlock> ACACIA_TOTEM_WING = createBlock("acacia_totem_wing", () -> new TotemWingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion().noLootTable().sound(SoundType.SCAFFOLDING).noCollission()));
-    public static final RegistryObject<Block> GRINNING_ACACIA_TOTEM = createBlock("grinning_acacia_totem", () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.GRINNING));
-    public static final RegistryObject<Block> PLACID_ACACIA_TOTEM   = createBlock("placid_acacia_totem",   () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.PLACID));
-    public static final RegistryObject<Block> SHOCKED_ACACIA_TOTEM  = createBlock("shocked_acacia_totem",  () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.SHOCKED));
-    public static final RegistryObject<Block> BLANK_ACACIA_TOTEM    = createBlock("blank_acacia_totem",    () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.BLANK));
+//    public static final RegistryObject<Block> GRINNING_ACACIA_TOTEM = createBlock("grinning_acacia_totem", () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.GRINNING));
+//    public static final RegistryObject<Block> PLACID_ACACIA_TOTEM   = createBlock("placid_acacia_totem",   () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.PLACID));
+//    public static final RegistryObject<Block> SHOCKED_ACACIA_TOTEM  = createBlock("shocked_acacia_totem",  () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.SHOCKED));
+//    public static final RegistryObject<Block> BLANK_ACACIA_TOTEM    = createBlock("blank_acacia_totem",    () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.BLANK));
 
     // Ender Pearl Block
 //    public static final RegistryObject<Block> ENDER_PEARL_BLOCK = createBlock("ender_pearl_block", () -> new Block(APBlockPropertiesFG.ENDER_PEARL));

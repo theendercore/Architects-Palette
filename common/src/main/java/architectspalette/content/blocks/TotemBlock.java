@@ -1,7 +1,7 @@
 package architectspalette.content.blocks;
 
 import architectspalette.core.integration.APCriterion;
-import architectspalette.core.registry.APBlocksFG;
+import architectspalette.core.registry.APBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -102,10 +102,10 @@ public class TotemBlock extends Block {
 
         public Block getStrip() {
             switch(this){
-                case GRINNING: return APBlocksFG.PLACID_ACACIA_TOTEM.get();
-                case PLACID: return APBlocksFG.SHOCKED_ACACIA_TOTEM.get();
-                case SHOCKED: return APBlocksFG.BLANK_ACACIA_TOTEM.get();
-                default: return APBlocksFG.GRINNING_ACACIA_TOTEM.get();
+                case GRINNING: return APBlocks.PLACID_ACACIA_TOTEM.get();
+                case PLACID: return APBlocks.SHOCKED_ACACIA_TOTEM.get();
+                case SHOCKED: return APBlocks.BLANK_ACACIA_TOTEM.get();
+                default: return APBlocks.GRINNING_ACACIA_TOTEM.get();
             }
         }
     }
