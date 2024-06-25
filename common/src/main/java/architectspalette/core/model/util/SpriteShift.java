@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static architectspalette.core.ArchitectsPalette.rl;
+import static architectspalette.core.APConstants.modLoc;
 
 public class SpriteShift {
 
@@ -26,7 +26,7 @@ public class SpriteShift {
         return shift;
     }
     public static SpriteShift getShift(String from_block, String to_block) {
-        return getShift(rl(from_block), rl(to_block));
+        return getShift(modLoc(from_block), modLoc(to_block));
     }
 
     public static void onTexturesDoneStitching() {
