@@ -3,7 +3,10 @@ package architectspalette.core.platform;
 import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.services.IRegistryHelper;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
@@ -40,7 +43,19 @@ public class FabricRegistryHelper implements IRegistryHelper {
 
     @Override
     public <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type) {
-        T block = Registry.register(BuiltInRegistries.SOUND_EVENT, modLoc(name), type.get());
-        return () -> block;
+        T sound = Registry.register(BuiltInRegistries.SOUND_EVENT, modLoc(name), type.get());
+        return () -> sound;
+    }
+
+    @Override
+    public <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type) {
+        T particle = Registry.register(BuiltInRegistries.PARTICLE_TYPE, modLoc(name), type.get());
+        return () -> particle;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name) {
+        return (Supplier<T>) registerParticleType(name, FabricParticleTypes::simple);
     }
 }

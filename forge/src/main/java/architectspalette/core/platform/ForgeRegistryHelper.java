@@ -4,6 +4,8 @@ import architectspalette.core.APConstants;
 import architectspalette.core.config.APConfig;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.platform.services.IRegistryHelper;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,7 +24,9 @@ import static architectspalette.core.APConstants.MOD_ID;
 public class ForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, APConstants.MOD_ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, APConstants.MOD_ID);
+
 
     @Override
     public void resisterConfig() {
@@ -32,6 +36,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public static void register(IEventBus modEventBus) {
         SOUNDS.register(modEventBus);
         ITEMS.register(modEventBus);
+        PARTICLE_TYPES.register(modEventBus);
 //        BLOCKS.register(modEventBus);
     }
 
@@ -52,5 +57,15 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type) {
         return SOUNDS.register(name, type);
+    }
+    @Override
+    public <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type) {
+        return PARTICLE_TYPES.register(name, type);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name) {
+        return (Supplier<T>) registerParticleType(name, () -> new SimpleParticleType(false));
     }
 }

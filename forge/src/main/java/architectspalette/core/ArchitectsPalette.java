@@ -38,7 +38,7 @@ public class ArchitectsPalette {
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
         ForgeRegistryHelper.register(modEventBus);
 
-        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
+//        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
         APBlocks.BLOCKS.register(modEventBus);
 
         APFeatures.FEATURES.register(modEventBus);

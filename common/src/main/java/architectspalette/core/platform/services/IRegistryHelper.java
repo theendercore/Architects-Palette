@@ -1,5 +1,7 @@
 package architectspalette.core.platform.services;
 
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
@@ -41,6 +43,10 @@ public interface IRegistryHelper {
     <T extends Block> Supplier<T> registerBlockNoItem(String name, Supplier<T> type);
 
     <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type);
+
+    <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type);
+
+    <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name);
 //    <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
 //    <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
