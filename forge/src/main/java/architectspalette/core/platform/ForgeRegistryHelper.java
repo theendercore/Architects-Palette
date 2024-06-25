@@ -51,8 +51,9 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     }
 
 
+    @SafeVarargs
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
+    public final <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
         Supplier<T> item = ITEMS.register(name, type);
         if (groups != null) {
             for (ResourceKey<CreativeModeTab> tab : groups) {

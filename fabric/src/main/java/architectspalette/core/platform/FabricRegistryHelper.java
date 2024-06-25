@@ -32,8 +32,9 @@ public class FabricRegistryHelper implements IRegistryHelper {
         ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
     }
 
+    @SafeVarargs
     @Override
-    public <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
+    public final <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
         T item = Registry.register(BuiltInRegistries.ITEM, modLoc(name), type.get());
         Supplier<T> supplierItem = () -> item;
         if (groups != null) {
