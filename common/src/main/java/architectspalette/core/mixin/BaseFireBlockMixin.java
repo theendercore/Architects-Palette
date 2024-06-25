@@ -2,7 +2,6 @@ package architectspalette.core.mixin;
 
 import architectspalette.content.blocks.GreenFireBlock;
 import architectspalette.core.registry.APBlocks;
-import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseFireBlock;
