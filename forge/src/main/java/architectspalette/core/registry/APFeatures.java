@@ -33,7 +33,7 @@ public class APFeatures {
         return List.of(
                 new FeatureWrapper<>("heliodor_cluster",
                         CRYSTAL_CLUSTER,
-                        new CrystalClusterConfig(1, 7, APBlocksFG.HELIODOR_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
+                        new CrystalClusterConfig(1, 7, APBlocks.HELIODOR_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
                         List.of(
                                 CountPlacement.of(7),
                                 InSquarePlacement.spread(),
@@ -43,7 +43,7 @@ public class APFeatures {
                 ),
                 new FeatureWrapper<>("ekanite_cluster",
                         CRYSTAL_CLUSTER,
-                        new CrystalClusterConfig(1, 6, APBlocksFG.EKANITE_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
+                        new CrystalClusterConfig(1, 6, APBlocks.EKANITE_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
                         List.of(
                                 CountPlacement.of(8),
                                 InSquarePlacement.spread(),
@@ -53,7 +53,7 @@ public class APFeatures {
                 ),
                 new FeatureWrapper<>("hanging_monazite_cluster",
                         CRYSTAL_CLUSTER,
-                        new CrystalClusterConfig(0, 7, APBlocksFG.MONAZITE_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
+                        new CrystalClusterConfig(0, 7, APBlocks.MONAZITE_ROD.get().defaultBlockState(), true, Blocks.BASALT.defaultBlockState()),
                         List.of(
                                 CountPlacement.of(4),
                                 InSquarePlacement.spread(),
@@ -63,7 +63,7 @@ public class APFeatures {
                 ),
                 new FeatureWrapper<>( "monazite_cluster",
                         CRYSTAL_CLUSTER,
-                        new CrystalClusterConfig(0, 6, APBlocksFG.MONAZITE_ROD.get().defaultBlockState(), false, Blocks.BASALT.defaultBlockState()),
+                        new CrystalClusterConfig(0, 6, APBlocks.MONAZITE_ROD.get().defaultBlockState(), false, Blocks.BASALT.defaultBlockState()),
                         List.of(
                                 CountPlacement.of(5),
                                 InSquarePlacement.spread(),

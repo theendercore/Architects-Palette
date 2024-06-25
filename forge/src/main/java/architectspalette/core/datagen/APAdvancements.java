@@ -62,9 +62,9 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .addCriterion("carve_totem", CarveTotemTrigger.TriggerInstance.simple())
                 .save(advancementConsumer, getNameId("main/totem_carving") );
 
-        AdvancementHolder whatACatch = getAdvancement(architectsPalette, APBlocksFG.COD_LOG.get().asItem(), "buy_fish_block", AdvancementType.TASK, true, false, false)
-                .addCriterion("cod_log", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocksFG.COD_LOG.get().asItem()))
-                .addCriterion("salmon_log", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocksFG.SALMON_LOG.get().asItem()))
+        AdvancementHolder whatACatch = getAdvancement(architectsPalette, APBlocks.COD_LOG.get().asItem(), "buy_fish_block", AdvancementType.TASK, true, false, false)
+                .addCriterion("cod_log", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocks.COD_LOG.get().asItem()))
+                .addCriterion("salmon_log", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocks.SALMON_LOG.get().asItem()))
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(advancementConsumer, getNameId("main/buy_fish_block"));
 
@@ -77,9 +77,9 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
         AdvancementHolder buyPlating = buyAdvancement(architectsPalette, APBlocksFG.PLATING_BLOCK.get().asItem(), "buy_plating", "plating", advancementConsumer);
         AdvancementHolder buySpool = buyAdvancement(architectsPalette, APBlocks.SPOOL.get().asItem(), "buy_spool", "spool", advancementConsumer);
 
-        AdvancementHolder buyCelestialStone = getAdvancement(architectsPalette, APBlocksFG.SUNSTONE.get().asItem(), "buy_celestial_stone", AdvancementType.TASK, true, false, false)
-                .addCriterion("moonstone", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocksFG.MOONSTONE.get().asItem()))
-                .addCriterion("sunstone", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocksFG.SUNSTONE.get().asItem()))
+        AdvancementHolder buyCelestialStone = getAdvancement(architectsPalette, APBlocks.SUNSTONE.get().asItem(), "buy_celestial_stone", AdvancementType.TASK, true, false, false)
+                .addCriterion("moonstone", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocks.MOONSTONE.get().asItem()))
+                .addCriterion("sunstone", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocks.SUNSTONE.get().asItem()))
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(advancementConsumer, getNameId("main/buy_celestial_stone"));
 

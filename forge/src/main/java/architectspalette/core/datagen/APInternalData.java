@@ -16,6 +16,8 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
+import static architectspalette.core.registry.APBlocks.TWISTED_LEAVES;
+
 public class APInternalData {
 
     public static RegistrySetBuilder getRegistrySetBuilder() {
@@ -40,7 +42,7 @@ public class APInternalData {
                             new TreeConfiguration.TreeConfigurationBuilder(
                                     BlockStateProvider.simple(APBlocksFG.TWISTED_LOG.get().defaultBlockState()),
                                     new ForkingTrunkPlacer(5, 2, 2),
-                                    BlockStateProvider.simple(APBlocksFG.TWISTED_LEAVES.get().defaultBlockState()),
+                                    BlockStateProvider.simple(TWISTED_LEAVES.get().defaultBlockState()),
                                     new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                                     new TwoLayersFeatureSize(1, 0, 2)
                             )
