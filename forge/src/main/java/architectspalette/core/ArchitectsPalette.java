@@ -61,7 +61,7 @@ public class ArchitectsPalette {
         // (ender) Thanks forge :)
         APCommonClass.earlyInit();
 
-        APBlockProperties.registerFlammables();
+        APBlockPropertiesFG.registerFlammables();
         APTrades.registerTrades();
     }
 

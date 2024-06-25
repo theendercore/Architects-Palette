@@ -2,8 +2,6 @@ package architectspalette.core.registry;
 
 import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.content.blocks.SunstoneBlock;
-import architectspalette.content.blocks.abyssaline.*;
-import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -16,27 +14,26 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.stream.Stream;
 
 import static architectspalette.core.registry.APBlocks.*;
-import static architectspalette.core.registry.APBlocksFG.*;
 
 public class APBlockProperties {
-	private static Block.Properties AbyssalineBase() {
-		return Block.Properties.ofFullCopy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
-			.emissiveRendering(AbyssalineHelper::needsPostProcessing)
-			.hasPostProcess(AbyssalineHelper::needsPostProcessing)
-			.isValidSpawn(AbyssalineHelper::allowsMobSpawning)
-			.lightLevel(AbyssalineBlock::getLightValue);
-	}
-
-	public static final Block.Properties ABYSSALINE = AbyssalineBase();
-
-	public static final Block.Properties ABYSSALINE_LAMP = AbyssalineBase()
-			.lightLevel(AbyssalineLampBlock::getLightValue);
-
-	public static final Block.Properties CHISELED_ABYSSALINE = AbyssalineBase()
-			.lightLevel(ChiseledAbyssalineBlock::getLightValue);
-
-	public static final Block.Properties ABYSSALINE_NUB = AbyssalineBase()
-			.lightLevel(AbyssalineNubBlock::getLightValue);
+//	private static Block.Properties AbyssalineBase() {
+//		return Block.Properties.ofFullCopy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
+//			.emissiveRendering(AbyssalineHelper::needsPostProcessing)
+//			.hasPostProcess(AbyssalineHelper::needsPostProcessing)
+//			.isValidSpawn(AbyssalineHelper::allowsMobSpawning)
+//			.lightLevel(AbyssalineBlock::getLightValue);
+//	}
+//
+//	public static final Block.Properties ABYSSALINE = AbyssalineBase();
+//
+//	public static final Block.Properties ABYSSALINE_LAMP = AbyssalineBase()
+//			.lightLevel(AbyssalineLampBlock::getLightValue);
+//
+//	public static final Block.Properties CHISELED_ABYSSALINE = AbyssalineBase()
+//			.lightLevel(ChiseledAbyssalineBlock::getLightValue);
+//
+//	public static final Block.Properties ABYSSALINE_NUB = AbyssalineBase()
+//			.lightLevel(AbyssalineNubBlock::getLightValue);
 
 
 	public static Block.Properties Meat(MapColor color) {
@@ -151,28 +148,28 @@ public class APBlockProperties {
 //			.setEmmisiveRendering(SunstoneBlock::isLit).setNeedsPostProcessing(SunstoneBlock::isLit);
 
 
-	public static void registerFlammables() {
-		// Logs & Coal: 5, 5
-		// Planks: 5, 20
-		// Leaves & Wool: 30, 60
-		// Plants: 60, 100
-		registerFlammable(TWISTED_FENCE.get(), 5, 20);
-		TWISTED_PLANKS.registerFlammable(5, 20);
-		Stream.of(GRINNING_ACACIA_TOTEM, PLACID_ACACIA_TOTEM, SHOCKED_ACACIA_TOTEM, BLANK_ACACIA_TOTEM,
-				TWISTED_LOG, STRIPPED_TWISTED_LOG, TWISTED_WOOD, STRIPPED_TWISTED_WOOD,
-				SPOOL, CHARCOAL_BLOCK,
-				OAK_RAILING, BIRCH_RAILING, SPRUCE_RAILING,
-				ACACIA_RAILING, DARK_OAK_RAILING, JUNGLE_RAILING,
-				TWISTED_RAILING
-		).forEach((t) -> {
-			registerFlammable(t.get(), 5, 5);
-		});
-		for (BlockNode node : boards) {
-			node.forEach((n) -> {
-				registerFlammable(n.get(), 5, 20);
-			});
-		}
-	}
+//	public static void registerFlammables() {
+//		// Logs & Coal: 5, 5
+//		// Planks: 5, 20
+//		// Leaves & Wool: 30, 60
+//		// Plants: 60, 100
+//		registerFlammable(TWISTED_FENCE.get(), 5, 20);
+//		TWISTED_PLANKS.registerFlammable(5, 20);
+//		Stream.of(GRINNING_ACACIA_TOTEM, PLACID_ACACIA_TOTEM, SHOCKED_ACACIA_TOTEM, BLANK_ACACIA_TOTEM,
+//				TWISTED_LOG, STRIPPED_TWISTED_LOG, TWISTED_WOOD, STRIPPED_TWISTED_WOOD,
+//				SPOOL, CHARCOAL_BLOCK,
+//				OAK_RAILING, BIRCH_RAILING, SPRUCE_RAILING,
+//				ACACIA_RAILING, DARK_OAK_RAILING, JUNGLE_RAILING,
+//				TWISTED_RAILING
+//		).forEach((t) -> {
+//			registerFlammable(t.get(), 5, 5);
+//		});
+//		for (BlockNode node : boards) {
+//			node.forEach((n) -> {
+//				registerFlammable(n.get(), 5, 20);
+//			});
+//		}
+//	}
 
 
 
