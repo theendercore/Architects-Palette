@@ -58,7 +58,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .addCriterion("craftingtable", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
                 .save(advancementConsumer, getNameId("main/root"));
 
-        AdvancementHolder totemCarving = getAdvancement(architectsPalette, APBlocksFG.PLACID_ACACIA_TOTEM.get().asItem(), "totem_carving", AdvancementType.TASK, true ,true, false)
+        AdvancementHolder totemCarving = getAdvancement(architectsPalette, APBlocks.PLACID_ACACIA_TOTEM.get().asItem(), "totem_carving", AdvancementType.TASK, true ,true, false)
                 .addCriterion("carve_totem", CarveTotemTrigger.TriggerInstance.simple())
                 .save(advancementConsumer, getNameId("main/totem_carving") );
 
