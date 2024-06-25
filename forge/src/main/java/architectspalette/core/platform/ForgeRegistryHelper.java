@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
@@ -26,6 +27,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, APConstants.MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, APConstants.MOD_ID);
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
 
 
     @Override
@@ -38,6 +40,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         ITEMS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);
 //        BLOCKS.register(modEventBus);
+        FEATURES.register(modEventBus);
     }
 
 
@@ -67,5 +70,10 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name) {
         return (Supplier<T>) registerParticleType(name, () -> new SimpleParticleType(false));
+    }
+
+    @Override
+    public <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type) {
+        return FEATURES.register(name, type);
     }
 }

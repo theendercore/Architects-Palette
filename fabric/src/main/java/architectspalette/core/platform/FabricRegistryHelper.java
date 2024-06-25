@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.function.Supplier;
@@ -57,5 +58,11 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name) {
         return (Supplier<T>) registerParticleType(name, FabricParticleTypes::simple);
+    }
+
+    @Override
+    public <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type) {
+        T feature = Registry.register(BuiltInRegistries.FEATURE, modLoc(name), type.get());
+        return () -> feature;
     }
 }

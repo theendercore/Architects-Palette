@@ -9,6 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -47,6 +48,8 @@ public interface IRegistryHelper {
     <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type);
 
     <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name);
+
+    <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type);
 //    <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
 //    <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
