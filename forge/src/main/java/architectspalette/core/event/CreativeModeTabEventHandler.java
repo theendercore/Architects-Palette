@@ -19,6 +19,9 @@ import static architectspalette.core.APConstants.MOD_ID;
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class CreativeModeTabEventHandler {
 
+
+    // (ender) If there is still more than ~20 lines in this file after the port i forger and should get yelled at
+
     private static final List<Supplier<? extends ItemLike>> items = new ArrayList<>();
     private static final List<ResourceKey<CreativeModeTab>> tabs = new ArrayList<>();
 
@@ -32,7 +35,7 @@ public class CreativeModeTabEventHandler {
 
     @SubscribeEvent
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
-        //Why would you do this?
+        // (ender) Why would you do this?
         int i = 0;
         for (Supplier<? extends ItemLike> item : items) {
             if (event.getTabKey() == tabs.get(i)) {
@@ -45,7 +48,10 @@ public class CreativeModeTabEventHandler {
 
         List<Supplier<? extends ItemLike>> itemlist = ForgeRegistryHelper.CREATIVE_TAB_ITEMS_MAP.get(event.getTabKey());
         if (itemlist != null) {
+            // (ender) add this back later
+//                if (!(item.get() instanceof VerticalSlabBlock && !VerticalSlabBlock.isQuarkEnabled())) {
             event.acceptAll(itemlist.stream().map((it) -> it.get().asItem().getDefaultInstance()).toList());
+//                }
         }
     }
 

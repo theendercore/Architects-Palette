@@ -13,7 +13,7 @@ public class CreativeModeTabEventHandler {
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
             List<Supplier<? extends ItemLike>> itemlist = FabricRegistryHelper.CREATIVE_TAB_ITEMS_MAP.get(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(group).get());
             if (itemlist != null) {
-                // add this back later
+                // (ender) add this back later
 //                if (!(item.get() instanceof VerticalSlabBlock && !VerticalSlabBlock.isQuarkEnabled())) {
                 entries.acceptAll(itemlist.stream().map((it) -> it.get().asItem().getDefaultInstance()).toList());
 //                }
