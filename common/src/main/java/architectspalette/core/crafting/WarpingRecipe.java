@@ -78,8 +78,8 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     public static class Serializer implements RecipeSerializer<WarpingRecipe> {
         public static final MapCodec<WarpingRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 instance -> instance.group(
-                                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(recipe -> recipe.input),
-                                ItemStack.STRICT_CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+                                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.input),
+                                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
                                 ResourceLocation.CODEC.fieldOf("dimension").forGetter(recipe -> recipe.dimension)
                         )
                         .apply(instance, WarpingRecipe::new)
