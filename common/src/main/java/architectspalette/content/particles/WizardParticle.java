@@ -10,10 +10,9 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+// (ender) figure out if there are agnostic annotations
+//@OnlyIn(Dist.CLIENT)
 public class WizardParticle extends TextureSheetParticle {
 
     private final SpriteSet sprites;
@@ -99,7 +98,7 @@ public class WizardParticle extends TextureSheetParticle {
 
     }
 
-    @OnlyIn(Dist.CLIENT)
+//    @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprite;
 
