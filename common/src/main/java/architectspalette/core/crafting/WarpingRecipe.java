@@ -12,8 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-import static architectspalette.core.registry.APRecipes.WARPING_SERIALIZER;
-
 // (ender) I used SingleRecipeInput since I didn't think it needs to have mor then one item input,
 // but you can blame me if this breaks stuff
 public class WarpingRecipe implements Recipe<SingleRecipeInput> {
@@ -74,7 +72,7 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return WARPING_SERIALIZER.get();
+        return APRecipes.WARPING_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<WarpingRecipe> {

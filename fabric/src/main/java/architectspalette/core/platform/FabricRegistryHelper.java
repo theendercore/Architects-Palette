@@ -12,6 +12,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.fml.config.ModConfig;
@@ -64,5 +66,17 @@ public class FabricRegistryHelper implements IRegistryHelper {
     public <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type) {
         T feature = Registry.register(BuiltInRegistries.FEATURE, modLoc(name), type.get());
         return () -> feature;
+    }
+
+    @Override
+    public <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type) {
+        T recipeSerializer = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, modLoc(name), type.get());
+        return () -> recipeSerializer;
+    }
+
+    @Override
+    public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
+        T recipeType = Registry.register(BuiltInRegistries.RECIPE_TYPE, modLoc(name), type.get());
+        return () -> recipeType;
     }
 }

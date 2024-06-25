@@ -7,6 +7,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -50,7 +52,8 @@ public interface IRegistryHelper {
     <T extends SimpleParticleType> Supplier<T> registerSimpleParticleType(String name);
 
     <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type);
-//    <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
-//    <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
+    <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
+
+    <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
 }

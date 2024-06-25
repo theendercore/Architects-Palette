@@ -10,6 +10,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,6 +30,8 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MOD_ID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, APConstants.MOD_ID);
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
 
 
     @Override
@@ -40,7 +44,9 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         ITEMS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);
 //        BLOCKS.register(modEventBus);
-        FEATURES.register(modEventBus);
+//        FEATURES.register(modEventBus);
+        RECIPE_TYPES.register(modEventBus);
+        RECIPE_SERIALIZERS.register(modEventBus);
     }
 
 
@@ -75,5 +81,15 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type) {
         return FEATURES.register(name, type);
+    }
+
+    @Override
+    public <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type) {
+        return RECIPE_SERIALIZERS.register(name, type);
+    }
+
+    @Override
+    public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
+        return RECIPE_TYPES.register(name, type);
     }
 }
