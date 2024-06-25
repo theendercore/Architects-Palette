@@ -7,9 +7,6 @@
   "mixins": [
     "ServerWorldMixin"
   ],
-  "client": [
-    "MixinMinecraft"
-  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
