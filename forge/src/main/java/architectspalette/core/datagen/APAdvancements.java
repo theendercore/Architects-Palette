@@ -2,6 +2,7 @@ package architectspalette.core.datagen;
 
 import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.integration.advancement.CarveTotemTrigger;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -74,7 +75,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .save(advancementConsumer, getNameId("main/place_entrails"));
 
         AdvancementHolder buyPlating = buyAdvancement(architectsPalette, APBlocksFG.PLATING_BLOCK.get().asItem(), "buy_plating", "plating", advancementConsumer);
-        AdvancementHolder buySpool = buyAdvancement(architectsPalette, APBlocksFG.SPOOL.get().asItem(), "buy_spool", "spool", advancementConsumer);
+        AdvancementHolder buySpool = buyAdvancement(architectsPalette, APBlocks.SPOOL.get().asItem(), "buy_spool", "spool", advancementConsumer);
 
         AdvancementHolder buyCelestialStone = getAdvancement(architectsPalette, APBlocksFG.SUNSTONE.get().asItem(), "buy_celestial_stone", AdvancementType.TASK, true, false, false)
                 .addCriterion("moonstone", InventoryChangeTrigger.TriggerInstance.hasItems(APBlocksFG.MOONSTONE.get().asItem()))

@@ -38,7 +38,7 @@ public class ArchitectsPalette {
         ForgeRegistryHelper.register(modEventBus);
 
 //        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
-        APBlocksFG.BLOCKS.register(modEventBus);
+//        APBlocksFG.BLOCKS.register(modEventBus);
 
         APFeatures.FEATURES.register(modEventBus);
 //        APRecipes.RECIPE_TYPES.register(modEventBus);

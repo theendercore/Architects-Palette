@@ -2,6 +2,7 @@ package architectspalette.core.integration;
 
 
 import architectspalette.core.config.APConfig;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemsForEmeralds;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +26,7 @@ public class APTrades {
             // Pipes
             add_trade(TOOLSMITH, 2, new ItemsForEmeralds(new ItemStack(APBlocksFG.PIPE.get()),4,12, 6, 4, 0.1F));
             // Spools
-            add_trade(SHEPHERD, 2, new ItemsForEmeralds(new ItemStack(APBlocksFG.SPOOL.get()),1,2, 5, 4, 0.0F));
+            add_trade(SHEPHERD, 2, new ItemsForEmeralds(new ItemStack(APBlocks.SPOOL.get()),1,2, 5, 4, 0.0F));
 
             // Temporary survival recipes until properly implemented
             add_trade(MASON, 1, new ItemsForEmeralds(new ItemStack(APBlocksFG.MYONITE.get()), 1, 16, 5, 3, 0.05f));

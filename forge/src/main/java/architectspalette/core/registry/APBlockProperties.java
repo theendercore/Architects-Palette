@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 import java.util.stream.Stream;
 
+import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.APBlocksFG.*;
 
 public class APBlockProperties {

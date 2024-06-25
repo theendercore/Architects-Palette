@@ -40,7 +40,7 @@ public class ModelBakeEventHandler {
 //        register(APBlocks.BIRCH_BOARDS, model -> new BoardModel(model, birchShift));
 
         //Note; Not all model swaps are registered here.
-        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
+//        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
         register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
         register(APBlocksFG.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
         register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));

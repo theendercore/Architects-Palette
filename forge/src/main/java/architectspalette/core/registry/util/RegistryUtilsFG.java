@@ -39,14 +39,14 @@ public class RegistryUtilsFG {
 
 	@SafeVarargs
 	public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, ResourceKey<CreativeModeTab>... group) {
-		RegistryObject<B> block = APBlocksFG.BLOCKS.register(name, supplier);
+		RegistryObject<B> block = ForgeRegistryHelper.BLOCKS.register(name, supplier);
 		ForgeRegistryHelper.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
 		if (group != null) CreativeModeTabEventHandler.assignItemToTab(block, group);
 		return block;
 	}
 	
 	public static <B extends Block> RegistryObject<B> createBlockNoItem(String name, Supplier<? extends B> supplier) {
-		return APBlocksFG.BLOCKS.register(name, supplier);
+		return ForgeRegistryHelper.BLOCKS.register(name, supplier);
 	}
 
 

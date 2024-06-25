@@ -2,10 +2,7 @@ package architectspalette.core;
 
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.platform.Services;
-import architectspalette.core.registry.APItems;
-import architectspalette.core.registry.APRecipes;
-import architectspalette.core.registry.APSounds;
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.*;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code written here can only
 // import and access the vanilla codebase, libraries used by vanilla, and optionally third party libraries that provide
@@ -22,6 +19,7 @@ public class APCommonClass {
 
         APSounds.init();
         APItems.init();
+        APBlocks.init();
         MiscRegistry.init();
 
         APRecipes.init();

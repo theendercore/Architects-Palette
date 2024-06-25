@@ -8,6 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
 
+import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
 import static architectspalette.core.registry.APBlocksFG.*;
 
 @OnlyIn(Dist.CLIENT)
