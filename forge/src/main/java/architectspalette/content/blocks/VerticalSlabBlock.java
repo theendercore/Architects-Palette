@@ -1,6 +1,7 @@
 package architectspalette.content.blocks;
 
 import architectspalette.core.config.APConfig;
+import architectspalette.core.platform.Services;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +34,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,7 +60,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 	
 	public static boolean isQuarkEnabled() {
 		if(!checkedQuark) {
-			quarkEnabled = ModList.get().isLoaded(QUARK_ID);
+			quarkEnabled = Services.PLATFORM.isModLoaded(QUARK_ID);
 			checkedQuark = true;
 		}
 		
