@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
             "architectspalette.core.ArchitectsPalette"
+        ],
+        "client": [
+            "architectspalette.core.ArchitectsPaletteClient"
         ]
     },
     "mixins": [

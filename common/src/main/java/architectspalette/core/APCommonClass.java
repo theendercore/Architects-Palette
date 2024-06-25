@@ -24,4 +24,10 @@ public class APCommonClass {
             APConstants.LOGGER.info("Hello to examplemod");
         }
     }
+
+
+    // (ender) I have no idea if this can go in the same call as init, but I will see :)
+    public static void initClient() {
+
+    }
 }

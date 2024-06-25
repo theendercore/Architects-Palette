@@ -1,6 +1,5 @@
 package architectspalette.core;
 
-import architectspalette.core.config.APConfig;
 import architectspalette.core.integration.APCriterion;
 import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
@@ -13,9 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -97,6 +94,7 @@ public class ArchitectsPalette {
     }
 
     void setupClient(final FMLClientSetupEvent event) {
+        APCommonClass.initClient();
         APRenderLayers.setupRenderLayers();
     }
 }
