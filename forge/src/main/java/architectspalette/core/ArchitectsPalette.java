@@ -36,15 +36,17 @@ public class ArchitectsPalette {
     public ArchitectsPalette() {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+//        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
 
         MiscRegistry.PARTICLE_TYPES.register(modEventBus);
         APSounds.SOUNDS.register(modEventBus);
         APBlocks.BLOCKS.register(modEventBus);
-        ForgeRegistryHelper.ITEMS.register(modEventBus);
+
+        ForgeRegistryHelper.register(modEventBus);
 //        ForgeRegistryHelper.BLOCKS.register(modEventBus);
+
         APFeatures.FEATURES.register(modEventBus);
         APRecipes.RECIPE_TYPES.register(modEventBus);
 
