@@ -6,15 +6,17 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 
-import static architectspalette.core.ArchitectsPalette.rl;
+import static architectspalette.core.APConstants.modLoc;
+
 
 public class APCriterion {
-    //this is here to just initialize things
-    public static void init() {}
+    // (ender) this is here to just initialize things
+    public static void init() {
+    }
 
-    public static CarveTotemTrigger CARVE_TOTEM = register(rl("carve_totem"),new CarveTotemTrigger());
+    public static CarveTotemTrigger CARVE_TOTEM = register(modLoc("carve_totem"), new CarveTotemTrigger());
 
-    //(ender) I don't know if there is a forge registry for this
+    // (ender) there doesn't seam to be a loader specific way to register criteria
     public static <T extends CriterionTrigger<?>> T register(ResourceLocation name, T criterion) {
         return Registry.register(BuiltInRegistries.TRIGGER_TYPES, name, criterion);
     }

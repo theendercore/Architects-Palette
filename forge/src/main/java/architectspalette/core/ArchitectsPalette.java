@@ -65,7 +65,7 @@ public class ArchitectsPalette {
 
         // Is this okay to go here?
         // (ender) I mean that's kind what vanilla does so probably
-        APCriterion.init();
+//        APCriterion.init();
     }
 
 //    void registerRecipeSerializers(IEventBus bus) {

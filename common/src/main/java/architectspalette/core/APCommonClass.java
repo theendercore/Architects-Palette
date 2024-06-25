@@ -1,5 +1,6 @@
 package architectspalette.core;
 
+import architectspalette.core.integration.APCriterion;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.APRecipes;
@@ -24,6 +25,7 @@ public class APCommonClass {
         MiscRegistry.init();
 
         APRecipes.init();
+        APCriterion.init();
 
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
             APConstants.LOGGER.info("Hello to examplemod");
