@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.modLoc;
 
+@SuppressWarnings("deprecation")
 public class APSounds {
     public static void init(){}
 
