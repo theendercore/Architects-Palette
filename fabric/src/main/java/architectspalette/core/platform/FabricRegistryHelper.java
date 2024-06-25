@@ -88,7 +88,7 @@ public class FabricRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public void setRenderLayer(Block block, RenderType type) {
-        BlockRenderLayerMap.INSTANCE.putBlock(block, type);
+    public void setRenderLayer(Supplier<Block> block, RenderType type) {
+        BlockRenderLayerMap.INSTANCE.putBlock(block.get(), type);
     }
 }

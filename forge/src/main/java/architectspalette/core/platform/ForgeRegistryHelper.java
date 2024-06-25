@@ -100,7 +100,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void setRenderLayer(Block block, RenderType type) {
-        ItemBlockRenderTypes.setRenderLayer(block, type);
+    public void setRenderLayer(Supplier<Block> block, RenderType type) {
+        ItemBlockRenderTypes.setRenderLayer(block.get(), type);
     }
 }
