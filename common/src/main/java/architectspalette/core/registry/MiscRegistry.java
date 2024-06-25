@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 import static architectspalette.core.APConstants.modLoc;
 
 public class MiscRegistry {
+    public static void init(){}
 
     // Tags
     public static final TagKey<Block> CRYSTAL_REPLACEABLE = blockTag("crystal_formation_replaceable");
