@@ -5,8 +5,6 @@ import architectspalette.core.event.ModelBakeEventHandler;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.util.SpriteShift;
 import architectspalette.core.platform.ForgeRegistryHelper;
-import architectspalette.core.registry.APBlocksFG;
-import architectspalette.core.registry.APItemsFG;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,20 +16,6 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class RegistryUtilsFG {
-
-
-
-	public static RegistryObject<Item> createItem(String name) {
-		return createItem(name, APItemsFG::resourceItem);
-	}
-	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier) {
-		return createItem(name, supplier, CreativeModeTabs.INGREDIENTS);
-	}
-	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier, ResourceKey<CreativeModeTab> group) {
-		RegistryObject<I> item = ForgeRegistryHelper.ITEMS.register(name, supplier);
-		CreativeModeTabEventHandler.assignItemToTab(item, group);
-		return item;
-	}
 
 	public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier) {
 		return createBlock(name, supplier, CreativeModeTabs.BUILDING_BLOCKS);
