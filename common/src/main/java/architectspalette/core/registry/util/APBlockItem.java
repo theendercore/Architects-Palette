@@ -17,7 +17,8 @@ public class APBlockItem extends BlockItem {
         return this;
     }
 
-    @Override
+    // (ender) this is a forgeism. Will have fun re-making this in fabric
+//    @Override
     public int getBurnTime(ItemStack itemStack, RecipeType type) {
         return this.burnTime;
     }

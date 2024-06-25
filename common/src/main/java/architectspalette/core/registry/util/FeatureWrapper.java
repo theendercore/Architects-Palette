@@ -4,7 +4,6 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraftforge.registries.RegistryObject;
 import oshi.util.Memoizer;
 
 import java.util.List;
@@ -16,12 +15,12 @@ import java.util.function.Supplier;
  */
 public final class FeatureWrapper<T extends FeatureConfiguration> {
     private final String name;
-    private final RegistryObject<Feature<T>> feature;
+    private final Supplier<Feature<T>> feature;
     private final T config;
     private final List<PlacementModifier> placement;
     private final Supplier<ConfiguredFeature<T, Feature<T>>> configuredFeatureSupplier;
 
-    public FeatureWrapper(String name, RegistryObject<Feature<T>> feature, T config, List<PlacementModifier> placement) {
+    public FeatureWrapper(String name, Supplier<Feature<T>> feature, T config, List<PlacementModifier> placement) {
         this.name = name;
         this.feature = feature;
         this.config = config;
@@ -33,7 +32,7 @@ public final class FeatureWrapper<T extends FeatureConfiguration> {
         return name;
     }
 
-    public RegistryObject<Feature<T>> feature() {
+    public Supplier<Feature<T>> feature() {
         return feature;
     }
 
