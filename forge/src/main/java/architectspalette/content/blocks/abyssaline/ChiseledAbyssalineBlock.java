@@ -1,13 +1,12 @@
 package architectspalette.content.blocks.abyssaline;
 
-import architectspalette.core.registry.APBlocks;
+import architectspalette.core.registry.APBlocksFG;
 import architectspalette.core.registry.APSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -67,7 +66,7 @@ public class ChiseledAbyssalineBlock extends Block implements IAbyssalineChargea
 			if(!player.isCreative())
 				stack.shrink(1);
 			world.setBlockAndUpdate(pos, this.getStateWithCharge(state, true));
-			var sound = (this == APBlocks.CHISELED_HADALINE_BRICKS.get()) ? APSounds.HADALINE_ACTIVATE.get() : SoundEvents.CONDUIT_ACTIVATE;
+			var sound = (this == APBlocksFG.CHISELED_HADALINE_BRICKS.get()) ? APSounds.HADALINE_ACTIVATE.get() : SoundEvents.CONDUIT_ACTIVATE;
 			world.playSound(null, pos, sound, SoundSource.BLOCKS, 0.5F, new Random().nextFloat() * 0.2F + 0.8F);
 			return ItemInteractionResult.SUCCESS;
 		}

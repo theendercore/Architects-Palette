@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static architectspalette.core.ArchitectsPalette.rl;
-import static architectspalette.core.registry.APBlocks.*;
+import static architectspalette.core.registry.APBlocksFG.*;
 import static architectspalette.core.registry.APItems.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static net.minecraft.data.recipes.RecipeCategory.*;

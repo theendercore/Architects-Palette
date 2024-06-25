@@ -7,7 +7,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoneycombItem;
@@ -24,7 +23,7 @@ import net.minecraftforge.common.ToolActions;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static architectspalette.core.registry.APBlocks.*;
+import static architectspalette.core.registry.APBlocksFG.*;
 
 //If you can't beat 'em, join 'em. (Vanilla Copper interface isn't extendable.)
 public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState> {

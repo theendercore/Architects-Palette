@@ -5,7 +5,7 @@ import architectspalette.core.model.HazardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.TileModel;
 import architectspalette.core.model.util.SpriteShift;
-import architectspalette.core.registry.APBlocks;
+import architectspalette.core.registry.APBlocksFG;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -40,12 +40,12 @@ public class ModelBakeEventHandler {
 //        register(APBlocks.BIRCH_BOARDS, model -> new BoardModel(model, birchShift));
 
         //Note; Not all model swaps are registered here.
-        register(APBlocks.UNOBTANIUM_BLOCK, TileModel::new);
-        register(APBlocks.HAZARD_BLOCK.getObject(), HazardModel::new);
-        register(APBlocks.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
-        register(APBlocks.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
+        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
+        register(APBlocksFG.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
-        for (BlockNode board : APBlocks.boards) {
+        for (BlockNode board : APBlocksFG.boards) {
             var wall = board.getChild(BlockNode.BlockType.WALL);
             var shift = SpriteShift.getShift("block/" + board.getName(), "block/" + board.getName() + "_odd");
             register(wall, model -> new BoardModel(model, shift));

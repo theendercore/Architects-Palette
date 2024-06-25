@@ -39,7 +39,7 @@ import static architectspalette.core.registry.util.StoneBlockSet.SetComponent.NU
 import static architectspalette.core.registry.util.StoneBlockSet.SetGroup.*;
 import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
 
-public class APBlocks {
+public class APBlocksFG {
     public static final ArrayList<BlockNode> boards = new ArrayList<>();
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
@@ -72,7 +72,7 @@ public class APBlocks {
     public static final StoneBlockSet ENTRAILS = new StoneBlockSet(createBlock("entrails", () -> new DrippyBlock(APBlockProperties.Meat(MapColor.TERRACOTTA_PINK))), NO_WALLS).usesAxe();
      // Plating & Piping
     public static final StoneBlockSet PLATING_BLOCK = new StoneBlockSet(createBlock("plating_block", () -> new Block(APBlockProperties.PLATING)), TYPICAL, NUB);
-    public static final RegistryObject<Block> PIPE = createBlock("pipe", () -> new PipeBlock(BlockBehaviour.Properties.ofFullCopy(APBlocks.PLATING_BLOCK.get()).noOcclusion()));
+    public static final RegistryObject<Block> PIPE = createBlock("pipe", () -> new PipeBlock(BlockBehaviour.Properties.ofFullCopy(APBlocksFG.PLATING_BLOCK.get()).noOcclusion()));
      //Spools
     public static final RegistryObject<Block> SPOOL = createBlock("spool", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
 

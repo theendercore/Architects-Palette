@@ -1,7 +1,7 @@
 package architectspalette.core.mixin;
 
 import architectspalette.content.blocks.GreenFireBlock;
-import architectspalette.core.registry.APBlocks;
+import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -20,7 +20,7 @@ public class BaseFireBlockMixin {
     //arguments for target method, callback info, then captured locals
     private static void architectsPaletteAddGreenFireMixin(BlockGetter getter, BlockPos pos, CallbackInfoReturnable<BlockState> ci, BlockPos below, BlockState belowState) {
         if (GreenFireBlock.canHeGreen(getter, below)) {
-            ci.setReturnValue(APBlocks.NETHER_BRASS_FIRE.get().defaultBlockState());
+            ci.setReturnValue(APBlocksFG.NETHER_BRASS_FIRE.get().defaultBlockState());
         }
     }
 }

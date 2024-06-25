@@ -1,6 +1,5 @@
 package architectspalette.core;
 
-import architectspalette.core.integration.APCriterion;
 import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
@@ -39,7 +38,7 @@ public class ArchitectsPalette {
         ForgeRegistryHelper.register(modEventBus);
 
 //        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
-        APBlocks.BLOCKS.register(modEventBus);
+        APBlocksFG.BLOCKS.register(modEventBus);
 
         APFeatures.FEATURES.register(modEventBus);
 //        APRecipes.RECIPE_TYPES.register(modEventBus);

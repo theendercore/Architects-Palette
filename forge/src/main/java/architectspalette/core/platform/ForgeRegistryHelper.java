@@ -43,7 +43,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         SOUNDS.register(modEventBus);
         ITEMS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);
-//        BLOCKS.register(modEventBus);
+        BLOCKS.register(modEventBus);
 //        FEATURES.register(modEventBus);
         RECIPE_TYPES.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
@@ -59,7 +59,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     }
 
     @Override
-    public <T extends Block> Supplier<T> registerBlockNoItem(String name, Supplier<T> type) {
+    public <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type) {
         return BLOCKS.register(name, type);
     }
 

@@ -1,6 +1,6 @@
 package architectspalette.content.blocks;
 
-import architectspalette.core.registry.APBlocks;
+import architectspalette.core.registry.APBlocksFG;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -62,7 +62,7 @@ public class BreadBlock extends Block {
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
         var stack = context.getItemInHand();
         if (!stack.canPerformAction(toolAction)) return null;
-        if (ToolActions.AXE_STRIP.equals(toolAction)) return APBlocks.BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get().defaultBlockState();
+        if (ToolActions.AXE_STRIP.equals(toolAction)) return APBlocksFG.BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get().defaultBlockState();
         return super.getToolModifiedState(state, context, toolAction, simulate);
     }
 

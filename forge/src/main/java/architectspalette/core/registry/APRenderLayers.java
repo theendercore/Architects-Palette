@@ -8,7 +8,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
 
-import static architectspalette.core.registry.APBlocks.*;
+import static architectspalette.core.registry.APBlocksFG.*;
 
 @OnlyIn(Dist.CLIENT)
 public class APRenderLayers {
@@ -17,19 +17,19 @@ public class APRenderLayers {
     //if you add dynamic render layers, then we'll talk.
     @SuppressWarnings("deprecation")
     public static void setupRenderLayers() {
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.ENTWINE_BARS.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.SUNMETAL_BARS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ENTWINE_BARS.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.SUNMETAL_BARS.get(), RenderType.cutout());
 
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.TWISTED_DOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.TWISTED_TRAPDOOR.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.TWISTED_SAPLING.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.POTTED_TWISTED_SAPLING.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.TWISTED_DOOR.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.TWISTED_TRAPDOOR.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.TWISTED_SAPLING.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.POTTED_TWISTED_SAPLING.get(), RenderType.cutout());
 
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.REDSTONE_CAGE_LANTERN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.GLOWSTONE_CAGE_LANTERN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.ALGAL_CAGE_LANTERN.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.REDSTONE_CAGE_LANTERN.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.GLOWSTONE_CAGE_LANTERN.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ALGAL_CAGE_LANTERN.get(), RenderType.cutout());
 
-        ItemBlockRenderTypes.setRenderLayer(APBlocks.ACACIA_TOTEM_WING.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(APBlocksFG.ACACIA_TOTEM_WING.get(), RenderType.cutout());
 
         ItemBlockRenderTypes.setRenderLayer(HELIODOR_ROD.get(), RenderType.translucent());
         ItemBlockRenderTypes.setRenderLayer(EKANITE_ROD.get(), RenderType.translucent());
