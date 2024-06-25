@@ -10,7 +10,7 @@ public class ArchitectsPaletteClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        APCommonClass.initClient();
+        APCommonClient.init();
 
         registerParticleFactories();
     }

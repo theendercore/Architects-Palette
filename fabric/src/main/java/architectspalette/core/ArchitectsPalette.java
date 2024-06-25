@@ -9,8 +9,8 @@ public class ArchitectsPalette implements ModInitializer {
     public void onInitialize() {
         APConstants.LOGGER.info("Hello Fabric world!");
 
-        APCommonClass.earlyInit();
-        APCommonClass.init();
+        APCommon.earlyInit();
+        APCommon.init();
 
         CreativeModeTabEventHandler.init();
     }

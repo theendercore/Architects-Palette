@@ -33,7 +33,7 @@ public class ArchitectsPalette {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 //        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
-        APCommonClass.init();
+        APCommon.init();
 //        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
         ForgeRegistryHelper.register(modEventBus);
 
@@ -59,7 +59,7 @@ public class ArchitectsPalette {
 
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks forge :)
-        APCommonClass.earlyInit();
+        APCommon.earlyInit();
 
         APBlockPropertiesFG.registerFlammables();
         APTrades.registerTrades();
@@ -78,7 +78,7 @@ public class ArchitectsPalette {
     }
 
     void setupClient(final FMLClientSetupEvent event) {
-        APCommonClass.initClient();
+        APCommonClient.init();
         APRenderLayersFG.setupRenderLayers();
     }
 }
