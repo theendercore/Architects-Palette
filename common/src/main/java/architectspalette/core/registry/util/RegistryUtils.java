@@ -29,8 +29,7 @@ public class RegistryUtils {
     }
 
     public static Supplier<Item> createItem(String name, Supplier<Item> item) {
-        //noinspection unchecked
-        return Services.REGISTRY.registerItem(name, item, INGREDIENTS_TAB);
+        return createItem(name, item, INGREDIENTS_TAB);
     }
 
     @SafeVarargs
