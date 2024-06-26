@@ -22,11 +22,12 @@ import java.util.function.Supplier;
 
 public interface IRegistryHelper {
 
-    Map<ResourceKey<CreativeModeTab>, ArrayList<Supplier<? extends ItemLike>>> CREATIVE_TAB_ITEMS_MAP = new HashMap<>();
+    Map<ResourceKey<CreativeModeTab>, ArrayList<Supplier<? extends Item>>> CREATIVE_TAB_ITEMS_MAP = new HashMap<>();
 
     void resisterConfig();  // (ender) for some reason you cant import (ModConfig.Type, IConfigSpec<?>) in common
 
-    default void addCreativeTabItems(ResourceKey<CreativeModeTab> tab, Supplier<? extends Item> item) {
+    default void addCreativeTabItems(@Nullable ResourceKey<CreativeModeTab> tab, Supplier<? extends Item> item) {
+        if (tab == null) return;
         var itemList = CREATIVE_TAB_ITEMS_MAP.get(tab);
         if (itemList == null) CREATIVE_TAB_ITEMS_MAP.put(tab, new ArrayList<>(List.of(item)));
         else {
