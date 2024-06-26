@@ -14,7 +14,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
     public void onInitialize() {
         APConstants.LOGGER.info("Hello Fabric world!");
 
-        APCommon.earlyInit();
+        APCommon.initEarly();
         APCommon.init();
 
         CreativeModeTabEventHandler.init();
@@ -22,7 +22,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        APCommonClient.init();
+        APCommon.initClient();
 
         registerParticleFactories();
     }

@@ -28,7 +28,11 @@ public class APCommon {
             APConstants.LOGGER.info("Hello to examplemod");
         }
     }
-    public static void earlyInit() {
+    public static void initEarly() {
         APCriterion.init();
+    }
+
+    public static void initClient() {
+        APRenderLayers.setupRenderLayers();
     }
 }

@@ -60,7 +60,7 @@ public class ArchitectsPalette {
 
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks forge :)
-        APCommon.earlyInit();
+        APCommon.initEarly();
 
         APBlockPropertiesFG.registerFlammables();
         APTrades.registerTrades();
@@ -79,7 +79,7 @@ public class ArchitectsPalette {
     }
 
     void setupClient(final FMLClientSetupEvent event) {
-        APCommonClient.init();
+        APCommon.initClient();
         APRenderLayersFG.setupRenderLayers();
     }
 }
