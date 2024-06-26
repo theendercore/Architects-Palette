@@ -19,7 +19,7 @@
             "architectspalette.core.ArchitectsPalette"
         ],
         "client": [
-            "architectspalette.core.ArchitectsPaletteClient"
+            "architectspalette.core.ArchitectsPalette"
         ],
         "jei_mod_plugin": [
             "architectspalette.compat.JEIPlugin"
