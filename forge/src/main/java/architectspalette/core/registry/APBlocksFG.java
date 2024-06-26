@@ -64,8 +64,8 @@ public class APBlocksFG {
      // Entrails
     public static final StoneBlockSet ENTRAILS = new StoneBlockSet(createBlock("entrails", () -> new DrippyBlock(APBlockProperties.Meat(MapColor.TERRACOTTA_PINK))), NO_WALLS).usesAxe();
      // Plating & Piping
-    public static final StoneBlockSet PLATING_BLOCK = new StoneBlockSet(createBlock("plating_block", () -> new Block(APBlockProperties.PLATING)), TYPICAL, NUB);
-    public static final RegistryObject<Block> PIPE = createBlock("pipe", () -> new PipeBlock(BlockBehaviour.Properties.ofFullCopy(APBlocksFG.PLATING_BLOCK.get()).noOcclusion()));
+//    public static final StoneBlockSet PLATING_BLOCK = new StoneBlockSet(createBlock("plating_block", () -> new Block(APBlockProperties.PLATING)), TYPICAL, NUB);
+//    public static final RegistryObject<Block> PIPE = createBlock("pipe", () -> new PipeBlock(BlockBehaviour.Properties.ofFullCopy(APBlocksFG.PLATING_BLOCK.get()).noOcclusion()));
      //Spools
 //    public static final RegistryObject<Block> SPOOL = createBlock("spool", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_WOOL)));
 
@@ -73,25 +73,25 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> CHARCOAL_BLOCK = createBlockNoItem("charcoal_block", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.COAL_BLOCK)));
 
     // Myonite (previously limestone)
-    public static final StoneBlockSet MYONITE             = new StoneBlockSet(createBlock("myonite",              () -> new Block(APBlockProperties.MYONITE)));
-    public static final StoneBlockSet MYONITE_BRICK       = new StoneBlockSet(createBlock("myonite_bricks",       () -> new Block(APBlockProperties.MYONITE)));
-    public static final StoneBlockSet MUSHY_MYONITE_BRICK = new StoneBlockSet(createBlock("mushy_myonite_bricks", () -> new Block(APBlockProperties.MYONITE)));
+//    public static final StoneBlockSet MYONITE             = new StoneBlockSet(createBlock("myonite",              () -> new Block(APBlockProperties.MYONITE)));
+//    public static final StoneBlockSet MYONITE_BRICK       = new StoneBlockSet(createBlock("myonite_bricks",       () -> new Block(APBlockProperties.MYONITE)));
+//    public static final StoneBlockSet MUSHY_MYONITE_BRICK = new StoneBlockSet(createBlock("mushy_myonite_bricks", () -> new Block(APBlockProperties.MYONITE)));
 
     // Olivestone
-    public static final StoneBlockSet OLIVESTONE_BRICK = new StoneBlockSet(createBlock("olivestone_bricks", () -> new Block(APBlockProperties.OLIVESTONE)));
-    public static final StoneBlockSet OLIVESTONE_TILE  = new StoneBlockSet(createBlock("olivestone_tiles",  () -> new Block(APBlockProperties.OLIVESTONE)));
+//    public static final StoneBlockSet OLIVESTONE_BRICK = new StoneBlockSet(createBlock("olivestone_bricks", () -> new Block(APBlockProperties.OLIVESTONE)));
+//    public static final StoneBlockSet OLIVESTONE_TILE  = new StoneBlockSet(createBlock("olivestone_tiles",  () -> new Block(APBlockProperties.OLIVESTONE)));
 
 //    public static final RegistryObject<Block> OLIVESTONE_PILLAR         = createBlock("olivestone_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.OLIVESTONE));
 //    public static final RegistryObject<Block> CRACKED_OLIVESTONE_BRICKS = createBlock("cracked_olivestone_bricks", () -> new Block(APBlockPropertiesFG.OLIVESTONE));
 //    public static final RegistryObject<Block> CRACKED_OLIVESTONE_TILES  = createBlock("cracked_olivestone_tiles",  () -> new Block(APBlockPropertiesFG.OLIVESTONE));
 //    public static final RegistryObject<Block> CHISELED_OLIVESTONE       = createBlock("chiseled_olivestone", () -> new Block(APBlockPropertiesFG.OLIVESTONE));
-    public static final RegistryObject<Block> ILLUMINATED_OLIVESTONE    = createBlock("illuminated_olivestone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(OLIVESTONE_BRICK.get()).lightLevel((state) -> 15)));
+//    public static final RegistryObject<Block> ILLUMINATED_OLIVESTONE    = createBlock("illuminated_olivestone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(OLIVESTONE_BRICK.get()).lightLevel((state) -> 15)));
 
     // Algal Brick
-    public static final StoneBlockSet ALGAL_BRICK = new StoneBlockSet(createBlock("algal_bricks", () -> new Block(APBlockProperties.ALGAL_BRICK)));
+//    public static final StoneBlockSet ALGAL_BRICK = new StoneBlockSet(createBlock("algal_bricks", () -> new Block(APBlockProperties.ALGAL_BRICK)));
 //    public static final RegistryObject<Block> CRACKED_ALGAL_BRICKS  = createBlock("cracked_algal_bricks",  () -> new Block(APBlockPropertiesFG.ALGAL_BRICK));
 //    public static final RegistryObject<Block> CHISELED_ALGAL_BRICKS = createBlock("chiseled_algal_bricks", () -> new Block(APBlockPropertiesFG.ALGAL_BRICK));
-    public static final StoneBlockSet OVERGROWN_ALGAL_BRICK = new StoneBlockSet(createBlock("overgrown_algal_bricks", () -> new Block(APBlockProperties.ALGAL_BRICK)));
+//    public static final StoneBlockSet OVERGROWN_ALGAL_BRICK = new StoneBlockSet(createBlock("overgrown_algal_bricks", () -> new Block(APBlockProperties.ALGAL_BRICK)));
 //    public static final RegistryObject<Block> ALGAL_LAMP = createBlock("algal_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN)));
 
     // Ore Bricks
@@ -115,29 +115,29 @@ public class APBlocksFG {
 
     // Flint Blocks
 //    public static final RegistryObject<Block> FLINT_BLOCK  	= createBlock("flint_block",  () -> new FlintBlock(APBlockPropertiesFG.FLINT));
-    public static final StoneBlockSet FLINT_TILES  			= new StoneBlockSet(createBlock("flint_tiles",  () -> new FlintBlock(APBlockProperties.FLINT)));
+//    public static final StoneBlockSet FLINT_TILES  			= new StoneBlockSet(createBlock("flint_tiles",  () -> new FlintBlock(APBlockProperties.FLINT)));
 //    public static final RegistryObject<Block> FLINT_PILLAR 	= createBlock("flint_pillar", () -> new FlintPillarBlock(APBlockPropertiesFG.FLINT));
 
     // Polished Packed Ice
-    public static final StoneBlockSet POLISHED_PACKED_ICE = new StoneBlockSet(createBlock("polished_packed_ice", () -> new Block(APBlockProperties.BUILDING_ICE)));
+//    public static final StoneBlockSet POLISHED_PACKED_ICE = new StoneBlockSet(createBlock("polished_packed_ice", () -> new Block(APBlockProperties.BUILDING_ICE)));
 //    public static final RegistryObject<Block> CHISELED_PACKED_ICE = createBlock("chiseled_packed_ice", () -> new Block(APBlockPropertiesFG.BUILDING_ICE));
 //    public static final RegistryObject<Block> PACKED_ICE_PILLAR   = createBlock("packed_ice_pillar",   () -> new RotatedPillarBlock(APBlockPropertiesFG.BUILDING_ICE));
 
     // Sunmetal
-    public static final StoneBlockSet SUNMETAL = new StoneBlockSet(createBlock("sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL)), NO_WALLS, NUB);
+//    public static final StoneBlockSet SUNMETAL = new StoneBlockSet(createBlock("sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL)), NO_WALLS, NUB);
 //    public static final RegistryObject<Block> CHISELED_SUNMETAL_BLOCK = createBlock("chiseled_sunmetal_block", () -> new Block(APBlockPropertiesFG.SUNMETAL));
 //    public static final RegistryObject<Block> SUNMETAL_PILLAR         = createBlock("sunmetal_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.SUNMETAL));
 //    public static final RegistryObject<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new IronBarsBlock(APBlockProperties.SUNMETAL.noOcclusion()));
 
     // Osseous Bricks
-    public static final StoneBlockSet OSSEOUS_BRICK = new StoneBlockSet(createBlock("osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
+//    public static final StoneBlockSet OSSEOUS_BRICK = new StoneBlockSet(createBlock("osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
 //    public static final RegistryObject<Block> OSSEOUS_PILLAR = createBlock("osseous_pillar", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK)));
 //    public static final RegistryObject<Block> OSSEOUS_SKULL = createBlock("osseous_skull", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK)));
 //    public static final RegistryObject<Block> LIT_OSSEOUS_SKULL = createBlock("lit_osseous_skull", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).lightLevel(e -> 12)));
     // Withered
      // Todo: Replace bone block recipe to one that uses withered bone meal if that gets in
 //    public static final RegistryObject<Block> WITHERED_BONE_BLOCK = createBlock("withered_bone_block", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK)));
-    public static final StoneBlockSet      WITHERED_OSSEOUS_BRICK = new StoneBlockSet(createBlock("withered_osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
+//    public static final StoneBlockSet      WITHERED_OSSEOUS_BRICK = new StoneBlockSet(createBlock("withered_osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
 //    public static final RegistryObject<Block> WITHERED_OSSEOUS_PILLAR = createBlock("withered_osseous_pillar", () -> new RotatedPillarBlock(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK)));
 //    public static final RegistryObject<Block> WITHERED_OSSEOUS_SKULL = createBlock("withered_osseous_skull", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK)));
 //    public static final RegistryObject<Block> LIT_WITHERED_OSSEOUS_SKULL = createBlock("lit_withered_osseous_skull", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).lightLevel(e -> 12)));
@@ -145,10 +145,10 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> WITHER_LAMP = createBlock("wither_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN)));
 
     // Entwine
-    public static final StoneBlockSet ENTWINE = new StoneBlockSet(createBlock("entwine_block", () -> new Block(APBlockProperties.ENTWINE)), NO_WALLS);
+//    public static final StoneBlockSet ENTWINE = new StoneBlockSet(createBlock("entwine_block", () -> new Block(APBlockProperties.ENTWINE)), NO_WALLS);
 //    public static final RegistryObject<Block> ENTWINE_PILLAR = createBlock("entwine_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.ENTWINE));
 //    public static final RegistryObject<Block> CHISELED_ENTWINE = createBlock("chiseled_entwine", () -> new Block(APBlockPropertiesFG.ENTWINE));
-    public static final RegistryObject<Block> ENTWINE_BARS = createBlock("entwine_bars", () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(ENTWINE.get()).noOcclusion()));
+    public static final RegistryObject<Block> ENTWINE_BARS = createBlock("entwine_bars", () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(APBlocks.ENTWINE.get()).noOcclusion()));
 
     // Heavy Stone Bricks
 //    public static final RegistryObject<Block> HEAVY_STONE_BRICKS = createBlock("heavy_stone_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)));
@@ -156,7 +156,7 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> HEAVY_CRACKED_STONE_BRICKS = createBlock("heavy_cracked_stone_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_STONE_BRICKS)));
 
     // Polished Glowstone
-    public static final StoneBlockSet POLISHED_GLOWSTONE = new StoneBlockSet(createBlock("polished_glowstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLOWSTONE))), NO_STAIRS, NUB);
+//    public static final StoneBlockSet POLISHED_GLOWSTONE = new StoneBlockSet(createBlock("polished_glowstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLOWSTONE))), NO_STAIRS, NUB);
 //    public static final RegistryObject<Block> RUNIC_GLOWSTONE = createBlock("runic_glowstone", () -> new DirectionalFacingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLOWSTONE)));
 
     // Scute Block
@@ -165,7 +165,7 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> ROTTEN_FLESH_BLOCK = createBlock("rotten_flesh_block", () -> new Block(APBlockPropertiesFG.Meat(MapColor.COLOR_ORANGE)));
 
     // Gilded Sandstone
-    public static final StoneBlockSet GILDED_SANDSTONE = new StoneBlockSet(createBlock("gilded_sandstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE))), NO_WALLS);
+//    public static final StoneBlockSet GILDED_SANDSTONE = new StoneBlockSet(createBlock("gilded_sandstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE))), NO_WALLS);
 //    public static final RegistryObject<Block> GILDED_SANDSTONE_PILLAR = createBlock("gilded_sandstone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE)));
 //    public static final RegistryObject<Block> CHISELED_GILDED_SANDSTONE = createBlock("chiseled_gilded_sandstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SANDSTONE)));
 
@@ -181,7 +181,7 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> CHISELED_END_STONE_BRICKS = createBlock("chiseled_end_stone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS)));
 
     // Warpstone
-    public static final StoneBlockSet WARPSTONE = new StoneBlockSet(createBlock("warpstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE))));
+//    public static final StoneBlockSet WARPSTONE = new StoneBlockSet(createBlock("warpstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE))));
 
     // Twisted Wood
      // Todo: Bookshelf, sign(?), boat(?), custom BlockSetType(?), custom WoodType(?)
@@ -204,7 +204,7 @@ public class APBlocksFG {
     public static final RegistryObject<Block> POTTED_TWISTED_SAPLING = createPottedPlant(TWISTED_SAPLING);
 
     // Basalt Tiles
-    public static final StoneBlockSet BASALT_TILES = new StoneBlockSet(createBlock("basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT))));
+//    public static final StoneBlockSet BASALT_TILES = new StoneBlockSet(createBlock("basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT))));
 //    public static final RegistryObject<Block>  CRACKED_BASALT_TILES = createBlock("cracked_basalt_tiles",  () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT)));
 //    public static final RegistryObject<Block> CHISELED_BASALT_TILES = createBlock("chiseled_basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT)));
 
@@ -261,19 +261,19 @@ public class APBlocksFG {
 
     // New stone block sets
     // Dripstone
-    public static final StoneBlockSet DRIPSTONE_BRICKS = new StoneBlockSet(createBlock("dripstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK))));
+//    public static final StoneBlockSet DRIPSTONE_BRICKS = new StoneBlockSet(createBlock("dripstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK))));
 //    public static final RegistryObject<Block> DRIPSTONE_PILLAR = createBlock("dripstone_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK)));
 //    public static final RegistryObject<Block> CHISELED_DRIPSTONE = createBlock("chiseled_dripstone", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK)));
 //    public static final RegistryObject<Block> HEAVY_DRIPSTONE_BRICKS = createBlock("heavy_dripstone_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK), BigBrickBlock.BrickType.DRIPSTONE));
 //    public static final RegistryObject<Block> DRIPSTONE_LAMP = createBlock("dripstone_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK).lightLevel((e) -> 8)));
     // Calcite
-    public static final StoneBlockSet CALCITE_BRICKS = new StoneBlockSet(createBlock("calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE))));
+//    public static final StoneBlockSet CALCITE_BRICKS = new StoneBlockSet(createBlock("calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE))));
 //    public static final RegistryObject<Block> CALCITE_PILLAR = createBlock("calcite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE)));
 //    public static final RegistryObject<Block> CHISELED_CALCITE = createBlock("chiseled_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE)));
 //    public static final RegistryObject<Block> HEAVY_CALCITE_BRICKS = createBlock("heavy_calcite_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE), BigBrickBlock.BrickType.CALCITE));
 //    public static final RegistryObject<Block> CALCITE_LAMP = createBlock("calcite_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CALCITE).lightLevel((e) -> 8)));
     // Tuff
-    public static final StoneBlockSet TUFF_BRICKS = new StoneBlockSet(createBlock("tuff_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF))));
+//    public static final StoneBlockSet TUFF_BRICKS = new StoneBlockSet(createBlock("tuff_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF))));
 //    public static final RegistryObject<Block> TUFF_PILLAR = createBlock("tuff_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)));
 //    public static final RegistryObject<Block> CHISELED_TUFF = createBlock("chiseled_tuff", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)));
 //    public static final RegistryObject<Block> HEAVY_TUFF_BRICKS = createBlock("heavy_tuff_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF), BigBrickBlock.BrickType.TUFF));
@@ -288,31 +288,31 @@ public class APBlocksFG {
 //    public static final RegistryObject<Block> UNOBTANIUM_BLOCK = createBlock("unobtanium_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)));
 
     // Nether Brass
-    public static final StoneBlockSet NETHER_BRASS = new StoneBlockSet(createBlock("nether_brass_block", () -> new Block(APBlockProperties.NETHER_BRASS)), TYPICAL, NUB);
-    public static final StoneBlockSet CUT_NETHER_BRASS = new StoneBlockSet(createBlock("cut_nether_brass", () -> new Block(APBlockProperties.NETHER_BRASS)));
+//    public static final StoneBlockSet NETHER_BRASS = new StoneBlockSet(createBlock("nether_brass_block", () -> new Block(APBlockProperties.NETHER_BRASS)), TYPICAL, NUB);
+//    public static final StoneBlockSet CUT_NETHER_BRASS = new StoneBlockSet(createBlock("cut_nether_brass", () -> new Block(APBlockProperties.NETHER_BRASS)));
 //    public static final RegistryObject<Block> NETHER_BRASS_PILLAR = createBlock("nether_brass_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.NETHER_BRASS));
-    public static final StoneBlockSet SMOOTH_NETHER_BRASS = new StoneBlockSet(createBlock("smooth_nether_brass", () -> new Block(APBlockProperties.NETHER_BRASS)), NO_WALLS);
+//    public static final StoneBlockSet SMOOTH_NETHER_BRASS = new StoneBlockSet(createBlock("smooth_nether_brass", () -> new Block(APBlockProperties.NETHER_BRASS)), NO_WALLS);
 //    public static final RegistryObject<Block> NETHER_BRASS_FIRE = createBlockNoItem("nether_brass_fire", () -> new GreenFireBlock(APBlockPropertiesFG.GREEN_FIRE));
-    public static final RegistryObject<Block> NETHER_BRASS_CHAIN = createBlock("nether_brass_chain", () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.CHAIN)));
-    public static final RegistryObject<Block> NETHER_BRASS_LANTERN = createBlock("nether_brass_lantern", () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.LANTERN).lightLevel((a)->13)), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.FUNCTIONAL_BLOCKS);
+//    public static final RegistryObject<Block> NETHER_BRASS_CHAIN = createBlock("nether_brass_chain", () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.CHAIN)));
+//    public static final RegistryObject<Block> NETHER_BRASS_LANTERN = createBlock("nether_brass_lantern", () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.LANTERN).lightLevel((a)->13)), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.FUNCTIONAL_BLOCKS);
 //    public static final RegistryObject<Block> NETHER_BRASS_TORCH = createBlockNoItem("nether_brass_torch", () -> new CustomTorchBlock(APBlockPropertiesFG.BRASS_TORCH, MiscRegistry.GREEN_FLAME));
 //    public static final RegistryObject<Block> NETHER_BRASS_WALL_TORCH = createBlockNoItem("nether_brass_wall_torch", () -> new CustomWallTorchBlock(APBlockPropertiesFG.BRASS_TORCH.dropsLike(NETHER_BRASS_TORCH.get()), MiscRegistry.GREEN_FLAME));
 
-    public static final StoneBlockSet ESOTERRACK = new StoneBlockSet(createBlock("esoterrack", () -> new Block(APBlockProperties.ESOTERRACK)));
-    public static final StoneBlockSet ESOTERRACK_BRICKS = new StoneBlockSet(createBlock("esoterrack_bricks", () -> new Block(APBlockProperties.ESOTERRACK)));
+//    public static final StoneBlockSet ESOTERRACK = new StoneBlockSet(createBlock("esoterrack", () -> new Block(APBlockProperties.ESOTERRACK)));
+//    public static final StoneBlockSet ESOTERRACK_BRICKS = new StoneBlockSet(createBlock("esoterrack_bricks", () -> new Block(APBlockProperties.ESOTERRACK)));
 //    public static final RegistryObject<Block> ESOTERRACK_PILLAR = createBlock("esoterrack_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.ESOTERRACK));
 
-    public static final StoneBlockSet ONYX = new StoneBlockSet(createBlock("onyx", () -> new Block(APBlockProperties.ONYX)));
-    public static final StoneBlockSet ONYX_BRICKS = new StoneBlockSet(createBlock("onyx_bricks", () -> new Block(APBlockProperties.ONYX)));
+//    public static final StoneBlockSet ONYX = new StoneBlockSet(createBlock("onyx", () -> new Block(APBlockProperties.ONYX)));
+//    public static final StoneBlockSet ONYX_BRICKS = new StoneBlockSet(createBlock("onyx_bricks", () -> new Block(APBlockProperties.ONYX)));
 //    public static final RegistryObject<Block> ONYX_PILLAR = createBlock("onyx_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.ONYX));
 
-    public static final StoneBlockSet WARDSTONE = new StoneBlockSet(createBlock("wardstone", () -> new Block(APBlockProperties.WARDSTONE)));
+//    public static final StoneBlockSet WARDSTONE = new StoneBlockSet(createBlock("wardstone", () -> new Block(APBlockProperties.WARDSTONE)));
 //    public static final RegistryObject<Block> CHISELED_WARDSTONE = createBlock("chiseled_wardstone", () -> new Block(APBlockPropertiesFG.WARDSTONE));
-    public static final StoneBlockSet WARDSTONE_BRICKS = new StoneBlockSet(createBlock("wardstone_bricks", () -> new Block(APBlockProperties.WARDSTONE)));
+//    public static final StoneBlockSet WARDSTONE_BRICKS = new StoneBlockSet(createBlock("wardstone_bricks", () -> new Block(APBlockProperties.WARDSTONE)));
 //    public static final RegistryObject<Block> WARDSTONE_PILLAR = createBlock("wardstone_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.WARDSTONE));
-    public static final RegistryObject<Block> WARDSTONE_LAMP = createBlock("wardstone_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(WARDSTONE.get()).lightLevel((state) -> 14)));
+//    public static final RegistryObject<Block> WARDSTONE_LAMP = createBlock("wardstone_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(WARDSTONE.get()).lightLevel((state) -> 14)));
 
-    public static final StoneBlockSet ANCIENT_PLATING = new StoneBlockSet(createBlock("ancient_plating", () -> new Block(APBlockProperties.ANCIENT_PLATING)), TYPICAL, FENCE);
+//    public static final StoneBlockSet ANCIENT_PLATING = new StoneBlockSet(createBlock("ancient_plating", () -> new Block(APBlockProperties.ANCIENT_PLATING)), TYPICAL, FENCE);
 
     //    public static final RegistryObject<Block> ABYSSALINE_NUB = createBlock("abyssaline_nub", () -> new AbyssalineNubBlock(APBlockProperties.ABYSSALINE_NUB), CreativeModeTab.TAB_DECORATIONS);
 
