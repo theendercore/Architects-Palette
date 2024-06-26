@@ -57,7 +57,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         Supplier<T> item = ITEMS.register(name, type);
         if (groups != null) {
             for (ResourceKey<CreativeModeTab> tab : groups) {
-                addCreativeTabItems(tab, type);
+                addCreativeTabItems(tab, item);
             }
         }
         return item;
