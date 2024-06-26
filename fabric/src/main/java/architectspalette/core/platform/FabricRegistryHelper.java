@@ -11,6 +11,7 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -19,6 +20,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.fml.config.ModConfig;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -90,5 +92,12 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type) {
         BlockRenderLayerMap.INSTANCE.putBlock(block.get(), type);
+    }
+
+    @Nullable
+    @Override
+    public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
+        var id = BuiltInRegistries.BLOCK.getKey(blockSupplier.get());
+        return (id == BuiltInRegistries.BLOCK.getDefaultKey()) ? null : id;
     }
 }

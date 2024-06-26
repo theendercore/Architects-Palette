@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -103,5 +105,12 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type) {
         ItemBlockRenderTypes.setRenderLayer(block.get(), type);
+    }
+
+    @Nullable
+    @Override
+    public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
+        var block = BLOCKS.getEntries().stream().filter(it -> it.get() == blockSupplier.get()).findFirst().orElse(null);
+        return block == null ? null : block.getId();
     }
 }

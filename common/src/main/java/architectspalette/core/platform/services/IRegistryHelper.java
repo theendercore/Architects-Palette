@@ -4,12 +4,12 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import org.jetbrains.annotations.Nullable;
@@ -54,4 +54,6 @@ public interface IRegistryHelper {
     <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
 
     <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type);
+
+    <T extends Block> ResourceLocation getId(Supplier<T> block);
 }
