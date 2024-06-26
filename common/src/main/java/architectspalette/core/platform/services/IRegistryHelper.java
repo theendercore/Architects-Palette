@@ -35,6 +35,7 @@ public interface IRegistryHelper {
         }
     }
 
+    @SuppressWarnings("unchecked")
     <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, @Nullable ResourceKey<CreativeModeTab>... group);
 
     <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type);
