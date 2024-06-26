@@ -51,5 +51,5 @@ public interface IRegistryHelper {
 
     <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
 
-    void setRenderLayer(Supplier<Block> block, RenderType type);
+    <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type);
 }

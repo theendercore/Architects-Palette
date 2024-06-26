@@ -72,6 +72,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type) {
         return SOUNDS.register(name, type);
     }
+
     @Override
     public <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type) {
         return PARTICLE_TYPES.register(name, type);
@@ -100,7 +101,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void setRenderLayer(Supplier<Block> block, RenderType type) {
+    public <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type) {
         ItemBlockRenderTypes.setRenderLayer(block.get(), type);
     }
 }
