@@ -2,6 +2,7 @@ package architectspalette.core.registry.util;
 
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
+import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APBlockProperties;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -23,7 +23,7 @@ import static architectspalette.core.registry.util.StoneBlockSet.SetComponent.*;
 
 public class StoneBlockSet implements Supplier<Block> {
     private final String material_name;
-    private final List<RegistryObject<? extends Block>> parts;
+    private final List<Supplier<? extends Block>> parts;
 
     public TagKey<Block> miningTag = BlockTags.MINEABLE_WITH_PICKAXE;
     public TagKey<Block> miningLevel = null;
@@ -34,25 +34,27 @@ public class StoneBlockSet implements Supplier<Block> {
         instances.forEach(consumer);
     }
 
-    public StoneBlockSet(RegistryObject<? extends Block> base_block) {
+    public StoneBlockSet(Supplier<? extends Block> base_block) {
         this(base_block, SetGroup.TYPICAL);
     }
 
-    public StoneBlockSet(RegistryObject<? extends Block> base_block, SetGroup group) {
+    public StoneBlockSet(Supplier<? extends Block> base_block, SetGroup group) {
         this(base_block, group.components);
     }
 
-    public StoneBlockSet(RegistryObject<? extends Block> base_block, SetGroup group, SetComponent... additionalParts) {
+    public StoneBlockSet(Supplier<? extends Block> base_block, SetGroup group, SetComponent... additionalParts) {
         this(base_block, concatArray(group.components, additionalParts));
     }
 
-    public StoneBlockSet(RegistryObject<? extends Block> base_block, SetComponent... parts){
+    public StoneBlockSet(Supplier<? extends Block> base_block, SetComponent... parts){
         this.parts = new ArrayList<>();
         //Piece of crap array list doesn't let me preallocate indices ((if it can, you should let me know))
         for (int i = 0; i < values().length; i++) {
             this.parts.add(null);
         }
-        this.material_name = getMaterialFromBlock(base_block.getId().getPath());
+        var base_block_id = Services.REGISTRY.getId(base_block);
+        if (base_block_id == null) throw new IllegalArgumentException("Base block must have a registry entry");
+        this.material_name = getMaterialFromBlock(base_block_id.getPath());
         setPart(BLOCK, base_block);
         for(SetComponent part : parts) {
             createPart(part);
@@ -85,17 +87,17 @@ public class StoneBlockSet implements Supplier<Block> {
         return BlockBehaviour.Properties.ofFullCopy(getPart(BLOCK));
     }
 
-    //Convenience function so it matches RegistryObjects
+    //Convenience function so it matches Suppliers
     public Block get() {
         return getPart(BLOCK);
     }
 
     private Stream<? extends Block> blockStream() {
         //Puts all blocks in a Stream, filters out null entries, then gets the blocks from their registry object
-        return parts.stream().filter(Objects::nonNull).map(RegistryObject::get);
+        return parts.stream().filter(Objects::nonNull).map(Supplier::get);
     }
 
-    private Stream<RegistryObject<? extends Block>> registryObjectStream() {
+    private Stream<Supplier<? extends Block>> SupplierStream() {
         //Returns a stream of all the present registry objects in this set.
         return parts.stream().filter(Objects::nonNull);
     }
@@ -103,8 +105,8 @@ public class StoneBlockSet implements Supplier<Block> {
     public void forEach(Consumer<? super Block> action) {
         this.blockStream().forEach(action);
     }
-    public void forEachRegistryObject(Consumer<RegistryObject<? extends Block>> action) {
-        this.registryObjectStream().forEach(action);
+    public void forEachSupplier(Consumer<Supplier<? extends Block>> action) {
+        this.SupplierStream().forEach(action);
     }
     public void forEachPart(BiConsumer<SetComponent, ? super Block> consumer) {
         for (int i = 0; i < parts.size(); i++) {
@@ -141,14 +143,14 @@ public class StoneBlockSet implements Supplier<Block> {
     }
 
     public enum SetComponent {
-        BLOCK("", CreativeModeTabs.BUILDING_BLOCKS),
-        SLAB("_slab", CreativeModeTabs.BUILDING_BLOCKS),
-        VERTICAL_SLAB("_vertical_slab", CreativeModeTabs.BUILDING_BLOCKS),
-        STAIRS("_stairs", CreativeModeTabs.BUILDING_BLOCKS),
-        WALL("_wall", CreativeModeTabs.BUILDING_BLOCKS),
-        FENCE("_fence", CreativeModeTabs.BUILDING_BLOCKS),
-        PILLAR(SetComponent::pillarName, CreativeModeTabs.BUILDING_BLOCKS),
-        NUB("_nub", CreativeModeTabs.BUILDING_BLOCKS);
+        BLOCK("", RegistryUtils.BUILDING_BLOCKS),
+        SLAB("_slab", RegistryUtils.BUILDING_BLOCKS),
+        VERTICAL_SLAB("_vertical_slab", RegistryUtils.BUILDING_BLOCKS),
+        STAIRS("_stairs", RegistryUtils.BUILDING_BLOCKS),
+        WALL("_wall", RegistryUtils.BUILDING_BLOCKS),
+        FENCE("_fence", RegistryUtils.BUILDING_BLOCKS),
+        PILLAR(SetComponent::pillarName, RegistryUtils.BUILDING_BLOCKS),
+        NUB("_nub", RegistryUtils.BUILDING_BLOCKS);
 
         public final ResourceKey<CreativeModeTab> tab;
         public final Function<String, String> nameGenerator;
@@ -192,10 +194,10 @@ public class StoneBlockSet implements Supplier<Block> {
     public Block getPart(SetComponent part) {
         return parts.get(part.ordinal()).get();
     }
-    public RegistryObject<? extends Block> getRegistryPart(SetComponent part) {
+    public Supplier<? extends Block> getRegistryPart(SetComponent part) {
         return parts.get(part.ordinal());
     }
-    private void setPart(SetComponent part, RegistryObject<? extends Block> block) {
+    private void setPart(SetComponent part, Supplier<? extends Block> block) {
         parts.add(part.ordinal(), block);
     }
     private void createPart(SetComponent part) {
@@ -208,8 +210,8 @@ public class StoneBlockSet implements Supplier<Block> {
         }
     }
 
-    private RegistryObject<Block> makePart(SetComponent part) {
-        return RegistryUtilsFG.createBlock(part.getName(material_name), () -> {
+    private Supplier<Block> makePart(SetComponent part) {
+        return RegistryUtils.createBlock(part.getName(material_name), () -> {
             Block block = getPart(BLOCK);
             if (block instanceof IBlockSetBase base) {
                 return base.getBlockForPart(part, properties(), block);
