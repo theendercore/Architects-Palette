@@ -5,6 +5,7 @@ import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
 import architectspalette.core.registry.util.RegistryUtils;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -111,7 +112,8 @@ public class APBlocks {
 //    public static final StoneBlockSet SUNMETAL = new StoneBlockSet(createBlock("sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL)), NO_WALLS, NUB);
     public static final Supplier<Block> CHISELED_SUNMETAL_BLOCK = createBlock("chiseled_sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL));
     public static final Supplier<Block> SUNMETAL_PILLAR         = createBlock("sunmetal_pillar", () -> new RotatedPillarBlock(APBlockProperties.SUNMETAL));
-//    public static final Supplier<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new IronBarsBlock(APBlockProperties.SUNMETAL.noOcclusion()));
+    // (ender) fix the fact that IronBarBlock constructor is a bitch
+    public static final Supplier<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new StainedGlassPaneBlock(DyeColor.BLACK ,APBlockProperties.SUNMETAL.noOcclusion()));
 
     // Osseous Bricks
 //    public static final StoneBlockSet OSSEOUS_BRICK = new StoneBlockSet(createBlock("osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
@@ -173,8 +175,8 @@ public class APBlocks {
 
     public static final Supplier<Block>  STRIPPED_TWISTED_LOG = createBlock("stripped_twisted_log", () -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
     public static final Supplier<Block> STRIPPED_TWISTED_WOOD = createBlock("stripped_twisted_wood",() -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
-//    public static final Supplier<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
-//    public static final Supplier<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
+    public static final Supplier<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
+    public static final Supplier<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
     public static final Supplier<Block>        TWISTED_LEAVES = createBlock("twisted_leaves",       () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
 //    public static final Supplier<Block>         TWISTED_FENCE = createBlock("twisted_fence",        () -> new         FenceBlock(APBlockProperties.TwistedWood()), CreativeModeTabs.BUILDING_BLOCKS);
 //    public static final Supplier<Block>    TWISTED_FENCE_GATE = createBlock("twisted_fence_gate",   () -> new     FenceGateBlock(WoodType.OAK, APBlockProperties.TwistedWood(), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
@@ -300,21 +302,21 @@ public class APBlocks {
 
     //    public static final Supplier<Block> ABYSSALINE_NUB = createBlock("abyssaline_nub", () -> new AbyssalineNubBlock(APBlockProperties.ABYSSALINE_NUB), CreativeModeTab.TAB_DECORATIONS);
 
-//    public static final Supplier<Block> STONE_NUB = makeNub("stone_nub", Blocks.STONE);
-//    public static final Supplier<Block> SMOOTH_STONE_NUB = makeNub("smooth_stone_nub", Blocks.SMOOTH_STONE);
-//    public static final Supplier<Block> SANDSTONE_NUB = makeNub("sandstone_nub", Blocks.SANDSTONE);
-//    public static final Supplier<Block> ANDESITE_NUB = makeNub("andesite_nub", Blocks.ANDESITE);
-//    public static final Supplier<Block> GRANITE_NUB = makeNub("granite_nub", Blocks.GRANITE);
-//    public static final Supplier<Block> DIORITE_NUB = makeNub("diorite_nub", Blocks.DIORITE);
-//    public static final Supplier<Block> BLACKSTONE_NUB = makeNub("blackstone_nub", Blocks.BLACKSTONE);
-//    public static final Supplier<Block> DEEPSLATE_NUB = makeNub("deepslate_nub", Blocks.POLISHED_DEEPSLATE);
-//    public static final Supplier<Block> BONE_NUB = makeNub("bone_nub", Blocks.BONE_BLOCK);
-//    public static final Supplier<Block> NUB_OF_ENDER = makeNub("nub_of_ender", ENDER_PEARL_BLOCK);
-//    public static final Supplier<Block> IRON_NUB = makeNub("iron_nub", Blocks.IRON_BLOCK);
-//    public static final Supplier<Block> GOLD_NUB = makeNub("gold_nub", Blocks.GOLD_BLOCK);
-//    public static final Supplier<Block> DIAMOND_NUB = makeNub("diamond_nub", Blocks.DIAMOND_BLOCK);
-//    public static final Supplier<Block> EMERALD_NUB = makeNub("emerald_nub", Blocks.EMERALD_BLOCK);
-//    public static final Supplier<Block> NETHERITE_NUB = makeNub("netherite_nub", Blocks.NETHERITE_BLOCK);
+    public static final Supplier<Block> STONE_NUB = makeNub("stone_nub", Blocks.STONE);
+    public static final Supplier<Block> SMOOTH_STONE_NUB = makeNub("smooth_stone_nub", Blocks.SMOOTH_STONE);
+    public static final Supplier<Block> SANDSTONE_NUB = makeNub("sandstone_nub", Blocks.SANDSTONE);
+    public static final Supplier<Block> ANDESITE_NUB = makeNub("andesite_nub", Blocks.ANDESITE);
+    public static final Supplier<Block> GRANITE_NUB = makeNub("granite_nub", Blocks.GRANITE);
+    public static final Supplier<Block> DIORITE_NUB = makeNub("diorite_nub", Blocks.DIORITE);
+    public static final Supplier<Block> BLACKSTONE_NUB = makeNub("blackstone_nub", Blocks.BLACKSTONE);
+    public static final Supplier<Block> DEEPSLATE_NUB = makeNub("deepslate_nub", Blocks.POLISHED_DEEPSLATE);
+    public static final Supplier<Block> BONE_NUB = makeNub("bone_nub", Blocks.BONE_BLOCK);
+    public static final Supplier<Block> NUB_OF_ENDER = makeNub("nub_of_ender", ENDER_PEARL_BLOCK);
+    public static final Supplier<Block> IRON_NUB = makeNub("iron_nub", Blocks.IRON_BLOCK);
+    public static final Supplier<Block> GOLD_NUB = makeNub("gold_nub", Blocks.GOLD_BLOCK);
+    public static final Supplier<Block> DIAMOND_NUB = makeNub("diamond_nub", Blocks.DIAMOND_BLOCK);
+    public static final Supplier<Block> EMERALD_NUB = makeNub("emerald_nub", Blocks.EMERALD_BLOCK);
+    public static final Supplier<Block> NETHERITE_NUB = makeNub("netherite_nub", Blocks.NETHERITE_BLOCK);
 
     public static final Supplier<Block> COPPER_NUB = makeCopperNub("copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
     public static final Supplier<Block> WAXED_COPPER_NUB = makeCopperNub("waxed_copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
@@ -422,7 +424,7 @@ public class APBlocks {
             .build();*/
 
 
-   /* private static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
+    /*private static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
         String name = plant.getId().getPath();
         Supplier<Block> pot = BLOCKS.register("potted_" + name, () ->
                 new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, plant, Block.Properties.ofFullCopy(Blocks.POTTED_AZURE_BLUET))

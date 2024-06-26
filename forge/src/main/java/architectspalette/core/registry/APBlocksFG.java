@@ -1,6 +1,5 @@
 package architectspalette.core.registry;
 
-import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.PipeBlock;
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
-import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.util.BlockNode.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
@@ -129,7 +127,7 @@ public class APBlocksFG {
     public static final StoneBlockSet SUNMETAL = new StoneBlockSet(createBlock("sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL)), NO_WALLS, NUB);
 //    public static final RegistryObject<Block> CHISELED_SUNMETAL_BLOCK = createBlock("chiseled_sunmetal_block", () -> new Block(APBlockPropertiesFG.SUNMETAL));
 //    public static final RegistryObject<Block> SUNMETAL_PILLAR         = createBlock("sunmetal_pillar", () -> new RotatedPillarBlock(APBlockPropertiesFG.SUNMETAL));
-    public static final RegistryObject<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new IronBarsBlock(APBlockProperties.SUNMETAL.noOcclusion()));
+//    public static final RegistryObject<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new IronBarsBlock(APBlockProperties.SUNMETAL.noOcclusion()));
 
     // Osseous Bricks
     public static final StoneBlockSet OSSEOUS_BRICK = new StoneBlockSet(createBlock("osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
@@ -191,8 +189,8 @@ public class APBlocksFG {
 
 //    public static final RegistryObject<Block>  STRIPPED_TWISTED_LOG = createBlock("stripped_twisted_log", () -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
 //    public static final RegistryObject<Block> STRIPPED_TWISTED_WOOD = createBlock("stripped_twisted_wood",() -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
-    public static final RegistryObject<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
-    public static final RegistryObject<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
+//    public static final RegistryObject<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
+//    public static final RegistryObject<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
 //    public static final RegistryObject<Block>        TWISTED_LEAVES = createBlock("twisted_leaves",       () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
     public static final RegistryObject<Block>         TWISTED_FENCE = createBlock("twisted_fence",        () -> new         FenceBlock(APBlockProperties.TwistedWood()), CreativeModeTabs.BUILDING_BLOCKS);
     public static final RegistryObject<Block>    TWISTED_FENCE_GATE = createBlock("twisted_fence_gate",   () -> new     FenceGateBlock(WoodType.OAK, APBlockProperties.TwistedWood(), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
@@ -318,21 +316,21 @@ public class APBlocksFG {
 
     //    public static final RegistryObject<Block> ABYSSALINE_NUB = createBlock("abyssaline_nub", () -> new AbyssalineNubBlock(APBlockProperties.ABYSSALINE_NUB), CreativeModeTab.TAB_DECORATIONS);
 
-    public static final RegistryObject<Block> STONE_NUB = makeNub("stone_nub", Blocks.STONE);
-    public static final RegistryObject<Block> SMOOTH_STONE_NUB = makeNub("smooth_stone_nub", Blocks.SMOOTH_STONE);
-    public static final RegistryObject<Block> SANDSTONE_NUB = makeNub("sandstone_nub", Blocks.SANDSTONE);
-    public static final RegistryObject<Block> ANDESITE_NUB = makeNub("andesite_nub", Blocks.ANDESITE);
-    public static final RegistryObject<Block> GRANITE_NUB = makeNub("granite_nub", Blocks.GRANITE);
-    public static final RegistryObject<Block> DIORITE_NUB = makeNub("diorite_nub", Blocks.DIORITE);
-    public static final RegistryObject<Block> BLACKSTONE_NUB = makeNub("blackstone_nub", Blocks.BLACKSTONE);
-    public static final RegistryObject<Block> DEEPSLATE_NUB = makeNub("deepslate_nub", Blocks.POLISHED_DEEPSLATE);
-    public static final RegistryObject<Block> BONE_NUB = makeNub("bone_nub", Blocks.BONE_BLOCK);
-    public static final RegistryObject<Block> NUB_OF_ENDER = makeNub("nub_of_ender", ENDER_PEARL_BLOCK);
-    public static final RegistryObject<Block> IRON_NUB = makeNub("iron_nub", Blocks.IRON_BLOCK);
-    public static final RegistryObject<Block> GOLD_NUB = makeNub("gold_nub", Blocks.GOLD_BLOCK);
-    public static final RegistryObject<Block> DIAMOND_NUB = makeNub("diamond_nub", Blocks.DIAMOND_BLOCK);
-    public static final RegistryObject<Block> EMERALD_NUB = makeNub("emerald_nub", Blocks.EMERALD_BLOCK);
-    public static final RegistryObject<Block> NETHERITE_NUB = makeNub("netherite_nub", Blocks.NETHERITE_BLOCK);
+//    public static final RegistryObject<Block> STONE_NUB = makeNub("stone_nub", Blocks.STONE);
+//    public static final RegistryObject<Block> SMOOTH_STONE_NUB = makeNub("smooth_stone_nub", Blocks.SMOOTH_STONE);
+//    public static final RegistryObject<Block> SANDSTONE_NUB = makeNub("sandstone_nub", Blocks.SANDSTONE);
+//    public static final RegistryObject<Block> ANDESITE_NUB = makeNub("andesite_nub", Blocks.ANDESITE);
+//    public static final RegistryObject<Block> GRANITE_NUB = makeNub("granite_nub", Blocks.GRANITE);
+//    public static final RegistryObject<Block> DIORITE_NUB = makeNub("diorite_nub", Blocks.DIORITE);
+//    public static final RegistryObject<Block> BLACKSTONE_NUB = makeNub("blackstone_nub", Blocks.BLACKSTONE);
+//    public static final RegistryObject<Block> DEEPSLATE_NUB = makeNub("deepslate_nub", Blocks.POLISHED_DEEPSLATE);
+//    public static final RegistryObject<Block> BONE_NUB = makeNub("bone_nub", Blocks.BONE_BLOCK);
+//    public static final RegistryObject<Block> NUB_OF_ENDER = makeNub("nub_of_ender", ENDER_PEARL_BLOCK);
+//    public static final RegistryObject<Block> IRON_NUB = makeNub("iron_nub", Blocks.IRON_BLOCK);
+//    public static final RegistryObject<Block> GOLD_NUB = makeNub("gold_nub", Blocks.GOLD_BLOCK);
+//    public static final RegistryObject<Block> DIAMOND_NUB = makeNub("diamond_nub", Blocks.DIAMOND_BLOCK);
+//    public static final RegistryObject<Block> EMERALD_NUB = makeNub("emerald_nub", Blocks.EMERALD_BLOCK);
+//    public static final RegistryObject<Block> NETHERITE_NUB = makeNub("netherite_nub", Blocks.NETHERITE_BLOCK);
 
 //    public static final RegistryObject<Block> COPPER_NUB = makeCopperNub("copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
 //    public static final RegistryObject<Block> WAXED_COPPER_NUB = makeCopperNub("waxed_copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
@@ -449,15 +447,15 @@ public class APBlocksFG {
         return pot;
     }
 
-    private static RegistryObject<Block> makeNub(String name, Block block_to_copy) {
-        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy)));
-    }
-    private static RegistryObject<Block> makeNub(String name, Supplier<Block> block_to_copy) {
-        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy.get())));
-    }
-    private static RegistryObject<Block> makeCopperNub(String name, Block block_to_copy, WeatheringCopper.WeatherState weatheringstate) {
-        return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
-    }
+//    private static RegistryObject<Block> makeNub(String name, Block block_to_copy) {
+//        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy)));
+//    }
+//    private static RegistryObject<Block> makeNub(String name, Supplier<Block> block_to_copy) {
+//        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy.get())));
+//    }
+//    private static RegistryObject<Block> makeCopperNub(String name, Block block_to_copy, WeatheringCopper.WeatherState weatheringstate) {
+//        return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
+//    }
 
     public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
         BlockNode node = new Builder()
