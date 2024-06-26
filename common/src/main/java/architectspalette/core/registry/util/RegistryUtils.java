@@ -29,6 +29,7 @@ public class RegistryUtils {
     }
 
     public static Supplier<Item> createItem(String name, Supplier<Item> item) {
+        //noinspection unchecked
         return Services.REGISTRY.registerItem(name, item, INGREDIENTS_TAB);
     }
 
@@ -37,13 +38,13 @@ public class RegistryUtils {
         return Services.REGISTRY.registerItem(name, item, tab);
     }
 
-    public static Supplier<Block> createBlock(String name, Supplier<Block> block) {
+    public static <T extends Block> Supplier<T> createBlock(String name, Supplier<T> block) {
         return createBlock(name, block, BUILDING_BLOCKS);
     }
 
     @SafeVarargs
-    public static Supplier<Block> createBlock(String name, Supplier<Block> block, @Nullable ResourceKey<CreativeModeTab>... tab) {
-        Supplier<Block> regBlock = Services.REGISTRY.registerBlock(name, block);
+    public static<T extends Block> Supplier<T> createBlock(String name, Supplier<T> block, @Nullable ResourceKey<CreativeModeTab>... tab) {
+        Supplier<T> regBlock = Services.REGISTRY.registerBlock(name, block);
         createItem(name, () -> new BlockItem(regBlock.get(), new Item.Properties()), tab);
         return block;
     }

@@ -28,13 +28,14 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class TotemBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public final TotemWingBlock WING_BLOCK;
+    public final Supplier<TotemWingBlock> WING_BLOCK;
     public final TotemFace totemType;
 
-    public TotemBlock(Properties properties, TotemWingBlock wingBlock, TotemFace face) {
+    public TotemBlock(Properties properties, Supplier<TotemWingBlock> wingBlock, TotemFace face) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH));
         this.WING_BLOCK = wingBlock;
@@ -63,14 +64,14 @@ public class TotemBlock extends Block {
             BlockPos blockpos = pos.relative(state.getValue(FACING).getClockWise());
             boolean waterlogged = worldIn.getFluidState(blockpos).getType() == Fluids.WATER;
             if (worldIn.isEmptyBlock(blockpos) || waterlogged) {
-                worldIn.setBlock(blockpos, this.WING_BLOCK.defaultBlockState()
+                worldIn.setBlock(blockpos, this.WING_BLOCK.get().defaultBlockState()
                         .setValue(TotemWingBlock.FACING, state.getValue(FACING).getClockWise())
                         .setValue(TotemWingBlock.WATERLOGGED, waterlogged), 3);
             }
             blockpos = pos.relative(state.getValue(FACING).getCounterClockWise());
             waterlogged = worldIn.getFluidState(blockpos).getType() == Fluids.WATER;
             if (worldIn.isEmptyBlock(blockpos) || waterlogged) {
-                worldIn.setBlock(blockpos, this.WING_BLOCK.defaultBlockState()
+                worldIn.setBlock(blockpos, this.WING_BLOCK.get().defaultBlockState()
                         .setValue(TotemWingBlock.FACING, state.getValue(FACING).getCounterClockWise())
                         .setValue(TotemWingBlock.WATERLOGGED, waterlogged), 3);
             }
@@ -82,7 +83,7 @@ public class TotemBlock extends Block {
     @Override
     public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.getItem() instanceof AxeItem) {
-            BlockState newState = this.totemType.getStrip().defaultBlockState().setValue(FACING, state.getValue(FACING));
+            BlockState newState = this.totemType.getStrip().get().defaultBlockState().setValue(FACING, state.getValue(FACING));
             world.setBlock(pos, newState, 3);
             stack.hurtAndBreak(1, player, (hand == InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
             world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, 1);
@@ -100,12 +101,12 @@ public class TotemBlock extends Block {
         SHOCKED,
         BLANK;
 
-        public Block getStrip() {
+        public Supplier<Block> getStrip() {
             switch(this){
-                case GRINNING: return APBlocks.PLACID_ACACIA_TOTEM.get();
-                case PLACID: return APBlocks.SHOCKED_ACACIA_TOTEM.get();
-                case SHOCKED: return APBlocks.BLANK_ACACIA_TOTEM.get();
-                default: return APBlocks.GRINNING_ACACIA_TOTEM.get();
+                case GRINNING: return APBlocks.PLACID_ACACIA_TOTEM;
+                case PLACID: return APBlocks.SHOCKED_ACACIA_TOTEM;
+                case SHOCKED: return APBlocks.BLANK_ACACIA_TOTEM;
+                default: return APBlocks.GRINNING_ACACIA_TOTEM;
             }
         }
     }

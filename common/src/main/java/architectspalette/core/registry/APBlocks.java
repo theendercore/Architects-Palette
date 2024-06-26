@@ -209,11 +209,11 @@ public class APBlocks {
     public static final Supplier<Block> ALGAL_CAGE_LANTERN     = createBlock("algal_cage_lantern", () -> new CageLanternBlock(APBlockProperties.CAGE_LANTERN, 3), RegistryUtils.FUNCTIONAL_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
 
     // Acacia Totems
-    public static final Supplier<Block> ACACIA_TOTEM_WING = createBlock("acacia_totem_wing", () -> new TotemWingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion().noLootTable().sound(SoundType.SCAFFOLDING).noCollission()));
-    public static final Supplier<Block> GRINNING_ACACIA_TOTEM = createBlock("grinning_acacia_totem", () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.GRINNING));
-    public static final Supplier<Block> PLACID_ACACIA_TOTEM   = createBlock("placid_acacia_totem",   () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.PLACID));
-    public static final Supplier<Block> SHOCKED_ACACIA_TOTEM  = createBlock("shocked_acacia_totem",  () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.SHOCKED));
-    public static final Supplier<Block> BLANK_ACACIA_TOTEM    = createBlock("blank_acacia_totem",    () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, (TotemWingBlock) ACACIA_TOTEM_WING.get(), TotemBlock.TotemFace.BLANK));
+    public static final Supplier<TotemWingBlock> ACACIA_TOTEM_WING = createBlock("acacia_totem_wing", () -> new TotemWingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion().noLootTable().sound(SoundType.SCAFFOLDING).noCollission()));
+    public static final Supplier<Block> GRINNING_ACACIA_TOTEM = createBlock("grinning_acacia_totem", () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, ACACIA_TOTEM_WING, TotemBlock.TotemFace.GRINNING));
+    public static final Supplier<Block> PLACID_ACACIA_TOTEM   = createBlock("placid_acacia_totem",   () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, ACACIA_TOTEM_WING, TotemBlock.TotemFace.PLACID));
+    public static final Supplier<Block> SHOCKED_ACACIA_TOTEM  = createBlock("shocked_acacia_totem",  () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, ACACIA_TOTEM_WING, TotemBlock.TotemFace.SHOCKED));
+    public static final Supplier<Block> BLANK_ACACIA_TOTEM    = createBlock("blank_acacia_totem",    () -> new TotemBlock(APBlockProperties.ACACIA_TOTEM, ACACIA_TOTEM_WING, TotemBlock.TotemFace.BLANK));
 
     // Ender Pearl Block
     public static final Supplier<Block> ENDER_PEARL_BLOCK = createBlock("ender_pearl_block", () -> new Block(APBlockProperties.ENDER_PEARL));
