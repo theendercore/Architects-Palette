@@ -1,7 +1,7 @@
 package architectspalette.core.datagen;
 
 import architectspalette.core.ArchitectsPalette;
-import architectspalette.core.registry.APBlocksFG;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APFeatures;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -40,7 +40,7 @@ public class APInternalData {
                     ResourceKey.create(Registries.CONFIGURED_FEATURE, ArchitectsPalette.rl("twisted_tree")),
                     new ConfiguredFeature<>(Feature.TREE,
                             new TreeConfiguration.TreeConfigurationBuilder(
-                                    BlockStateProvider.simple(APBlocksFG.TWISTED_LOG.get().defaultBlockState()),
+                                    BlockStateProvider.simple(APBlocks.TWISTED_LOG.get().defaultBlockState()),
                                     new ForkingTrunkPlacer(5, 2, 2),
                                     BlockStateProvider.simple(TWISTED_LEAVES.get().defaultBlockState()),
                                     new AcaciaFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),

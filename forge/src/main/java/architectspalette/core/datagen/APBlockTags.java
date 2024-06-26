@@ -106,7 +106,7 @@ public class APBlockTags extends BlockTagsProvider {
 //                PACKED_ICE_PILLAR,
 //                CHISELED_SUNMETAL_BLOCK,
 //                SUNMETAL_PILLAR,
-                SUNMETAL_BARS,
+//                SUNMETAL_BARS,
                 //                OSSEOUS_PILLAR,
                 //                 OSSEOUS_SKULL,
                 //                LIT_OSSEOUS_SKULL,
@@ -167,22 +167,22 @@ public class APBlockTags extends BlockTagsProvider {
 //                ONYX_PILLAR,
 //                CHISELED_WARDSTONE,
 //                WARDSTONE_PILLAR,
-                WARDSTONE_LAMP,
-                STONE_NUB,
-                SMOOTH_STONE_NUB,
-                SANDSTONE_NUB,
-                ANDESITE_NUB,
-                GRANITE_NUB,
-                DIORITE_NUB,
-                BLACKSTONE_NUB,
-                DEEPSLATE_NUB,
-                BONE_NUB,
-                NUB_OF_ENDER,
-                IRON_NUB,
-                GOLD_NUB,
-                DIAMOND_NUB,
-                EMERALD_NUB,
-                NETHERITE_NUB
+                WARDSTONE_LAMP
+//                STONE_NUB,
+//                SMOOTH_STONE_NUB,
+//                SANDSTONE_NUB,
+//                ANDESITE_NUB,
+//                GRANITE_NUB,
+//                DIORITE_NUB,
+//                BLACKSTONE_NUB,
+//                DEEPSLATE_NUB,
+//                BONE_NUB,
+//                NUB_OF_ENDER,
+//                IRON_NUB,
+//                GOLD_NUB,
+//                DIAMOND_NUB,
+//                EMERALD_NUB,
+//                NETHERITE_NUB
 //                HAZARD_SIGN
         );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(MiscRegistry.NUBS);
@@ -206,10 +206,10 @@ public class APBlockTags extends BlockTagsProvider {
                 TWISTED_DOOR,
                 TWISTED_FENCE,
                 TWISTED_FENCE_GATE,
-                TWISTED_LOG,
+//                TWISTED_LOG,
                 TWISTED_PRESSURE_PLATE,
-                TWISTED_TRAPDOOR,
-                TWISTED_WOOD
+                TWISTED_TRAPDOOR
+//                TWISTED_WOOD
                 //                OAK_RAILING,
                 //                DARK_OAK_RAILING,
                 //                SPRUCE_RAILING,
