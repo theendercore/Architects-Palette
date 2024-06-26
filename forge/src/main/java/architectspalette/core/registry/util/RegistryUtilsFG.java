@@ -28,11 +28,6 @@ public class RegistryUtilsFG {
 		if (group != null) CreativeModeTabEventHandler.assignItemToTab(block, group);
 		return block;
 	}
-	
-	public static <B extends Block> RegistryObject<B> createBlockNoItem(String name, Supplier<? extends B> supplier) {
-		return ForgeRegistryHelper.BLOCKS.register(name, supplier);
-	}
-
 
 	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {
 		StoneBlockSet boardSet = new StoneBlockSet(createBlock(name, supplier), StoneBlockSet.SetGroup.NO_WALLS).woodify();
