@@ -1,6 +1,5 @@
 package architectspalette.core.registry.util;
 
-import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.ModelBakeEventHandler;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.util.SpriteShift;
@@ -25,7 +24,6 @@ public class RegistryUtilsFG {
 	public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, ResourceKey<CreativeModeTab>... group) {
 		RegistryObject<B> block = ForgeRegistryHelper.BLOCKS.register(name, supplier);
 		ForgeRegistryHelper.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
-		if (group != null) CreativeModeTabEventHandler.assignItemToTab(block, group);
 		return block;
 	}
 
