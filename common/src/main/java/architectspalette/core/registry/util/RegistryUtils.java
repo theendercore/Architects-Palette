@@ -46,7 +46,7 @@ public class RegistryUtils {
     public static<T extends Block> Supplier<T> createBlock(String name, Supplier<T> block, @Nullable ResourceKey<CreativeModeTab>... tab) {
         Supplier<T> regBlock = Services.REGISTRY.registerBlock(name, block);
         createItem(name, () -> new BlockItem(regBlock.get(), new Item.Properties()), tab);
-        return block;
+        return regBlock;
     }
 
     public static Supplier<Block> createBlockNoItem(String name, Supplier<Block> block) {
