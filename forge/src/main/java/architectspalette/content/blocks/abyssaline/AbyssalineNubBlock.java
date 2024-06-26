@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
-import java.util.Random;
-
 import static architectspalette.content.blocks.abyssaline.AbyssalineBlock.CHARGED;
 
 public class AbyssalineNubBlock extends NubBlock implements IAbyssalineChargeable {
