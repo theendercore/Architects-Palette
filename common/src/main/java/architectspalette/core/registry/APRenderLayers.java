@@ -10,13 +10,13 @@ public class APRenderLayers {
     //"use json for it" yeah nice try forge. i know you won't take this out.
     //if you add dynamic render layers, then we'll talk.
     public static void setupRenderLayers() {
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.ENTWINE_BARS , RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.SUNMETAL_BARS , RenderType.cutout());
-//
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.TWISTED_DOOR , RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.TWISTED_TRAPDOOR , RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.TWISTED_SAPLING , RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(APBlocksFG.POTTED_TWISTED_SAPLING , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(ENTWINE_BARS , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(SUNMETAL_BARS , RenderType.cutout());
+
+//        Services.REGISTRY.setRenderLayer(TWISTED_DOOR , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(TWISTED_TRAPDOOR , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(TWISTED_SAPLING , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(POTTED_TWISTED_SAPLING , RenderType.cutout());
 
         Services.REGISTRY.setRenderLayer(REDSTONE_CAGE_LANTERN, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(GLOWSTONE_CAGE_LANTERN, RenderType.cutout());
@@ -31,13 +31,13 @@ public class APRenderLayers {
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_FIRE, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_TORCH, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_WALL_TORCH, RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(NETHER_BRASS_CHAIN , RenderType.cutout());
-//        Services.REGISTRY.registerRenderLayer(NETHER_BRASS_LANTERN , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN , RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN , RenderType.cutout());
 
 //        //I'm lazy
 //        for (RegistryObject<Block> obj : BLOCKS.getEntries()) {
 //            if (obj instanceof NubBlock block) {
-//                Services.REGISTRY.registerRenderLayer(block, RenderType.cutout());
+//                Services.REGISTRY.setRenderLayer(block, RenderType.cutout());
 //            }
 //        }
     }

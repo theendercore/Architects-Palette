@@ -19,7 +19,7 @@ public class APRenderLayersFG {
     //if you add dynamic render layers, then we'll talk.
     public static void setupRenderLayers() {
         Services.REGISTRY.setRenderLayer(APBlocksFG.ENTWINE_BARS, RenderType.cutout());
-        Services.REGISTRY.setRenderLayer(APBlocksFG.SUNMETAL_BARS, RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(APBlocksFG.SUNMETAL_BARS, RenderType.cutout());
 
         Services.REGISTRY.setRenderLayer(APBlocksFG.TWISTED_DOOR, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(APBlocksFG.TWISTED_TRAPDOOR, RenderType.cutout());
