@@ -157,7 +157,7 @@ public class APBlockPropertiesFG {
 				SPOOL, CHARCOAL_BLOCK,
 				OAK_RAILING, BIRCH_RAILING, SPRUCE_RAILING,
 				ACACIA_RAILING, DARK_OAK_RAILING, JUNGLE_RAILING,
-				TWISTED_RAILING
+				TWISTED_RAILING, MANGROVE_RAILING
 		).forEach((t) -> {
 			registerFlammable(t.get(), 5, 5);
 		});
