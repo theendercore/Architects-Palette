@@ -2,6 +2,7 @@ package architectspalette.core.registry;
 
 import architectspalette.content.worldgen.features.CrystalClusterFeature;
 import architectspalette.content.worldgen.features.configs.CrystalClusterConfig;
+import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.FeatureWrapper;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.world.level.block.Blocks;
@@ -9,23 +10,18 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.placement.BiomeFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
-
-import static architectspalette.core.APConstants.MOD_ID;
+import java.util.function.Supplier;
 
 public class APFeatures {
+    public static void init(){}
     // Features have 3 levels of abstraction.
     // Feature: the thing that does the generation.
     // ConfiguredFeature: Feature + Configuration, e.g. how big it is or which BlockStates, etc.
     // PlacedFeature: ConfiguredFeature + placement options, e.g. diamonds go at the bottom of the world
 
-    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
-
-    public static final RegistryObject<Feature<CrystalClusterConfig>> CRYSTAL_CLUSTER = FEATURES.register("crystal_cluster", () -> new CrystalClusterFeature(CrystalClusterConfig.CODEC));
+    public static final Supplier<Feature<CrystalClusterConfig>> CRYSTAL_CLUSTER = Services.REGISTRY.registerFeature("crystal_cluster", () -> new CrystalClusterFeature(CrystalClusterConfig.CODEC));
 
     // Configured and Placed features are completely data-driven now, so this function is only ever called during datagen.
     // However, this can effectively be treated as registration.

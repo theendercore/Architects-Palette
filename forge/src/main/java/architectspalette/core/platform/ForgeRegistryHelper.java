@@ -45,7 +45,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         ITEMS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);
         BLOCKS.register(modEventBus);
-//        FEATURES.register(modEventBus);
+        FEATURES.register(modEventBus);
         RECIPE_TYPES.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
     }

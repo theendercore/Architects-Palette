@@ -20,12 +20,14 @@ public class APCommon {
         APSounds.init();
         APItems.init();
         APBlocks.init();
+
+        APFeatures.init();
         MiscRegistry.init();
 
         APRecipes.init();
 
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
-            APConstants.LOGGER.info("Hello to examplemod");
+            APConstants.LOGGER.info("I am loaded my self");
         }
     }
     public static void initEarly() {

@@ -12,8 +12,6 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
 
     @Override
     public void onInitialize() {
-        APConstants.LOGGER.info("Hello Fabric world!");
-
         APCommon.initEarly();
         APCommon.init();
 

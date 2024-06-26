@@ -41,7 +41,7 @@ public class ArchitectsPalette {
 //        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
 //        APBlocksFG.BLOCKS.register(modEventBus);
 
-        APFeatures.FEATURES.register(modEventBus);
+//        APFeatures.FEATURES.register(modEventBus);
 //        APRecipes.RECIPE_TYPES.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, this::setupCommon);
