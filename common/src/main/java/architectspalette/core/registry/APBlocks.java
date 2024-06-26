@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 import static architectspalette.core.registry.util.RegistryUtils.createBlock;
 import static architectspalette.core.registry.util.RegistryUtils.createBlockNoItem;
+import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
 
 public class APBlocks {
     public static void init(){}
@@ -315,14 +316,14 @@ public class APBlocks {
 //    public static final Supplier<Block> EMERALD_NUB = makeNub("emerald_nub", Blocks.EMERALD_BLOCK);
 //    public static final Supplier<Block> NETHERITE_NUB = makeNub("netherite_nub", Blocks.NETHERITE_BLOCK);
 
-//    public static final Supplier<Block> COPPER_NUB = makeCopperNub("copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
-//    public static final Supplier<Block> WAXED_COPPER_NUB = makeCopperNub("waxed_copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
-//    public static final Supplier<Block> EXPOSED_COPPER_NUB = makeCopperNub("exposed_copper_nub", Blocks.EXPOSED_COPPER, EXPOSED);
-//    public static final Supplier<Block> WAXED_EXPOSED_COPPER_NUB = makeCopperNub("waxed_exposed_copper_nub", Blocks.EXPOSED_COPPER, EXPOSED);
-//    public static final Supplier<Block> WEATHERED_COPPER_NUB = makeCopperNub("weathered_copper_nub", Blocks.WEATHERED_COPPER, WEATHERED);
-//    public static final Supplier<Block> WAXED_WEATHERED_COPPER_NUB = makeCopperNub("waxed_weathered_copper_nub", Blocks.WEATHERED_COPPER, WEATHERED);
-//    public static final Supplier<Block> OXIDIZED_COPPER_NUB = makeCopperNub("oxidized_copper_nub", Blocks.OXIDIZED_COPPER, OXIDIZED);
-//    public static final Supplier<Block> WAXED_OXIDIZED_COPPER_NUB = makeCopperNub("waxed_oxidized_copper_nub", Blocks.OXIDIZED_COPPER, OXIDIZED);
+    public static final Supplier<Block> COPPER_NUB = makeCopperNub("copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
+    public static final Supplier<Block> WAXED_COPPER_NUB = makeCopperNub("waxed_copper_nub", Blocks.COPPER_BLOCK, UNAFFECTED);
+    public static final Supplier<Block> EXPOSED_COPPER_NUB = makeCopperNub("exposed_copper_nub", Blocks.EXPOSED_COPPER, EXPOSED);
+    public static final Supplier<Block> WAXED_EXPOSED_COPPER_NUB = makeCopperNub("waxed_exposed_copper_nub", Blocks.EXPOSED_COPPER, EXPOSED);
+    public static final Supplier<Block> WEATHERED_COPPER_NUB = makeCopperNub("weathered_copper_nub", Blocks.WEATHERED_COPPER, WEATHERED);
+    public static final Supplier<Block> WAXED_WEATHERED_COPPER_NUB = makeCopperNub("waxed_weathered_copper_nub", Blocks.WEATHERED_COPPER, WEATHERED);
+    public static final Supplier<Block> OXIDIZED_COPPER_NUB = makeCopperNub("oxidized_copper_nub", Blocks.OXIDIZED_COPPER, OXIDIZED);
+    public static final Supplier<Block> WAXED_OXIDIZED_COPPER_NUB = makeCopperNub("waxed_oxidized_copper_nub", Blocks.OXIDIZED_COPPER, OXIDIZED);
 
     public static final Supplier<Block> HAZARD_SIGN = createBlock("hazard_sign", () -> new SmallSignBlock(APBlockProperties.PLATING), RegistryUtils.BUILDING_BLOCKS);
 
@@ -421,14 +422,14 @@ public class APBlocks {
             .build();*/
 
 
-  /*  private static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
+   /* private static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
         String name = plant.getId().getPath();
         Supplier<Block> pot = BLOCKS.register("potted_" + name, () ->
                 new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, plant, Block.Properties.ofFullCopy(Blocks.POTTED_AZURE_BLUET))
         );
         ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(plant.getId(), pot);
         return pot;
-    }
+    }*/
 
     private static Supplier<Block> makeNub(String name, Block block_to_copy) {
         return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy)));
@@ -440,7 +441,7 @@ public class APBlocks {
         return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
     }
 
-    public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
+  /*  public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
         BlockNode node = new Builder()
                 .tool(Tool.AXE)
                 .exclude(MODELS)

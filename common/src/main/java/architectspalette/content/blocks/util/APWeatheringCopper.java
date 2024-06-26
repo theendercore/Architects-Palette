@@ -1,5 +1,6 @@
 package architectspalette.content.blocks.util;
 
+import architectspalette.core.registry.APBlocks;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
@@ -17,22 +18,19 @@ import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static architectspalette.core.registry.APBlocksFG.*;
 
 //If you can't beat 'em, join 'em. (Vanilla Copper interface isn't extendable.)
 public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState> {
     Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() ->
     {
         ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
-        builder.put(COPPER_NUB.get(), EXPOSED_COPPER_NUB.get());
-        builder.put(EXPOSED_COPPER_NUB.get(), WEATHERED_COPPER_NUB.get());
-        builder.put(WEATHERED_COPPER_NUB.get(), OXIDIZED_COPPER_NUB.get());
+        builder.put(APBlocks.COPPER_NUB.get(), APBlocks.EXPOSED_COPPER_NUB.get());
+        builder.put(APBlocks.EXPOSED_COPPER_NUB.get(), APBlocks.WEATHERED_COPPER_NUB.get());
+        builder.put(APBlocks.WEATHERED_COPPER_NUB.get(), APBlocks.OXIDIZED_COPPER_NUB.get());
         return builder.build();
     });
 
@@ -41,10 +39,10 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     Supplier<BiMap<Block, Block>> WAXED_BY_BLOCK = Suppliers.memoize(() ->
     {
         ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
-        builder.put(COPPER_NUB.get(), WAXED_COPPER_NUB.get());
-        builder.put(EXPOSED_COPPER_NUB.get(), WAXED_EXPOSED_COPPER_NUB.get());
-        builder.put(WEATHERED_COPPER_NUB.get(), WAXED_WEATHERED_COPPER_NUB.get());
-        builder.put(OXIDIZED_COPPER_NUB.get(), WAXED_OXIDIZED_COPPER_NUB.get());
+        builder.put(APBlocks.COPPER_NUB.get(), APBlocks.WAXED_COPPER_NUB.get());
+        builder.put(APBlocks.EXPOSED_COPPER_NUB.get(), APBlocks.WAXED_EXPOSED_COPPER_NUB.get());
+        builder.put(APBlocks.WEATHERED_COPPER_NUB.get(), APBlocks.WAXED_WEATHERED_COPPER_NUB.get());
+        builder.put(APBlocks.OXIDIZED_COPPER_NUB.get(), APBlocks.WAXED_OXIDIZED_COPPER_NUB.get());
         return builder.build();
     });
 
@@ -92,12 +90,12 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     default float getChanceModifier() {
         return this.getAge() == WeatheringCopper.WeatherState.UNAFFECTED ? 0.75F : 1.0F;
     }
-
-    static BlockState getToolModifiedState(ToolAction toolAction, BlockState state) {
-        if (ToolActions.AXE_SCRAPE == toolAction) return APWeatheringCopper.getPrevious(state).orElse(null);
-        if (ToolActions.AXE_WAX_OFF == toolAction) return APWeatheringCopper.getUnWaxed(state).orElse(null);
-        return null;
-    }
+        // (ender) fix this later [forgeism stripping]
+//    static BlockState getToolModifiedState(ToolAction toolAction, BlockState state) {
+//        if (ToolActions.AXE_SCRAPE == toolAction) return APWeatheringCopper.getPrevious(state).orElse(null);
+//        if (ToolActions.AXE_WAX_OFF == toolAction) return APWeatheringCopper.getUnWaxed(state).orElse(null);
+//        return null;
+//    }
 
     static ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.getItem() instanceof HoneycombItem) {
