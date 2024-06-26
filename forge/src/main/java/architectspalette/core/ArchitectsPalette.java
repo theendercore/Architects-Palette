@@ -4,7 +4,10 @@ import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.ForgeRegistryHelper;
-import architectspalette.core.registry.*;
+import architectspalette.core.registry.APBiomeModifiers;
+import architectspalette.core.registry.APBlockPropertiesFG;
+import architectspalette.core.registry.APBlocksFG;
+import architectspalette.core.registry.APRenderLayersFG;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,31 +32,26 @@ public class ArchitectsPalette {
     }
 
     public ArchitectsPalette() {
-
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-//        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         APCommon.init();
         APBlocksFG.init();
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
         ForgeRegistryHelper.register(modEventBus);
-
-//        MiscRegistry.PARTICLE_TYPES.register(modEventBus);
-//        APBlocksFG.BLOCKS.register(modEventBus);
-
-//        APFeatures.FEATURES.register(modEventBus);
-//        APRecipes.RECIPE_TYPES.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, this::setupCommon);
         modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
 
-//        registerRecipeSerializers(modEventBus);
-        registerLootSerializers(modEventBus);
-        // Biomes need to be registered before features.
-        registerBiomeSerializers(modEventBus);
+        // (ender) the rest will be heavily reworked in the future.
 
-        DeferredRegister.create(ForgeRegistries.CONDITION_SERIALIZERS, MOD_ID)
-                .register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
+        var LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
+        LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
+        LOOT.register(modEventBus);
+        // Biomes need to be registered before features.
+        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modEventBus);
+
+        var CONDITION = DeferredRegister.create(ForgeRegistries.CONDITION_SERIALIZERS, MOD_ID);
+        CONDITION.register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
+        CONDITION.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -64,18 +62,6 @@ public class ArchitectsPalette {
 
         APBlockPropertiesFG.registerFlammables();
         APTrades.registerTrades();
-    }
-
-
-    void registerLootSerializers(IEventBus bus) {
-        DeferredRegister<MapCodec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
-        RegistryObject<MapCodec<WitheredBoneLootModifier>> WITHER_SKELETON_DROPS = LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
-
-        LOOT.register(bus);
-    }
-
-    void registerBiomeSerializers(IEventBus bus) {
-        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(bus);
     }
 
     void setupClient(final FMLClientSetupEvent event) {
