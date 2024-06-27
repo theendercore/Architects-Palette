@@ -2,10 +2,12 @@ package architectspalette.core;
 
 import architectspalette.content.particles.WizardParticle;
 import architectspalette.core.event.CreativeModeTabEventHandler;
+import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.MiscRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+//import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.minecraft.client.particle.FlameParticle;
 
 public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
@@ -16,6 +18,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
         APCommon.init();
 
         CreativeModeTabEventHandler.init();
+        APVerticalSlabsCondition.registerCondition();
     }
 
     @Override
@@ -29,4 +32,10 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(MiscRegistry.GREEN_FLAME.get(), FlameParticle.Provider::new);
         ParticleFactoryRegistry.getInstance().register(MiscRegistry.WIZARDLY_DEFENSE_BLAST.get(), WizardParticle.Provider::new);
     }
+
+//    @Override
+//    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+//        FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+//        pack.addProvider(BlockTagProvider::new);
+//    }
 }

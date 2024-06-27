@@ -42,10 +42,7 @@ public class ArchitectsPalette {
         // Biomes need to be registered before features.
         APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modEventBus);
 
-        var CONDITION = DeferredRegister.create(ForgeRegistries.CONDITION_SERIALIZERS, MOD_ID);
-        CONDITION.register("enable_vertical_slabs", () -> APVerticalSlabsCondition.CODEC);
-        CONDITION.register(modEventBus);
-
+        APVerticalSlabsCondition.registerCondition(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
