@@ -1,14 +1,9 @@
 package architectspalette.core.registry;
 
-import architectspalette.content.blocks.NubBlock;
 import architectspalette.core.platform.Services;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.RegistryObject;
-
-import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
 
 @OnlyIn(Dist.CLIENT)
 public class APRenderLayersFG {
@@ -40,11 +35,11 @@ public class APRenderLayersFG {
 //        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN, RenderType.cutout());
 //        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN, RenderType.cutout());
 
-        //I'm lazy
-        for (RegistryObject<Block> obj : BLOCKS.getEntries()) {
-            if (obj.get() instanceof NubBlock block) {
-                Services.REGISTRY.setRenderLayer(() -> block, RenderType.cutout());
-            }
-        }
+//        //I'm lazy
+//        for (RegistryObject<Block> obj : BLOCKS.getEntries()) {
+//            if (obj.get() instanceof NubBlock block) {
+//                Services.REGISTRY.setRenderLayer(() -> block, RenderType.cutout());
+//            }
+//        }
     }
 }
