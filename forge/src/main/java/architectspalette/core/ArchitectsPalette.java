@@ -5,7 +5,6 @@ import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APBiomeModifiers;
-import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -30,7 +29,6 @@ public class ArchitectsPalette {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         APCommon.init();
-        APBlocksFG.init();
         ForgeRegistryHelper.register(modEventBus);
 
         modEventBus.addListener(EventPriority.LOWEST, this::setupCommon);

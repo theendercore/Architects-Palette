@@ -1,7 +1,6 @@
 package architectspalette.core.datagen;
 
 import architectspalette.core.registry.APBlocks;
-import architectspalette.core.registry.APBlocksFG;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import architectspalette.core.registry.util.StoneBlockSet.SetComponent;

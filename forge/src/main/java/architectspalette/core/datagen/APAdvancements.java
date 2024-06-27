@@ -3,7 +3,6 @@ package architectspalette.core.datagen;
 import architectspalette.core.ArchitectsPalette;
 import architectspalette.core.integration.advancement.CarveTotemTrigger;
 import architectspalette.core.registry.APBlocks;
-import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;

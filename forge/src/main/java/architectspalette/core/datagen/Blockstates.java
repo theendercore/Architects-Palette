@@ -4,7 +4,7 @@ import architectspalette.content.blocks.BreadBlock;
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
-import architectspalette.core.registry.APBlocksFG;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BlockNode;
 import com.google.common.base.Preconditions;
@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static architectspalette.core.ArchitectsPalette.rl;
 import static architectspalette.core.event.RegisterModelLoadersEventHandler.MODELTYPE_BOARDS;
-import static architectspalette.core.registry.APBlocksFG.boards;
+import static architectspalette.core.registry.APBlocks.boards;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static architectspalette.core.registry.util.BlockNode.DataFlag.BOARDS;
 import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
@@ -110,12 +110,12 @@ public class Blockstates extends BlockStateProvider {
             currentNode = null;
         }
 
-        cerebralTiles(APBlocksFG.CEREBRAL_BLOCK.getChild(TILES).get());
-        stoneModel(APBlocksFG.MOONSHALE);
+        cerebralTiles(APBlocks.CEREBRAL_BLOCK.getChild(TILES).get());
+        stoneModel(APBlocks.MOONSHALE);
 
         BlockNode.forAllBaseNodes(this::processBlockNode);
-        breadBlock(APBlocksFG.BREAD_BLOCK.get());
-        breadSlab(APBlocksFG.BREAD_BLOCK.getChild(SLAB).get());
+        breadBlock(APBlocks.BREAD_BLOCK.get());
+        breadSlab(APBlocks.BREAD_BLOCK.getChild(SLAB).get());
 
         itemModels().basicItem(APItems.ORACLE_JELLY.get());
         itemModels().basicItem(APItems.CEREBRAL_PLATE.get());

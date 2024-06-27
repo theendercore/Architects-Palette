@@ -18,6 +18,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.mcLoc;
+import static architectspalette.core.registry.APBlocks.boards;
+import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
 
 public class RegistryUtils {
     // (ender) yes forge AT's the Tab reg keys, and not im not doing that, this ref is fine
@@ -81,6 +83,22 @@ public class RegistryUtils {
 
     public static Supplier<Block> makeCopperNub(String name, Block block_to_copy, WeatheringCopper.WeatherState weatheringstate) {
         return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
+    }
+
+    @SuppressWarnings("unchecked")
+    public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
+        BlockNode node = new BlockNode.Builder()
+                .tool(BlockNode.Tool.AXE)
+                .exclude(MODELS)
+                .base((Supplier<Block>) createBlock(name, supplier))
+                .commonVariants()
+                .flag(BlockNode.DataFlag.BOARDS)
+                .build();
+        boards.add(node);
+//        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+//            node.forEach((n) -> ModelBakeEventHandler.register(n.getObject(), model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
+//        });
+        return node;
     }
 
 //	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {

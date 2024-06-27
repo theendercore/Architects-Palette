@@ -8,6 +8,7 @@ import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
 import architectspalette.content.worldgen.features.APTreeGrowers;
+import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.RegistryUtils;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.world.level.block.*;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import static architectspalette.core.registry.util.RegistryUtils.*;
@@ -26,7 +28,7 @@ import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
 
 public class APBlocks {
     public static void init(){}
-//    public static final ArrayList<BlockNode> boards = new ArrayList<>();
+    public static final ArrayList<BlockNode> boards = new ArrayList<>();
 
 
     // Abyssaline
@@ -87,23 +89,23 @@ public class APBlocks {
     public static final Supplier<Block> ALGAL_LAMP = createBlock("algal_lamp", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SEA_LANTERN)));
 
     // Ore Bricks
-//    public static final BlockNode COAL_BRICKS = oreBrickSet("coal");
-//    public static final BlockNode LAPIS_BRICKS = oreBrickSet("lapis");
-//    public static final BlockNode REDSTONE_BRICKS = oreBrickSet("redstone");
-//    public static final BlockNode IRON_BRICKS = oreBrickSet("iron");
-//    public static final BlockNode GOLD_BRICKS = oreBrickSet("gold");
-//    public static final BlockNode EMERALD_BRICKS = oreBrickSet("emerald");
-//    public static final BlockNode DIAMOND_BRICKS = oreBrickSet("diamond");
+    public static final BlockNode COAL_BRICKS = oreBrickSet("coal");
+    public static final BlockNode LAPIS_BRICKS = oreBrickSet("lapis");
+    public static final BlockNode REDSTONE_BRICKS = oreBrickSet("redstone");
+    public static final BlockNode IRON_BRICKS = oreBrickSet("iron");
+    public static final BlockNode GOLD_BRICKS = oreBrickSet("gold");
+    public static final BlockNode EMERALD_BRICKS = oreBrickSet("emerald");
+    public static final BlockNode DIAMOND_BRICKS = oreBrickSet("diamond");
 
-   /* private static BlockNode oreBrickSet(String ore) {
-        return new Builder()
-                .tool(Tool.PICK)
+    private static BlockNode oreBrickSet(String ore) {
+        return new BlockNode.Builder()
+                .tool(BlockNode.Tool.PICK)
                 .base(createBlock(ore + "_ore_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS))))
-                .addPart(CRACKED)
-                .addPart(CHISELED)
+                .addPart(BlockNode.BlockType.CRACKED)
+                .addPart(BlockNode.BlockType.CHISELED)
                 .commonVariants()
                 .build();
-    }*/
+    }
 
     // Flint Blocks
     public static final Supplier<Block> FLINT_BLOCK  	= createBlock("flint_block",  () -> new FlintBlock(APBlockProperties.FLINT));
@@ -230,16 +232,16 @@ public class APBlocks {
     public static final Supplier<Block> ENDER_PEARL_BLOCK = createBlock("ender_pearl_block", () -> new Block(APBlockProperties.ENDER_PEARL));
 
     // Boards
-//    public static final BlockNode OAK_BOARDS      = createBoardNode("oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
-//    public static final BlockNode BIRCH_BOARDS    = createBoardNode("birch_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS)));
-//    public static final BlockNode SPRUCE_BOARDS   = createBoardNode("spruce_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
-//    public static final BlockNode JUNGLE_BOARDS   = createBoardNode("jungle_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
-//    public static final BlockNode DARK_OAK_BOARDS = createBoardNode("dark_oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
-//    public static final BlockNode ACACIA_BOARDS   = createBoardNode("acacia_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
-//    public static final BlockNode CRIMSON_BOARDS  = createBoardNode("crimson_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
-//    public static final BlockNode WARPED_BOARDS   = createBoardNode("warped_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
-//    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
-//    public static final BlockNode TWISTED_BOARDS  = createBoardNode("twisted_boards", () -> new Block(APBlockProperties.TwistedWood()));
+    public static final BlockNode OAK_BOARDS      = createBoardNode("oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
+    public static final BlockNode BIRCH_BOARDS    = createBoardNode("birch_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS)));
+    public static final BlockNode SPRUCE_BOARDS   = createBoardNode("spruce_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
+    public static final BlockNode JUNGLE_BOARDS   = createBoardNode("jungle_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
+    public static final BlockNode DARK_OAK_BOARDS = createBoardNode("dark_oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
+    public static final BlockNode ACACIA_BOARDS   = createBoardNode("acacia_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
+    public static final BlockNode CRIMSON_BOARDS  = createBoardNode("crimson_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
+    public static final BlockNode WARPED_BOARDS   = createBoardNode("warped_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
+    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final BlockNode TWISTED_BOARDS  = createBoardNode("twisted_boards", () -> new Block(APBlockProperties.TwistedWood()));
 
     // Railings
     public static final Supplier<Block> OAK_RAILING      = createBlock("oak_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
@@ -338,114 +340,96 @@ public class APBlocks {
     public static final Supplier<Block> HAZARD_SIGN = createBlock("hazard_sign", () -> new SmallSignBlock(APBlockProperties.PLATING), RegistryUtils.BUILDING_BLOCKS);
 
 
-  /*  public static final BlockNode TREAD_PLATE = new Builder()
-            .tool(Tool.IRON_PICK)
-            .style(Style.CUBE)
+    public static final BlockNode TREAD_PLATE = new BlockNode.Builder()
+            .tool(BlockNode.Tool.IRON_PICK)
+            .style(BlockNode.Style.CUBE)
             .base(createBlock("tread_plate", () -> new Block(APBlockProperties.PLATING)))
             .slabs()
-            .variants(STAIRS, WALL)
+            .variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.WALL)
             .build();
 
-    public static final BlockNode HAZARD_BLOCK = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode HAZARD_BLOCK = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("hazard_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_CONCRETE))))
             .slabs()
-            .variants(WALL)
+            .variants(BlockNode.BlockType.WALL)
             .build();
 
-    public static final BlockNode SHEET_METAL = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode SHEET_METAL = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("sheet_metal_block", () -> new Block(APBlockProperties.PLATING)))
-            .variants(WALL)
+            .variants(BlockNode.BlockType.WALL)
             .build();
 
-    public static final BlockNode BREAD_BLOCK = new Builder()
-            .tool(Tool.AXE)
-            .exclude(MODELS)
+    public static final BlockNode BREAD_BLOCK = new BlockNode.Builder()
+            .tool(BlockNode.Tool.AXE)
+            .exclude(BlockNode.ExcludeFlag.MODELS)
             .base(createBlock("bread_block", () -> new BreadBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_WOOL))))
-            .addPart(SLAB, b -> b.exclude(MODELS))
-            .addPart(BlockType.NUB)
-            .addPart(SPECIAL, b -> {
+            .addPart(BlockNode.BlockType.SLAB, b -> b.exclude(BlockNode.ExcludeFlag.MODELS))
+            .addPart(BlockNode.BlockType.NUB)
+            .addPart(BlockNode.BlockType.SPECIAL, b -> {
                 b.setName("crustless_bread_block");
             })
             .build();
 
-    public static final BlockNode ORACLE_BLOCK = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode ORACLE_BLOCK = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("oracle_block", () -> new Block(APBlockProperties.ORACLE)))
             .slabs()
-            .variants(STAIRS, PILLAR)
+            .variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.PILLAR)
             .bricks(b -> {
                 b.commonVariants();
-                b.addPart(DARK, Builder::commonVariants);
+                b.addPart(BlockNode.BlockType.DARK, BlockNode.Builder::commonVariants);
             })
             .tiles(b -> {
                 b.slabs();
-                b.variants(STAIRS, WALL);
+                b.variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.WALL);
             })
-            .addPart(SPECIAL, b -> {
+            .addPart(BlockNode.BlockType.SPECIAL, b -> {
                 b.setName("framed_oracle_block");
             })
-            .addPart(LAMP, b -> b.base(createBlock("oracle_lamp", () -> new Block(APBlockProperties.ORACLE_LAMP))))
+            .addPart(BlockNode.BlockType.LAMP, b -> b.base(createBlock("oracle_lamp", () -> new Block(APBlockProperties.ORACLE_LAMP))))
             .build();
 
-    public static final BlockNode CEREBRAL_BLOCK = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode CEREBRAL_BLOCK = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("cerebral_block", () -> new Block(APBlockProperties.CEREBRAL)))
             .slabs()
-            .variants(STAIRS, WALL, PILLAR)
+            .variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.WALL, BlockNode.BlockType.PILLAR)
             .tiles(b -> {
-                b.exclude(MODELS);
+                b.exclude(BlockNode.ExcludeFlag.MODELS);
                 b.commonVariants();
             })
             .build();
 
-    public static final BlockNode MOONSHALE = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode MOONSHALE = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("moonshale", () -> new Block(APBlockProperties.MOONSHALE)))
             .commonVariants()
-            .exclude(MODELS)
-            .variants(CHISELED)
+            .exclude(BlockNode.ExcludeFlag.MODELS)
+            .variants(BlockNode.BlockType.CHISELED)
             .bricks(b -> {
                 b.commonVariants();
-                b.addPart(CRACKED);
-                b.withPart(CHISELED)
+                b.addPart(BlockNode.BlockType.CRACKED);
+                b.withPart(BlockNode.BlockType.CHISELED)
                         .setName("moonshale_flagstone");
             })
-            .addPart(SPECIAL, builder -> {
+            .addPart(BlockNode.BlockType.SPECIAL, builder -> {
                 builder.setName("bordered_moonshale");
             })
             .build();
-    public static final BlockNode CRATERSTONE = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode CRATERSTONE = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("craterstone", () -> new Block(APBlockProperties.MOONSHALE)))
             .commonVariants()
             .build();
-    public static final BlockNode NEBULITE = new Builder()
-            .tool(Tool.PICK)
+    public static final BlockNode NEBULITE = new BlockNode.Builder()
+            .tool(BlockNode.Tool.PICK)
             .base(createBlock("nebulite", () -> new Block(APBlockProperties.NEBULITE)))
             .commonVariants()
-            .addPart(POLISHED, b -> {
+            .addPart(BlockNode.BlockType.POLISHED, b -> {
                 b.slabs();
-                b.addPart(STAIRS);
+                b.addPart(BlockNode.BlockType.STAIRS);
             })
-            .build();*/
-
-
-
-  /*  public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
-        BlockNode node = new Builder()
-                .tool(Tool.AXE)
-                .exclude(MODELS)
-                .base(createBlock(name, supplier))
-                .commonVariants()
-                .flag(DataFlag.BOARDS)
-                .build();
-        boards.add(node);
-//        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-//            node.forEach((n) -> ModelBakeEventHandler.register(n.getObject(), model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
-//        });
-        return node;
-    }*/
-
+            .build();
 }

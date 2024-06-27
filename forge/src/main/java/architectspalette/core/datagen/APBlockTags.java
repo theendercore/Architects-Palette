@@ -21,8 +21,6 @@ import java.util.concurrent.CompletableFuture;
 
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
-import static architectspalette.core.registry.APBlocks.*;
-import static architectspalette.core.registry.APBlocksFG.*;
 
 public class APBlockTags extends BlockTagsProvider {
     public APBlockTags(PackOutput pack, CompletableFuture<HolderLookup.Provider> completableFuture, @Nullable ExistingFileHelper existingFileHelper) {

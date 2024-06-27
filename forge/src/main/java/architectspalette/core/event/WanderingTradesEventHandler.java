@@ -2,7 +2,6 @@ package architectspalette.core.event;
 
 import architectspalette.core.config.APConfig;
 import architectspalette.core.registry.APBlocks;
-import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemsForEmeralds;
 import net.minecraft.world.item.ItemStack;
