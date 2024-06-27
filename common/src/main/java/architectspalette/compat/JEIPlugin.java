@@ -135,7 +135,6 @@ public class JEIPlugin implements IModPlugin {
             for (Supplier<? extends Block> block : blockList) {
                 blocks.add(block.get());
             }
-            ;
             return this;
         }
 
