@@ -41,14 +41,14 @@ public class ModelBakeEventHandler {
 
         //Note; Not all model swaps are registered here.
 //        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
-        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
-        register(APBlocksFG.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
-        register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+//        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
+//        register(APBlocksFG.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+//        register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
         for (BlockNode board : APBlocksFG.boards) {
             var wall = board.getChild(BlockNode.BlockType.WALL);
             var shift = SpriteShift.getShift("block/" + board.getName(), "block/" + board.getName() + "_odd");
-            register(wall, model -> new BoardModel(model, shift));
+//            register(wall, model -> new BoardModel(model, shift));
         }
         //SpriteShift.onTexturesDoneStitching();
 

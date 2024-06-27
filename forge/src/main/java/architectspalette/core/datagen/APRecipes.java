@@ -1,6 +1,7 @@
 package architectspalette.core.datagen;
 
 import architectspalette.core.integration.APVerticalSlabsCondition;
+import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.BlockNode.BlockType;
@@ -155,7 +156,7 @@ public class APRecipes extends RecipeProvider {
                                     .pattern("xx")
                                     .define('x', tiles.get())
                                     .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-                                    .save(output, modId(n.getName() + "_from_" + tiles.getId().getPath()));
+                                    .save(output, modId(n.getName() + "_from_" + Services.REGISTRY.getId(tiles).getPath()));
                         }
                     }
                     case CRACKED -> {
@@ -175,7 +176,7 @@ public class APRecipes extends RecipeProvider {
                                     .pattern("xx")
                                     .define('x', bricks.get())
                                     .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-                                    .save(output, modId(n.getName() + "_from_" + bricks.getId().getPath()));
+                                    .save(output, modId(n.getName() + "_from_" + Services.REGISTRY.getId(bricks).getPath()));
                         }
                         //Default recipe if there are no bricks
                         else {

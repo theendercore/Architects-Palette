@@ -2,17 +2,16 @@ package architectspalette.core.registry.util;
 
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
+import architectspalette.core.platform.Services;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +24,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
 
     public final BlockNode parent;
     public ArrayList<BlockNode> children;
-    public final RegistryObject<Block> block;
+    public final Supplier<Block> block;
 
     public final Style style;
     public final BlockType type;
@@ -38,7 +37,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
         instances.forEach(consumer);
     }
 
-    protected BlockNode(BlockNode parent, RegistryObject<Block> block, BlockType type, Tool tool, Style style, int flags, String blockName, int dataFlags) {
+    protected BlockNode(BlockNode parent, Supplier<Block> block, BlockType type, Tool tool, Style style, int flags, String blockName, int dataFlags) {
         this.parent = parent;
         this.type = type == null ? BlockType.BASE : type;
         this.tool = tool;
@@ -51,7 +50,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
         this.children = children;
     }
 
-    public RegistryObject<Block> getObject() {
+    public Supplier<Block> getObject() {
         return block;
     }
 
@@ -62,7 +61,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     /**
      * Abyssaline.get(BRICKS, SLAB) -> Abyssaline Brick Slab
      */
-    public RegistryObject<Block> getChild(BlockType... types) {
+    public Supplier<Block> getChild(BlockType... types) {
         for (BlockNode node : children) {
             if (node.type == types[0]) {
                 //If length is one, then this is the last "part" to get.
@@ -77,7 +76,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     }
 
     public ResourceLocation getId() {
-        return block.getId();
+        return Services.REGISTRY.getId(block);
     }
     public String getName() {
         return getId().getPath();
@@ -100,7 +99,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
         return list;
     }
 
-    public RegistryObject<Block> getSibling(BlockType type) {
+    public Supplier<Block> getSibling(BlockType type) {
         if (parent != null) {
             return parent.getChild(type);
         }
@@ -114,9 +113,9 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     }
 
     //This too
-    private RegistryObject<Block> makeBlock(String blockName) {
+    private Supplier<Block> makeBlock(String blockName) {
         String name = blockName == null ? modifyBlockNameForType(type, this.parent.getName()) : blockName;
-        return RegistryUtilsFG.createBlock(name, () -> {
+        return RegistryUtils.createBlock(name, () -> {
             Block block = parent.block.get();
             if (block instanceof IBlockSetBase base) {
 //                (ender) fix then when porting node block
@@ -141,7 +140,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     public static class Builder {
         protected Builder parent;
         private final ArrayList<Builder> children = new ArrayList<>();
-        private RegistryObject<Block> block;
+        private Supplier<Block> block;
 
         private Style style;
         private final BlockType type;
@@ -232,9 +231,9 @@ public class BlockNode implements Supplier<Block>, ItemLike {
             return this.variants(BlockType.STAIRS, BlockType.WALL);
         }
 
-        public Builder base(RegistryObject<Block> block) {
+        public Builder base(Supplier<Block> block) {
             this.block = block;
-            if (this.name == null) this.name = block.getId().getPath();
+            if (this.name == null) this.name =  Services.REGISTRY.getId(block).getPath();
             return this;
         }
 
@@ -416,7 +415,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
     private static ResourceKey<CreativeModeTab> getTabForType(BlockType type) {
         return switch(type) {
             //case VERTICAL_SLAB -> VerticalSlabBlock.isQuarkEnabled() ? CreativeModeTabs.BUILDING_BLOCKS : null;
-            default -> CreativeModeTabs.BUILDING_BLOCKS;
+            default -> RegistryUtils.BUILDING_BLOCKS;
         };
     }
 
