@@ -45,11 +45,11 @@ public class AbyssalineSlabBlock extends SlabBlock implements IAbyssalineChargea
 	//Interface stuff
 	@Override
 	public boolean acceptsChargeFrom(BlockState stateIn, Direction faceIn) {
-		switch(stateIn.getValue(TYPE)) {
-			case TOP: return faceIn != Direction.DOWN;
-			case BOTTOM: return faceIn != Direction.UP;
-			default: return true;
-		}
+        return switch (stateIn.getValue(TYPE)) {
+            case TOP -> faceIn != Direction.DOWN;
+            case BOTTOM -> faceIn != Direction.UP;
+            default -> true;
+        };
 	}
 
 	@Override
