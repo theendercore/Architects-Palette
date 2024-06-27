@@ -16,10 +16,10 @@ public class APRenderLayers {
         Services.REGISTRY.setRenderLayer(ENTWINE_BARS, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(SUNMETAL_BARS, RenderType.cutout());
 
-//        Services.REGISTRY.setRenderLayer(TWISTED_DOOR , RenderType.cutout());
-//        Services.REGISTRY.setRenderLayer(TWISTED_TRAPDOOR , RenderType.cutout());
-//        Services.REGISTRY.setRenderLayer(TWISTED_SAPLING , RenderType.cutout());
-//        Services.REGISTRY.setRenderLayer(POTTED_TWISTED_SAPLING , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(TWISTED_DOOR , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(TWISTED_TRAPDOOR , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(TWISTED_SAPLING , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(POTTED_TWISTED_SAPLING , RenderType.cutout());
 
         Services.REGISTRY.setRenderLayer(REDSTONE_CAGE_LANTERN, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(GLOWSTONE_CAGE_LANTERN, RenderType.cutout());
