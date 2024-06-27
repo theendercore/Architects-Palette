@@ -1,12 +1,18 @@
 package architectspalette.core.registry.util;
 
+import architectspalette.content.blocks.NubBlock;
 import architectspalette.core.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -43,7 +49,7 @@ public class RegistryUtils {
     }
 
     @SafeVarargs
-    public static<T extends Block> Supplier<T> createBlock(String name, Supplier<T> block, @Nullable ResourceKey<CreativeModeTab>... tab) {
+    public static <T extends Block> Supplier<T> createBlock(String name, Supplier<T> block, @Nullable ResourceKey<CreativeModeTab>... tab) {
         Supplier<T> regBlock = Services.REGISTRY.registerBlock(name, block);
         createItem(name, () -> new BlockItem(regBlock.get(), new Item.Properties()), tab);
         return regBlock;
@@ -51,6 +57,30 @@ public class RegistryUtils {
 
     public static Supplier<Block> createBlockNoItem(String name, Supplier<Block> block) {
         return Services.REGISTRY.registerBlock(name, block);
+    }
+
+
+    // Specific block helpers
+    public static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
+        ResourceLocation id = Services.REGISTRY.getId(plant);
+        if (id == null) throw new IllegalStateException("Plant is not registered " + plant.get());
+        String name = id.getPath();
+        Supplier<Block> pot = createBlockNoItem("potted_" + name, () ->
+                new FlowerPotBlock(plant.get(), Block.Properties.ofFullCopy(Blocks.POTTED_AZURE_BLUET))
+        );
+        return pot;
+    }
+
+    public static Supplier<Block> makeNub(String name, Block block_to_copy) {
+        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy)));
+    }
+
+    public static Supplier<Block> makeNub(String name, Supplier<Block> block_to_copy) {
+        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy.get())));
+    }
+
+    public static Supplier<Block> makeCopperNub(String name, Block block_to_copy, WeatheringCopper.WeatherState weatheringstate) {
+        return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
     }
 
 //	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {

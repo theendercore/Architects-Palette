@@ -7,17 +7,19 @@ import architectspalette.content.blocks.entrails.DrippyBlock;
 import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
 import architectspalette.content.blocks.util.DirectionalFacingBlock;
+import architectspalette.content.worldgen.features.APTreeGrowers;
 import architectspalette.core.registry.util.RegistryUtils;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 
 import java.util.function.Supplier;
 
-import static architectspalette.core.registry.util.RegistryUtils.createBlock;
-import static architectspalette.core.registry.util.RegistryUtils.createBlockNoItem;
+import static architectspalette.core.registry.util.RegistryUtils.*;
 import static architectspalette.core.registry.util.StoneBlockSet.SetComponent.*;
 import static architectspalette.core.registry.util.StoneBlockSet.SetGroup.*;
 import static net.minecraft.world.level.block.WeatheringCopper.WeatherState.*;
@@ -176,23 +178,24 @@ public class APBlocks {
 
     // Twisted Wood
      // Todo: Bookshelf, sign(?), boat(?), custom BlockSetType(?), custom WoodType(?)
-//    public static final StoneBlockSet TWISTED_PLANKS = new StoneBlockSet(createBlock("twisted_planks", () -> new Block(APBlockProperties.TwistedWood())), NO_WALLS).woodify();
+    public static final StoneBlockSet TWISTED_PLANKS = new StoneBlockSet(createBlock("twisted_planks", () -> new Block(APBlockProperties.TwistedWood())), NO_WALLS).woodify();
 
     public static final Supplier<Block>  STRIPPED_TWISTED_LOG = createBlock("stripped_twisted_log", () -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
     public static final Supplier<Block> STRIPPED_TWISTED_WOOD = createBlock("stripped_twisted_wood",() -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
     public static final Supplier<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
     public static final Supplier<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
     public static final Supplier<Block>        TWISTED_LEAVES = createBlock("twisted_leaves",       () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
-//    public static final Supplier<Block>         TWISTED_FENCE = createBlock("twisted_fence",        () -> new         FenceBlock(APBlockProperties.TwistedWood()), CreativeModeTabs.BUILDING_BLOCKS);
-//    public static final Supplier<Block>    TWISTED_FENCE_GATE = createBlock("twisted_fence_gate",   () -> new     FenceGateBlock(WoodType.OAK, APBlockProperties.TwistedWood(), SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-//    public static final Supplier<Block>          TWISTED_DOOR = createBlock("twisted_door",         () -> new          DoorBlock(BlockSetType.OAK, APBlockProperties.TwistedWood().noOcclusion()), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-//    public static final Supplier<Block>      TWISTED_TRAPDOOR = createBlock("twisted_trapdoor",     () -> new      TrapDoorBlock(BlockSetType.OAK, APBlockProperties.TwistedWood().noOcclusion()), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-//    public static final Supplier<Block>        TWISTED_BUTTON = createBlock("twisted_button",
-//            () -> new    ButtonBlock(BlockSetType.OAK, 30, APBlockProperties.TwistedWood(true)), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-//    public static final Supplier<Block> TWISTED_PRESSURE_PLATE = createBlock("twisted_pressure_plate",
-//            () -> new PressurePlateBlock(BlockSetType.OAK, APBlockProperties.TwistedWood(true)), CreativeModeTabs.BUILDING_BLOCKS, CreativeModeTabs.REDSTONE_BLOCKS);
-//    public static final Supplier<Block>        TWISTED_SAPLING = createBlock("twisted_sapling", () -> new SaplingBlock(APTreeGrowers.WARPED_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), CreativeModeTabs.NATURAL_BLOCKS);
-//    public static final Supplier<Block> POTTED_TWISTED_SAPLING = createPottedPlant(TWISTED_SAPLING);
+    // (ender) oh boy time for this mess
+    public static final Supplier<Block>         TWISTED_FENCE = createBlock("twisted_fence",        () -> new         FenceBlock(APBlockProperties.TwistedWood()), RegistryUtils.BUILDING_BLOCKS);
+    public static final Supplier<Block>    TWISTED_FENCE_GATE = createBlock("twisted_fence_gate",   () -> new     FenceGateBlock(WoodType.OAK, APBlockProperties.TwistedWood()), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
+    public static final Supplier<Block>          TWISTED_DOOR = createBlock("twisted_door",         () -> new          DoorBlock(BlockSetType.OAK, APBlockProperties.TwistedWood().noOcclusion()), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
+    public static final Supplier<Block>      TWISTED_TRAPDOOR = createBlock("twisted_trapdoor",     () -> new      TrapDoorBlock(BlockSetType.OAK, APBlockProperties.TwistedWood().noOcclusion()), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
+    public static final Supplier<Block>        TWISTED_BUTTON = createBlock("twisted_button",
+            () -> new    ButtonBlock(BlockSetType.OAK, 30, APBlockProperties.TwistedWood(true)), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
+    public static final Supplier<Block> TWISTED_PRESSURE_PLATE = createBlock("twisted_pressure_plate",
+            () -> new PressurePlateBlock(BlockSetType.OAK, APBlockProperties.TwistedWood(true)), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
+    public static final Supplier<Block>        TWISTED_SAPLING = createBlock("twisted_sapling", () -> new SaplingBlock(APTreeGrowers.WARPED_TREE, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)), RegistryUtils.NATURAL_BLOCKS);
+    public static final Supplier<Block> POTTED_TWISTED_SAPLING = createPottedPlant(TWISTED_SAPLING);
 
     // Basalt Tiles
     public static final StoneBlockSet BASALT_TILES = new StoneBlockSet(createBlock("basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT))));
@@ -429,24 +432,6 @@ public class APBlocks {
             .build();*/
 
 
-    /*private static Supplier<Block> createPottedPlant(Supplier<Block> plant) {
-        String name = plant.getId().getPath();
-        Supplier<Block> pot = BLOCKS.register("potted_" + name, () ->
-                new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, plant, Block.Properties.ofFullCopy(Blocks.POTTED_AZURE_BLUET))
-        );
-        ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(plant.getId(), pot);
-        return pot;
-    }*/
-
-    private static Supplier<Block> makeNub(String name, Block block_to_copy) {
-        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy)));
-    }
-    private static Supplier<Block> makeNub(String name, Supplier<Block> block_to_copy) {
-        return createBlock(name, () -> new NubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy.get())));
-    }
-    private static Supplier<Block> makeCopperNub(String name, Block block_to_copy, WeatheringCopper.WeatherState weatheringstate) {
-        return createBlock(name, () -> new NubBlock.CopperNubBlock(BlockBehaviour.Properties.ofFullCopy(block_to_copy), weatheringstate));
-    }
 
   /*  public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
         BlockNode node = new Builder()
