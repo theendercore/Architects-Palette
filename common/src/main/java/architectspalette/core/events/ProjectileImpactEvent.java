@@ -1,4 +1,4 @@
-package architectspalette.core.event;
+package architectspalette.core.events;
 
 import architectspalette.core.registry.APSounds;
 import architectspalette.core.registry.MiscRegistry;
@@ -15,30 +15,23 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-import static architectspalette.core.APConstants.MOD_ID;
-
-@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class ProjectileImpactEventHandler {
-
+public class ProjectileImpactEvent {
     // Used in evil arrow mixin
     public static boolean justHitWardstone = false;
 
-    @SubscribeEvent
-    public static void projectileImpact(ProjectileImpactEvent event) {
-        Projectile projectile = event.getProjectile();
-        if (projectile.getDeltaMovement().length() > .2 && event.getRayTraceResult() instanceof BlockHitResult hitResult) {
-            if (deflect(projectile, hitResult, 0)) event.setCanceled(true);
+    public static boolean projectileImpact(Projectile projectile, HitResult ray) {
+        if (projectile.getDeltaMovement().length() > .2 && ray instanceof BlockHitResult hitResult) {
+            if (deflect(projectile, hitResult, 0)) return true;
         }
+        return false;
     }
 
-    private static boolean deflect(Projectile projectile, BlockHitResult hitResult, int depth) {
+    public static boolean deflect(Projectile projectile, BlockHitResult hitResult, int depth) {
         BlockState state = projectile.level().getBlockState(hitResult.getBlockPos());
         Level level = projectile.level();
         if (state.is(MiscRegistry.WIZARD_BLOCKS)) {
+
             justHitWardstone = false;
 
             //Get normal (atLowerCorner is just to cast it from Vec3i, I'm lazy)
@@ -120,4 +113,5 @@ public class ProjectileImpactEventHandler {
         }
         return e;
     }
+
 }
