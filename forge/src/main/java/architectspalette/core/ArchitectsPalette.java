@@ -7,11 +7,8 @@ import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APBiomeModifiers;
 import architectspalette.core.registry.APBlockPropertiesFG;
 import architectspalette.core.registry.APBlocksFG;
-import architectspalette.core.registry.APRenderLayersFG;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +17,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 import static architectspalette.core.APConstants.MOD_ID;
 
@@ -66,6 +62,5 @@ public class ArchitectsPalette {
 
     void setupClient(final FMLClientSetupEvent event) {
         APCommon.initClient();
-        APRenderLayersFG.setupRenderLayers();
     }
 }
