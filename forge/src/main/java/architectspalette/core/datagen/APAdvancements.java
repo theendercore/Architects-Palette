@@ -68,13 +68,13 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(advancementConsumer, getNameId("main/buy_fish_block"));
 
-        AdvancementHolder buyPipes = buyAdvancement(architectsPalette, APBlocksFG.PIPE.get().asItem(), "buy_pipe", "pipe", advancementConsumer);
+        AdvancementHolder buyPipes = buyAdvancement(architectsPalette, APBlocks.PIPE.get().asItem(), "buy_pipe", "pipe", advancementConsumer);
         AdvancementHolder buyEntrails = buyAdvancement(architectsPalette, APBlocksFG.ENTRAILS.get().asItem(), "buy_entrails", "entrails", advancementConsumer);
         AdvancementHolder placeEntrails = getAdvancement(buyEntrails, APBlocksFG.ENTRAILS.get().asItem(), "place_entrails", AdvancementType.TASK, true, true, true)
                 .addCriterion("entrails", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(APBlocksFG.ENTRAILS.get()))
                 .save(advancementConsumer, getNameId("main/place_entrails"));
 
-        AdvancementHolder buyPlating = buyAdvancement(architectsPalette, APBlocksFG.PLATING_BLOCK.get().asItem(), "buy_plating", "plating", advancementConsumer);
+        AdvancementHolder buyPlating = buyAdvancement(architectsPalette, APBlocks.PLATING_BLOCK.get().asItem(), "buy_plating", "plating", advancementConsumer);
         AdvancementHolder buySpool = buyAdvancement(architectsPalette, APBlocks.SPOOL.get().asItem(), "buy_spool", "spool", advancementConsumer);
 
         AdvancementHolder buyCelestialStone = getAdvancement(architectsPalette, APBlocks.SUNSTONE.get().asItem(), "buy_celestial_stone", AdvancementType.TASK, true, false, false)
@@ -83,7 +83,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .requirements(AdvancementRequirements.Strategy.OR)
                 .save(advancementConsumer, getNameId("main/buy_celestial_stone"));
 
-        AdvancementHolder getWarpstone = buyAdvancement(architectsPalette, APBlocksFG.WARPSTONE.get().asItem(), "find_warpstone", "warpstone", advancementConsumer);
+        AdvancementHolder getWarpstone = buyAdvancement(architectsPalette, APBlocks.WARPSTONE.get().asItem(), "find_warpstone", "warpstone", advancementConsumer);
         AdvancementHolder getTwistedSapling = buyAdvancement(getWarpstone, APBlocksFG.TWISTED_SAPLING.get().asItem(), "find_twisted_sapling", "sapling", advancementConsumer);
 
     }
