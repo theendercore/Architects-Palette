@@ -80,7 +80,7 @@ public class APBlockTags extends BlockTagsProvider {
             });
         });
 
-        tagBlocks(BlockTags.MINEABLE_WITH_PICKAXE,
+//        tagBlocks(BlockTags.MINEABLE_WITH_PICKAXE,
 //                ABYSSALINE,
 //                CHISELED_ABYSSALINE_BRICKS,
 //                ABYSSALINE_PILLAR,
@@ -133,7 +133,7 @@ public class APBlockTags extends BlockTagsProvider {
                 //                CHORAL_END_STONE_BRICKS,
                 //                CRACKED_END_STONE_BRICKS,
                 //                CHISELED_END_STONE_BRICKS,
-                POTTED_TWISTED_SAPLING
+//                POTTED_TWISTED_SAPLING
                 //                CRACKED_BASALT_TILES,
                 //                CHISELED_BASALT_TILES,
 //                SUNSTONE,
@@ -184,10 +184,10 @@ public class APBlockTags extends BlockTagsProvider {
 //                EMERALD_NUB,
 //                NETHERITE_NUB
 //                HAZARD_SIGN
-        );
+//        );
         tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(MiscRegistry.NUBS);
 
-        tagBlocks(BlockTags.MINEABLE_WITH_AXE,
+//        tagBlocks(BlockTags.MINEABLE_WITH_AXE,
 //                ACACIA_TOTEM_WING,
 //                BLANK_ACACIA_TOTEM,
                 //                CHARCOAL_BLOCK,
@@ -202,13 +202,13 @@ public class APBlockTags extends BlockTagsProvider {
                 //                SPOOL,
 //                STRIPPED_TWISTED_LOG,
 //                STRIPPED_TWISTED_WOOD,
-                TWISTED_BUTTON,
-                TWISTED_DOOR,
-                TWISTED_FENCE,
-                TWISTED_FENCE_GATE,
+//                TWISTED_BUTTON,
+//                TWISTED_DOOR,
+//                TWISTED_FENCE,
+//                TWISTED_FENCE_GATE,
 //                TWISTED_LOG,
-                TWISTED_PRESSURE_PLATE,
-                TWISTED_TRAPDOOR
+//                TWISTED_PRESSURE_PLATE,
+//                TWISTED_TRAPDOOR
 //                TWISTED_WOOD
                 //                OAK_RAILING,
                 //                DARK_OAK_RAILING,
@@ -220,7 +220,7 @@ public class APBlockTags extends BlockTagsProvider {
                 //                CRIMSON_RAILING,
                 //                JUNGLE_RAILING,
                 //                MANGROVE_RAILING
-            );
+//            );
     }
 
 }

@@ -84,7 +84,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .save(advancementConsumer, getNameId("main/buy_celestial_stone"));
 
         AdvancementHolder getWarpstone = buyAdvancement(architectsPalette, APBlocks.WARPSTONE.get().asItem(), "find_warpstone", "warpstone", advancementConsumer);
-        AdvancementHolder getTwistedSapling = buyAdvancement(getWarpstone, APBlocksFG.TWISTED_SAPLING.get().asItem(), "find_twisted_sapling", "sapling", advancementConsumer);
+        AdvancementHolder getTwistedSapling = buyAdvancement(getWarpstone, APBlocks.TWISTED_SAPLING.get().asItem(), "find_twisted_sapling", "sapling", advancementConsumer);
 
     }
 }

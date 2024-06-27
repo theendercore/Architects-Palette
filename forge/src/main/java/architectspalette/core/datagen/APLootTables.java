@@ -32,7 +32,7 @@ public class APLootTables extends LootTableProvider {
         @Override
         protected void generate() {
             BlockNode.forAllBaseNodes(this::processBlockNode);
-            this.add(APBlocks.TWISTED_LEAVES.get(), (leaves) -> this.createLeavesDrops(leaves, APBlocksFG.TWISTED_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+            this.add(APBlocks.TWISTED_LEAVES.get(), (leaves) -> this.createLeavesDrops(leaves, APBlocks.TWISTED_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         }
 
         @Override
