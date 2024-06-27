@@ -21,8 +21,10 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
@@ -112,5 +114,11 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
         var block = BLOCKS.getEntries().stream().filter(it -> it.get() == blockSupplier.get()).findFirst().orElse(null);
         return block == null ? null : block.getId();
+    }
+
+    @Override
+    public <T extends Block> List<T> getModBlocks() {
+        //noinspection unchecked  (ender) shut up java
+        return (List<T>) BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
     }
 }

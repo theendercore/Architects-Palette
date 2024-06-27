@@ -22,6 +22,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.fml.config.ModConfig;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
@@ -97,7 +98,17 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Nullable
     @Override
     public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
-        var id = BuiltInRegistries.BLOCK.getKey(blockSupplier.get());
+        var id = blockId(blockSupplier.get());
         return (id == BuiltInRegistries.BLOCK.getDefaultKey()) ? null : id;
+    }
+
+    @Override
+    public <T extends Block> List<T> getModBlocks() {
+        //noinspection unchecked (ender) again, shut up java
+        return (List<T>) BuiltInRegistries.BLOCK.stream().filter(it -> blockId(it).getNamespace().equals(MOD_ID)).toList();
+    }
+
+    public static ResourceLocation blockId(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 }

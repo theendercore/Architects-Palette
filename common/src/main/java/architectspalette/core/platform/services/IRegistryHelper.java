@@ -55,5 +55,10 @@ public interface IRegistryHelper {
 
     <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type);
 
+    // (ender) I have to remove this because forge sucks (and it doesn't work)
+    @Nullable
     <T extends Block> ResourceLocation getId(Supplier<T> block);
+
+    <T extends Block> List<T> getModBlocks();
+
 }
