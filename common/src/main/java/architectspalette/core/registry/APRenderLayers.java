@@ -7,6 +7,7 @@ import static architectspalette.core.registry.APBlocks.*;
 
 public class APRenderLayers {
 
+    // (ender) Thanks for not doing a forgeism, this works better on multi-platform
     //"use json for it" yeah nice try forge. i know you won't take this out.
     //if you add dynamic render layers, then we'll talk.
     public static void setupRenderLayers() {
