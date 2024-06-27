@@ -31,8 +31,8 @@ public class APRenderLayers {
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_FIRE, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_TORCH, RenderType.cutout());
         Services.REGISTRY.setRenderLayer(NETHER_BRASS_WALL_TORCH, RenderType.cutout());
-//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN , RenderType.cutout());
-//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN , RenderType.cutout());
 
 //        //I'm lazy
 //        for (RegistryObject<Block> obj : BLOCKS.getEntries()) {

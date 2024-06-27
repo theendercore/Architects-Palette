@@ -9,8 +9,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.RegistryObject;
 
 import static architectspalette.core.platform.ForgeRegistryHelper.BLOCKS;
-import static architectspalette.core.registry.APBlocksFG.NETHER_BRASS_CHAIN;
-import static architectspalette.core.registry.APBlocksFG.NETHER_BRASS_LANTERN;
 
 @OnlyIn(Dist.CLIENT)
 public class APRenderLayersFG {
@@ -39,8 +37,8 @@ public class APRenderLayersFG {
 //        Services.REGISTRY.setRenderLayer(NETHER_BRASS_FIRE , RenderType.cutout());
 //        Services.REGISTRY.setRenderLayer(NETHER_BRASS_TORCH , RenderType.cutout());
 //        Services.REGISTRY.setRenderLayer(NETHER_BRASS_WALL_TORCH , RenderType.cutout());
-        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN, RenderType.cutout());
-        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN, RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_CHAIN, RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(NETHER_BRASS_LANTERN, RenderType.cutout());
 
         //I'm lazy
         for (RegistryObject<Block> obj : BLOCKS.getEntries()) {
