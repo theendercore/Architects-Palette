@@ -5,7 +5,6 @@ import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APBiomeModifiers;
-import architectspalette.core.registry.APBlockPropertiesFG;
 import architectspalette.core.registry.APBlocksFG;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,7 +55,6 @@ public class ArchitectsPalette {
         // (ender) Thanks forge :)
         APCommon.initEarly();
 
-        APBlockPropertiesFG.registerFlammables();
         APTrades.registerTrades();
     }
 

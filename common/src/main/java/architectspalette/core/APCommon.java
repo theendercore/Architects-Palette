@@ -32,6 +32,8 @@ public class APCommon {
     }
     public static void initEarly() {
         APCriterion.init();
+
+        APBlockProperties.registerFlammables();
     }
 
     public static void initClient() {
