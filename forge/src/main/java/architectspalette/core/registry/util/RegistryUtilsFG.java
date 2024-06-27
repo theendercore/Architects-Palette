@@ -1,8 +1,5 @@
 package architectspalette.core.registry.util;
 
-import architectspalette.core.event.ModelBakeEventHandler;
-import architectspalette.core.model.BoardModel;
-import architectspalette.core.model.util.SpriteShift;
 import architectspalette.core.platform.ForgeRegistryHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
@@ -27,9 +24,9 @@ public class RegistryUtilsFG {
 		return block;
 	}
 
-	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {
-		StoneBlockSet boardSet = new StoneBlockSet(createBlock(name, supplier), StoneBlockSet.SetGroup.NO_WALLS).woodify();
-		boardSet.forEachRegistryObject((obj) -> ModelBakeEventHandler.register(obj, model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
-		return boardSet;
-	}
+//	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {
+//		StoneBlockSet boardSet = new StoneBlockSet(createBlock(name, supplier), StoneBlockSet.SetGroup.NO_WALLS).woodify();
+//		boardSet.forEachRegistryObject((obj) -> ModelBakeEventHandler.register(obj, model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
+//		return boardSet;
+//	}
 }
