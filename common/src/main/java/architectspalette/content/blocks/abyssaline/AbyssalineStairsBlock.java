@@ -13,8 +13,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.Half;
 
-import java.util.function.Supplier;
-
 public class AbyssalineStairsBlock extends StairBlock implements IAbyssalineChargeable {
 
 	public AbyssalineStairsBlock(BlockState state, Properties properties) {

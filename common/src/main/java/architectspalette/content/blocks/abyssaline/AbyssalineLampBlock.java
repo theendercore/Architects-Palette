@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
-
 import static architectspalette.content.blocks.abyssaline.AbyssalineBlock.CHARGED;
 import static architectspalette.content.blocks.abyssaline.AbyssalineBlock.CHARGE_SOURCE;
 
