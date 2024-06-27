@@ -112,8 +112,7 @@ public class ForgeRegistryHelper implements IRegistryHelper {
     @Nullable
     @Override
     public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
-        var block = BLOCKS.getEntries().stream().filter(it -> it.get() == blockSupplier.get()).findFirst().orElse(null);
-        return block == null ? null : block.getId();
+        return ((RegistryObject<T>) blockSupplier).getId();
     }
 
     @SuppressWarnings("unchecked") // (ender) shut up java
