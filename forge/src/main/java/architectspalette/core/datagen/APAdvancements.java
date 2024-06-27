@@ -69,9 +69,9 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
                 .save(advancementConsumer, getNameId("main/buy_fish_block"));
 
         AdvancementHolder buyPipes = buyAdvancement(architectsPalette, APBlocks.PIPE.get().asItem(), "buy_pipe", "pipe", advancementConsumer);
-        AdvancementHolder buyEntrails = buyAdvancement(architectsPalette, APBlocksFG.ENTRAILS.get().asItem(), "buy_entrails", "entrails", advancementConsumer);
-        AdvancementHolder placeEntrails = getAdvancement(buyEntrails, APBlocksFG.ENTRAILS.get().asItem(), "place_entrails", AdvancementType.TASK, true, true, true)
-                .addCriterion("entrails", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(APBlocksFG.ENTRAILS.get()))
+        AdvancementHolder buyEntrails = buyAdvancement(architectsPalette, APBlocks.ENTRAILS.get().asItem(), "buy_entrails", "entrails", advancementConsumer);
+        AdvancementHolder placeEntrails = getAdvancement(buyEntrails, APBlocks.ENTRAILS.get().asItem(), "place_entrails", AdvancementType.TASK, true, true, true)
+                .addCriterion("entrails", ItemUsedOnLocationTrigger.TriggerInstance.placedBlock(APBlocks.ENTRAILS.get()))
                 .save(advancementConsumer, getNameId("main/place_entrails"));
 
         AdvancementHolder buyPlating = buyAdvancement(architectsPalette, APBlocks.PLATING_BLOCK.get().asItem(), "buy_plating", "plating", advancementConsumer);

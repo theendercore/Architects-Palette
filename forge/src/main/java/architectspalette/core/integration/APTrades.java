@@ -20,7 +20,7 @@ public class APTrades {
             add_trade(FISHERMAN, 2, new ItemsForEmeralds(new ItemStack(APBlocks.COD_LOG.get()), 2, 8, 6, 4, 0.05f));
             add_trade(FISHERMAN, 2, new ItemsForEmeralds(new ItemStack(APBlocks.SALMON_LOG.get()), 2, 8, 6, 4, 0.05f));
             // Entrails
-            add_trade(BUTCHER, 2, new ItemsForEmeralds(new ItemStack(APBlocksFG.ENTRAILS.get()), 1, 5, 5, 4, 0.0f));
+            add_trade(BUTCHER, 2, new ItemsForEmeralds(new ItemStack(APBlocks.ENTRAILS.get()), 1, 5, 5, 4, 0.0f));
             // Plating
             add_trade(ARMORER, 2, new ItemsForEmeralds(new ItemStack(APBlocks.PLATING_BLOCK.get()),3,12, 6, 4, 0.1F));
             // Pipes
