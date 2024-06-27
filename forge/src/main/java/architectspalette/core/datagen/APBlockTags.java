@@ -117,7 +117,7 @@ public class APBlockTags extends BlockTagsProvider {
                 //                WITHER_LAMP,
 //                ENTWINE_PILLAR,
 //                CHISELED_ENTWINE,
-                ENTWINE_BARS,
+//                ENTWINE_BARS,
                 //                HEAVY_STONE_BRICKS,
                 //                HEAVY_MOSSY_STONE_BRICKS,
                 //                HEAVY_CRACKED_STONE_BRICKS,

@@ -10,7 +10,7 @@ public class APRenderLayers {
     //"use json for it" yeah nice try forge. i know you won't take this out.
     //if you add dynamic render layers, then we'll talk.
     public static void setupRenderLayers() {
-//        Services.REGISTRY.setRenderLayer(ENTWINE_BARS , RenderType.cutout());
+        Services.REGISTRY.setRenderLayer(ENTWINE_BARS , RenderType.cutout());
         Services.REGISTRY.setRenderLayer(SUNMETAL_BARS , RenderType.cutout());
 
 //        Services.REGISTRY.setRenderLayer(TWISTED_DOOR , RenderType.cutout());

@@ -16,7 +16,7 @@ public class APRenderLayersFG {
     //"use json for it" yeah nice try forge. i know you won't take this out.
     //if you add dynamic render layers, then we'll talk.
     public static void setupRenderLayers() {
-        Services.REGISTRY.setRenderLayer(APBlocksFG.ENTWINE_BARS, RenderType.cutout());
+//        Services.REGISTRY.setRenderLayer(APBlocksFG.ENTWINE_BARS, RenderType.cutout());
 //        Services.REGISTRY.setRenderLayer(APBlocksFG.SUNMETAL_BARS, RenderType.cutout());
 
         Services.REGISTRY.setRenderLayer(APBlocksFG.TWISTED_DOOR, RenderType.cutout());

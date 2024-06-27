@@ -117,7 +117,7 @@ public class APBlocks {
     public static final Supplier<Block> CHISELED_SUNMETAL_BLOCK = createBlock("chiseled_sunmetal_block", () -> new Block(APBlockProperties.SUNMETAL));
     public static final Supplier<Block> SUNMETAL_PILLAR         = createBlock("sunmetal_pillar", () -> new RotatedPillarBlock(APBlockProperties.SUNMETAL));
     // (ender) fix the fact that IronBarBlock constructor is a bitch
-    public static final Supplier<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new StainedGlassPaneBlock(DyeColor.BLACK ,APBlockProperties.SUNMETAL.noOcclusion()));
+    public static final Supplier<Block> SUNMETAL_BARS           = createBlock("sunmetal_bars", () -> new IronBarsBlock(APBlockProperties.SUNMETAL.noOcclusion()));
 
     // Osseous Bricks
     public static final StoneBlockSet OSSEOUS_BRICK = new StoneBlockSet(createBlock("osseous_bricks", () -> new Block(Block.Properties.ofFullCopy(Blocks.BONE_BLOCK))));
@@ -138,7 +138,7 @@ public class APBlocks {
     public static final StoneBlockSet ENTWINE = new StoneBlockSet(createBlock("entwine_block", () -> new Block(APBlockProperties.ENTWINE)), NO_WALLS);
     public static final Supplier<Block> ENTWINE_PILLAR = createBlock("entwine_pillar", () -> new RotatedPillarBlock(APBlockProperties.ENTWINE));
     public static final Supplier<Block> CHISELED_ENTWINE = createBlock("chiseled_entwine", () -> new Block(APBlockProperties.ENTWINE));
-//    public static final Supplier<Block> ENTWINE_BARS = createBlock("entwine_bars", () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(ENTWINE.get()).noOcclusion()));
+    public static final Supplier<Block> ENTWINE_BARS = createBlock("entwine_bars", () -> new IronBarsBlock(BlockBehaviour.Properties.ofFullCopy(ENTWINE.get()).noOcclusion()));
 
     // Heavy Stone Bricks
     public static final Supplier<Block> HEAVY_STONE_BRICKS = createBlock("heavy_stone_bricks", () -> new BigBrickBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)));
