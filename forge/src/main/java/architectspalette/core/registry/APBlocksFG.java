@@ -1,13 +1,11 @@
 package architectspalette.core.registry;
 
-import architectspalette.content.blocks.PipeBlock;
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
 import architectspalette.content.blocks.abyssaline.AbyssalineLampBlock;
 import architectspalette.content.blocks.abyssaline.AbyssalinePillarBlock;
 import architectspalette.content.blocks.abyssaline.ChiseledAbyssalineBlock;
 import architectspalette.content.blocks.entrails.DrippyBlock;
-import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.worldgen.features.APTreeGrowers;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -28,8 +26,6 @@ import static architectspalette.core.registry.util.BlockNode.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
 import static architectspalette.core.registry.util.RegistryUtilsFG.createBlock;
-import static architectspalette.core.registry.util.StoneBlockSet.SetComponent.FENCE;
-import static architectspalette.core.registry.util.StoneBlockSet.SetComponent.NUB;
 import static architectspalette.core.registry.util.StoneBlockSet.SetGroup.*;
 
 public class APBlocksFG {
