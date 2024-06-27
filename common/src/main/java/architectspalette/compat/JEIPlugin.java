@@ -1,7 +1,12 @@
 package architectspalette.compat;
 
+import architectspalette.content.blocks.BigBrickBlock;
+import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.core.crafting.WarpingRecipe;
+import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APRecipes;
+import architectspalette.core.registry.util.BlockNode;
+import architectspalette.core.registry.util.StoneBlockSet;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -19,10 +24,12 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.registry.APBlocks.*;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
@@ -51,7 +58,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipes(WARPING.get(), Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(APRecipes.WARPING.get()));
 
         //Register item info
-        /*builder()
+        builder()
                 .add(CHISELED_ABYSSALINE_BRICKS, CHISELED_HADALINE_BRICKS)
                 .registerInfo(registration, "chiseled_chargeable");
         builder()
@@ -83,16 +90,16 @@ public class JEIPlugin implements IModPlugin {
         builder()
                 .add(WARDSTONE, WARDSTONE_BRICKS)
                 .add(WARDSTONE_PILLAR, CHISELED_WARDSTONE, WARDSTONE_LAMP)
-                .registerInfo(registration, "wardstone");*/
+                .registerInfo(registration, "wardstone");
     }
 
     protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
         addItemInfo(register, item.get(), infoString);
     }
 
-   /* protected static void addItemInfo(IRecipeRegistration register, StoneBlockSet stoneSet, String infoString) {
+    protected static void addItemInfo(IRecipeRegistration register, StoneBlockSet stoneSet, String infoString) {
         stoneSet.forEach((block -> addItemInfo(register, block, infoString)));
-    }*/
+    }
 
     protected static void addItemInfo(IRecipeRegistration register, ItemLike item, String infoString) {
         register.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
@@ -106,7 +113,7 @@ public class JEIPlugin implements IModPlugin {
     protected static class BlockListBuilder {
         protected final List<Block> blocks = new ArrayList<>();
 
-        /*  protected BlockListBuilder add(BlockNode... nodes) {
+          protected BlockListBuilder add(BlockNode... nodes) {
               for (BlockNode node : nodes)
                   node.forEach((n) -> blocks.add(n.get()));
               return this;
@@ -118,11 +125,11 @@ public class JEIPlugin implements IModPlugin {
               return this;
           }
           protected BlockListBuilder add(Predicate<Block> filter) {
-              for (Supplier<Block> entry : BLOCKS.getEntries()) {
-                  if (filter.test(entry.get())) blocks.add(entry.get());
+              for (Block entry : Services.REGISTRY.getModBlocks()) {
+                  if (filter.test(entry)) blocks.add(entry);
               }
               return this;
-          }*/
+          }
         @SafeVarargs
         private BlockListBuilder add(Supplier<? extends Block>... blockList) {
             for (Supplier<? extends Block> block : blockList) {

@@ -1,7 +1,7 @@
 package architectspalette.compat;
 
 import architectspalette.core.crafting.WarpingRecipe;
-import architectspalette.core.registry.APItems;
+import architectspalette.core.registry.APBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -33,8 +33,7 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
     public WarpingRecipeCategory(IGuiHelper helper) {
         title = Component.translatable(MOD_ID + ".info.warping_recipe_title");
         background = helper.createDrawable(modLoc("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
-//        icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get()));
-        icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APItems.UNOBTANIUM.get()));
+        icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get()));
     }
 
     @Override
