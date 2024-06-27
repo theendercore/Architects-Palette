@@ -2,6 +2,7 @@ package architectspalette.core.registry;
 
 import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.content.blocks.SunstoneBlock;
+import architectspalette.content.blocks.abyssaline.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -11,29 +12,25 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
-import java.util.stream.Stream;
-
-import static architectspalette.core.registry.APBlocks.*;
-
 public class APBlockProperties {
-//	private static Block.Properties AbyssalineBase() {
-//		return Block.Properties.ofFullCopy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
-//			.emissiveRendering(AbyssalineHelper::needsPostProcessing)
-//			.hasPostProcess(AbyssalineHelper::needsPostProcessing)
-//			.isValidSpawn(AbyssalineHelper::allowsMobSpawning)
-//			.lightLevel(AbyssalineBlock::getLightValue);
-//	}
-//
-//	public static final Block.Properties ABYSSALINE = AbyssalineBase();
-//
-//	public static final Block.Properties ABYSSALINE_LAMP = AbyssalineBase()
-//			.lightLevel(AbyssalineLampBlock::getLightValue);
-//
-//	public static final Block.Properties CHISELED_ABYSSALINE = AbyssalineBase()
-//			.lightLevel(ChiseledAbyssalineBlock::getLightValue);
-//
-//	public static final Block.Properties ABYSSALINE_NUB = AbyssalineBase()
-//			.lightLevel(AbyssalineNubBlock::getLightValue);
+	private static Block.Properties AbyssalineBase() {
+		return Block.Properties.ofFullCopy(Blocks.OBSIDIAN).strength(25.0F, 600.0F)
+			.emissiveRendering(AbyssalineHelper::needsPostProcessing)
+			.hasPostProcess(AbyssalineHelper::needsPostProcessing)
+			.isValidSpawn(AbyssalineHelper::allowsMobSpawning)
+			.lightLevel(AbyssalineBlock::getLightValue);
+	}
+
+	public static final Block.Properties ABYSSALINE = AbyssalineBase();
+
+	public static final Block.Properties ABYSSALINE_LAMP = AbyssalineBase()
+			.lightLevel(AbyssalineLampBlock::getLightValue);
+
+	public static final Block.Properties CHISELED_ABYSSALINE = AbyssalineBase()
+			.lightLevel(ChiseledAbyssalineBlock::getLightValue);
+
+	public static final Block.Properties ABYSSALINE_NUB = AbyssalineBase()
+			.lightLevel(AbyssalineNubBlock::getLightValue);
 
 
 	public static Block.Properties Meat(MapColor color) {

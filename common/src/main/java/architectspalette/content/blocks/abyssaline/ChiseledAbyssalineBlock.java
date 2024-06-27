@@ -1,5 +1,6 @@
 package architectspalette.content.blocks.abyssaline;
 
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

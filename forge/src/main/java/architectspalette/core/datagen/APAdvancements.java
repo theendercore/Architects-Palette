@@ -50,7 +50,7 @@ public class APAdvancements implements ForgeAdvancementProvider.AdvancementGener
     @Override
     public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> advancementConsumer, ExistingFileHelper existingFileHelper) {
         AdvancementHolder architectsPalette = Advancement.Builder.advancement()
-                .display(APBlocksFG.CHISELED_ABYSSALINE_BRICKS.get().asItem(),
+                .display(APBlocks.CHISELED_ABYSSALINE_BRICKS.get().asItem(),
                         getTranslationKey("advancement.root"),
                         getTranslationKey("advancement.root.desc"),
                         ResourceLocation.parse("architects_palette:textures/block/myonite_bricks.png"),

@@ -1,11 +1,6 @@
 package architectspalette.core.registry;
 
 import architectspalette.content.blocks.*;
-import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
-import architectspalette.content.blocks.abyssaline.AbyssalineLampBlock;
-import architectspalette.content.blocks.abyssaline.AbyssalinePillarBlock;
-import architectspalette.content.blocks.abyssaline.ChiseledAbyssalineBlock;
-import architectspalette.content.blocks.entrails.DrippyBlock;
 import architectspalette.content.worldgen.features.APTreeGrowers;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -15,7 +10,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -34,22 +28,22 @@ public class APBlocksFG {
 
 
     // Abyssaline
-    public static final RegistryObject<Block> ABYSSALINE = createBlock("abyssaline", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
-    public static final StoneBlockSet ABYSSALINE_BRICKS = new StoneBlockSet(createBlock("abyssaline_bricks", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
-    public static final StoneBlockSet ABYSSALINE_TILES = new StoneBlockSet(createBlock("abyssaline_tiles", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
-    public static final RegistryObject<Block> CHISELED_ABYSSALINE_BRICKS = createBlock("chiseled_abyssaline_bricks", () -> new ChiseledAbyssalineBlock(APBlockPropertiesFG.CHISELED_ABYSSALINE));
-    public static final RegistryObject<Block> ABYSSALINE_PILLAR          = createBlock("abyssaline_pillar",          () -> new AbyssalinePillarBlock(APBlockPropertiesFG.ABYSSALINE));
-    public static final RegistryObject<Block> ABYSSALINE_LAMP_BLOCK      = createBlock("abyssaline_lamp",            () -> new AbyssalineLampBlock(APBlockPropertiesFG.ABYSSALINE_LAMP.sound(SoundType.GLASS)));
-    public static final RegistryObject<AbyssalineBlock> ABYSSALINE_PLATING = createBlock("abyssaline_plating", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final RegistryObject<Block> ABYSSALINE = createBlock("abyssaline", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final StoneBlockSet ABYSSALINE_BRICKS = new StoneBlockSet(createBlock("abyssaline_bricks", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
+//    public static final StoneBlockSet ABYSSALINE_TILES = new StoneBlockSet(createBlock("abyssaline_tiles", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
+//    public static final RegistryObject<Block> CHISELED_ABYSSALINE_BRICKS = createBlock("chiseled_abyssaline_bricks", () -> new ChiseledAbyssalineBlock(APBlockPropertiesFG.CHISELED_ABYSSALINE));
+//    public static final RegistryObject<Block> ABYSSALINE_PILLAR          = createBlock("abyssaline_pillar",          () -> new AbyssalinePillarBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final RegistryObject<Block> ABYSSALINE_LAMP_BLOCK      = createBlock("abyssaline_lamp",            () -> new AbyssalineLampBlock(APBlockPropertiesFG.ABYSSALINE_LAMP.sound(SoundType.GLASS)));
+//    public static final RegistryObject<AbyssalineBlock> ABYSSALINE_PLATING = createBlock("abyssaline_plating", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
 
     // Hadaline
-    public static final RegistryObject<Block> HADALINE = createBlock("hadaline", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
-    public static final StoneBlockSet HADALINE_BRICKS = new StoneBlockSet(createBlock("hadaline_bricks", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
-    public static final StoneBlockSet HADALINE_TILES = new StoneBlockSet(createBlock("hadaline_tiles", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
-    public static final RegistryObject<ChiseledAbyssalineBlock> CHISELED_HADALINE_BRICKS = createBlock("chiseled_hadaline_bricks", () -> new ChiseledAbyssalineBlock(APBlockPropertiesFG.CHISELED_ABYSSALINE));
-    public static final RegistryObject<AbyssalinePillarBlock>   HADALINE_PILLAR          = createBlock("hadaline_pillar",          () -> new AbyssalinePillarBlock(APBlockPropertiesFG.ABYSSALINE));
-    public static final RegistryObject<AbyssalineLampBlock>     HADALINE_LAMP_BLOCK      = createBlock("hadaline_lamp",            () -> new AbyssalineLampBlock(APBlockPropertiesFG.ABYSSALINE_LAMP.sound(SoundType.GLASS)));
-    public static final RegistryObject<AbyssalineBlock> HADALINE_PLATING = createBlock("hadaline_plating", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final RegistryObject<Block> HADALINE = createBlock("hadaline", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final StoneBlockSet HADALINE_BRICKS = new StoneBlockSet(createBlock("hadaline_bricks", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
+//    public static final StoneBlockSet HADALINE_TILES = new StoneBlockSet(createBlock("hadaline_tiles", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE)), SLABS);
+//    public static final RegistryObject<ChiseledAbyssalineBlock> CHISELED_HADALINE_BRICKS = createBlock("chiseled_hadaline_bricks", () -> new ChiseledAbyssalineBlock(APBlockPropertiesFG.CHISELED_ABYSSALINE));
+//    public static final RegistryObject<AbyssalinePillarBlock>   HADALINE_PILLAR          = createBlock("hadaline_pillar",          () -> new AbyssalinePillarBlock(APBlockPropertiesFG.ABYSSALINE));
+//    public static final RegistryObject<AbyssalineLampBlock>     HADALINE_LAMP_BLOCK      = createBlock("hadaline_lamp",            () -> new AbyssalineLampBlock(APBlockPropertiesFG.ABYSSALINE_LAMP.sound(SoundType.GLASS)));
+//    public static final RegistryObject<AbyssalineBlock> HADALINE_PLATING = createBlock("hadaline_plating", () -> new AbyssalineBlock(APBlockPropertiesFG.ABYSSALINE));
 
     // Villager Trade blocks
      // Funny fish blocks
