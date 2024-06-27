@@ -102,9 +102,9 @@ public class FabricRegistryHelper implements IRegistryHelper {
         return (id == BuiltInRegistries.BLOCK.getDefaultKey()) ? null : id;
     }
 
+    @SuppressWarnings("unchecked") // (ender) again, shut up java
     @Override
     public <T extends Block> List<T> getModBlocks() {
-        //noinspection unchecked (ender) again, shut up java
         return (List<T>) BuiltInRegistries.BLOCK.stream().filter(it -> blockId(it).getNamespace().equals(MOD_ID)).toList();
     }
 

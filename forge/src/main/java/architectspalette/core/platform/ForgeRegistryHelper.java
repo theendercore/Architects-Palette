@@ -116,9 +116,9 @@ public class ForgeRegistryHelper implements IRegistryHelper {
         return block == null ? null : block.getId();
     }
 
+    @SuppressWarnings("unchecked") // (ender) shut up java
     @Override
     public <T extends Block> List<T> getModBlocks() {
-        //noinspection unchecked  (ender) shut up java
         return (List<T>) BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
     }
 }
