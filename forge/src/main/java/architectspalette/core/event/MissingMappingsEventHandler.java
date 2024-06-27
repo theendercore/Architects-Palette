@@ -13,6 +13,9 @@ import static architectspalette.core.ArchitectsPalette.rl;
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class MissingMappingsEventHandler {
 
+    // (ender) I'm not going to touch any of this cuz IDK anything about this
+    // and as fas as I know there is nothing like this for fabric
+
     //private static void trace(String string) {ArchitectsPalette.LOGGER.warn(string);}
 
     @SubscribeEvent
