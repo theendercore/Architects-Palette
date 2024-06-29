@@ -184,10 +184,9 @@ public class APBlocks {
 
     public static final Supplier<Block>  STRIPPED_TWISTED_LOG = createBlock("stripped_twisted_log", () -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
     public static final Supplier<Block> STRIPPED_TWISTED_WOOD = createBlock("stripped_twisted_wood",() -> new RotatedPillarBlock(APBlockProperties.TwistedWood()));
-    public static final Supplier<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
-    public static final Supplier<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippableLogBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
+    public static final Supplier<Block>           TWISTED_LOG = createBlock("twisted_log",          () -> new StrippablePilarBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_LOG.get()));
+    public static final Supplier<Block>          TWISTED_WOOD = createBlock("twisted_wood",         () -> new StrippablePilarBlock(APBlockProperties.TwistedWood(), STRIPPED_TWISTED_WOOD.get()));
     public static final Supplier<Block>        TWISTED_LEAVES = createBlock("twisted_leaves",       () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
-    // (ender) oh boy time for this mess
     public static final Supplier<Block>         TWISTED_FENCE = createBlock("twisted_fence",        () -> new         FenceBlock(APBlockProperties.TwistedWood()), RegistryUtils.BUILDING_BLOCKS);
     public static final Supplier<Block>    TWISTED_FENCE_GATE = createBlock("twisted_fence_gate",   () -> new     FenceGateBlock(WoodType.OAK, APBlockProperties.TwistedWood()), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
     public static final Supplier<Block>          TWISTED_DOOR = createBlock("twisted_door",         () -> new          DoorBlock(BlockSetType.OAK, APBlockProperties.TwistedWood().noOcclusion()), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.REDSTONE_BLOCKS);
