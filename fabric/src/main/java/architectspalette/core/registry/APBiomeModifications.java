@@ -16,10 +16,16 @@ import static architectspalette.core.APConstants.modLoc;
 public class APBiomeModifications {
 
     final static ResourceKey<PlacedFeature> EKANITE_CLUSTER = key("ekanite_cluster_placed");
+    final static ResourceKey<PlacedFeature> HELIODOR_CLUSTER = key("heliodor_cluster_placed");
+    final static ResourceKey<PlacedFeature> HANGING_MONAZITE_CLUSTER = key("hanging_monazite_cluster_placed");
+    final static ResourceKey<PlacedFeature> MONAZITE_CLUSTER = key("monazite_cluster_placed");
 
     public static void init() {
         if (APConfig.worldGenCheck(APConfig.NETHER_CRYSTAL_TOGGLE)) {
+            addUnderground("add_heliodor_cluster", HELIODOR_CLUSTER, Biomes.BASALT_DELTAS);
             addUnderground("add_ekanite_cluster", EKANITE_CLUSTER, Biomes.WARPED_FOREST);
+            addUnderground( "add_hanging_monazite_cluster", HANGING_MONAZITE_CLUSTER, Biomes.NETHER_WASTES);
+            addUnderground( "add_grounded_monazite_cluster", MONAZITE_CLUSTER, Biomes.CRIMSON_FOREST);
         }
 
     }
