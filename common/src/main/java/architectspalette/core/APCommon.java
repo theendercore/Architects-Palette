@@ -30,11 +30,11 @@ public class APCommon {
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
             APConstants.LOGGER.info("I am loaded my self");
         }
+        APTrades.registerTrades();
     }
     public static void initEarly() {
         APCriterion.init();
         APBlockProperties.registerFlammables();
-        APTrades.registerTrades();
     }
 
     public static void initClient() {
