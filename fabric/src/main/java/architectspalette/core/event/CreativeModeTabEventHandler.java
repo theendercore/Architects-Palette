@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CreativeModeTabEventHandler {
-    public static void init() {
+    public static void modifyTabs() {
         ItemGroupEvents.MODIFY_ENTRIES_ALL.register((group, entries) -> {
             List<Supplier<? extends Item>> itemlist = FabricRegistryHelper.CREATIVE_TAB_ITEMS_MAP.get(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(group).get());
             if (itemlist != null) {
