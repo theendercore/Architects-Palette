@@ -1,5 +1,7 @@
 package architectspalette.content.blocks;
 
+import architectspalette.core.registry.APBlocks;
+import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -14,7 +16,11 @@ import org.jetbrains.annotations.Nullable;
 import static architectspalette.content.blocks.BreadBlock.BreadPart.*;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS;
 
-public class BreadBlock extends Block {
+public class BreadBlock extends Block implements StrippableBlock {
+    @Override
+    public Block getStripToBlock() {
+        return APBlocks.BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get();
+    }
 
     public static final EnumProperty<BreadPart> PART = EnumProperty.create("part", BreadPart.class);
 
@@ -51,16 +57,6 @@ public class BreadBlock extends Block {
 
         return state;
     }
-
-    // (ender) fix this later [forgeism stripping]
-//    @Override
-//    @javax.annotation.Nullable
-//    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-//        var stack = context.getItemInHand();
-//        if (!stack.canPerformAction(toolAction)) return null;
-//        if (ToolActions.AXE_STRIP.equals(toolAction)) return APBlocksFG.BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get().defaultBlockState();
-//        return super.getToolModifiedState(state, context, toolAction, simulate);
-//    }
 
     public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
         if (facing != Direction.UP && facing != Direction.DOWN && facingState.is(this)) {
