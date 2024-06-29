@@ -5,7 +5,6 @@ import architectspalette.core.registry.MiscRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -17,8 +16,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ProjectileImpactEvent {
-    // Used in evil arrow mixin
-    public static boolean justHitWardstone = false;
 
     public static boolean projectileImpact(Projectile projectile, HitResult ray) {
         if (projectile.getDeltaMovement().length() > .2 && ray instanceof BlockHitResult hitResult) {
@@ -31,8 +28,6 @@ public class ProjectileImpactEvent {
         BlockState state = projectile.level().getBlockState(hitResult.getBlockPos());
         Level level = projectile.level();
         if (state.is(MiscRegistry.WIZARD_BLOCKS)) {
-
-            justHitWardstone = false;
 
             //Get normal (atLowerCorner is just to cast it from Vec3i, I'm lazy)
             Vec3 normal = Vec3.atLowerCornerOf(hitResult.getDirection().getNormal());
@@ -60,7 +55,6 @@ public class ProjectileImpactEvent {
                 return false;
             } else {
                 projectile.setDeltaMovement(motion.add(a));
-                if (projectile instanceof AbstractArrow) justHitWardstone = true;
             }
 
             //Recalculate rotation values, more or less copied from vanilla.
