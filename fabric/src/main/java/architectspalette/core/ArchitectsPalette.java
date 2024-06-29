@@ -1,7 +1,8 @@
 package architectspalette.core;
 
-import architectspalette.core.datagen.BlockTagProvider;
-import architectspalette.core.datagen.ItemTagProvider;
+import architectspalette.core.datagen.*;
+import architectspalette.core.datagen.worldgen.ConfiguredFeatureCreator;
+import architectspalette.core.datagen.worldgen.PlacedFeatureProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
@@ -11,6 +12,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -39,8 +42,6 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         RegisterParticleProvidersEventHandler.registerParticleFactories();
     }
 
-
-
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator gen) {
         FabricDataGenerator.Pack pack = gen.createPack();
@@ -53,5 +54,12 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         });
 
         pack.addProvider((o, r) -> new ItemTagProvider(o, r, blockTags.get()));
+        pack.addProvider(WorldGenProvider::new);
+    }
+
+    @Override
+    public void buildRegistry(RegistrySetBuilder builder) {
+        builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureCreator::bootstrap);
+        builder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrap);
     }
 }
