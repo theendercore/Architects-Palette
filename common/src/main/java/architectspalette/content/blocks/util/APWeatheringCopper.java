@@ -1,5 +1,6 @@
 package architectspalette.content.blocks.util;
 
+import architectspalette.content.blocks.StrippableBlock;
 import architectspalette.core.registry.APBlocks;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
@@ -24,7 +25,7 @@ import java.util.function.Supplier;
 
 
 //If you can't beat 'em, join 'em. (Vanilla Copper interface isn't extendable.)
-public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState> {
+public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState>, StrippableBlock {
     Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() ->
     {
         ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
@@ -90,12 +91,6 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     default float getChanceModifier() {
         return this.getAge() == WeatheringCopper.WeatherState.UNAFFECTED ? 0.75F : 1.0F;
     }
-        // (ender) fix this later [forgeism stripping]
-//    static BlockState getToolModifiedState(ToolAction toolAction, BlockState state) {
-//        if (ToolActions.AXE_SCRAPE == toolAction) return APWeatheringCopper.getPrevious(state).orElse(null);
-//        if (ToolActions.AXE_WAX_OFF == toolAction) return APWeatheringCopper.getUnWaxed(state).orElse(null);
-//        return null;
-//    }
 
     static ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.getItem() instanceof HoneycombItem) {

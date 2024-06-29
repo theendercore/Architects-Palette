@@ -71,18 +71,14 @@ public class NubBlock extends WaterloggableDirectionalBlock {
         }
 
 
-        // (ender) fix this later [forgeism stripping]
-//        @Nullable
-//        @Override
-//        public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-//            BlockState a = APWeatheringCopper.getToolModifiedState(toolAction, state);
-//            if (a != null) return a;
-//            return super.getToolModifiedState(state, context, toolAction, simulate);
-//        }
-
         @Override
         public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
             return APWeatheringCopper.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        }
+
+        @Override
+        public Block getStripToBlock() {
+            return null;
         }
     }
 
