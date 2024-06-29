@@ -4,6 +4,7 @@ import architectspalette.content.particles.WizardParticle;
 import architectspalette.core.datagen.BlockTagProvider;
 import architectspalette.core.datagen.ItemTagProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
+import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.MiscRegistry;
 import net.fabricmc.api.ClientModInitializer;
@@ -22,7 +23,10 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         APCommon.initEarly();
         APCommon.init();
 
-        CreativeModeTabEventHandler.init();
+        //events
+        CreativeModeTabEventHandler.modifyTabs();
+        TradingEventHandler.registerTrades();
+
         APVerticalSlabsCondition.registerCondition();
     }
 

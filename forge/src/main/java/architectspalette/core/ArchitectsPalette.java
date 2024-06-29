@@ -49,8 +49,6 @@ public class ArchitectsPalette {
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks forge :)
         APCommon.initEarly();
-
-        APTrades.registerTrades();
     }
 
     void setupClient(final FMLClientSetupEvent event) {

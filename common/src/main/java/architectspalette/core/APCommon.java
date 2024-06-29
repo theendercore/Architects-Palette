@@ -1,6 +1,7 @@
 package architectspalette.core;
 
 import architectspalette.core.integration.APCriterion;
+import architectspalette.core.integration.APTrades;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.*;
 
@@ -33,6 +34,7 @@ public class APCommon {
     public static void initEarly() {
         APCriterion.init();
         APBlockProperties.registerFlammables();
+        APTrades.registerTrades();
     }
 
     public static void initClient() {
