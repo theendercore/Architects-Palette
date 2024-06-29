@@ -6,6 +6,7 @@ import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.integration.APVerticalSlabsCondition;
+import architectspalette.core.registry.APBiomeModifications;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -25,6 +26,8 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         //events
         CreativeModeTabEventHandler.modifyTabs();
         TradingEventHandler.registerTrades();
+
+        APBiomeModifications.init();
 
         APVerticalSlabsCondition.registerCondition();
     }
