@@ -20,6 +20,8 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
 
     @Override
     public void onInitialize() {
+        APCommon.initConfig();
+
         APCommon.initEarly();
         APCommon.init();
 

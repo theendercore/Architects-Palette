@@ -11,12 +11,15 @@ import architectspalette.core.registry.*;
 // however it will be compatible with all supported mod loaders.
 public class APCommon {
 
+    public static void initConfig() {
+        // (ender) you will never guess what this has to be its own thing :)
+        Services.REGISTRY.resisterConfig();
+    }
+
     // The loader specific projects are able to import and use any code from the common project. This allows you to
     // write the majority of your code here and load it from your loader specific projects. This example has some
     // code that gets invoked by the entry point of the loader specific projects.
     public static void init() {
-
-        Services.REGISTRY.resisterConfig();
 
         APSounds.init();
         APItems.init();
@@ -30,11 +33,12 @@ public class APCommon {
         if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
             APConstants.LOGGER.info("I am loaded my self");
         }
-        APTrades.registerTrades();
     }
+
     public static void initEarly() {
         APCriterion.init();
         APBlockProperties.registerFlammables();
+        APTrades.registerTrades();
     }
 
     public static void initClient() {

@@ -1,6 +1,5 @@
 package architectspalette.core;
 
-import architectspalette.core.integration.APTrades;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.ForgeRegistryHelper;
@@ -27,6 +26,7 @@ public class ArchitectsPalette {
 
     public ArchitectsPalette() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        APCommon.initConfig();
 
         APCommon.init();
         ForgeRegistryHelper.register(modEventBus);
