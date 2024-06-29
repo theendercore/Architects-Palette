@@ -15,7 +15,7 @@ public class APVerticalSlabsCondition implements ICondition {
     public static final APVerticalSlabsCondition INSTANCE = new APVerticalSlabsCondition();
     public static final MapCodec<APVerticalSlabsCondition> CODEC = MapCodec.unit(INSTANCE).stable();
 
-    // ender remember to re implement this later, I swear you better not forget
+    // (ender) ender remember to re implement this later, I swear you better not forget
     /*
      * Original logic from Abnormals Core
      * https://github.com/team-abnormals/abnormals-core/blob/264b7ca6df505743f1c969547dbf2bc8e71b04d5/src/main/java/com/minecraftabnormals/abnormals_core/core/api/conditions/QuarkFlagRecipeCondition.java
