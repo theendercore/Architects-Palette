@@ -23,7 +23,7 @@ dependencies {
 }
 
 
-sourceSets.main.resources.srcDir 'src/main/generated'
+sourceSets.main.resources.srcDir '../common/src/main/generated'
 loom {
     def aw = project(":common").file("src/main/resources/${mod_id}.accesswidener")
     if (aw.exists()) {
@@ -51,8 +51,8 @@ loom {
             ideConfigGenerated(true)
             vmArg("-Dfabric-api.datagen")
             // (ender) i will figure this out in the future :)
-//            vmArg("-Dfabric-api.datagen.output-dir=${file("../common/src/main/generated")}")
-            vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("../common/src/main/generated")}")
+//            vmArg("-Dfabric-api.datagen.output-dir=${file("src/main/generated")}")
             vmArg("-Dfabric-api.datagen.modid=${mod_id}")
             runDir("runs/datagen")
         }
