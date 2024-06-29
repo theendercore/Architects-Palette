@@ -21,5 +21,7 @@ public interface StrippableBlock {
 
     public Block getStripToBlock();
 
-    public boolean shouldCopyProperties();
+    default public boolean shouldCopyProperties(){
+        return false;
+    };
 }
