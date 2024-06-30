@@ -2,14 +2,10 @@ package architectspalette.core.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.List;
-import java.util.Set;
 
 import static architectspalette.core.APConstants.MOD_ID;
 
@@ -30,10 +26,10 @@ public class GatherData {
             generator.addProvider(true, new APLootTables(pack, event.getLookupProvider()));
             generator.addProvider(true, new APRecipes(pack, event.getLookupProvider()));
 
-            generator.addProvider(true, new DatapackBuiltinEntriesProvider(pack, event.getLookupProvider(),
-                    APInternalData.getRegistrySetBuilder(),
-                    Set.of(MOD_ID)
-                ));
+//            generator.addProvider(true, new DatapackBuiltinEntriesProvider(pack, event.getLookupProvider(),
+//                    APInternalData.getRegistrySetBuilder(),
+//                    Set.of(MOD_ID)
+//                ));
         }
         if (event.includeClient()) {
             generator.addProvider(true, (DataProvider.Factory<Blockstates>) (packOutput) -> new Blockstates(packOutput, MOD_ID, event.getExistingFileHelper()));
