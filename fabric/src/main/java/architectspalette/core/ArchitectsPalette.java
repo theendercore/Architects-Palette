@@ -4,6 +4,7 @@ import architectspalette.core.datagen.*;
 import architectspalette.core.datagen.worldgen.ConfiguredFeatureCreator;
 import architectspalette.core.datagen.worldgen.PlacedFeatureProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
+import architectspalette.core.event.ModifyLootTableEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.integration.APVerticalSlabsCondition;
@@ -29,6 +30,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         //events
         CreativeModeTabEventHandler.modifyTabs();
         TradingEventHandler.registerTrades();
+        ModifyLootTableEventHandler.modify();
 
         APBiomeModifications.init();
 
