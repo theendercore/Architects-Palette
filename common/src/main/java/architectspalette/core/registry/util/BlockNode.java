@@ -118,8 +118,7 @@ public class BlockNode implements Supplier<Block>, ItemLike {
         return RegistryUtils.createBlock(name, () -> {
             Block block = parent.block.get();
             if (block instanceof IBlockSetBase base) {
-//                (ender) fix then when porting node block
-//                return base.getBlockForType(type, getProperties(), block);
+                return base.getBlockForType(type, getProperties(), block);
             }
             return getBlockForType(type, getProperties(), block);
         }, getTabForType(type));

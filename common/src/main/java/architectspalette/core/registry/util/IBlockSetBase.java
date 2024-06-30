@@ -8,9 +8,7 @@ public interface IBlockSetBase {
         return StoneBlockSet.getBlockForPart(part, properties, base);
     }
 
-
-    // (ender) fix this
-//    default Block getBlockForType(BlockNode.BlockType type, BlockBehaviour.Properties properties, Block base) {
-//        return BlockNode.getBlockForType(type, properties, base);
-//    }
+    default Block getBlockForType(BlockNode.BlockType type, BlockBehaviour.Properties properties, Block base) {
+        return BlockNode.getBlockForType(type, properties, base);
+    }
 }
