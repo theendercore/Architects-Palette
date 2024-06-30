@@ -29,6 +29,9 @@ public class ItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
         copy(APTags.NUBS, APTags.NUBS_ITEM);
         copy(APTags.COPPER_NUBS, APTags.COPPER_NUBS_ITEM);
+        copy(APTags.TWISTED_LOGS, APTags.TWISTED_LOGS_ITEM);
+        copy(APTags.ABYSSALINE, APTags.ABYSSALINE_ITEM);
+        copy(APTags.HADALINE, APTags.HADALINE_ITEM);
     }
 
 

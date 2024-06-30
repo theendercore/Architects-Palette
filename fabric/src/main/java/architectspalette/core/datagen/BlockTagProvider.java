@@ -10,10 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.*;
 
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
@@ -30,6 +27,8 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     protected void addTags(HolderLookup.Provider wrapperLookup) {
         microBlocks();
         woodenTags();
+        miscTags();
+        abyssalineTags();
         miningTags();
     }
 
@@ -52,6 +51,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void woodenTags() {
+        getOrCreateTag(BlockTags.PLANKS, TWISTED_PLANKS);
         getOrCreateTag(BlockTags.WOODEN_TRAPDOORS, TWISTED_TRAPDOOR);
         getOrCreateTag(BlockTags.WOODEN_STAIRS)
                 .add(TWISTED_PLANKS.getPart(StoneBlockSet.SetComponent.STAIRS));
@@ -62,6 +62,69 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTag(BlockTags.WOODEN_DOORS, TWISTED_DOOR);
         getOrCreateTag(BlockTags.WOODEN_BUTTONS, TWISTED_BUTTON);
         getOrCreateTag(BlockTags.FENCE_GATES, TWISTED_FENCE_GATE);
+
+
+        getOrCreateTag(APTags.TWISTED_LOGS, TWISTED_LOG);
+        getOrCreateTag(BlockTags.LOGS_THAT_BURN, TWISTED_LOG);
+
+        getOrCreateTag(BlockTags.LEAVES, TWISTED_LEAVES);
+        getOrCreateTag(BlockTags.SAPLINGS, TWISTED_SAPLING);
+    }
+
+    private void miscTags() {
+        var dragonImmune = getOrCreateTag(BlockTags.DRAGON_IMMUNE,
+                ENTWINE_PILLAR,
+                ENTWINE_BARS,
+                CHISELED_ENTWINE,
+                HEAVY_END_STONE_BRICKS,
+                HEAVY_CRACKED_END_STONE_BRICKS,
+                CHISELED_END_STONE_BRICKS,
+                CRACKED_END_STONE_BRICKS,
+                CHORAL_END_STONE_BRICKS
+        ).add(
+                Blocks.END_STONE_BRICKS,
+                Blocks.END_STONE_BRICK_WALL,
+                Blocks.END_STONE_BRICK_STAIRS,
+                Blocks.END_STONE_BRICK_SLAB
+        );
+        ENTWINE.forEach(dragonImmune::add);
+
+        getOrCreateTag(BlockTags.FIRE, NETHER_BRASS_FIRE);
+        getOrCreateTag(BlockTags.FLOWER_POTS, POTTED_TWISTED_SAPLING);
+
+        var mushroomGrow = getOrCreateTag(BlockTags.MUSHROOM_GROW_BLOCK);
+        MYONITE.forEach(mushroomGrow::add);
+        MYONITE_BRICK.forEach(mushroomGrow::add);
+        MUSHY_MYONITE_BRICK.forEach(mushroomGrow::add);
+
+        getOrCreateTag(BlockTags.WALL_POST_OVERRIDE)
+                .forceAddTag(APTags.CAGE_LANTERNS);
+
+    }
+
+    private void miscModTags() {
+        getOrCreateTag(APTags.CAGE_LANTERNS, REDSTONE_CAGE_LANTERN, GLOWSTONE_CAGE_LANTERN, ALGAL_CAGE_LANTERN);
+    }
+
+    private void abyssalineTags() {
+        var abyssaline = getOrCreateTag(APTags.ABYSSALINE,
+                ABYSSALINE,
+                CHISELED_ABYSSALINE_BRICKS,
+                ABYSSALINE_PILLAR,
+                ABYSSALINE_LAMP_BLOCK
+        ).add(ABYSSALINE_PLATING.get());
+        ABYSSALINE_BRICKS.forEach(abyssaline::add);
+        ABYSSALINE_TILES.forEach(abyssaline::add);
+
+        var hadaline = getOrCreateTag(APTags.HADALINE, HADALINE)
+                .add(
+                        CHISELED_HADALINE_BRICKS.get(),
+                        HADALINE_PILLAR.get(),
+                        HADALINE_LAMP_BLOCK.get(),
+                        HADALINE_PLATING.get()
+                );
+        HADALINE_BRICKS.forEach(hadaline::add);
+        HADALINE_TILES.forEach(hadaline::add);
     }
 
     private void miningTags() {
@@ -92,6 +155,8 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         hoeTag();
 
         needsStoneToolTag();
+        needsIronToolTag();
+        needsDiamondToolTag();
     }
 
     private void pickaxeTag() {
@@ -238,8 +303,49 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void needsStoneToolTag() {
-        getOrCreateTag(BlockTags.NEEDS_STONE_TOOL)
+        var needsStone = getOrCreateTag(BlockTags.NEEDS_STONE_TOOL,
+                ENTWINE_PILLAR,
+                CHISELED_ENTWINE,
+                ENTWINE_BARS,
+                FLINT_BLOCK,
+                FLINT_PILLAR,
+                SUNMETAL_BARS,
+                SUNMETAL_PILLAR,
+                CHISELED_SUNMETAL_BLOCK,
+                CHISELED_WARDSTONE,
+                WARDSTONE_PILLAR,
+                WARDSTONE_LAMP
+        )
                 .forceAddTag(APTags.COPPER_NUBS);
+
+        ENTWINE.forEach(needsStone::add);
+        FLINT_TILES.forEach(needsStone::add);
+        SUNMETAL.forEach(needsStone::add);
+        WARDSTONE.forEach(needsStone::add);
+        WARDSTONE_BRICKS.forEach(needsStone::add);
+    }
+
+    private void needsIronToolTag() {
+        var needsIron = getOrCreateTag(BlockTags.NEEDS_IRON_TOOL,
+                PIPE,
+                UNOBTANIUM_BLOCK,
+                NETHER_BRASS_PILLAR,
+                NETHER_BRASS_CHAIN,
+                NETHER_BRASS_LANTERN,
+                HAZARD_BLOCK
+        );
+        PLATING_BLOCK.forEach(needsIron::add);
+        NETHER_BRASS.forEach(needsIron::add);
+        CUT_NETHER_BRASS.forEach(needsIron::add);
+        SMOOTH_NETHER_BRASS.forEach(needsIron::add);
+        ANCIENT_PLATING.forEach(needsIron::add);
+
+    }
+
+    private void needsDiamondToolTag() {
+        getOrCreateTag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .forceAddTag(APTags.ABYSSALINE)
+                .forceAddTag(APTags.HADALINE);
     }
 
     @SafeVarargs
