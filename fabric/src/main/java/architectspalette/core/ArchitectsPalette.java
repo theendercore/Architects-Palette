@@ -1,6 +1,8 @@
 package architectspalette.core;
 
-import architectspalette.core.datagen.*;
+import architectspalette.core.datagen.AdvancementProvider;
+import architectspalette.core.datagen.BlockTagProvider;
+import architectspalette.core.datagen.ItemTagProvider;
 import architectspalette.core.datagen.worldgen.FeatureCreator;
 import architectspalette.core.datagen.worldgen.WorldGenProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
@@ -9,10 +11,13 @@ import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.APBiomeModifications;
+import architectspalette.core.registry.APItems;
+import architectspalette.core.registry.util.BurnableBlockItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 
@@ -35,6 +40,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         APBiomeModifications.init();
 
         APVerticalSlabsCondition.registerCondition();
+        FuelRegistry.INSTANCE.add(APItems.CHARCOAL_BLOCK.get(), ((BurnableBlockItem) APItems.CHARCOAL_BLOCK.get()).getBurnTime());
     }
 
     @Override

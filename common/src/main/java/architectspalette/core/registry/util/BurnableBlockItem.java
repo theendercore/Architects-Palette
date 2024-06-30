@@ -5,21 +5,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 
-public class APBlockItem extends BlockItem {
+public class BurnableBlockItem extends BlockItem {
     private Integer burnTime = -1;
 
-    public APBlockItem(Block blockIn, Properties builder) {
+    public BurnableBlockItem(Block blockIn, Properties builder) {
         super(blockIn, builder);
     }
 
-    public APBlockItem setBurnTime(int ticks) {
+    public BurnableBlockItem setBurnTime(int ticks) {
         this.burnTime = ticks;
         return this;
     }
 
-    // (ender) this is a forgeism. Will have fun re-making this in fabric
-//    @Override
+    // (ender) this is here for forge other is for fabric
     public int getBurnTime(ItemStack itemStack, RecipeType type) {
+        return this.burnTime;
+    }
+    public int getBurnTime() {
         return this.burnTime;
     }
 }

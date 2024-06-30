@@ -1,6 +1,6 @@
 package architectspalette.core.registry;
 
-import architectspalette.core.registry.util.APBlockItem;
+import architectspalette.core.registry.util.BurnableBlockItem;
 import architectspalette.core.registry.util.RegistryUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
@@ -13,7 +13,7 @@ import static architectspalette.core.registry.util.RegistryUtils.createItem;
 public class APItems {
     public static void init(){}
 
-    public static final Supplier<Item> CHARCOAL_BLOCK = createItem("charcoal_block", () -> new APBlockItem(APBlocks.CHARCOAL_BLOCK.get(), new Item.Properties()).setBurnTime(1600), RegistryUtils.BUILDING_BLOCKS);
+    public static final Supplier<Item> CHARCOAL_BLOCK = createItem("charcoal_block", () -> new BurnableBlockItem(APBlocks.CHARCOAL_BLOCK.get(), new Item.Properties()).setBurnTime(1600), RegistryUtils.BUILDING_BLOCKS);
 
     public static final Supplier<Item> ALGAL_BLEND = createItem("algal_blend");
     public static final Supplier<Item> ALGAL_BRICK = createItem("algal_brick");
