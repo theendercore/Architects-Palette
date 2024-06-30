@@ -62,6 +62,7 @@ public class BigBrickBlock extends Block {
         }
     }
 
+    // (ender) Why is this capitalised ????!?!??!!?!?!
     private boolean BrickMatches(BigBrickBlock thisBlock, BlockState suspect) {
         if (suspect.getBlock() instanceof BigBrickBlock block) {
             return block.TYPE == thisBlock.TYPE;
