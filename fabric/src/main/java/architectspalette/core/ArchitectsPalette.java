@@ -57,6 +57,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
 
         pack.addProvider((o, r) -> new ItemTagProvider(o, r, blockTags.get()));
         pack.addProvider(WorldGenProvider::new);
+        pack.addProvider(AdvancementProvider::new);
     }
 
     @Override
