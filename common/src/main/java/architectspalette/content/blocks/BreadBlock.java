@@ -86,6 +86,7 @@ public class BreadBlock extends Block implements StrippableBlock {
         var part = state.getValue(PART);
         if (part == WHOLE) return true;
         /*if (part == MIDDLE)*/ return connectTo.getAxis() == state.getValue(HORIZONTAL_AXIS);
+        //(ender-?) is this needed?
 //        if (part == LEFT) return connectTo.getAxisDirection() == Direction.AxisDirection.POSITIVE && connectTo.getAxis() == state.getValue(HORIZONTAL_AXIS);
 //        if (part == RIGHT) return connectTo.getAxisDirection() == Direction.AxisDirection.NEGATIVE && connectTo.getAxis() == state.getValue(HORIZONTAL_AXIS);
 //        return false;
