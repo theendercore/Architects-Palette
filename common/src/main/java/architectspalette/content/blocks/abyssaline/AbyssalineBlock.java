@@ -32,7 +32,7 @@ public class AbyssalineBlock extends Block implements IAbyssalineChargeable, IBl
             default -> IBlockSetBase.super.getBlockForPart(part, properties, base);
         };
     }
-    
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(CHARGED, CHARGE_SOURCE);
@@ -53,6 +53,7 @@ public class AbyssalineBlock extends Block implements IAbyssalineChargeable, IBl
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        //(ender-?) is this needed?
 //        context.getLevel().scheduleTick(context.getClickedPos(), this, 1);
 //        return this.defaultBlockState();
         return AbyssalineHelper.getStateWithNeighborCharge(this.defaultBlockState(), context.getLevel(), context.getClickedPos());
