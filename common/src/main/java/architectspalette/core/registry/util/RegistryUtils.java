@@ -17,17 +17,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-import static architectspalette.core.APConstants.mcLoc;
 import static architectspalette.core.registry.APBlocks.boards;
 import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
+import static architectspalette.core.util.KeyMaker.vanillaTab;
 
 public class RegistryUtils {
     // (ender) yes forge AT's the Tab reg keys, and not im not doing that, this ref is fine
-    public static final ResourceKey<CreativeModeTab> INGREDIENTS_TAB = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("ingredients"));
-    public static final ResourceKey<CreativeModeTab> BUILDING_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("building_blocks"));
-    public static final ResourceKey<CreativeModeTab> FUNCTIONAL_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("functional_blocks"));
-    public static final ResourceKey<CreativeModeTab> REDSTONE_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("redstone_blocks"));
-    public static final ResourceKey<CreativeModeTab> NATURAL_BLOCKS = ResourceKey.create(Registries.CREATIVE_MODE_TAB, mcLoc("natural_blocks"));
+    public static final ResourceKey<CreativeModeTab> INGREDIENTS_TAB = vanillaTab("ingredients");
+    public static final ResourceKey<CreativeModeTab> BUILDING_BLOCKS = vanillaTab("building_blocks");
+    public static final ResourceKey<CreativeModeTab> FUNCTIONAL_BLOCKS = vanillaTab("functional_blocks");
+    public static final ResourceKey<CreativeModeTab> REDSTONE_BLOCKS = vanillaTab("redstone_blocks");
+    public static final ResourceKey<CreativeModeTab> NATURAL_BLOCKS = vanillaTab("natural_blocks");
 
     public static Item resourceItem() {
         return new Item(new Item.Properties());
@@ -95,12 +95,13 @@ public class RegistryUtils {
                 .flag(BlockNode.DataFlag.BOARDS)
                 .build();
         boards.add(node);
+        //(ender-?) is this needed?
 //        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 //            node.forEach((n) -> ModelBakeEventHandler.register(n.getObject(), model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
 //        });
         return node;
     }
-
+    //(ender-?) is this needed?
 //	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {
 //		StoneBlockSet boardSet = new StoneBlockSet(createBlock(name, supplier), StoneBlockSet.SetGroup.NO_WALLS).woodify();
 //		boardSet.forEachRegistryObject((obj) -> ModelBakeEventHandler.register(obj, model -> new BoardModel(model, SpriteShift.getShift("block/" + name, "block/" + name + "_odd"))));
