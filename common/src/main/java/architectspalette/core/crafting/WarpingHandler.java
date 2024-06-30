@@ -14,29 +14,6 @@ import java.util.Optional;
 
 public class WarpingHandler {
 
-    //OLD, see mixin/ItemEntityMixin for info
- /*   public static void onDimensionsChanged (ItemEntity itemIn, ServerLevel server) {
-        ResourceKey<Level> dimension = server.dimension();
-        ResourceLocation dimensionId = dimension.location();
-        ItemStack item = itemIn.getItem();
-        for (Recipe<?> recipe : itemIn.level.getRecipeManager().getAllRecipesFor(WarpingRecipe.TYPE)) {
-            if (recipe instanceof WarpingRecipe) {
-                WarpingRecipe warpingRecipe = (WarpingRecipe) recipe;
-                 //compareTo returns 0 if they're the same
-                boolean dimensionPassed = dimensionId.compareTo(warpingRecipe.getDimension()) == 0;
-                dimensionPassed = dimensionPassed || (itemIn.level.dimension().location().compareTo(warpingRecipe.getDimension()) == 0);
-                if (dimensionPassed && (warpingRecipe.getInput().test(item))) {
-                    itemIn.level.playSound(null, itemIn.getX(), itemIn.getY(), itemIn.getZ(), APSounds.ITEM_WARPS.get(), SoundSource.BLOCKS, 1F, 1F);
-                    int n = item.getCount();
-                    ItemStack out = warpingRecipe.getResultItem().copy();
-                    out.setCount(n);
-                    itemIn.setItem(out);
-                    break;
-                }
-            }
-        }
-    }*/
-
     public static SingleRecipeInput transformationInv;
 
     private static Optional<RecipeHolder<WarpingRecipe>> getRecipe(ItemStack item, Level world) {
