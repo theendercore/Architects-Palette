@@ -23,10 +23,10 @@ public class GatherData {
         DataGenerator generator = event.getGenerator();
         var pack = generator.getPackOutput();
         if (event.includeServer()) {
-            generator.addProvider(true, new ForgeAdvancementProvider(pack, event.getLookupProvider(), event.getExistingFileHelper(), List.of(new APAdvancements())));
-            var blocktagger = new APBlockTags(pack, event.getLookupProvider(), event.getExistingFileHelper());
-            generator.addProvider(true, blocktagger);
-            generator.addProvider(true, new APItemTags(pack, event.getLookupProvider(), blocktagger, event.getExistingFileHelper()));
+//            generator.addProvider(true, new ForgeAdvancementProvider(pack, event.getLookupProvider(), event.getExistingFileHelper(), List.of(new APAdvancements())));
+//            var blocktagger = new APBlockTags(pack, event.getLookupProvider(), event.getExistingFileHelper());
+//            generator.addProvider(true, blocktagger);
+//            generator.addProvider(true, new APItemTags(pack, event.getLookupProvider(), blocktagger, event.getExistingFileHelper()));
             generator.addProvider(true, new APLootTables(pack, event.getLookupProvider()));
             generator.addProvider(true, new APRecipes(pack, event.getLookupProvider()));
 
