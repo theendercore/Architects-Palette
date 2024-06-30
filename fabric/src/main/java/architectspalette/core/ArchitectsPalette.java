@@ -1,8 +1,8 @@
 package architectspalette.core;
 
 import architectspalette.core.datagen.*;
-import architectspalette.core.datagen.worldgen.ConfiguredFeatureCreator;
-import architectspalette.core.datagen.worldgen.PlacedFeatureProvider;
+import architectspalette.core.datagen.worldgen.FeatureCreator;
+import architectspalette.core.datagen.worldgen.WorldGenProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.ModifyLootTableEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
@@ -62,7 +62,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
 
     @Override
     public void buildRegistry(RegistrySetBuilder builder) {
-        builder.add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureCreator::bootstrap);
-        builder.add(Registries.PLACED_FEATURE, PlacedFeatureProvider::bootstrap);
+        builder.add(Registries.CONFIGURED_FEATURE, FeatureCreator::bootstrapConfigured);
+        builder.add(Registries.PLACED_FEATURE, FeatureCreator::bootstrapPlaced);
     }
 }

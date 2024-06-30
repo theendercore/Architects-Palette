@@ -1,4 +1,4 @@
-package architectspalette.core.datagen;
+package architectspalette.core.datagen.worldgen;
 
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
