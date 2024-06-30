@@ -3,6 +3,7 @@ package architectspalette.core;
 import architectspalette.core.datagen.AdvancementProvider;
 import architectspalette.core.datagen.BlockTagProvider;
 import architectspalette.core.datagen.ItemTagProvider;
+import architectspalette.core.datagen.LangProvider;
 import architectspalette.core.datagen.worldgen.FeatureCreator;
 import architectspalette.core.datagen.worldgen.WorldGenProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
@@ -64,6 +65,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         pack.addProvider((o, r) -> new ItemTagProvider(o, r, blockTags.get()));
         pack.addProvider(WorldGenProvider::new);
         pack.addProvider(AdvancementProvider::new);
+        pack.addProvider(LangProvider::new);
     }
 
     @Override

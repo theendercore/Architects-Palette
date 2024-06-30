@@ -1,21 +1,22 @@
 package architectspalette.core.datagen;
 
 import architectspalette.core.registry.util.BlockNode;
-import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.core.HolderLookup;
 
-import static architectspalette.core.APConstants.MOD_ID;
+import java.util.concurrent.CompletableFuture;
 
-public class APLang extends LanguageProvider {
-    public APLang(PackOutput pack) {
-        super(pack, MOD_ID, "auto_generated");
+public class LangProvider extends FabricLanguageProvider {
+    public LangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
-    protected void addTranslations() {
+    public void generateTranslations(HolderLookup.Provider registryLookup, TranslationBuilder builder) {
         BlockNode.forAllBaseNodes((node) -> {
-            node.forEach( n -> {
-                add(n.get(), format(n.getName()));
+            node.forEach(n -> {
+                builder.add(n.get(), format(n.getName()));
             });
         });
     }
@@ -41,5 +42,4 @@ public class APLang extends LanguageProvider {
         }
         return new String(buffer);
     }
-
 }
