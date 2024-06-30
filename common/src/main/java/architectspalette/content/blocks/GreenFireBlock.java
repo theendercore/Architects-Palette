@@ -1,6 +1,6 @@
 package architectspalette.content.blocks;
 
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.APTags;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,7 +46,7 @@ public class GreenFireBlock extends BaseFireBlock {
     //Green fire can go on slabs and stuff.
     public static boolean canHeGreen(BlockGetter getter, BlockPos pos) {
         BlockState state = getter.getBlockState(pos);
-        return state.is(MiscRegistry.GREEN_FIRE_SUPPORTING) && state.isFaceSturdy(getter, pos, Direction.UP);
+        return state.is(APTags.GREEN_FIRE_SUPPORTING) && state.isFaceSturdy(getter, pos, Direction.UP);
     }
 
     @Override

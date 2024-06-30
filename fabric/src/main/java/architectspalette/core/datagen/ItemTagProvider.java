@@ -1,6 +1,6 @@
 package architectspalette.core.datagen;
 
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.APTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -27,7 +27,7 @@ public class ItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(BlockTags.WALLS, ItemTags.WALLS);
         copy(BlockTags.SLABS, ItemTags.SLABS);
         copy(BlockTags.STAIRS, ItemTags.STAIRS);
-        copy(MiscRegistry.NUBS, MiscRegistry.NUBS_ITEM);
+        copy(APTags.NUBS, APTags.NUBS_ITEM);
     }
 
 

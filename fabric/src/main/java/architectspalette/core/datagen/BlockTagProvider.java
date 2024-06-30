@@ -2,7 +2,7 @@ package architectspalette.core.datagen;
 
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.core.platform.Services;
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.APTags;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -36,7 +36,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         var walls = getOrCreateTagBuilder(BlockTags.WALLS);
         var slabs = getOrCreateTagBuilder(BlockTags.SLABS);
         var stairs = getOrCreateTagBuilder(BlockTags.STAIRS);
-        var nubs = getOrCreateTagBuilder(MiscRegistry.NUBS);
+        var nubs = getOrCreateTagBuilder(APTags.NUBS);
 
 
         Services.REGISTRY.getModBlocks().forEach((block) -> {
@@ -167,7 +167,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
                         HADALINE_LAMP_BLOCK.get(),
                         HADALINE_PLATING.get()
                 )
-                .forceAddTag(MiscRegistry.NUBS);
+                .forceAddTag(APTags.NUBS);
     }
 
     private void axeTag() {

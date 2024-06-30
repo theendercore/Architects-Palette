@@ -2,6 +2,7 @@ package architectspalette.core.events;
 
 import architectspalette.core.registry.APSounds;
 import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.APTags;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -27,7 +28,7 @@ public class ProjectileImpactEvent {
     public static boolean deflect(Projectile projectile, BlockHitResult hitResult, int depth) {
         BlockState state = projectile.level().getBlockState(hitResult.getBlockPos());
         Level level = projectile.level();
-        if (state.is(MiscRegistry.WIZARD_BLOCKS)) {
+        if (state.is(APTags.WIZARD_BLOCKS)) {
 
             //Get normal (atLowerCorner is just to cast it from Vec3i, I'm lazy)
             Vec3 normal = Vec3.atLowerCornerOf(hitResult.getDirection().getNormal());
