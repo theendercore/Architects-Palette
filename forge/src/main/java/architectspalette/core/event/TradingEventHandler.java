@@ -37,12 +37,14 @@ public class TradingEventHandler {
 
     @SubscribeEvent
     public static void onWanderingTradesLoaded(WandererTradesEvent event) {
+        //(ender) I just left it in here in case there is a need for rare trades later
         if (APConfig.WANDERER_TRADES_ENABLED.get()) {
             List<VillagerTrades.ItemListing> generic = event.getGenericTrades();
-            List<VillagerTrades.ItemListing> rare = event.getRareTrades();
+//            List<VillagerTrades.ItemListing> rare = event.getRareTrades();
             APTrades.WONDERING_TRADES.forEach((level, trades) -> {
-                if (level == 1) generic.addAll(trades);
-                else if (level > 1) rare.addAll(trades);
+                generic.addAll(trades);
+//                if (level == 1) generic.addAll(trades);
+//                else if (level > 1) rare.addAll(trades);
             });
         }
     }
