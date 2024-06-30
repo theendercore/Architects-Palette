@@ -29,6 +29,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         woodenTags();
         miscTags();
         abyssalineTags();
+        miscModTags();
         miningTags();
     }
 
@@ -51,6 +52,10 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void woodenTags() {
+        // Add boards to all the stuff wood stuff
+
+
+        // processed
         getOrCreateTag(BlockTags.PLANKS, TWISTED_PLANKS);
         getOrCreateTag(BlockTags.WOODEN_TRAPDOORS, TWISTED_TRAPDOOR);
         getOrCreateTag(BlockTags.WOODEN_STAIRS)
@@ -62,11 +67,11 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTag(BlockTags.WOODEN_DOORS, TWISTED_DOOR);
         getOrCreateTag(BlockTags.WOODEN_BUTTONS, TWISTED_BUTTON);
         getOrCreateTag(BlockTags.FENCE_GATES, TWISTED_FENCE_GATE);
+        // logs
+        getOrCreateTag(APTags.TWISTED_LOGS, TWISTED_LOG, STRIPPED_TWISTED_LOG, STRIPPED_TWISTED_WOOD, TWISTED_WOOD);
+        getOrCreateTag(BlockTags.LOGS_THAT_BURN).forceAddTag(APTags.TWISTED_LOGS);
 
-
-        getOrCreateTag(APTags.TWISTED_LOGS, TWISTED_LOG);
-        getOrCreateTag(BlockTags.LOGS_THAT_BURN, TWISTED_LOG);
-
+        // leaves / plant
         getOrCreateTag(BlockTags.LEAVES, TWISTED_LEAVES);
         getOrCreateTag(BlockTags.SAPLINGS, TWISTED_SAPLING);
     }
@@ -99,6 +104,8 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         getOrCreateTag(BlockTags.WALL_POST_OVERRIDE)
                 .forceAddTag(APTags.CAGE_LANTERNS);
+
+        getOrCreateTag(BlockTags.FENCES).add(ANCIENT_PLATING.getPart(StoneBlockSet.SetComponent.FENCE));
 
     }
 
