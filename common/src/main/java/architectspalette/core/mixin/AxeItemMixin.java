@@ -45,11 +45,11 @@ public class AxeItemMixin {
     private void doTheMagicStripping(BlockState oldState, CallbackInfoReturnable<Optional<BlockState>> cir) {
         if (cir.getReturnValue().isEmpty()) {
             if (oldState.getBlock() instanceof StrippableBlock strippable) {
-                if (strippable.getStripToBlock() == null) return;
                 if (strippable instanceof APWeatheringCopper) {
                     isAPWeatheringCopper = true;
                     return;
                 }
+                if (strippable.getStripToBlock() == null) return;
                 assert strippable.getStripToBlock() != null;
                 BlockState newState = (strippable.shouldCopyProperties())
                         ? strippable.getStripedBlockState(oldState.getValues())
