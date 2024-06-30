@@ -38,6 +38,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         var slabs = getOrCreateTagBuilder(BlockTags.SLABS);
         var stairs = getOrCreateTagBuilder(BlockTags.STAIRS);
         var nubs = getOrCreateTagBuilder(APTags.NUBS);
+        nubs.forceAddTag(APTags.COPPER_NUBS);
         var copperNubs = getOrCreateTagBuilder(APTags.COPPER_NUBS);
 
 
@@ -45,7 +46,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
             if (block instanceof WallBlock) walls.add(block);
             else if (block instanceof SlabBlock) slabs.add(block);
             else if (block instanceof StairBlock) stairs.add(block);
-            else if (block instanceof NubBlock) nubs.add(block);
+            else if (block instanceof NubBlock && !(block instanceof NubBlock.CopperNubBlock)) nubs.add(block);
             if (block instanceof NubBlock.CopperNubBlock) copperNubs.add(block);
         });
     }
@@ -237,8 +238,8 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void needsStoneToolTag() {
-      getOrCreateTag(BlockTags.NEEDS_STONE_TOOL)
-              .forceAddTag(APTags.COPPER_NUBS);
+        getOrCreateTag(BlockTags.NEEDS_STONE_TOOL)
+                .forceAddTag(APTags.COPPER_NUBS);
     }
 
     @SafeVarargs
