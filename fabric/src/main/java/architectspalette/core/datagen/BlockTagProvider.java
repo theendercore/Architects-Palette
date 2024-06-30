@@ -29,6 +29,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
         microBlocks();
+        woodenTags();
         miningTags();
     }
 
@@ -37,6 +38,7 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         var slabs = getOrCreateTagBuilder(BlockTags.SLABS);
         var stairs = getOrCreateTagBuilder(BlockTags.STAIRS);
         var nubs = getOrCreateTagBuilder(APTags.NUBS);
+        var copperNubs = getOrCreateTagBuilder(APTags.COPPER_NUBS);
 
 
         Services.REGISTRY.getModBlocks().forEach((block) -> {
@@ -44,9 +46,22 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
             else if (block instanceof SlabBlock) slabs.add(block);
             else if (block instanceof StairBlock) stairs.add(block);
             else if (block instanceof NubBlock) nubs.add(block);
+            if (block instanceof NubBlock.CopperNubBlock) copperNubs.add(block);
         });
     }
 
+    private void woodenTags() {
+        getOrCreateTag(BlockTags.WOODEN_TRAPDOORS, TWISTED_TRAPDOOR);
+        getOrCreateTag(BlockTags.WOODEN_STAIRS)
+                .add(TWISTED_PLANKS.getPart(StoneBlockSet.SetComponent.STAIRS));
+        getOrCreateTag(BlockTags.WOODEN_SLABS)
+                .add(TWISTED_PLANKS.getPart(StoneBlockSet.SetComponent.SLAB));
+        getOrCreateTag(BlockTags.WOODEN_PRESSURE_PLATES, TWISTED_PRESSURE_PLATE);
+        getOrCreateTag(BlockTags.WOODEN_FENCES, TWISTED_FENCE);
+        getOrCreateTag(BlockTags.WOODEN_DOORS, TWISTED_DOOR);
+        getOrCreateTag(BlockTags.WOODEN_BUTTONS, TWISTED_BUTTON);
+        getOrCreateTag(BlockTags.FENCE_GATES, TWISTED_FENCE_GATE);
+    }
 
     private void miningTags() {
         StoneBlockSet.forAllSets(set -> {
@@ -72,6 +87,10 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
         pickaxeTag();
         axeTag();
+        shovelTag();
+        hoeTag();
+
+        needsStoneToolTag();
     }
 
     private void pickaxeTag() {
@@ -206,6 +225,21 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
         ).add(ACACIA_TOTEM_WING.get());
     }
 
+    private void shovelTag() {
+        getOrCreateTag(BlockTags.MINEABLE_WITH_SHOVEL, COARSE_SNOW);
+    }
+
+    private void hoeTag() {
+        getOrCreateTag(BlockTags.MINEABLE_WITH_HOE,
+                ENDER_PEARL_BLOCK,
+                TWISTED_LEAVES
+        );
+    }
+
+    private void needsStoneToolTag() {
+      getOrCreateTag(BlockTags.NEEDS_STONE_TOOL)
+              .forceAddTag(APTags.COPPER_NUBS);
+    }
 
     @SafeVarargs
     private FabricTagProvider<Block>.FabricTagBuilder getOrCreateTag(TagKey<Block> tagKey, Supplier<Block>... suppliers) {

@@ -13,8 +13,10 @@ public class APTags {
     public static final TagKey<Block> GREEN_FIRE_SUPPORTING = blockTag("green_fire_supporting");
     public static final TagKey<Block> WIZARD_BLOCKS = blockTag("wizard_blocks");
     public static final TagKey<Block> NUBS = blockTag("nubs");
+    public static final TagKey<Block> COPPER_NUBS = blockTag("copper_nubs");
 
     public static final TagKey<Item> NUBS_ITEM = itemTag("nubs");
+    public static final TagKey<Item> COPPER_NUBS_ITEM = itemTag("copper_nubs");
 
 
 
