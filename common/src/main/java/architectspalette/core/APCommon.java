@@ -26,7 +26,7 @@ public class APCommon {
         APBlocks.init();
 
         APFeatures.init();
-        MiscRegistry.init();
+        ParticleRegistry.init();
 
         APRecipes.init();
 

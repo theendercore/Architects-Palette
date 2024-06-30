@@ -1,7 +1,7 @@
 package architectspalette.core.events;
 
 import architectspalette.core.registry.APSounds;
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.ParticleRegistry;
 import architectspalette.core.registry.APTags;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -76,7 +76,7 @@ public class ProjectileImpactEvent {
             //Place particle slightly off the surface.
             Vec3 hit = hitResult.getLocation().add(normal.scale(.02));
             if (level.isClientSide) {
-                level.addParticle(MiscRegistry.WIZARDLY_DEFENSE_BLAST.get(), hit.x, hit.y, hit.z, normal.x, normal.y, normal.z);
+                level.addParticle(ParticleRegistry.WIZARDLY_DEFENSE_BLAST.get(), hit.x, hit.y, hit.z, normal.x, normal.y, normal.z);
                 level.playLocalSound(hit.x, hit.y, hit.z, APSounds.WIZARD_BLAST.get(), SoundSource.BLOCKS, .5f, level.random.nextFloat() * .4f + .8f, false);
             }
 

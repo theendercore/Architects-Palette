@@ -1,7 +1,7 @@
 package architectspalette.core.event;
 
 import architectspalette.content.particles.WizardParticle;
-import architectspalette.core.registry.MiscRegistry;
+import architectspalette.core.registry.ParticleRegistry;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -15,7 +15,7 @@ import static architectspalette.core.APConstants.MOD_ID;
 public class RegisterParticleProvidersEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(MiscRegistry.GREEN_FLAME.get(), FlameParticle.Provider::new);
-        event.registerSpriteSet(MiscRegistry.WIZARDLY_DEFENSE_BLAST.get(), WizardParticle.Provider::new);
+        event.registerSpriteSet(ParticleRegistry.GREEN_FLAME.get(), FlameParticle.Provider::new);
+        event.registerSpriteSet(ParticleRegistry.WIZARDLY_DEFENSE_BLAST.get(), WizardParticle.Provider::new);
     }
 }

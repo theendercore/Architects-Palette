@@ -5,7 +5,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 
 import java.util.function.Supplier;
 
-public class MiscRegistry {
+public class ParticleRegistry {
     public static void init(){}
     //Particles
     public static final Supplier<SimpleParticleType> GREEN_FLAME = Services.REGISTRY.registerSimpleParticleType("green_flame");
