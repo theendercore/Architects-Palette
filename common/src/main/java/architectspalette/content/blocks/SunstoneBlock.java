@@ -39,12 +39,6 @@ public class SunstoneBlock extends Block {
         return this.defaultBlockState().setValue(LIGHT, this.lightSupplier.apply(context.getLevel()));
     }
 
-    // Replaced with property
-//    @Override
-//    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
-//        return state.get(LIGHT) * 7;
-//    }
-
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return true;
