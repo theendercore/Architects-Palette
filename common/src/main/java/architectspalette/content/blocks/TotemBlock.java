@@ -101,12 +101,12 @@ public class TotemBlock extends Block {
         BLANK;
 
         public Block getStrip() {
-            switch(this){
-                case GRINNING: return APBlocks.PLACID_ACACIA_TOTEM.get();
-                case PLACID: return APBlocks.SHOCKED_ACACIA_TOTEM.get();
-                case SHOCKED: return APBlocks.BLANK_ACACIA_TOTEM.get();
-                default: return APBlocks.GRINNING_ACACIA_TOTEM.get();
-            }
+            return switch (this) {
+                case GRINNING -> APBlocks.PLACID_ACACIA_TOTEM.get();
+                case PLACID -> APBlocks.SHOCKED_ACACIA_TOTEM.get();
+                case SHOCKED -> APBlocks.BLANK_ACACIA_TOTEM.get();
+                default -> APBlocks.GRINNING_ACACIA_TOTEM.get();
+            };
         }
     }
 
