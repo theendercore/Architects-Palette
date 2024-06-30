@@ -1,6 +1,6 @@
 package architectspalette.core.event;
 
-import architectspalette.core.api.ItemReplacer;
+import architectspalette.core.util.ItemReplacer;
 import architectspalette.core.registry.APItems;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.world.entity.EntityType;

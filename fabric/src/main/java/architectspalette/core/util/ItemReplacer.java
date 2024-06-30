@@ -1,4 +1,4 @@
-package architectspalette.core.api;
+package architectspalette.core.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;

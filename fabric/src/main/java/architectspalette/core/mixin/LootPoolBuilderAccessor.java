@@ -1,6 +1,6 @@
 package architectspalette.core.mixin;
 
-import architectspalette.core.api.ItemReplacer;
+import architectspalette.core.util.ItemReplacer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
