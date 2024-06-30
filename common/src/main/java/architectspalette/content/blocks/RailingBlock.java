@@ -40,6 +40,7 @@ public class RailingBlock extends CrossCollisionBlock {
     }
 
     public boolean connectsTo(BlockState checkedBlock, boolean isSturdy, Direction direction) {
+        // (ender) replace this with a tag check instead of instanceof
         return (!isExceptionForConnection(checkedBlock) && isSturdy) || checkedBlock.getBlock() instanceof RailingBlock;
     }
 
