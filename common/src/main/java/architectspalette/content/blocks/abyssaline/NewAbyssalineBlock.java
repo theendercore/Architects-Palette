@@ -43,6 +43,7 @@ public class NewAbyssalineBlock extends Block implements IAbyssalineChargeable {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         context.getLevel().scheduleTick(context.getClickedPos(), this, 1);
         return this.defaultBlockState();
+        //(ender-?) is this needed?
 //        return getStateWithNeighborCharge(this.getDefaultState(), context.getWorld(), context.getPos());
     }
 

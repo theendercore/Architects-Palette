@@ -54,7 +54,7 @@ public class AbyssalinePillarBlock extends RotatedPillarBlock implements IAbyssa
 		return this.isCharged(stateIn) &&
 				!(faceIn == this.getSourceDirection(stateIn)) &&
 				faceIn.getAxis() == stateIn.getValue(AXIS);
-
+		//(ender-?) is this needed?
 //		return this.isCharged(stateIn) &&
 //				!(faceIn.getAxisDirection().getOffset() == stateIn.get(CHARGE_SIDE).toScalar()) &&
 //				faceIn.getAxis() == stateIn.get(AXIS);
@@ -69,7 +69,7 @@ public class AbyssalinePillarBlock extends RotatedPillarBlock implements IAbyssa
 	public boolean pullsPowerFrom(BlockState stateIn, Direction faceIn) {
 		return faceIn.getAxis() == stateIn.getValue(AXIS);
 	}
-
+	//(ender-?) is this needed?
 //	@Override
 //	public Direction getSourceDirection(BlockState stateIn) {
 //		return directionFromAxis(stateIn.get(AXIS), stateIn.get(CHARGE_SIDE).toScalar());
