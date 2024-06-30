@@ -43,7 +43,6 @@ public class WaterloggableDirectionalBlock extends DirectionalFacingBlock implem
 
     @Nonnull
     @Override
-    @SuppressWarnings("deprecation")
     public BlockState updateShape(@Nonnull BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
         if(stateIn.getValue(WATERLOGGED))
             worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
