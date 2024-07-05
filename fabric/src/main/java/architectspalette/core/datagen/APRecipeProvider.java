@@ -8,8 +8,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,13 +31,10 @@ public class APRecipeProvider extends FabricRecipeProvider {
     public void buildRecipes(RecipeOutput exporter) {
         BlockNode.forAllBaseNodes((node) -> processBlockNode(exporter, node));
 
+
         //Warping recipes
-        quickWarpingRecipe(exporter, ESOTERRACK.get(), Blocks.ANDESITE, Level.NETHER);
-        quickWarpingRecipe(exporter, ONYX.get(), Blocks.GRANITE, Level.NETHER);
-        quickWarpingRecipe(exporter, NEBULITE.get(), Blocks.DIORITE, Level.NETHER);
-        quickWarpingRecipe(exporter, MOONSHALE.get(), Blocks.STONE, Level.NETHER);
-        quickWarpingRecipe(exporter, MOONSHALE.getChild(BRICKS).get(), Blocks.STONE_BRICKS, Level.NETHER);
-        quickWarpingRecipe(exporter, CRATERSTONE.get(), Blocks.COBBLESTONE, Level.NETHER);
+        makeWarpingRecipes(exporter);
+
 
         //Base recipes for blocks
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SHEET_METAL.get(), 64)
@@ -118,5 +115,34 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE))
                 .save(exporter);
+    }
+
+    private void makeWarpingRecipes(RecipeOutput exporter) {
+        netherWarpingRecipe(exporter, ESOTERRACK.get(), Blocks.ANDESITE);
+        netherWarpingRecipe(exporter, ONYX.get(), Blocks.GRANITE);
+        netherWarpingRecipe(exporter, NEBULITE.get(), Blocks.DIORITE);
+        netherWarpingRecipe(exporter, MOONSHALE.get(), Blocks.STONE);
+        netherWarpingRecipe(exporter, MOONSHALE.getChild(BRICKS).get(), Blocks.STONE_BRICKS);
+        netherWarpingRecipe(exporter, CRATERSTONE.get(), Blocks.COBBLESTONE);
+
+        netherWarpingRecipe(exporter, WARPSTONE.get(), Blocks.CLAY);
+        netherWarpingRecipe(exporter, UNOBTANIUM.get(), Items.NETHERITE_INGOT);
+
+        netherWarpingRecipe(exporter, TWISTED_SAPLING.get(), ItemTags.SAPLINGS);
+        netherWarpingRecipe(exporter, TWISTED_PLANKS.get(), ItemTags.PLANKS);
+        netherWarpingRecipe(exporter, TWISTED_LOG.get(), ItemTags.LOGS);
+        netherWarpingRecipe(exporter, TWISTED_LEAVES.get(), ItemTags.LEAVES);
+
+        netherWarpingRecipe(exporter, MOONSTONE.get(), SUNSTONE.get());
+
+        netherWarpingRecipe(exporter, HADALINE_TILES.get(), ABYSSALINE_TILES.get());
+        netherWarpingRecipe(exporter, HADALINE_PLATING.get(), ABYSSALINE_PLATING.get());
+        netherWarpingRecipe(exporter, HADALINE_PILLAR.get(), ABYSSALINE_PILLAR.get());
+        netherWarpingRecipe(exporter, HADALINE_LAMP_BLOCK.get(), ABYSSALINE_LAMP_BLOCK.get());
+        netherWarpingRecipe(exporter, HADALINE.get(), ABYSSALINE.get());
+        netherWarpingRecipe(exporter, HADALINE_BRICKS.get(), ABYSSALINE_BRICKS.get());
+        netherWarpingRecipe(exporter, CHISELED_HADALINE_BRICKS.get(), CHISELED_ABYSSALINE_BRICKS.get());
+
+        netherWarpingRecipe(exporter, ENTRAILS.get(), ROTTEN_FLESH_BLOCK.get());
     }
 }

@@ -1,18 +1,17 @@
 package architectspalette.core.util;
 
 import architectspalette.core.datagen.WarpingRecipeBuilder;
-import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.ModelLocationUtils;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -26,7 +25,6 @@ import java.util.Map;
 
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
-import static net.minecraft.data.models.BlockModelGenerators.createHorizontalFacingDispatch;
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 import static net.minecraft.data.recipes.RecipeProvider.*;
 
@@ -35,8 +33,12 @@ public interface RecipeHelper {
         return modLoc("smelting/" + getItemName(item));
     }
 
-    private static ResourceLocation warpingName(Block item, Block from) {
+    private static ResourceLocation warpingName(ItemLike item, ItemLike from) {
         return modLoc("warping/" + getItemName(item) + "_from_" + getItemName(from) + "_warping");
+    }
+
+    private static ResourceLocation warpingName(ItemLike item, String from) {
+        return modLoc("warping/" + getItemName(item) + "_from_" + from + "_warping");
     }
 
     private static ResourceLocation blastingName(ItemLike item, ItemLike from) {
@@ -53,12 +55,26 @@ public interface RecipeHelper {
         return modLoc("stonecutting/" + string);
     }
 
+    static void netherWarpingRecipe(RecipeOutput output, ItemLike result, ItemLike from) {
+        quickWarpingRecipe(output, result, from, Level.NETHER);
+    }
 
-    static void quickWarpingRecipe(RecipeOutput output, Block result, Block from, ResourceKey<Level> dimension) {
+    static void netherWarpingRecipe(RecipeOutput output, ItemLike result, TagKey<Item> from) {
+        quickWarpingRecipe(output, result, from, from.location().getPath(), Level.NETHER);
+    }
+
+    static void quickWarpingRecipe(RecipeOutput output, ItemLike result, TagKey<Item> from, String inputName, ResourceKey<Level> dimension) {
+        new WarpingRecipeBuilder(Ingredient.of(from), result, dimension.location())
+                .unlockedBy("has_" + inputName, has(from))
+                .save(output, warpingName(result.asItem(), inputName));
+    }
+
+    static void quickWarpingRecipe(RecipeOutput output, ItemLike result, ItemLike from, ResourceKey<Level> dimension) {
         new WarpingRecipeBuilder(Ingredient.of(from), result, dimension.location())
                 .unlockedBy(getHasName(from), has(from))
-                .save(output, warpingName(result, from));
+                .save(output, warpingName(result.asItem(), from));
     }
+
 
     static void quickStonecuttingRecipe(RecipeOutput output, ItemLike from, ItemLike result, int amount) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(from), BUILDING_BLOCKS, result, amount)
