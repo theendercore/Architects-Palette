@@ -33,7 +33,7 @@ public class GatherData {
         }
         if (event.includeClient()) {
             generator.addProvider(true, (DataProvider.Factory<Blockstates>) (packOutput) -> new Blockstates(packOutput, MOD_ID, event.getExistingFileHelper()));
-            generator.addProvider(true, new APLang(pack));
+//            generator.addProvider(true, new APLang(pack));
         }
     }
 }
