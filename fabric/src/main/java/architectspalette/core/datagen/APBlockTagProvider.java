@@ -1,7 +1,9 @@
 package architectspalette.core.datagen;
 
 import architectspalette.content.blocks.NubBlock;
+import architectspalette.content.blocks.VerticalSlabBlock;
 import architectspalette.core.platform.Services;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APTags;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -30,6 +32,7 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         miscTags();
         abyssalineTags();
         miscModTags();
+        compatabilityTags();
         miningTags();
     }
 
@@ -40,6 +43,7 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         var nubs = getOrCreateTagBuilder(APTags.NUBS);
         nubs.forceAddTag(APTags.COPPER_NUBS);
         var copperNubs = getOrCreateTagBuilder(APTags.COPPER_NUBS);
+        var verticalSlabs = getOrCreateTag(MiscTags.QUARK_VERTICAL_SLAB);
 
 
         Services.REGISTRY.getModBlocks().forEach((block) -> {
@@ -48,6 +52,7 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             else if (block instanceof StairBlock) stairs.add(block);
             else if (block instanceof NubBlock && !(block instanceof NubBlock.CopperNubBlock)) nubs.add(block);
             if (block instanceof NubBlock.CopperNubBlock) copperNubs.add(block);
+            if (block instanceof VerticalSlabBlock) verticalSlabs.add(block);
         });
     }
 
@@ -135,6 +140,12 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         WARDSTONE.forEach(wizardBlocks::add);
         WARDSTONE_BRICKS.forEach(wizardBlocks::add);
 
+    }
+
+    private void compatabilityTags() {
+        getOrCreateTag(MiscTags.FORGE_STONE, MYONITE);
+        getOrCreateTag(MiscTags.FORGE_ICES_PACKEDICE, POLISHED_PACKED_ICE);
+        getOrCreateTag(MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ENDER_PEARL_BLOCK);
     }
 
     private void abyssalineTags() {

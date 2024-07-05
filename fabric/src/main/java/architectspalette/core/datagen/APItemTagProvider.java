@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
+import static architectspalette.core.registry.APItems.WITHERED_BONE;
 import static architectspalette.core.util.KeyMaker.stringTag;
 
 public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
@@ -25,6 +26,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     protected void addTags(HolderLookup.Provider wrapperLookup) {
         copyBlockTags();
         miscModTags();
+        compatabilityTags();
     }
 
     private void copyBlockTags() {
@@ -55,10 +57,21 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
         copy(APTags.ABYSSALINE, APTags.ABYSSALINE_ITEM);
         copy(APTags.HADALINE, APTags.HADALINE_ITEM);
+
+        // compatibility tags
+        copy(MiscTags.QUARK_VERTICAL_SLAB, MiscTags.QUARK_VERTICAL_SLAB_ITEM);
+        copy(MiscTags.FORGE_STONE, MiscTags.FORGE_STONE_ITEM);
+        copy(MiscTags.FORGE_ICES_PACKEDICE, MiscTags.FORGE_ICES_PACKEDICE_ITEM);
+        copy(MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS_ITEM);
+
     }
 
     private void miscModTags() {
         getOrCreateTag(APTags.WITHERED_BONES).addOptionalTag(sTag("forge:bones/wither"));
+    }
+
+    private void compatabilityTags() {
+        getOrCreateTag(MiscTags.FORGE_BONES_WITHER, WITHERED_BONE);
     }
 
 
