@@ -1,9 +1,6 @@
 package architectspalette.core;
 
-import architectspalette.core.datagen.APAdvancementProvider;
-import architectspalette.core.datagen.APBlockTagProvider;
-import architectspalette.core.datagen.APItemTagProvider;
-import architectspalette.core.datagen.APLangProvider;
+import architectspalette.core.datagen.*;
 import architectspalette.core.datagen.worldgen.APFeatureCreator;
 import architectspalette.core.datagen.worldgen.APWorldGenProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
@@ -66,6 +63,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         pack.addProvider(APWorldGenProvider::new);
         pack.addProvider(APAdvancementProvider::new);
         pack.addProvider(APLangProvider::new);
+        pack.addProvider(APRecipeProvider::new);
     }
 
     @Override
