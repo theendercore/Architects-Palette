@@ -18,7 +18,7 @@ import static architectspalette.core.registry.APBlocks.TWISTED_LEAVES;
 import static architectspalette.core.util.KeyMaker.configuredFeature;
 import static architectspalette.core.util.KeyMaker.placedFeature;
 
-public class FeatureCreator {
+public class APFeatureCreator {
 
     public static void bootstrapConfigured(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         APFeatures.getFeatureWrappers().forEach((featureWrapper -> {

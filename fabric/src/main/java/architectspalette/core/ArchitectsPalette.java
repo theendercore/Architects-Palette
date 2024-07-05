@@ -1,11 +1,11 @@
 package architectspalette.core;
 
-import architectspalette.core.datagen.AdvancementProvider;
-import architectspalette.core.datagen.BlockTagProvider;
-import architectspalette.core.datagen.ItemTagProvider;
-import architectspalette.core.datagen.LangProvider;
-import architectspalette.core.datagen.worldgen.FeatureCreator;
-import architectspalette.core.datagen.worldgen.WorldGenProvider;
+import architectspalette.core.datagen.APAdvancementProvider;
+import architectspalette.core.datagen.APBlockTagProvider;
+import architectspalette.core.datagen.APItemTagProvider;
+import architectspalette.core.datagen.APLangProvider;
+import architectspalette.core.datagen.worldgen.APFeatureCreator;
+import architectspalette.core.datagen.worldgen.APWorldGenProvider;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.ModifyLootTableEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
@@ -56,21 +56,21 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         FabricDataGenerator.Pack pack = gen.createPack();
 
         // (ender) No, I don't think there is a nicer way of doing this :(
-        AtomicReference<BlockTagProvider> blockTags = new AtomicReference<>();
+        AtomicReference<APBlockTagProvider> blockTags = new AtomicReference<>();
         pack.addProvider((o, r) -> {
-            blockTags.set(new BlockTagProvider(o, r));
+            blockTags.set(new APBlockTagProvider(o, r));
             return blockTags.get();
         });
 
-        pack.addProvider((o, r) -> new ItemTagProvider(o, r, blockTags.get()));
-        pack.addProvider(WorldGenProvider::new);
-        pack.addProvider(AdvancementProvider::new);
-        pack.addProvider(LangProvider::new);
+        pack.addProvider((o, r) -> new APItemTagProvider(o, r, blockTags.get()));
+        pack.addProvider(APWorldGenProvider::new);
+        pack.addProvider(APAdvancementProvider::new);
+        pack.addProvider(APLangProvider::new);
     }
 
     @Override
     public void buildRegistry(RegistrySetBuilder builder) {
-        builder.add(Registries.CONFIGURED_FEATURE, FeatureCreator::bootstrapConfigured);
-        builder.add(Registries.PLACED_FEATURE, FeatureCreator::bootstrapPlaced);
+        builder.add(Registries.CONFIGURED_FEATURE, APFeatureCreator::bootstrapConfigured);
+        builder.add(Registries.PLACED_FEATURE, APFeatureCreator::bootstrapPlaced);
     }
 }

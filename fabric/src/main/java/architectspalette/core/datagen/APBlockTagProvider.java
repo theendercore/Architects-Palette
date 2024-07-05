@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 
 import static architectspalette.core.registry.APBlocks.*;
 
-public class BlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public BlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
+    public APBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

@@ -21,8 +21,8 @@ import java.util.function.Consumer;
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.APConstants.modLoc;
 
-public class AdvancementProvider extends FabricAdvancementProvider {
-    public AdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+public class APAdvancementProvider extends FabricAdvancementProvider {
+    public APAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 

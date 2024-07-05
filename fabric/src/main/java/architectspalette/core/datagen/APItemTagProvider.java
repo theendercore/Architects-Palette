@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-public class ItemTagProvider extends FabricTagProvider.ItemTagProvider {
-    public ItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, architectspalette.core.datagen.BlockTagProvider btp) {
+public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
+    public APItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, APBlockTagProvider btp) {
         super(output, registriesFuture, btp);
     }
 
