@@ -119,7 +119,9 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                         Blocks.TWISTING_VINES_PLANT,
                         Blocks.WEEPING_VINES,
                         Blocks.WEEPING_VINES_PLANT
-                );
+                )
+                .forceAddTag(BlockTags.REPLACEABLE);
+
         var greenFire = getOrCreateTag(APTags.GREEN_FIRE_SUPPORTING, NETHER_BRASS_PILLAR);
         NETHER_BRASS.forEach(greenFire::add);
         CUT_NETHER_BRASS.forEach(greenFire::add);
