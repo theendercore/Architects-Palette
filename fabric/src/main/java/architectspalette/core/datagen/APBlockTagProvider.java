@@ -111,6 +111,28 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     private void miscModTags() {
         getOrCreateTag(APTags.CAGE_LANTERNS, REDSTONE_CAGE_LANTERN, GLOWSTONE_CAGE_LANTERN, ALGAL_CAGE_LANTERN);
+        getOrCreateTag(APTags.CRYSTAL_REPLACEABLE)
+                .add(
+                        Blocks.NETHER_WART_BLOCK,
+                        Blocks.WARPED_WART_BLOCK,
+                        Blocks.TWISTING_VINES,
+                        Blocks.TWISTING_VINES_PLANT,
+                        Blocks.WEEPING_VINES,
+                        Blocks.WEEPING_VINES_PLANT
+                );
+        var greenFire = getOrCreateTag(APTags.GREEN_FIRE_SUPPORTING, NETHER_BRASS_PILLAR);
+        NETHER_BRASS.forEach(greenFire::add);
+        CUT_NETHER_BRASS.forEach(greenFire::add);
+        SMOOTH_NETHER_BRASS.forEach(greenFire::add);
+        var wizardBlocks = getOrCreateTag(APTags.WIZARD_BLOCKS,
+                CHISELED_WARDSTONE,
+                WARDSTONE_PILLAR,
+                WARDSTONE_LAMP
+        );
+
+        WARDSTONE.forEach(wizardBlocks::add);
+        WARDSTONE_BRICKS.forEach(wizardBlocks::add);
+
     }
 
     private void abyssalineTags() {
