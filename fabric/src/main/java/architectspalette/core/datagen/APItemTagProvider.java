@@ -4,6 +4,7 @@ import architectspalette.core.registry.APTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -13,6 +14,8 @@ import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
+import static architectspalette.core.util.KeyMaker.stringTag;
+
 public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public APItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, APBlockTagProvider btp) {
         super(output, registriesFuture, btp);
@@ -21,6 +24,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
         copyBlockTags();
+        miscModTags();
     }
 
     private void copyBlockTags() {
@@ -53,11 +57,19 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(APTags.HADALINE, APTags.HADALINE_ITEM);
     }
 
+    private void miscModTags() {
+        getOrCreateTag(APTags.WITHERED_BONES).addOptionalTag(sTag("forge:bones/wither"));
+    }
+
 
     @SafeVarargs
     private FabricTagProvider<Item>.FabricTagBuilder getOrCreateTag(TagKey<Item> tagKey, Supplier<Item>... suppliers) {
         var tag = getOrCreateTagBuilder(tagKey);
         Arrays.stream(suppliers).map(Supplier::get).forEach(tag::add);
         return tag;
+    }
+
+    private TagKey<Item> sTag(String string) {
+        return stringTag(Registries.ITEM, string);
     }
 }

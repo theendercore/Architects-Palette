@@ -24,6 +24,7 @@ public class APTags {
     public static final TagKey<Item> TWISTED_LOGS_ITEM = itemTag("twisted_logs");
     public static final TagKey<Item> ABYSSALINE_ITEM = itemTag("abyssaline");
     public static final TagKey<Item> HADALINE_ITEM = itemTag("hadaline");
+    public static final TagKey<Item> WITHERED_BONES = itemTag("withered_bones");
 
 
 
