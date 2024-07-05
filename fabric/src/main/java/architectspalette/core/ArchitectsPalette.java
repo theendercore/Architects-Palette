@@ -64,6 +64,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         pack.addProvider(APAdvancementProvider::new);
         pack.addProvider(APLangProvider::new);
         pack.addProvider(APRecipeProvider::new);
+        pack.addProvider(APLootTablesProvider::new);
     }
 
     @Override
