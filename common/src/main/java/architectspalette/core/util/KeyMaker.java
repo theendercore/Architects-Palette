@@ -33,7 +33,7 @@ public class KeyMaker {
         return tag(key, modLoc(name));
     }
 
-    // (ender) should only be used when
+    // (ender) should only be used to reference other mod tags, and only optinaly
     public static <T> TagKey<T> stringTag(ResourceKey<? extends Registry<T>> key, String name) {
         return tag(key, ResourceLocation.parse(name));
     }
