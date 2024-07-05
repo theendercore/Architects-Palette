@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class APLangProvider extends FabricLanguageProvider {
     public APLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
-        super(dataOutput, registryLookup);
+        super(dataOutput,"auto_generated", registryLookup);
     }
 
     @Override
