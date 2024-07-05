@@ -1,13 +1,16 @@
 package architectspalette.core.util;
 
 import architectspalette.core.datagen.WarpingRecipeBuilder;
+import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +26,7 @@ import java.util.Map;
 
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
+import static net.minecraft.data.models.BlockModelGenerators.createHorizontalFacingDispatch;
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 import static net.minecraft.data.recipes.RecipeProvider.*;
 
@@ -90,6 +94,7 @@ public interface RecipeHelper {
             case NUB, SLAB, VERTICAL_SLAB -> 2;
         };
     }
+
     private static Ingredient getStonecuttingIngredients(BlockNode node) {
         //Traverse the tree in reverse until we hit a step that doesn't use stonecutting.
         var list = new ArrayList<BlockNode>();
@@ -190,42 +195,42 @@ public interface RecipeHelper {
                     }
                     case VERTICAL_SLAB -> {
                         //Special case with stoneCuttingCount here. The slabs make their own conditional stonecutting recipe
-                       /* stoneCuttingCount = 0;
+                        stoneCuttingCount = 0;
                         var slab = n.getSibling(SLAB).get();
                         //Craft from slabs
                         //I have no idea how this shit works
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-                                .recipe((c) -> {
-                                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 3)
-                                            .pattern("x")
-                                            .pattern("x")
-                                            .pattern("x")
-                                            .group("vertical_slab")
-                                            .define('x', slab)
-                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-                                            .save(c);
-                                })
-                                .save(output, modId("vslabs/" + n.getName()));
-                        //Revert to slab from vslab
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-                                .recipe((c) -> {
-                                    ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
-                                            .group("vertical_slab_revert")
-                                            .requires(block)
-                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-                                            .save(c);
-                                })
-                                .save(output, modId("vslabs/" + n.getName() + "_revert"));
-                        //Stonecut from block to vslab
-                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-                                .recipe((c) -> {
-                                    SingleItemRecipeBuilder.stonecutting(getStonecuttingIngredients(n), BUILDING_BLOCKS, block, 2)
-                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-                                            .save(c);
-                                })
-                                .save(output, modId("vslabs/stonecutting/" + n.getName()));
-*/
 
+//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
+//                                .recipe((c) -> {
+//                                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 3)
+//                                            .pattern("x")
+//                                            .pattern("x")
+//                                            .pattern("x")
+//                                            .group("vertical_slab")
+//                                            .define('x', slab)
+//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+//                                            .save(c);
+//                                })
+//                                .save(output, modLoc("vslabs/" + n.getName()));
+//                        //Revert to slab from vslab
+//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
+//                                .recipe((c) -> {
+//                                    ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
+//                                            .group("vertical_slab_revert")
+//                                            .requires(block)
+//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+//                                            .save(c);
+//                                })
+//                                .save(output, modLoc("vslabs/" + n.getName() + "_revert"));
+//                        //Stonecut from block to vslab
+//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
+//                                .recipe((c) -> {
+//                                    SingleItemRecipeBuilder.stonecutting(getStonecuttingIngredients(n), BUILDING_BLOCKS, block, 2)
+//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+//                                            .save(c);
+//                                })
+//                                .save(output, modLoc("vslabs/stonecutting/" + n.getName()));
+//
                     }
                     case STAIRS -> {
                         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
