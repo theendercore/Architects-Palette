@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FireBlock;
@@ -28,17 +29,13 @@ public class APLootTablesProvider extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        //(ender) this got skipped somehow, idfk
-        this.add((Block) APBlocks.ACACIA_TOTEM_WING.get(), this.createSingleItemTable(APBlocks.ACACIA_TOTEM_WING.get().asItem()));
-        LOGGER.info("Generated Acacia Totem Wing {}", APBlocks.ACACIA_TOTEM_WING.get().getLootTable());
-        LOGGER.info("Generated X {}", APBlocks.PACKED_ICE_PILLAR.get().getLootTable());
-
         // (ender) do everything first
         Services.REGISTRY.getModBlocks().forEach(this::processBlock);
 
 
+
         // (ender) then override special cases
-        this.add((Block) APBlocks.NETHER_BRASS_FIRE.get(), noDrop());
+        this.add(APBlocks.NETHER_BRASS_FIRE.get(), noDrop());
 
         APBlocks.POLISHED_PACKED_ICE.forEach(this::dropWhenSilkTouch);
         this.dropWhenSilkTouch(APBlocks.CHISELED_PACKED_ICE.get());
@@ -87,8 +84,8 @@ public class APLootTablesProvider extends FabricBlockLootTableProvider {
     }
 
     public final LootTable.Builder createChiseledAbyssaline(Block block) {
-        // (ender) this looks ugly, I don't like java
-        // and don't say just make it one line, I cant read that at all
+        // (ender) this looks ugly, I don't like java.
+        // And don't say just make it one line, I cant read that
         return LootTable.lootTable()
                 .withPool(
                         this.applyExplosionCondition(
