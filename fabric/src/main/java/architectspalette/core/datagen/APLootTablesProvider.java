@@ -34,8 +34,6 @@ public class APLootTablesProvider extends FabricBlockLootTableProvider {
 
 
         // (ender) then override special cases
-        this.add(APBlocks.NETHER_BRASS_FIRE.get(), noDrop());
-
         APBlocks.POLISHED_PACKED_ICE.forEach(this::dropWhenSilkTouch);
         this.dropWhenSilkTouch(APBlocks.CHISELED_PACKED_ICE.get());
         this.dropWhenSilkTouch(APBlocks.PACKED_ICE_PILLAR.get());

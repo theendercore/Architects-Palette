@@ -86,7 +86,7 @@ public class APBlockProperties {
 			.instabreak()
 			.lightLevel((p_50884_) -> 13)
 			.sound(SoundType.WOOL)
-//			.noLootTable() // (ender) removed for now
+			.noLootTable()
 			.pushReaction(PushReaction.DESTROY);
 
 	public static final BlockBehaviour.Properties BRASS_TORCH = BlockBehaviour.Properties.of()
