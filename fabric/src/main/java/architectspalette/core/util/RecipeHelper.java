@@ -3,6 +3,7 @@ package architectspalette.core.util;
 import architectspalette.core.datagen.WarpingRecipeBuilder;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
+import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
@@ -111,6 +113,14 @@ public interface RecipeHelper {
         };
     }
 
+    private static int getStoneCuttingCount(StoneBlockSet.SetComponent type) {
+        return switch (type) {
+            case BLOCK -> 0;
+            case FENCE, PILLAR, STAIRS, WALL -> 1;
+            case NUB, SLAB, VERTICAL_SLAB -> 2;
+        };
+    }
+
     private static Ingredient getStonecuttingIngredients(BlockNode node) {
         //Traverse the tree in reverse until we hit a step that doesn't use stonecutting.
         var list = new ArrayList<BlockNode>();
@@ -121,6 +131,60 @@ public interface RecipeHelper {
         }
         var stream = list.stream().map((n) -> new ItemStack(n.get().asItem()));
         return Ingredient.of(stream);
+    }
+
+    static void processStoneBlockSet(RecipeOutput output, StoneBlockSet set) {
+        var base = set.getPart(StoneBlockSet.SetComponent.BLOCK);
+        set.forEachPart((part, block) -> {
+            String hasBase = "has_" + Objects.requireNonNull(Services.REGISTRY.getId(() -> base)).getPath();
+            switch (part) {
+                case SLAB -> {
+                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                            .pattern("xxx")
+                            .define('x', base)
+                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .save(output);
+                }
+                case VERTICAL_SLAB -> {
+                    /*do stuff later*/
+                }
+                case STAIRS -> {
+                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
+                            .pattern("x  ")
+                            .pattern("xx ")
+                            .pattern("xxx")
+                            .define('x', base)
+                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .save(output);
+                }
+                case WALL -> {
+                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                            .pattern("xxx")
+                            .pattern("xxx")
+                            .define('x', base)
+                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .save(output);
+                }
+                case PILLAR -> {
+                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 1)
+                            .pattern("x")
+                            .pattern("x")
+                            .define('x', set.getPart(StoneBlockSet.SetComponent.SLAB))
+                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .save(output);
+                }
+                case FENCE, NUB, BLOCK -> {
+                }
+            }
+
+            int stoneCuttingCount = getStoneCuttingCount(part);
+            if (stoneCuttingCount > 0 && (set.hasStoneCuttingRecipes || part == StoneBlockSet.SetComponent.NUB)) {
+                SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, block, stoneCuttingCount)
+                        .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                        .save(output, cuttingName(block, base));
+            }
+
+        });
     }
 
     static void processBlockNode(RecipeOutput output, BlockNode node) {

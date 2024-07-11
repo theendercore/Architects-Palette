@@ -2,6 +2,7 @@ package architectspalette.core.datagen;
 
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BlockNode;
+import architectspalette.core.registry.util.StoneBlockSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +31,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
     @Override
     public void buildRecipes(RecipeOutput exporter) {
         BlockNode.forAllBaseNodes((node) -> processBlockNode(exporter, node));
+        StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
 
 
         //Warping recipes
