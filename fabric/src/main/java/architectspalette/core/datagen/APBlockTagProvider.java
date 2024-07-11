@@ -3,7 +3,6 @@ package architectspalette.core.datagen;
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
 import architectspalette.core.platform.Services;
-import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APTags;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
