@@ -150,6 +150,15 @@ public interface RecipeHelper {
                 .save(output);
     }
 
+    static void railingRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 3)
+                .pattern("xsx")
+                .define('s', Items.STICK)
+                .define('x', ingredient)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(output);
+    }
+
     static void brickRecipe(ItemLike result, ItemLike ingredient, int count, RecipeOutput output) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
                 .pattern("xx")

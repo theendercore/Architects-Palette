@@ -10,7 +10,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -41,6 +40,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makePillarRecipes(exporter);
         makeOreBrickRecipes(exporter);
         makeBoardRecipes(exporter);
+        railingRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -125,6 +125,19 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE))
                 .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UNOBTANIUM_BLOCK.get(), 1)
+                .pattern("xx")
+                .pattern("xx")
+                .define('x', UNOBTANIUM.get())
+                .unlockedBy(getHasName(UNOBTANIUM_BLOCK.get()), has(UNOBTANIUM_BLOCK.get()))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
+                .requires(UNOBTANIUM_BLOCK.get())
+                .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
+                .save(exporter);
+
     }
 
     private void smeltingRecipes(RecipeOutput exporter) {
@@ -172,6 +185,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
         quickPillarRecipe(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_OSSEOUS_BRICK.get());
     }
+
     private void makeOreBrickRecipes(RecipeOutput exporter) {
         oreBrickRecipe(exporter, COAL_BRICKS.get(), Items.COAL);
         oreBrickRecipe(exporter, DIAMOND_BRICKS.get(), Items.DIAMOND);
@@ -181,6 +195,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         oreBrickRecipe(exporter, LAPIS_BRICKS.get(), Items.LAPIS_LAZULI);
         oreBrickRecipe(exporter, REDSTONE_BRICKS.get(), Items.REDSTONE);
     }
+
     private void makeBoardRecipes(RecipeOutput exporter) {
         boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
         boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
@@ -192,6 +207,19 @@ public class APRecipeProvider extends FabricRecipeProvider {
         boardRecipe(exporter, SPRUCE_BOARDS.get(), Blocks.SPRUCE_PLANKS);
         boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
         boardRecipe(exporter, WARPED_BOARDS.get(), Blocks.WARPED_PLANKS);
+    }
+
+    private void railingRecipes(RecipeOutput exporter) {
+        railingRecipe(exporter, ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
+        railingRecipe(exporter, BIRCH_RAILING.get(), Blocks.BIRCH_PLANKS);
+        railingRecipe(exporter, CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
+        railingRecipe(exporter, DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
+        railingRecipe(exporter, JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
+        railingRecipe(exporter, MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
+        railingRecipe(exporter, OAK_RAILING.get(), Blocks.OAK_PLANKS);
+        railingRecipe(exporter, SPRUCE_RAILING.get(), Blocks.SPRUCE_PLANKS);
+        railingRecipe(exporter, TWISTED_RAILING.get(), TWISTED_PLANKS.get());
+        railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
     }
 
     private void makeWarpingRecipes(RecipeOutput exporter) {
