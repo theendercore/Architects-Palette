@@ -157,6 +157,7 @@ public interface RecipeHelper {
         var base = set.getPart(StoneBlockSet.SetComponent.BLOCK);
         set.forEachPart((part, block) -> {
             String hasBase = "has_" + Objects.requireNonNull(Services.REGISTRY.getId(() -> base)).getPath();
+            int stoneCuttingCount = getStoneCuttingCount(part);
             switch (part) {
                 case SLAB -> {
                     ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
@@ -166,6 +167,7 @@ public interface RecipeHelper {
                             .save(output);
                 }
                 case VERTICAL_SLAB -> {
+                    stoneCuttingCount = 0;
                     /*do stuff later*/
                 }
                 case STAIRS -> {
@@ -197,7 +199,6 @@ public interface RecipeHelper {
                 }
             }
 
-            int stoneCuttingCount = getStoneCuttingCount(part);
             if (stoneCuttingCount > 0 && (set.hasStoneCuttingRecipes || part == StoneBlockSet.SetComponent.NUB)) {
                 SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, block, stoneCuttingCount)
                         .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
