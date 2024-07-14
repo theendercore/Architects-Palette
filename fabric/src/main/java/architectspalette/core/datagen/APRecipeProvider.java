@@ -122,18 +122,18 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickSmeltingRecipe(exporter, APItems.ALGAL_BRICK.get(), ALGAL_BLEND.get());
         quickSmeltingRecipe(exporter, Items.BLACK_DYE, WITHERED_BONE.get());
         quickSmeltingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
-        quickSmokingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
-        quickSmokingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
-        quickSmokingRecipe(exporter, WARDSTONE_BRICK.get(), WARDSTONE_BLEND.get());
+        quickSmeltingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
+        quickSmeltingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
+        quickSmeltingRecipe(exporter, WARDSTONE_BRICK.get(), WARDSTONE_BLEND.get());
 
         //Crack recipes
-        quickSmokingRecipe(exporter, CRACKED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.get());
-        quickSmokingRecipe(exporter, CRACKED_BASALT_TILES.get(), BASALT_TILES.get());
-        quickSmokingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
-        quickSmokingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
-        quickSmokingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
-        quickSmokingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
-        quickSmokingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
+        quickSmeltingRecipe(exporter, CRACKED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.get());
+        quickSmeltingRecipe(exporter, CRACKED_BASALT_TILES.get(), BASALT_TILES.get());
+        quickSmeltingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
+        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
+        quickSmeltingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmeltingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
 
 
         quickSmokingRecipe(exporter, APBlocks.CHARCOAL_BLOCK.get(), ItemTags.LOGS_THAT_BURN);

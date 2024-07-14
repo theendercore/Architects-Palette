@@ -36,11 +36,11 @@ public interface RecipeHelper {
     }
 
     private static ResourceLocation smokingName(ItemLike item, ItemLike from) {
-        return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smoking");
+        return modLoc("smoking/" + getItemName(item) + "_from_" + getItemName(from) + "_smoking");
     }
 
     private static ResourceLocation smokingName(ItemLike item, String from) {
-        return modLoc("smelting/" + getItemName(item) + "_from_" + from + "_smoking");
+        return modLoc("smoking/" + getItemName(item) + "_from_" + from + "_smoking");
     }
 
     private static ResourceLocation warpingName(ItemLike item, ItemLike from) {
