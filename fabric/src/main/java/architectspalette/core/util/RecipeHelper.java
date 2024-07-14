@@ -115,7 +115,8 @@ public interface RecipeHelper {
                 .unlockedBy(getHasName(from), has(from))
                 .save(output, blastingName(result, from));
     }
-    static void quickPillarRecipe(RecipeOutput output, ItemLike result, ItemLike base ) {
+
+    static void quickPillarRecipe(RecipeOutput output, ItemLike result, ItemLike base) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 2)
                 .pattern("x")
                 .pattern("x")
@@ -127,13 +128,24 @@ public interface RecipeHelper {
                 .save(output, cuttingName(result, base));
 
     }
-    static void oreBrickRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient ) {
+
+    static void oreBrickRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 8)
                 .pattern("xxx")
                 .pattern("xox")
                 .pattern("xxx")
                 .define('x', Items.STONE_BRICKS)
                 .define('o', ingredient)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(output);
+    }
+
+    static void boardRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 9)
+                .pattern("xxx")
+                .pattern("xxx")
+                .pattern("xxx")
+                .define('x', ingredient)
                 .unlockedBy(getHasName(ingredient), has(ingredient))
                 .save(output);
     }

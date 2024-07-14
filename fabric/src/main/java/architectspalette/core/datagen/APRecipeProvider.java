@@ -39,6 +39,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         smeltingRecipes(exporter);
         makePillarRecipes(exporter);
         makeOreBrickRecipes(exporter);
+        makeBoardRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -171,6 +172,18 @@ public class APRecipeProvider extends FabricRecipeProvider {
         oreBrickRecipe(exporter, IRON_BRICKS.get(), Items.IRON_INGOT);
         oreBrickRecipe(exporter, LAPIS_BRICKS.get(), Items.LAPIS_LAZULI);
         oreBrickRecipe(exporter, REDSTONE_BRICKS.get(), Items.REDSTONE);
+    }
+    private void makeBoardRecipes(RecipeOutput exporter) {
+        boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
+        boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
+        boardRecipe(exporter, CRIMSON_BOARDS.get(), Blocks.CRIMSON_PLANKS);
+        boardRecipe(exporter, DARK_OAK_BOARDS.get(), Blocks.DARK_OAK_PLANKS);
+        boardRecipe(exporter, JUNGLE_BOARDS.get(), Blocks.JUNGLE_PLANKS);
+        boardRecipe(exporter, MANGROVE_BOARDS.get(), Blocks.MANGROVE_PLANKS);
+        boardRecipe(exporter, OAK_BOARDS.get(), Blocks.OAK_PLANKS);
+        boardRecipe(exporter, SPRUCE_BOARDS.get(), Blocks.SPRUCE_PLANKS);
+        boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
+        boardRecipe(exporter, WARPED_BOARDS.get(), Blocks.WARPED_PLANKS);
     }
 
     private void makeWarpingRecipes(RecipeOutput exporter) {
