@@ -1,5 +1,6 @@
 package architectspalette.core.datagen;
 
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
@@ -36,6 +37,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         //Warping recipes
         makeWarpingRecipes(exporter);
+        smeltingRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -105,10 +107,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.TUFF), has(Items.TUFF))
                 .save(exporter);
 
-        quickBlastingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
-        quickBlastingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
-
-        quickSmeltingRecipe(exporter, MOONSHALE, CRATERSTONE);
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MOONSHALE.getChild(SPECIAL).get(), 2)
                 .pattern("s")
                 .pattern("b")
@@ -117,6 +115,33 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE))
                 .save(exporter);
+    }
+
+    private void smeltingRecipes(RecipeOutput exporter) {
+        quickSmeltingRecipe(exporter, MOONSHALE, CRATERSTONE);
+        quickSmeltingRecipe(exporter, APItems.ALGAL_BRICK.get(), ALGAL_BLEND.get());
+        quickSmeltingRecipe(exporter, Items.BLACK_DYE, WITHERED_BONE.get());
+        quickSmeltingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
+        quickSmokingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
+        quickSmokingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
+        quickSmokingRecipe(exporter, WARDSTONE_BRICK.get(), WARDSTONE_BLEND.get());
+
+        //Crack recipes
+        quickSmokingRecipe(exporter, CRACKED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.get());
+        quickSmokingRecipe(exporter, CRACKED_BASALT_TILES.get(), BASALT_TILES.get());
+        quickSmokingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmokingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
+        quickSmokingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
+        quickSmokingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmokingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
+
+
+        quickSmokingRecipe(exporter, APBlocks.CHARCOAL_BLOCK.get(), ItemTags.LOGS_THAT_BURN);
+
+
+        quickBlastingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
+        quickBlastingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
+        quickBlastingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
     }
 
     private void makeWarpingRecipes(RecipeOutput exporter) {

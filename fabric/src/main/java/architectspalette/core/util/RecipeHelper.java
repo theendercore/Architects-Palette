@@ -32,7 +32,15 @@ import static net.minecraft.data.recipes.RecipeProvider.*;
 
 public interface RecipeHelper {
     private static ResourceLocation smeltingName(ItemLike item, ItemLike from) {
-        return modLoc("smelting/" + getItemName(item));
+        return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smelting");
+    }
+
+    private static ResourceLocation smokingName(ItemLike item, ItemLike from) {
+        return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smoking");
+    }
+
+    private static ResourceLocation smokingName(ItemLike item, String from) {
+        return modLoc("smelting/" + getItemName(item) + "_from_" + from + "_smoking");
     }
 
     private static ResourceLocation warpingName(ItemLike item, ItemLike from) {
@@ -88,6 +96,18 @@ public interface RecipeHelper {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(from), BUILDING_BLOCKS, result, .1f, 200)
                 .unlockedBy(getHasName(from), has(from))
                 .save(output, smeltingName(result, from));
+    }
+
+    static void quickSmokingRecipe(RecipeOutput output, ItemLike result, ItemLike from) {
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(from), BUILDING_BLOCKS, result, .1f, 100)
+                .unlockedBy(getHasName(from), has(from))
+                .save(output, smokingName(result, from));
+    }
+
+    static void quickSmokingRecipe(RecipeOutput output, ItemLike result, TagKey<Item> from) {
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(from), BUILDING_BLOCKS, result, .1f, 100)
+                .unlockedBy("has_" + from.location().getPath(), has(from))
+                .save(output, smokingName(result, from.location().getPath()));
     }
 
     static void quickBlastingRecipe(RecipeOutput output, ItemLike result, ItemLike from) {
