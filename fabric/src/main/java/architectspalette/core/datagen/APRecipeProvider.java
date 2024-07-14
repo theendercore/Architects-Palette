@@ -38,6 +38,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
         makePillarRecipes(exporter);
+        makeOreBrickRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -161,6 +162,15 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
         quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
         quickPillarRecipe(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_OSSEOUS_BRICK.get());
+    }
+    private void makeOreBrickRecipes(RecipeOutput exporter) {
+        oreBrickRecipe(exporter, COAL_BRICKS.get(), Items.COAL);
+        oreBrickRecipe(exporter, DIAMOND_BRICKS.get(), Items.DIAMOND);
+        oreBrickRecipe(exporter, EMERALD_BRICKS.get(), Items.EMERALD);
+        oreBrickRecipe(exporter, GOLD_BRICKS.get(), Items.GOLD_INGOT);
+        oreBrickRecipe(exporter, IRON_BRICKS.get(), Items.IRON_INGOT);
+        oreBrickRecipe(exporter, LAPIS_BRICKS.get(), Items.LAPIS_LAZULI);
+        oreBrickRecipe(exporter, REDSTONE_BRICKS.get(), Items.REDSTONE);
     }
 
     private void makeWarpingRecipes(RecipeOutput exporter) {

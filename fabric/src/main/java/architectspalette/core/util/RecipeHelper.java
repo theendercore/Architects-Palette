@@ -127,6 +127,16 @@ public interface RecipeHelper {
                 .save(output, cuttingName(result, base));
 
     }
+    static void oreBrickRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient ) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 8)
+                .pattern("xxx")
+                .pattern("xox")
+                .pattern("xxx")
+                .define('x', Items.STONE_BRICKS)
+                .define('o', ingredient)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(output);
+    }
 
     static void brickRecipe(ItemLike result, ItemLike ingredient, int count, RecipeOutput output) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
