@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -84,6 +85,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('x', CEREBRAL_PLATE.get())
                 .define('y', ORACLE_BLOCK.get())
                 .unlockedBy(getHasName(ORACLE_BLOCK.get()), has(ORACLE_BLOCK.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SPOOL.get(), 2)
+                .pattern("wfw")
+                .define('f', ItemTags.WOODEN_FENCES)
+                .define('w', Blocks.WHITE_WOOL)
+                .unlockedBy(getHasName(SPOOL.get()), has(SPOOL.get()))
                 .save(exporter);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(LAMP).get(), 2)
