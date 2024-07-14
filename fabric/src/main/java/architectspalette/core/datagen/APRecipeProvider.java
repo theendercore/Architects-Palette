@@ -35,9 +35,9 @@ public class APRecipeProvider extends FabricRecipeProvider {
         StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
 
 
-        //Warping recipes
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
+        makePillarRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -142,6 +142,25 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickBlastingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
         quickBlastingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
         quickBlastingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
+    }
+
+    private void makePillarRecipes(RecipeOutput exporter) {
+        quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE_BRICKS.get());
+        quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
+        quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
+        quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
+        quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
+        quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
+        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
+        quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
+        quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
+        quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
+        quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
+        quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
+        quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL.get());
+        quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
+        quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
+        quickPillarRecipe(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_OSSEOUS_BRICK.get());
     }
 
     private void makeWarpingRecipes(RecipeOutput exporter) {

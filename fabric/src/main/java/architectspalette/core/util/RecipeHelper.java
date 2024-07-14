@@ -115,6 +115,18 @@ public interface RecipeHelper {
                 .unlockedBy(getHasName(from), has(from))
                 .save(output, blastingName(result, from));
     }
+    static void quickPillarRecipe(RecipeOutput output, ItemLike result, ItemLike base ) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 2)
+                .pattern("x")
+                .pattern("x")
+                .define('x', base)
+                .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                .save(output);
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, base, 1)
+                .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                .save(output, cuttingName(result, base));
+
+    }
 
     static void brickRecipe(ItemLike result, ItemLike ingredient, int count, RecipeOutput output) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
@@ -188,10 +200,10 @@ public interface RecipeHelper {
                             .save(output);
                 }
                 case PILLAR -> {
-                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 1)
+                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 2)
                             .pattern("x")
                             .pattern("x")
-                            .define('x', set.getPart(StoneBlockSet.SetComponent.SLAB))
+                            .define('x', base)
                             .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
                             .save(output);
                 }
