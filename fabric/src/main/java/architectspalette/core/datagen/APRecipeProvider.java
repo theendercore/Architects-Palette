@@ -2,6 +2,7 @@ package architectspalette.core.datagen;
 
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APItems;
+import architectspalette.core.registry.APTags;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -41,6 +42,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeOreBrickRecipes(exporter);
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
+        makeWoodRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -136,6 +138,24 @@ public class APRecipeProvider extends FabricRecipeProvider {
         ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
                 .requires(UNOBTANIUM_BLOCK.get())
                 .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, ENDER_PEARL_BLOCK.get(), 1)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.ENDER_PEARL, 4)
+                .requires(ENDER_PEARL_BLOCK.get())
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.BONE_MEAL, 4)
+                .requires(WITHERED_BONE.get())
+                .unlockedBy(getHasName(WITHERED_BONE.get()), has(WITHERED_BONE.get()))
                 .save(exporter);
 
     }
@@ -249,5 +269,18 @@ public class APRecipeProvider extends FabricRecipeProvider {
         netherWarpingRecipe(exporter, CHISELED_HADALINE_BRICKS.get(), CHISELED_ABYSSALINE_BRICKS.get());
 
         netherWarpingRecipe(exporter, ENTRAILS.get(), ROTTEN_FLESH_BLOCK.get());
+    }
+
+    private void makeWoodRecipes(RecipeOutput exporter) {
+        woodFromLogs(exporter, TWISTED_LOG.get(), TWISTED_WOOD.get());
+        woodFromLogs(exporter, STRIPPED_TWISTED_LOG.get(), STRIPPED_TWISTED_WOOD.get());
+
+//        trapdoorBuilder(TWISTED_TRAPDOOR.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_trapdoor").save(exporter);
+//        pressurePlateBuilder(RecipeCategory.REDSTONE,TWISTED_PRESSURE_PLATE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("pressurePlate").save(exporter);
+        planksFromLogs(exporter, TWISTED_PLANKS.get(), APTags.TWISTED_LOGS_ITEM, 4);
+//        fenceBuilder( TWISTED_FENCE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_fence").save(exporter);
+//        fenceGateBuilder(TWISTED_FENCE_GATE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_fence_gate").save(exporter);
+//        doorBuilder(TWISTED_DOOR.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_door").save(exporter);
+//        buttonBuilder(TWISTED_BUTTON.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_button").save(exporter);
     }
 }
