@@ -160,6 +160,19 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(WITHERED_BONE.get()), has(WITHERED_BONE.get()))
                 .save(exporter);
 
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
+                .pattern("xxx")
+                .pattern("xxx")
+                .pattern("xxx")
+                .define('x', Items.ROTTEN_FLESH)
+                .unlockedBy(getHasName(ROTTEN_FLESH_BLOCK.get()), has(ROTTEN_FLESH_BLOCK.get()))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.ROTTEN_FLESH, 9)
+                .requires(ROTTEN_FLESH_BLOCK.get())
+                .unlockedBy(getHasName(ROTTEN_FLESH_BLOCK.get()), has(ROTTEN_FLESH_BLOCK.get()))
+                .save(exporter);
+
     }
 
     private void smeltingRecipes(RecipeOutput exporter) {
