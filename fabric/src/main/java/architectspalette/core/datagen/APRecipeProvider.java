@@ -8,11 +8,13 @@ import architectspalette.core.registry.util.StoneBlockSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -272,15 +274,28 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
     private void makeWoodRecipes(RecipeOutput exporter) {
-        woodFromLogs(exporter, TWISTED_LOG.get(), TWISTED_WOOD.get());
-        woodFromLogs(exporter, STRIPPED_TWISTED_LOG.get(), STRIPPED_TWISTED_WOOD.get());
+        // (ender) this is messy, but it works
+        woodFromLogs(exporter,  TWISTED_WOOD.get(), TWISTED_LOG.get());
+        woodFromLogs(exporter,  STRIPPED_TWISTED_WOOD.get(), STRIPPED_TWISTED_LOG.get());
 
-//        trapdoorBuilder(TWISTED_TRAPDOOR.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_trapdoor").save(exporter);
-//        pressurePlateBuilder(RecipeCategory.REDSTONE,TWISTED_PRESSURE_PLATE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("pressurePlate").save(exporter);
+        trapdoorBuilder(TWISTED_TRAPDOOR.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("wooden_trapdoor").save(exporter);
+        pressurePlateBuilder(RecipeCategory.REDSTONE,TWISTED_PRESSURE_PLATE.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("pressurePlate").save(exporter);
         planksFromLogs(exporter, TWISTED_PLANKS.get(), APTags.TWISTED_LOGS_ITEM, 4);
-//        fenceBuilder( TWISTED_FENCE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_fence").save(exporter);
-//        fenceGateBuilder(TWISTED_FENCE_GATE.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_fence_gate").save(exporter);
-//        doorBuilder(TWISTED_DOOR.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_door").save(exporter);
-//        buttonBuilder(TWISTED_BUTTON.get(), Ingredient.of(TWISTED_PLANKS.get())).group("wooden_button").save(exporter);
+        fenceBuilder( TWISTED_FENCE.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("wooden_fence").save(exporter);
+        fenceGateBuilder(TWISTED_FENCE_GATE.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("wooden_fence_gate").save(exporter);
+        doorBuilder(TWISTED_DOOR.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("wooden_door").save(exporter);
+        buttonBuilder(TWISTED_BUTTON.get(), Ingredient.of(TWISTED_PLANKS.get()))
+                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+                .group("wooden_button").save(exporter);
     }
 }
