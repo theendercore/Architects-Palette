@@ -123,7 +123,7 @@ public interface RecipeHelper {
                 .define('x', base)
                 .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
                 .save(output);
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, base, 1)
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, result, 1)
                 .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
                 .save(output, cuttingName(result, base));
 
