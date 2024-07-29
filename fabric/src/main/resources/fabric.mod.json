@@ -26,6 +26,9 @@
         ],
         "jei_mod_plugin": [
             "architectspalette.compat.JEIPlugin"
+        ],
+        "emi": [
+            "architectspalette.compat.emi.EMIPlugin"
         ]
     },
     "mixins": [
