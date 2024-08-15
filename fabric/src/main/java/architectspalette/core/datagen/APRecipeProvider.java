@@ -54,7 +54,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeSunmetalRecipes(exporter);
         makeBlackstoneRecipes(exporter);
         makeEntwineRecipes(exporter);
-        ancientPlatingRecipes(exporter);
+        makeAncientPlatingRecipes(exporter);
+        makePolishedPackedIceRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -239,7 +240,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
         quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
-        quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
     }
 
@@ -574,7 +574,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
     }
 
-    private void ancientPlatingRecipes(RecipeOutput exporter) {
+    private void makeAncientPlatingRecipes(RecipeOutput exporter) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ANCIENT_PLATING.get(), 64)
                 .pattern("ini")
                 .pattern("nsn")
@@ -592,5 +592,20 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(NETHER_BRASS_NUGGET.get()), has(NETHER_BRASS_NUGGET.get()))
                 .save(exporter);
 
+    }
+
+    private void makePolishedPackedIceRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE, 4);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE);
+
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.PACKED_ICE, 2);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.PACKED_ICE);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.WALL), Blocks.PACKED_ICE);
+
+        quickChiseledRecipe(exporter, CHISELED_PACKED_ICE.get(), POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), POLISHED_PACKED_ICE.get());
+        quickStoneCutting(exporter, CHISELED_PACKED_ICE.get(), Blocks.PACKED_ICE);
+
+        quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
+        quickStoneCutting(exporter, PACKED_ICE_PILLAR.get(), Blocks.PACKED_ICE);
     }
 }
