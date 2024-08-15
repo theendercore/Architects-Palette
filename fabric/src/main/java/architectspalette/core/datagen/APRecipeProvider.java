@@ -14,7 +14,6 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
@@ -64,7 +63,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern(" x ")
                 .define('x', Items.IRON_NUGGET)
                 .define('y', PLATING_BLOCK.get())
-                .unlockedBy(getHasName(PLATING_BLOCK.get()), has(PLATING_BLOCK.get()))
+                .unlockedBy(hasName(PLATING_BLOCK), hasItem(PLATING_BLOCK))
                 .save(exporter);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HAZARD_BLOCK.get(), 4)
@@ -88,14 +87,14 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("xyx")
                 .define('x', CEREBRAL_PLATE.get())
                 .define('y', ORACLE_BLOCK.get())
-                .unlockedBy(getHasName(ORACLE_BLOCK.get()), has(ORACLE_BLOCK.get()))
+                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
                 .save(exporter);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SPOOL.get(), 2)
                 .pattern("wfw")
                 .define('f', ItemTags.WOODEN_FENCES)
                 .define('w', Blocks.WHITE_WOOL)
-                .unlockedBy(getHasName(SPOOL.get()), has(SPOOL.get()))
+                .unlockedBy(hasName(SPOOL), hasItem(SPOOL))
                 .save(exporter);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(LAMP).get(), 2)
@@ -104,7 +103,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern(" x ")
                 .define('x', ORACLE_JELLY.get())
                 .define('y', Items.END_ROD)
-                .unlockedBy(getHasName(ORACLE_BLOCK.get()), has(ORACLE_BLOCK.get()))
+                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
                 .save(exporter);
 
         ShapelessRecipeBuilder.shapeless(MISC, ORACLE_JELLY.get(), 4)
@@ -127,7 +126,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("s")
                 .define('s', Blocks.STONE_SLAB)
                 .define('b', MOONSHALE)
-                .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE))
+                .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
 
 //        UNOBTANIUM
@@ -135,7 +134,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("xx")
                 .pattern("xx")
                 .define('x', UNOBTANIUM.get())
-                .unlockedBy(getHasName(UNOBTANIUM_BLOCK.get()), has(UNOBTANIUM_BLOCK.get()))
+                .unlockedBy(hasName(UNOBTANIUM_BLOCK), hasItem(UNOBTANIUM_BLOCK))
                 .save(exporter);
 
         ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
@@ -169,12 +168,12 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("xxx")
                 .pattern("xxx")
                 .define('x', Items.ROTTEN_FLESH)
-                .unlockedBy(getHasName(ROTTEN_FLESH_BLOCK.get()), has(ROTTEN_FLESH_BLOCK.get()))
+                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
                 .save(exporter);
 
         ShapelessRecipeBuilder.shapeless(MISC, Items.ROTTEN_FLESH, 9)
                 .requires(ROTTEN_FLESH_BLOCK.get())
-                .unlockedBy(getHasName(ROTTEN_FLESH_BLOCK.get()), has(ROTTEN_FLESH_BLOCK.get()))
+                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
                 .save(exporter);
 
     }
@@ -292,27 +291,30 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     private void makeWoodRecipes(RecipeOutput exporter) {
         // (ender) this is messy, but it works
-        woodFromLogs(exporter,  TWISTED_WOOD.get(), TWISTED_LOG.get());
-        woodFromLogs(exporter,  STRIPPED_TWISTED_WOOD.get(), STRIPPED_TWISTED_LOG.get());
+        woodFromLogs(exporter, TWISTED_WOOD.get(), TWISTED_LOG.get());
+        woodFromLogs(exporter, STRIPPED_TWISTED_WOOD.get(), STRIPPED_TWISTED_LOG.get());
 
-        trapdoorBuilder(TWISTED_TRAPDOOR.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        trapdoorBuilder(TWISTED_TRAPDOOR.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("wooden_trapdoor").save(exporter);
-        pressurePlateBuilder(RecipeCategory.REDSTONE,TWISTED_PRESSURE_PLATE.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        pressurePlateBuilder(RecipeCategory.REDSTONE, TWISTED_PRESSURE_PLATE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("pressurePlate").save(exporter);
         planksFromLogs(exporter, TWISTED_PLANKS.get(), APTags.TWISTED_LOGS_ITEM, 4);
-        fenceBuilder( TWISTED_FENCE.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        fenceBuilder(TWISTED_FENCE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("wooden_fence").save(exporter);
-        fenceGateBuilder(TWISTED_FENCE_GATE.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        fenceGateBuilder(TWISTED_FENCE_GATE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("wooden_fence_gate").save(exporter);
-        doorBuilder(TWISTED_DOOR.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        doorBuilder(TWISTED_DOOR.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("wooden_door").save(exporter);
-        buttonBuilder(TWISTED_BUTTON.get(), Ingredient.of(TWISTED_PLANKS.get()))
-                .unlockedBy(getHasName(TWISTED_PLANKS.get()), has(TWISTED_PLANKS.get()))
+        buttonBuilder(TWISTED_BUTTON.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
                 .group("wooden_button").save(exporter);
     }
+
+
+
 }

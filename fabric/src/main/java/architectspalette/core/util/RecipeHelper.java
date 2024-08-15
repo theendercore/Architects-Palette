@@ -4,6 +4,7 @@ import architectspalette.core.datagen.WarpingRecipeBuilder;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
@@ -31,6 +33,20 @@ import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 import static net.minecraft.data.recipes.RecipeProvider.*;
 
 public interface RecipeHelper {
+
+    static String hasName(Supplier<Block> itemLike) {
+        return getHasName(itemLike.get());
+    }
+
+    static Criterion<InventoryChangeTrigger.TriggerInstance> hasItem(Supplier<Block> itemLike) {
+        return has(itemLike.get());
+    }
+
+    static Ingredient ingredient(Supplier<Block> itemLike) {
+        return Ingredient.of(itemLike.get());
+    }
+
+
     private static ResourceLocation smeltingName(ItemLike item, ItemLike from) {
         return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smelting");
     }
