@@ -575,7 +575,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
     private void ancientPlatingRecipes(RecipeOutput exporter) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ANCIENT_PLATING.get(), 8)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ANCIENT_PLATING.get(), 64)
                 .pattern("ini")
                 .pattern("nsn")
                 .pattern("ini")
