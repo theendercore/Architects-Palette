@@ -649,12 +649,12 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         brickRecipe(exporter, APBlocks.ALGAL_BRICK.get(), APItems.ALGAL_BRICK.get(), 4);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_LAMP.get(), 1)
                 .pattern("xdx")
                 .pattern("ddd")
                 .pattern("xdx")
-                .define('x', Items.GLOWSTONE_DUST)
-                .define('d', APItems.ALGAL_BRICK.get())
+                .define('d', Items.GLOWSTONE_DUST)
+                .define('x', APItems.ALGAL_BRICK.get())
                 .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
                 .save(exporter);
 
