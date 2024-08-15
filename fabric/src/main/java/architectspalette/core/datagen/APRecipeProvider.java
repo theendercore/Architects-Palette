@@ -392,7 +392,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         //wither lamp
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, WITHER_LAMP.get())
                 .pattern("#d#")
-                .pattern("#d#")
+                .pattern("d#d")
                 .pattern("#d#")
                 .define('#', APTags.WITHERED_BONES)
                 .define('d', Items.GLOWSTONE_DUST)
