@@ -48,7 +48,7 @@ public class ArchitectsPalette {
 
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks forge :)
-        APCommon.initEarly();
+        APCommon.lateInit();
     }
 
     void setupClient(final FMLClientSetupEvent event) {

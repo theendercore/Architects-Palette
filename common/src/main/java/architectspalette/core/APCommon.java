@@ -35,7 +35,7 @@ public class APCommon {
         }
     }
 
-    public static void initEarly() {
+    public static void lateInit() {
         APCriterion.init();
         APBlockProperties.registerFlammables();
         APTrades.registerTrades();

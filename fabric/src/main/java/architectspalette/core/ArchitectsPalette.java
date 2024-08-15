@@ -25,8 +25,8 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
     public void onInitialize() {
         APCommon.initConfig();
 
-        APCommon.initEarly();
         APCommon.init();
+        APCommon.lateInit();
 
         //events
         CreativeModeTabEventHandler.modifyTabs();

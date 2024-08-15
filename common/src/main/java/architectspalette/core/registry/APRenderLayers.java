@@ -29,7 +29,6 @@ public class APRenderLayers {
 
         //I'm lazy
         // (ender) no you are a programmer.
-        // Also is this even needed? Like it works fine without it.
         for (Block obj : Services.REGISTRY.getModBlocks()) {
             if (obj instanceof NubBlock block) {
                 Services.REGISTRY.setRenderLayer(() -> block, RenderType.cutout());

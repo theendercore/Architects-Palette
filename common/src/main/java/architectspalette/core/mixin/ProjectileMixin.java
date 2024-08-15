@@ -21,11 +21,11 @@ public abstract class ProjectileMixin {
     protected abstract boolean canHitEntity(Entity p_37250_);
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void changeDimension(CallbackInfo ci) {
+    private void bounce(CallbackInfo ci) {
         // (ender) if this is still pp then im an infant
-        Projectile pp = (Projectile) (Object) this;
-        HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(pp, this::canHitEntity);
-        if (projectileImpact(pp, hitresult)) {
+        Projectile projectile = (Projectile) (Object) this;
+        HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(projectile, this::canHitEntity);
+        if (projectileImpact(projectile, hitresult)) {
             ci.cancel();
             return;
         }
