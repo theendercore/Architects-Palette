@@ -54,6 +54,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeSunmetalRecipes(exporter);
         makeBlackstoneRecipes(exporter);
         makeEntwineRecipes(exporter);
+        ancientPlatingRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -571,5 +572,25 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
 
         quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
+    }
+
+    private void ancientPlatingRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ANCIENT_PLATING.get(), 8)
+                .pattern("ini")
+                .pattern("nsn")
+                .pattern("ini")
+                .define('i', APItems.NETHER_BRASS.get())
+                .define('n', NETHER_BRASS_NUGGET.get())
+                .define('s', Items.NETHERITE_SCRAP)
+                .unlockedBy(getHasName(APItems.NETHER_BRASS.get()), has(APItems.NETHER_BRASS.get()))
+                .save(exporter);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ANCIENT_PLATING.getPart(StoneBlockSet.SetComponent.FENCE), 6)
+                .pattern("#I#")
+                .pattern("#I#")
+                .define('I', NETHER_BRASS_NUGGET.get())
+                .define('#', ANCIENT_PLATING.get())
+                .unlockedBy(getHasName(NETHER_BRASS_NUGGET.get()), has(NETHER_BRASS_NUGGET.get()))
+                .save(exporter);
+
     }
 }
