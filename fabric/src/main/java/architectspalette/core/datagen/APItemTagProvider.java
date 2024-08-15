@@ -3,6 +3,8 @@ package architectspalette.core.datagen;
 import architectspalette.core.registry.APTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -59,10 +61,13 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(APTags.HADALINE, APTags.HADALINE_ITEM);
 
         // compatibility tags
-        copy(MiscTags.QUARK_VERTICAL_SLAB, MiscTags.QUARK_VERTICAL_SLAB_ITEM);
-        copy(MiscTags.FORGE_STONE, MiscTags.FORGE_STONE_ITEM);
-        copy(MiscTags.FORGE_ICES_PACKEDICE, MiscTags.FORGE_ICES_PACKEDICE_ITEM);
-        copy(MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS_ITEM);
+        copy(ModdedTags.QUARK_VERTICAL_SLAB, ModdedTags.QUARK_VERTICAL_SLAB_ITEM);
+        //fabric
+        copy(ConventionalBlockTags.STONES, ConventionalItemTags.STONES);
+        // forge
+        copy(ModdedTags.FORGE_STONE, ModdedTags.FORGE_STONE_ITEM);
+        copy(ModdedTags.FORGE_ICES_PACKEDICE, ModdedTags.FORGE_ICES_PACKEDICE_ITEM);
+        copy(ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS_ITEM);
 
     }
 
@@ -71,7 +76,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void compatabilityTags() {
-        getOrCreateTag(MiscTags.FORGE_BONES_WITHER, WITHERED_BONE);
+        getOrCreateTag(ModdedTags.FORGE_BONES_WITHER, WITHERED_BONE);
     }
 
 

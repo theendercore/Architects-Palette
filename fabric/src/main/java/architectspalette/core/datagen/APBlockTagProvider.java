@@ -8,6 +8,7 @@ import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -42,7 +43,7 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         var nubs = getOrCreateTagBuilder(APTags.NUBS);
         nubs.forceAddTag(APTags.COPPER_NUBS);
         var copperNubs = getOrCreateTagBuilder(APTags.COPPER_NUBS);
-        var verticalSlabs = getOrCreateTag(MiscTags.QUARK_VERTICAL_SLAB);
+        var verticalSlabs = getOrCreateTag(ModdedTags.QUARK_VERTICAL_SLAB);
 
 
         Services.REGISTRY.getModBlocks().forEach((block) -> {
@@ -142,9 +143,12 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     }
 
     private void compatabilityTags() {
-        getOrCreateTag(MiscTags.FORGE_STONE, MYONITE);
-        getOrCreateTag(MiscTags.FORGE_ICES_PACKEDICE, POLISHED_PACKED_ICE);
-        getOrCreateTag(MiscTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ENDER_PEARL_BLOCK);
+        // fabric
+        getOrCreateTag(ConventionalBlockTags.STONES, MYONITE);
+        // forge
+        getOrCreateTag(ModdedTags.FORGE_STONE, MYONITE);
+        getOrCreateTag(ModdedTags.FORGE_ICES_PACKEDICE, POLISHED_PACKED_ICE);
+        getOrCreateTag(ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ENDER_PEARL_BLOCK);
     }
 
     private void abyssalineTags() {

@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.Block;
 
 import static architectspalette.core.util.KeyMaker.stringTag;
 
-public interface MiscTags {
+public interface ModdedTags {
 
     // Quark compatibility
     TagKey<Block> QUARK_VERTICAL_SLAB = blockTag("quark:vertical_slab");
