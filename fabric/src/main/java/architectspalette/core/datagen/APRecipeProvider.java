@@ -50,6 +50,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeFlintRecipes(exporter);
         makeWitheredRecipes(exporter);
         makeOsseousRecipes(exporter);
+        makeNetherBrassRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -225,7 +226,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
-        quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
         quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
         quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
@@ -431,5 +431,65 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
         quickStoneCutting(exporter, OSSEOUS_PILLAR.get(), Items.BONE_BLOCK);
+    }
+
+    private void makeNetherBrassRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, BRASS_BLEND.get(), 4)
+                .requires(Items.SOUL_SAND, 2)
+                .requires(Items.IRON_NUGGET)
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy(getHasName(Items.SOUL_SAND), has(Items.SOUL_SAND))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(MISC, APItems.NETHER_BRASS.get(), 1)
+                .pattern("XXX")
+                .pattern("XXX")
+                .pattern("XXX")
+                .define('X', NETHER_BRASS_NUGGET.get())
+                .unlockedBy(getHasName(NETHER_BRASS_NUGGET.get()), has(NETHER_BRASS_NUGGET.get()))
+                .unlockedBy(getHasName(APItems.NETHER_BRASS.get()), has(APItems.NETHER_BRASS.get()))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(MISC, NETHER_BRASS_NUGGET.get(), 9)
+                .requires(APItems.NETHER_BRASS.get())
+                .unlockedBy(getHasName(APItems.NETHER_BRASS.get()), has(APItems.NETHER_BRASS.get()))
+                .save(exporter);
+
+        brickRecipe(exporter, APBlocks.NETHER_BRASS.get(), APItems.NETHER_BRASS.get(), 4);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, NETHER_BRASS_CHAIN.get(), 3)
+                .pattern("n")
+                .pattern("I")
+                .pattern("n")
+                .define('n', NETHER_BRASS_NUGGET.get())
+                .define('I', APItems.NETHER_BRASS.get())
+                .unlockedBy(getHasName(APItems.NETHER_BRASS.get()), has(APItems.NETHER_BRASS.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, APItems.NETHER_BRASS_TORCH.get(), 4)
+                .pattern("n")
+                .pattern("s")
+                .define('n', NETHER_BRASS_NUGGET.get())
+                .define('s', Items.STICK)
+                .unlockedBy(getHasName(APItems.NETHER_BRASS.get()), has(APItems.NETHER_BRASS.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, NETHER_BRASS_LANTERN.get(), 1)
+                .pattern("nnn")
+                .pattern("ntn")
+                .pattern("nnn")
+                .define('n', NETHER_BRASS_NUGGET.get())
+                .define('t', APItems.NETHER_BRASS_TORCH.get())
+                .unlockedBy(getHasName(NETHER_BRASS_NUGGET.get()), has(NETHER_BRASS_NUGGET.get()))
+                .unlockedBy(getHasName(APItems.NETHER_BRASS_TORCH.get()), has(APItems.NETHER_BRASS_TORCH.get()))
+                .save(exporter);
+
+        brickRecipe(exporter, CUT_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get(), 4);
+        quickStoneCutting(exporter, CUT_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
+
+        quickStoneCutting(exporter, CUT_NETHER_BRASS.getPart(StoneBlockSet.SetComponent.SLAB), APBlocks.NETHER_BRASS.get(), 2);
+        quickStoneCutting(exporter, CUT_NETHER_BRASS.getPart(StoneBlockSet.SetComponent.STAIRS), APBlocks.NETHER_BRASS.get());
+        quickStoneCutting(exporter, CUT_NETHER_BRASS.getPart(StoneBlockSet.SetComponent.WALL), APBlocks.NETHER_BRASS.get());
+
+        quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
     }
 }
