@@ -44,6 +44,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         makeWoodRecipes(exporter);
+        makeWardstoneRecipes(exporter);
 
 
         //Base recipes for blocks
@@ -80,8 +81,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
                 .save(exporter);
 
-        brickRecipe(ORACLE_BLOCK.get(), ORACLE_JELLY.get(), 8, exporter);
-        brickRecipe(CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8, exporter);
+        brickRecipe(exporter, ORACLE_BLOCK.get(), ORACLE_JELLY.get(), 8);
+        brickRecipe(exporter, CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(SPECIAL).get(), 2)
                 .pattern("xyx")
@@ -315,6 +316,36 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .group("wooden_button").save(exporter);
     }
 
+    private void makeWardstoneRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, WARDSTONE_BLEND.get(), 4)
+                .requires(Items.LAPIS_LAZULI)
+                .requires(Items.NETHER_WART)
+                .requires(Items.NETHER_WART)
+                .unlockedBy(getHasName(Items.NETHER_WART), has(Items.NETHER_WART))
+                .save(exporter);
+
+        brickRecipe(exporter, WARDSTONE.get(), WARDSTONE_BRICK.get(), 4);
+        quickChiseledRecipe(exporter, CHISELED_WARDSTONE.get(), WARDSTONE.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get());
+
+        quickStoneCuttings(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), 2, WARDSTONE.get(), WARDSTONE_BRICKS.get());
+        quickStoneCuttings(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), 1, WARDSTONE.get(), WARDSTONE_BRICKS.get());
+        quickStoneCuttings(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), 1, WARDSTONE.get(), WARDSTONE_BRICKS.get());
+
+        quickStoneCutting(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get());
+        brickRecipe(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get(), 4);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, WARDSTONE_LAMP.get(), 4)
+                .pattern("xxx")
+                .pattern("x x")
+                .pattern("xxx")
+                .define('x', WARDSTONE_BRICKS.get())
+                .unlockedBy(hasName(WARDSTONE_BRICKS), hasItem(WARDSTONE_BRICKS))
+                .save(exporter);
+
+        quickStoneCutting(exporter, WARDSTONE.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get(), 2);
+        quickStoneCutting(exporter, WARDSTONE.getPart(StoneBlockSet.SetComponent.STAIRS), WARDSTONE.get());
+        quickStoneCutting(exporter, WARDSTONE.getPart(StoneBlockSet.SetComponent.WALL), WARDSTONE.get());
+
+    }
 
 
 }

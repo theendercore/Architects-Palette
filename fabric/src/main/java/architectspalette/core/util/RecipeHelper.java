@@ -1,5 +1,6 @@
 package architectspalette.core.util;
 
+import architectspalette.core.APConstants;
 import architectspalette.core.datagen.WarpingRecipeBuilder;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
@@ -29,6 +30,7 @@ import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
+import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 import static net.minecraft.data.recipes.RecipeProvider.*;
 
@@ -132,17 +134,42 @@ public interface RecipeHelper {
                 .save(output, blastingName(result, from));
     }
 
+    static void quickStoneCutting(RecipeOutput output, ItemLike result, ItemLike base) {
+        quickStoneCutting(output, result, base, 1);
+    }
+
+    static void quickStoneCutting(RecipeOutput output, ItemLike result, ItemLike base, int count) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, result, count)
+                .unlockedBy(getHasName(base), hasItems(base))
+                .save(output, cuttingName(result, base));
+    }
+
+    static void quickStoneCuttings(RecipeOutput output, ItemLike result, int count, ItemLike... ingredients) {
+        for (ItemLike base : ingredients) {
+            SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, result, count)
+                    .unlockedBy(getHasName(base), hasItems(base))
+                    .save(output, cuttingName(result, base));
+        }
+    }
+
     static void quickPillarRecipe(RecipeOutput output, ItemLike result, ItemLike base) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 2)
                 .pattern("x")
                 .pattern("x")
                 .define('x', base)
-                .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                .unlockedBy(getHasName(base), hasItems(base))
                 .save(output);
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, result, 1)
-                .unlockedBy(getHasName(base), InventoryChangeTrigger.TriggerInstance.hasItems(base))
-                .save(output, cuttingName(result, base));
+        quickStoneCutting(output, result, base);
+    }
 
+    static void quickChiseledRecipe(RecipeOutput output, ItemLike result, ItemLike slab, ItemLike base) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, 1)
+                .pattern("x")
+                .pattern("x")
+                .define('x', slab)
+                .unlockedBy(getHasName(base), hasItems(base))
+                .save(output);
+        quickStoneCutting(output, result, base);
     }
 
     static void oreBrickRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient) {
@@ -175,7 +202,7 @@ public interface RecipeHelper {
                 .save(output);
     }
 
-    static void brickRecipe(ItemLike result, ItemLike ingredient, int count, RecipeOutput output) {
+    static void brickRecipe(RecipeOutput output, ItemLike result, ItemLike ingredient, int count) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
                 .pattern("xx")
                 .pattern("xx")
@@ -222,7 +249,7 @@ public interface RecipeHelper {
                     ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
                             .pattern("xxx")
                             .define('x', base)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .unlockedBy(hasBase, hasItems(base))
                             .save(output);
                 }
                 case VERTICAL_SLAB -> {
@@ -235,7 +262,7 @@ public interface RecipeHelper {
                             .pattern("xx ")
                             .pattern("xxx")
                             .define('x', base)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .unlockedBy(hasBase, hasItems(base))
                             .save(output);
                 }
                 case WALL -> {
@@ -243,7 +270,7 @@ public interface RecipeHelper {
                             .pattern("xxx")
                             .pattern("xxx")
                             .define('x', base)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .unlockedBy(hasBase, hasItems(base))
                             .save(output);
                 }
                 case PILLAR -> {
@@ -251,7 +278,7 @@ public interface RecipeHelper {
                             .pattern("x")
                             .pattern("x")
                             .define('x', base)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                            .unlockedBy(hasBase, hasItems(base))
                             .save(output);
                 }
                 case FENCE, NUB, BLOCK -> {
@@ -260,7 +287,7 @@ public interface RecipeHelper {
 
             if (stoneCuttingCount > 0 && (set.hasStoneCuttingRecipes || part == StoneBlockSet.SetComponent.NUB)) {
                 SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, block, stoneCuttingCount)
-                        .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(base))
+                        .unlockedBy(hasBase, hasItems(base))
                         .save(output, cuttingName(block, base));
             }
 
@@ -269,6 +296,7 @@ public interface RecipeHelper {
 
     static void processBlockNode(RecipeOutput output, BlockNode node) {
         String hasBase = "has_" + node.getName();
+        APConstants.LOGGER.info("Processing block node: " + node.getName());
         node.forEach((n -> {
             if (n.parent != null && !n.getFlag(BlockNode.ExcludeFlag.RECIPES)) {
                 Block block = n.get();
@@ -281,7 +309,7 @@ public interface RecipeHelper {
                                 .pattern("xx")
                                 .pattern("xx")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                         //Tile conversion recipe
                         var tiles = n.getSibling(TILES);
@@ -291,13 +319,13 @@ public interface RecipeHelper {
                                     .pattern("xx")
                                     .pattern("xx")
                                     .define('x', tiles.get())
-                                    .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                    .unlockedBy(hasBase, hasItems(node.get()))
                                     .save(output, modLoc(n.getName() + "_from_" + Services.REGISTRY.getId(tiles).getPath()));
                         }
                     }
                     case CRACKED -> {
                         SimpleCookingRecipeBuilder.smelting(Ingredient.of(parent), BUILDING_BLOCKS, block, .1f, 200)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output, smeltingName(block, parent));
                     }
                     case MOSSY -> {
@@ -311,7 +339,7 @@ public interface RecipeHelper {
                                     .pattern("xx")
                                     .pattern("xx")
                                     .define('x', bricks.get())
-                                    .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                    .unlockedBy(hasBase, hasItems(node.get()))
                                     .save(output, modLoc(n.getName() + "_from_" + Services.REGISTRY.getId(bricks).getPath()));
                         }
                         //Default recipe if there are no bricks
@@ -320,7 +348,7 @@ public interface RecipeHelper {
                                     .pattern("xx")
                                     .pattern("xx")
                                     .define('x', parent)
-                                    .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                    .unlockedBy(hasBase, hasItems(node.get()))
                                     .save(output);
                         }
                     }
@@ -331,7 +359,7 @@ public interface RecipeHelper {
                                     .pattern("x")
                                     .pattern("x")
                                     .define('x', slab.get())
-                                    .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                    .unlockedBy(hasBase, hasItems(node.get()))
                                     .save(output);
                         }
                     }
@@ -340,7 +368,7 @@ public interface RecipeHelper {
                                 .pattern("x")
                                 .pattern("x")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
                     case NUB -> {
@@ -350,7 +378,7 @@ public interface RecipeHelper {
                         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
                                 .pattern("xxx")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
                     case VERTICAL_SLAB -> {
@@ -398,7 +426,7 @@ public interface RecipeHelper {
                                 .pattern("xx ")
                                 .pattern("xxx")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
                     case WALL -> {
@@ -406,7 +434,7 @@ public interface RecipeHelper {
                                 .pattern("xxx")
                                 .pattern("xxx")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
                     case FENCE -> {
@@ -418,7 +446,7 @@ public interface RecipeHelper {
                                 .pattern("x x")
                                 .pattern("xxx")
                                 .define('x', parent)
-                                .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                                .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
                     case DARK -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 8)
@@ -427,12 +455,12 @@ public interface RecipeHelper {
                             .pattern("xxx")
                             .define('x', parent)
                             .define('d', Items.BLACK_DYE)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                            .unlockedBy(hasBase, hasItems(node.get()))
                             .save(output);
                 }
                 if (stoneCuttingCount > 0 && (node.tool != BlockNode.Tool.AXE || n.type == NUB)) {
                     SingleItemRecipeBuilder.stonecutting(getStonecuttingIngredients(n), BUILDING_BLOCKS, block, stoneCuttingCount)
-                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
+                            .unlockedBy(hasBase, hasItems(node.get()))
                             .save(output, cuttingName(block, parent));
                 }
 
