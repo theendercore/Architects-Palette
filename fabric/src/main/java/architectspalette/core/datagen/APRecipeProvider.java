@@ -49,6 +49,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWardstoneRecipes(exporter);
         makeFlintRecipes(exporter);
         makeWitheredRecipes(exporter);
+        makeOsseousRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -227,7 +228,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
         quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
-        quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
         quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
         quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
@@ -409,5 +409,27 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         quickPillarRecipe(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_OSSEOUS_BRICK.get());
         quickStoneCutting(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_BONE_BLOCK.get());
+    }
+
+    private void makeOsseousRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, LIT_OSSEOUS_SKULL.get(), 1)
+                .pattern("X")
+                .pattern("Y")
+                .define('X', OSSEOUS_SKULL.get())
+                .define('Y', Items.TORCH)
+                .unlockedBy(hasName(OSSEOUS_SKULL), hasItem(OSSEOUS_SKULL))
+                .save(exporter);
+
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), Items.BONE_BLOCK, 2);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.STAIRS), Items.BONE_BLOCK);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.WALL), Items.BONE_BLOCK);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK);
+
+        brickRecipe(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK, 4);
+        quickStoneCutting(exporter, OSSEOUS_SKULL.get(), Items.BONE_BLOCK);
+        quickChiseledRecipe(exporter, OSSEOUS_SKULL.get(), OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), OSSEOUS_BRICK.get());
+
+        quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
+        quickStoneCutting(exporter, OSSEOUS_PILLAR.get(), Items.BONE_BLOCK);
     }
 }
