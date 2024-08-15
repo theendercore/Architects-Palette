@@ -52,6 +52,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeOsseousRecipes(exporter);
         makeNetherBrassRecipes(exporter);
         makeSunmetalRecipes(exporter);
+        makeBlackstoneRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -520,5 +521,32 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickChiseledRecipe(exporter, CHISELED_SUNMETAL_BLOCK.get(), SUNMETAL.getPart(StoneBlockSet.SetComponent.SLAB), SUNMETAL.get());
 
         quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL_BRICK.get());
+    }
+
+    private void makeBlackstoneRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE.get(), 1)
+                .requires(Items.BLACKSTONE)
+                .requires(Items.WEEPING_VINES)
+                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE_BRICKS.get(), 1)
+                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
+                .requires(Items.WEEPING_VINES)
+                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
+                .save(exporter);
+        quickStoneCutting(exporter, WEEPING_BLACKSTONE_BRICKS.get(), WEEPING_BLACKSTONE.get(), 1);
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE.get(), 1)
+                .requires(Items.BLACKSTONE)
+                .requires(Items.TWISTING_VINES)
+                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE_BRICKS.get(), 1)
+                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
+                .requires(Items.TWISTING_VINES)
+                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
+                .save(exporter);
+        quickStoneCutting(exporter, TWISTING_BLACKSTONE_BRICKS.get(), TWISTING_BLACKSTONE.get(), 1);
+
     }
 }
