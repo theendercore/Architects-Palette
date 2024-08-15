@@ -130,6 +130,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE))
                 .save(exporter);
 
+//        UNOBTANIUM
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UNOBTANIUM_BLOCK.get(), 1)
                 .pattern("xx")
                 .pattern("xx")
@@ -142,6 +143,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
                 .save(exporter);
 
+        // ender pearl
         ShapelessRecipeBuilder.shapeless(MISC, ENDER_PEARL_BLOCK.get(), 1)
                 .requires(Items.ENDER_PEARL)
                 .requires(Items.ENDER_PEARL)
@@ -155,11 +157,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
                 .save(exporter);
 
+        // WITHERED_BONE
         ShapelessRecipeBuilder.shapeless(MISC, Items.BONE_MEAL, 4)
                 .requires(WITHERED_BONE.get())
                 .unlockedBy(getHasName(WITHERED_BONE.get()), has(WITHERED_BONE.get()))
                 .save(exporter);
 
+        // rotten blocks
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
                 .pattern("xxx")
                 .pattern("xxx")
