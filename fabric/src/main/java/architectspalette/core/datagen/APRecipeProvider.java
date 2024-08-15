@@ -57,6 +57,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeEntwineRecipes(exporter);
         makeAncientPlatingRecipes(exporter);
         makePolishedPackedIceRecipes(exporter);
+        makeAlgalBrickRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -639,5 +640,30 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, PACKED_ICE_PILLAR.get(), Blocks.PACKED_ICE);
     }
 
+    private void makeAlgalBrickRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, ALGAL_BLEND.get(), 2)
+                .requires(Items.CLAY_BALL)
+                .requires(Items.KELP)
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .save(exporter);
 
+        brickRecipe(exporter, APBlocks.ALGAL_BRICK.get(), APItems.ALGAL_BRICK.get(), 4);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
+                .pattern("xdx")
+                .pattern("ddd")
+                .pattern("xdx")
+                .define('x', Items.GLOWSTONE_DUST)
+                .define('d', APItems.ALGAL_BRICK.get())
+                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
+                .save(exporter);
+
+        quickChiseledRecipe(exporter, CHISELED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), APBlocks.ALGAL_BRICK.get());
+
+        ShapelessRecipeBuilder.shapeless(MISC, OVERGROWN_ALGAL_BRICK.get(), 1)
+                .requires(APBlocks.ALGAL_BRICK.get())
+                .requires(Items.KELP)
+                .unlockedBy(getHasName(APBlocks.ALGAL_BRICK.get()), has(APBlocks.ALGAL_BRICK.get()))
+                .save(exporter);
+    }
 }
