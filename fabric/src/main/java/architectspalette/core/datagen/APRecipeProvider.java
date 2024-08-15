@@ -51,6 +51,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWitheredRecipes(exporter);
         makeOsseousRecipes(exporter);
         makeNetherBrassRecipes(exporter);
+        makeSunmetalRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -229,7 +230,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
         quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
         quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
-        quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
     }
 
@@ -491,5 +491,26 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, CUT_NETHER_BRASS.getPart(StoneBlockSet.SetComponent.WALL), APBlocks.NETHER_BRASS.get());
 
         quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
+    }
+
+    private void makeSunmetalRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, SUNMETAL_BLEND.get(), 4)
+                .requires(Items.SOUL_SAND, 2)
+                .requires(Items.GOLD_NUGGET, 2)
+                .unlockedBy(getHasName(Items.SOUL_SAND), has(Items.SOUL_SAND))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(MISC, SUNMETAL_BARS.get(), 16)
+                .pattern("bbb")
+                .pattern("bbb")
+                .define('b', SUNMETAL_BRICK.get())
+                .unlockedBy(getHasName(SUNMETAL_BRICK.get()), has(SUNMETAL_BRICK.get()))
+                .save(exporter);
+
+        brickRecipe(exporter, SUNMETAL.get(), SUNMETAL_BRICK.get(), 4);
+
+        quickChiseledRecipe(exporter, CHISELED_SUNMETAL_BLOCK.get(), SUNMETAL.getPart(StoneBlockSet.SetComponent.SLAB), SUNMETAL.get());
+
+        quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL_BRICK.get());
     }
 }
