@@ -53,6 +53,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeNetherBrassRecipes(exporter);
         makeSunmetalRecipes(exporter);
         makeBlackstoneRecipes(exporter);
+        makeEntwineRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -232,7 +233,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE_BRICKS.get());
         quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
         quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
-        quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
         quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
@@ -548,5 +548,28 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .save(exporter);
         quickStoneCutting(exporter, TWISTING_BLACKSTONE_BRICKS.get(), TWISTING_BLACKSTONE.get(), 1);
 
+    }
+
+    private void makeEntwineRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_ROD.get(), 4)
+                .pattern("XYX")
+                .define('X', Items.IRON_NUGGET)
+                .define('Y', Items.ENDER_PEARL)
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
+                .save(exporter);
+
+        brickRecipe(exporter, ENTWINE.get(), ENTWINE_ROD.get(), 4);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_BARS.get(), 16)
+                .pattern("###")
+                .pattern("###")
+                .define('#', ENTWINE_ROD.get())
+                .unlockedBy(getHasName(ENTWINE_ROD.get()), has(ENTWINE_ROD.get()))
+                .save(exporter);
+
+        quickChiseledRecipe(exporter, CHISELED_ENTWINE.get(), ENTWINE.getPart(StoneBlockSet.SetComponent.SLAB), ENTWINE.get());
+
+
+        quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
     }
 }
