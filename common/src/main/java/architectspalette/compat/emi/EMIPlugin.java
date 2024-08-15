@@ -115,7 +115,7 @@ public class EMIPlugin implements EmiPlugin {
             register.addRecipe(new EmiInfoRecipe(
                     blocks.stream().map((i) -> EmiIngredient.of(Ingredient.of(i))).toList(),
                     List.of(Component.translatable(MOD_ID + ".info." + infoString)),
-                    modLoc(infoString)
+                    modLoc("info/" + infoString)
             ));
             blocks.clear();
         }
