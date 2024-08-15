@@ -36,6 +36,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         BlockNode.forAllBaseNodes((node) -> processBlockNode(exporter, node));
         StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
 
+        miscRecipes(exporter);
 
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
@@ -46,7 +47,9 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWoodRecipes(exporter);
         makeWardstoneRecipes(exporter);
 
+    }
 
+    private void miscRecipes(RecipeOutput exporter) {
         //Base recipes for blocks
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SHEET_METAL.get(), 64)
                 .pattern("x")
@@ -230,7 +233,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
         quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
-        quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
         quickPillarRecipe(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_OSSEOUS_BRICK.get());
     }
 
@@ -349,5 +351,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('x', WARDSTONE_BRICKS.get())
                 .unlockedBy(hasName(WARDSTONE_BRICKS), hasItem(WARDSTONE_BRICKS))
                 .save(exporter);
+        quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
     }
 }
