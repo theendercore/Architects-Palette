@@ -19,8 +19,6 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 public class ArchitectsPalette implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
     @Override
@@ -52,14 +50,8 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
     public void onInitializeDataGenerator(FabricDataGenerator gen) {
         FabricDataGenerator.Pack pack = gen.createPack();
 
-        // (ender) No, I don't think there is a nicer way of doing this :(
-        AtomicReference<APBlockTagProvider> blockTags = new AtomicReference<>();
-        pack.addProvider((o, r) -> {
-            blockTags.set(new APBlockTagProvider(o, r));
-            return blockTags.get();
-        });
-
-        pack.addProvider((o, r) -> new APItemTagProvider(o, r, blockTags.get()));
+        APBlockTagProvider blockTags = pack.addProvider(APBlockTagProvider::new);
+        pack.addProvider((o, r) -> new APItemTagProvider(o, r, blockTags));
         pack.addProvider(APWorldGenProvider::new);
         pack.addProvider(APAdvancementProvider::new);
         pack.addProvider(APLangProvider::new);
