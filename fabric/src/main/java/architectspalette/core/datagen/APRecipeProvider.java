@@ -45,8 +45,9 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         makeWoodRecipes(exporter);
-        makeWardstoneRecipes(exporter);
 
+        makeWardstoneRecipes(exporter);
+        makeFlintRecipes(exporter);
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -352,5 +353,17 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(hasName(WARDSTONE_BRICKS), hasItem(WARDSTONE_BRICKS))
                 .save(exporter);
         quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
+    }
+
+    private void makeFlintRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, FLINT_BLOCK.get(), Items.FLINT, 4);
+        brickRecipe(exporter, FLINT_TILES.get(), FLINT_BLOCK.get(), 4);
+        quickStoneCutting(exporter, FLINT_TILES.get(), FLINT_BLOCK.get());
+
+        quickStoneCutting(exporter, FLINT_TILES.getPart(StoneBlockSet.SetComponent.SLAB), FLINT_BLOCK.get(), 2);
+        quickStoneCutting(exporter, FLINT_TILES.getPart(StoneBlockSet.SetComponent.STAIRS), FLINT_BLOCK.get());
+        quickStoneCutting(exporter, FLINT_TILES.getPart(StoneBlockSet.SetComponent.WALL), FLINT_BLOCK.get());
+
+        quickPillarRecipe(exporter, FLINT_PILLAR.get(), FLINT_BLOCK.get());
     }
 }
