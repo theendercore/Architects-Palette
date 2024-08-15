@@ -45,6 +45,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         makeWoodRecipes(exporter);
+        makeCageLanternRecipes(exporter);
 
         makeWardstoneRecipes(exporter);
         makeFlintRecipes(exporter);
@@ -334,6 +335,35 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .group("wooden_button").save(exporter);
     }
 
+    private void makeCageLanternRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.GLOWSTONE_DUST)
+                .define('b', APItems.ALGAL_BRICK.get())
+                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GLOWSTONE_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.GLOWSTONE_DUST)
+                .define('b', APTags.WITHERED_BONES)
+                .unlockedBy(getHasName(APItems.WITHERED_BONE.get()), has(APTags.WITHERED_BONES))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, REDSTONE_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.REDSTONE)
+                .define('b', Items.IRON_NUGGET)
+                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                .save(exporter);
+    }
+
     private void makeWardstoneRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, WARDSTONE_BLEND.get(), 4)
                 .requires(Items.NETHER_WART)
@@ -608,4 +638,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
         quickStoneCutting(exporter, PACKED_ICE_PILLAR.get(), Blocks.PACKED_ICE);
     }
+
+
 }
