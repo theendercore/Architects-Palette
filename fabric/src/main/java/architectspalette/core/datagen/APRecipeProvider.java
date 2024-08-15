@@ -190,6 +190,14 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('y', Items.IRON_INGOT)
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SUNSTONE.get(), 4)
+                .pattern("XY")
+                .pattern("YX")
+                .define('X', Items.BASALT)
+                .define('Y', SUNMETAL_BLEND.get())
+                .unlockedBy(getHasName(SUNMETAL_BLEND.get()), has(SUNMETAL_BLEND.get()))
+                .save(exporter);
     }
 
     private void smeltingRecipes(RecipeOutput exporter) {
