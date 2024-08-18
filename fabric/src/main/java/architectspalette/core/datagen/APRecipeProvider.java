@@ -51,9 +51,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWitheredRecipes(exporter);
         makeEntwineRecipes(exporter);
         //
-        //
+        makeGildedSandstoneRecipes(exporter);
         makeBlackstoneRecipes(exporter);
-        //
         makeTwistedWoodRecipes(exporter);
         makeBasaltRecipes(exporter);
         makeEndStoneRecipes(exporter);
@@ -75,7 +74,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
-        quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
     }
 
@@ -504,6 +502,20 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
 
+
+    private void makeGildedSandstoneRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GILDED_SANDSTONE.get(), 2)
+                .pattern("XY")
+                .pattern("YX")
+                .define('X', Blocks.SANDSTONE)
+                .define('Y', Items.GOLD_NUGGET)
+                .unlockedBy(getHasName(Items.GOLD_NUGGET), has(Items.GOLD_NUGGET))
+                .save(exporter);
+
+        quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
+        quickChiseledRecipe(exporter, CHISELED_GILDED_SANDSTONE.get(), GILDED_SANDSTONE.getPart(StoneBlockSet.SetComponent.SLAB), GILDED_SANDSTONE.get());
+    }
+
     private void makeBlackstoneRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE.get(), 1)
                 .requires(Items.BLACKSTONE)
@@ -530,7 +542,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, TWISTING_BLACKSTONE_BRICKS.get(), TWISTING_BLACKSTONE.get(), 1);
 
     }
-
 
     private void makeTwistedWoodRecipes(RecipeOutput exporter) {
         // (ender) this is messy, but it works
