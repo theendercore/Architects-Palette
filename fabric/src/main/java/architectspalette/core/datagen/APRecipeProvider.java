@@ -40,6 +40,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         miscRecipes(exporter);
         makeAbyssalineRecipes(exporter);
+        makeHadalineRecipes(exporter);
         //
         makeAlgalBrickRecipes(exporter);
         makeOreBrickRecipes(exporter);
@@ -73,7 +74,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
-        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
         quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
         quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
         quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
@@ -265,6 +265,34 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ABYSSALINE.get()), has(ABYSSALINE.get()))
                 .save(exporter);
         quickStoneCutting(exporter, ABYSSALINE_PLATING.get(), ABYSSALINE.get());
+    }
+
+    private void makeHadalineRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, HADALINE_BRICKS.get(), HADALINE.get(), 4);
+        quickStoneCutting(exporter, HADALINE_BRICKS.get(), HADALINE.get());
+        quickStoneCutting(exporter, HADALINE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), HADALINE.get(), 2);
+
+        brickRecipe(exporter, HADALINE_TILES.get(), HADALINE_BRICKS.get(), 4);
+        quickStoneCutting(exporter, HADALINE_TILES.get(), HADALINE_BRICKS.get());
+        quickStoneCutting(exporter, HADALINE_TILES.get(), HADALINE.get());
+        quickStoneCutting(exporter, HADALINE_TILES.getPart(StoneBlockSet.SetComponent.SLAB), HADALINE_BRICKS.get(), 2);
+        quickStoneCutting(exporter, HADALINE_TILES.getPart(StoneBlockSet.SetComponent.SLAB), HADALINE.get(), 2);
+
+        quickChiseledRecipe(exporter, CHISELED_HADALINE_BRICKS.get(), HADALINE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), HADALINE_BRICKS.get());
+        quickStoneCutting(exporter, CHISELED_HADALINE_BRICKS.get(), HADALINE.get());
+
+        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
+        quickStoneCutting(exporter, HADALINE_PILLAR.get(), HADALINE.get());
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HADALINE_PLATING.get(), 8)
+                .pattern("xxx")
+                .pattern("x x")
+                .pattern("xxx")
+                .define('x', HADALINE.get())
+                .unlockedBy(getHasName(HADALINE.get()), has(HADALINE.get()))
+                .save(exporter);
+        quickStoneCutting(exporter, HADALINE_PLATING.get(), HADALINE.get());
+
     }
 
     private void makeAlgalBrickRecipes(RecipeOutput exporter) {
