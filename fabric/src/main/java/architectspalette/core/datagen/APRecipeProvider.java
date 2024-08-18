@@ -104,6 +104,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(SUNMETAL_BLEND.get()), has(SUNMETAL_BLEND.get()))
                 .save(exporter);
 
+        // Spool
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SPOOL.get(), 2)
+                .pattern("wfw")
+                .define('f', ItemTags.WOODEN_FENCES)
+                .define('w', Blocks.WHITE_WOOL)
+                .unlockedBy(hasName(SPOOL), hasItem(SPOOL))
+                .save(exporter);
 
         // rotten blocks
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
@@ -146,33 +153,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
                 .requires(UNOBTANIUM_BLOCK.get())
                 .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
-                .save(exporter);
-
-
-        //Base recipes for blocks
-        brickRecipe(exporter, CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SPOOL.get(), 2)
-                .pattern("wfw")
-                .define('f', ItemTags.WOODEN_FENCES)
-                .define('w', Blocks.WHITE_WOOL)
-                .unlockedBy(hasName(SPOOL), hasItem(SPOOL))
-                .save(exporter);
-
-        ShapelessRecipeBuilder.shapeless(MISC, CEREBRAL_PLATE.get(), 4)
-                .requires(Blocks.TUFF)
-                .requires(Items.QUARTZ)
-                .requires(Items.CHARCOAL)
-                .unlockedBy(getHasName(Items.TUFF), has(Items.TUFF))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MOONSHALE.getChild(SPECIAL).get(), 2)
-                .pattern("s")
-                .pattern("b")
-                .pattern("s")
-                .define('s', Blocks.STONE_SLAB)
-                .define('b', MOONSHALE)
-                .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
 
 
@@ -220,6 +200,25 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("xxx")
                 .define('x', Blocks.HAY_BLOCK)
                 .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
+                .save(exporter);
+
+        // Cerebral Blocks
+        brickRecipe(exporter, CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8);
+        ShapelessRecipeBuilder.shapeless(MISC, CEREBRAL_PLATE.get(), 4)
+                .requires(Blocks.TUFF)
+                .requires(Items.QUARTZ)
+                .requires(Items.CHARCOAL)
+                .unlockedBy(getHasName(Items.TUFF), has(Items.TUFF))
+                .save(exporter);
+
+        // Moonshale Special
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MOONSHALE.getChild(SPECIAL).get(), 2)
+                .pattern("s")
+                .pattern("b")
+                .pattern("s")
+                .define('s', Blocks.STONE_SLAB)
+                .define('b', MOONSHALE)
+                .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
     }
 
@@ -686,7 +685,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
                 .save(exporter);
     }
-
 
 
     private void smeltingRecipes(RecipeOutput exporter) {
