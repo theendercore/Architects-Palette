@@ -65,6 +65,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWardstoneRecipes(exporter);
         makeAncientPlatingRecipes(exporter);
         makeNubRecipes(exporter);
+        makeOracleRecipes(exporter);
         //
 
 
@@ -149,37 +150,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
 
         //Base recipes for blocks
-        brickRecipe(exporter, ORACLE_BLOCK.get(), ORACLE_JELLY.get(), 8);
         brickRecipe(exporter, CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(SPECIAL).get(), 2)
-                .pattern("xyx")
-                .define('x', CEREBRAL_PLATE.get())
-                .define('y', ORACLE_BLOCK.get())
-                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
-                .save(exporter);
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SPOOL.get(), 2)
                 .pattern("wfw")
                 .define('f', ItemTags.WOODEN_FENCES)
                 .define('w', Blocks.WHITE_WOOL)
                 .unlockedBy(hasName(SPOOL), hasItem(SPOOL))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(LAMP).get(), 2)
-                .pattern(" x ")
-                .pattern("xyx")
-                .pattern(" x ")
-                .define('x', ORACLE_JELLY.get())
-                .define('y', Items.END_ROD)
-                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
-                .save(exporter);
-
-        ShapelessRecipeBuilder.shapeless(MISC, ORACLE_JELLY.get(), 4)
-                .requires(Items.CHORUS_FRUIT)
-                .requires(Items.AMETHYST_SHARD)
-                .requires(Items.SUGAR)
-                .unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Items.AMETHYST_SHARD))
                 .save(exporter);
 
         ShapelessRecipeBuilder.shapeless(MISC, CEREBRAL_PLATE.get(), 4)
@@ -197,6 +174,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
+
 
         // Hazard Sign
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HAZARD_SIGN.get(), 4)
@@ -680,6 +658,35 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 Pair.of(WAXED_OXIDIZED_COPPER_NUB, OXIDIZED_COPPER_NUB)
         ).forEach((pair) -> quickWaxing(exporter, pair.first.get(), pair.second.get()));
     }
+
+    private void makeOracleRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, ORACLE_JELLY.get(), 4)
+                .requires(Items.CHORUS_FRUIT)
+                .requires(Items.AMETHYST_SHARD)
+                .requires(Items.SUGAR)
+                .unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Items.AMETHYST_SHARD))
+                .save(exporter);
+
+        brickRecipe(exporter, ORACLE_BLOCK.get(), ORACLE_JELLY.get(), 8);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(SPECIAL).get(), 2)
+                .pattern("xyx")
+                .define('x', CEREBRAL_PLATE.get())
+                .define('y', ORACLE_BLOCK.get())
+                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
+                .save(exporter);
+
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ORACLE_BLOCK.getChild(LAMP).get(), 2)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', ORACLE_JELLY.get())
+                .define('y', Items.END_ROD)
+                .unlockedBy(getHasName(ORACLE_BLOCK), has(ORACLE_BLOCK.get()))
+                .save(exporter);
+    }
+
 
 
     private void smeltingRecipes(RecipeOutput exporter) {
