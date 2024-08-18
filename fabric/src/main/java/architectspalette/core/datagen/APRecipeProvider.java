@@ -5,6 +5,7 @@ import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.APTags;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
+import com.ibm.icu.impl.Pair;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.APItems.*;
@@ -62,8 +64,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         //
         makeWardstoneRecipes(exporter);
         makeAncientPlatingRecipes(exporter);
+        makeNubRecipes(exporter);
         //
-
 
 
         makeWarpingRecipes(exporter);
@@ -494,7 +496,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
 
-
     private void makeBoardRecipes(RecipeOutput exporter) {
         boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
         boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
@@ -630,14 +631,34 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
-
-
-
-
-
-
-
-
+    private void makeNubRecipes(RecipeOutput exporter) {
+        Stream.of(
+                Pair.of(STONE_NUB, Blocks.STONE),
+                Pair.of(SMOOTH_STONE_NUB, Blocks.SMOOTH_STONE),
+                Pair.of(SANDSTONE_NUB, Blocks.SANDSTONE),
+                Pair.of(ANDESITE_NUB, Blocks.POLISHED_ANDESITE),
+                Pair.of(GRANITE_NUB, Blocks.POLISHED_GRANITE),
+                Pair.of(DIORITE_NUB, Blocks.POLISHED_DIORITE),
+                Pair.of(BLACKSTONE_NUB, Blocks.POLISHED_BLACKSTONE),
+                Pair.of(DEEPSLATE_NUB, Blocks.POLISHED_DEEPSLATE),
+                Pair.of(BONE_NUB, Blocks.BONE_BLOCK),
+                Pair.of(NUB_OF_ENDER, Items.ENDER_EYE),
+                Pair.of(IRON_NUB, Items.IRON_INGOT),
+                Pair.of(GOLD_NUB, Items.GOLD_INGOT),
+                Pair.of(DIAMOND_NUB, Items.DIAMOND),
+                Pair.of(EMERALD_NUB, Items.EMERALD),
+                Pair.of(NETHERITE_NUB, Items.NETHERITE_INGOT),
+                //Copper Nubs
+                Pair.of(COPPER_NUB, Blocks.CUT_COPPER),
+                Pair.of(WAXED_COPPER_NUB, Blocks.WAXED_CUT_COPPER),
+                Pair.of(EXPOSED_COPPER_NUB, Blocks.EXPOSED_CUT_COPPER),
+                Pair.of(WAXED_EXPOSED_COPPER_NUB, Blocks.WAXED_EXPOSED_CUT_COPPER),
+                Pair.of(WEATHERED_COPPER_NUB, Blocks.WEATHERED_CUT_COPPER),
+                Pair.of(WAXED_WEATHERED_COPPER_NUB, Blocks.WAXED_WEATHERED_CUT_COPPER),
+                Pair.of(OXIDIZED_COPPER_NUB, Blocks.OXIDIZED_CUT_COPPER),
+                Pair.of(WAXED_OXIDIZED_COPPER_NUB, Blocks.WAXED_OXIDIZED_CUT_COPPER)
+        ).forEach((pair) -> quickStoneCutting(exporter, pair.first.get(), pair.second.asItem(), 2));
+    }
 
 
     private void smeltingRecipes(RecipeOutput exporter) {
