@@ -42,6 +42,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeAbyssalineRecipes(exporter);
         makeHadalineRecipes(exporter);
         //
+        makeMyoniteBrickRecipes(exporter);
+        makeOlivestoneBrickRecipes(exporter);
         makeAlgalBrickRecipes(exporter);
         makeOreBrickRecipes(exporter);
         makeFlintRecipes(exporter);
@@ -75,7 +77,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
-        quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -324,6 +325,42 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
+    private void makeMyoniteBrickRecipes(RecipeOutput exporter) {
+
+
+    }
+
+    private void makeOlivestoneBrickRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, OLIVESTONE_BRICK.get(), 8)
+                .pattern("###")
+                .pattern("#O#")
+                .pattern("###")
+                .define('#', Blocks.STONE_BRICKS)
+                .define('O', Items.GREEN_DYE)
+                .unlockedBy(getHasName(Items.GREEN_DYE), has(Items.GREEN_DYE))
+                .save(exporter);
+
+        brickRecipe(exporter, OLIVESTONE_TILE.get(), OLIVESTONE_BRICK.get(), 4);
+        quickStoneCutting(exporter, OLIVESTONE_TILE.get(), OLIVESTONE_BRICK.get());
+
+
+        quickStoneCutting(exporter, OLIVESTONE_TILE.getPart(StoneBlockSet.SetComponent.SLAB), OLIVESTONE_BRICK.get(), 2);
+        quickStoneCutting(exporter, OLIVESTONE_TILE.getPart(StoneBlockSet.SetComponent.STAIRS), OLIVESTONE_BRICK.get());
+        quickStoneCutting(exporter, OLIVESTONE_TILE.getPart(StoneBlockSet.SetComponent.WALL), OLIVESTONE_BRICK.get());
+
+        quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
+        quickStoneCutting(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_TILE.get());
+        quickChiseledRecipe(exporter, CHISELED_OLIVESTONE.get(), OLIVESTONE_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), OLIVESTONE_BRICK.get());
+        quickPillarRecipe(exporter, CHISELED_OLIVESTONE.get(), OLIVESTONE_TILE.get());
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, ILLUMINATED_OLIVESTONE.get(), 2)
+                .requires(OLIVESTONE_BRICK.get())
+                .requires(Items.GLOWSTONE_DUST)
+                .requires(Items.GLOWSTONE_DUST)
+                .unlockedBy(getHasName(Items.GLOWSTONE_DUST), has(Items.GLOWSTONE_DUST))
+                .save(exporter);
+
+    }
 
     private void makeAlgalBrickRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, ALGAL_BLEND.get(), 2)
