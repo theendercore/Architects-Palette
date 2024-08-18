@@ -7,10 +7,7 @@ import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -132,6 +129,14 @@ public interface RecipeHelper {
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(from), BUILDING_BLOCKS, result, .1f, 100)
                 .unlockedBy(getHasName(from), has(from))
                 .save(output, blastingName(result, from));
+    }
+
+    static void quickWaxing(RecipeOutput output, ItemLike result, ItemLike input) {
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, result)
+                .requires(input)
+                .requires(Items.HONEYCOMB)
+                .unlockedBy(getHasName(input), has(input))
+                .save(output);
     }
 
     static void quickStoneCutting(RecipeOutput output, ItemLike result, ItemLike base) {

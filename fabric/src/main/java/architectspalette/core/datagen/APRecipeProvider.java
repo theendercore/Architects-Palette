@@ -149,39 +149,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
 
         //Base recipes for blocks
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SHEET_METAL.get(), 64)
-                .pattern("x")
-                .pattern("x")
-                .define('x', Items.IRON_BLOCK)
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
-                .save(exporter);
-
-        quickStonecuttingRecipe(exporter, Items.IRON_INGOT, SHEET_METAL.get(), 4);
-        quickStonecuttingRecipe(exporter, Items.IRON_BLOCK, SHEET_METAL.get(), 36);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TREAD_PLATE.get(), 4)
-                .pattern(" x ")
-                .pattern("xyx")
-                .pattern(" x ")
-                .define('x', Items.IRON_NUGGET)
-                .define('y', PLATING_BLOCK.get())
-                .unlockedBy(hasName(PLATING_BLOCK), hasItem(PLATING_BLOCK))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HAZARD_BLOCK.get(), 4)
-                .pattern("xy")
-                .pattern("yx")
-                .define('x', Blocks.YELLOW_CONCRETE)
-                .define('y', Blocks.BLACK_CONCRETE)
-                .unlockedBy(getHasName(Blocks.YELLOW_CONCRETE), has(Blocks.YELLOW_CONCRETE))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, BREAD_BLOCK.get(), 9)
-                .pattern("xxx")
-                .define('x', Blocks.HAY_BLOCK)
-                .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
-                .save(exporter);
-
         brickRecipe(exporter, ORACLE_BLOCK.get(), ORACLE_JELLY.get(), 8);
         brickRecipe(exporter, CEREBRAL_BLOCK.get(), CEREBRAL_PLATE.get(), 8);
 
@@ -229,6 +196,52 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('s', Blocks.STONE_SLAB)
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
+                .save(exporter);
+
+        // Hazard Sign
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HAZARD_SIGN.get(), 4)
+                .pattern(" i ")
+                .pattern("nin")
+                .define('i', Items.IRON_INGOT)
+                .define('n', Items.IRON_NUGGET)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(exporter);
+        quickStoneCutting(exporter, HAZARD_SIGN.get(), Items.IRON_BLOCK, 16);
+
+        // Threaded Plate
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TREAD_PLATE.get(), 4)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', Items.IRON_NUGGET)
+                .define('y', PLATING_BLOCK.get())
+                .unlockedBy(hasName(PLATING_BLOCK), hasItem(PLATING_BLOCK))
+                .save(exporter);
+
+        // Sheet Metal
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SHEET_METAL.get(), 64)
+                .pattern("x")
+                .pattern("x")
+                .define('x', Items.IRON_BLOCK)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(exporter);
+        quickStoneCutting(exporter, SHEET_METAL.get(), Items.IRON_INGOT, 4);
+        quickStoneCutting(exporter, SHEET_METAL.get(), Items.IRON_BLOCK, 36);
+
+        // Hazard Block
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HAZARD_BLOCK.get(), 4)
+                .pattern("xy")
+                .pattern("yx")
+                .define('x', Blocks.YELLOW_CONCRETE)
+                .define('y', Blocks.BLACK_CONCRETE)
+                .unlockedBy(getHasName(Blocks.YELLOW_CONCRETE), has(Blocks.YELLOW_CONCRETE))
+                .save(exporter);
+
+        // Bread Block
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, BREAD_BLOCK.get(), 9)
+                .pattern("xxx")
+                .define('x', Blocks.HAY_BLOCK)
+                .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT))
                 .save(exporter);
     }
 
@@ -658,6 +671,14 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 Pair.of(OXIDIZED_COPPER_NUB, Blocks.OXIDIZED_CUT_COPPER),
                 Pair.of(WAXED_OXIDIZED_COPPER_NUB, Blocks.WAXED_OXIDIZED_CUT_COPPER)
         ).forEach((pair) -> quickStoneCutting(exporter, pair.first.get(), pair.second.asItem(), 2));
+
+        //Waxing recipes
+        Stream.of(
+                Pair.of(WAXED_COPPER_NUB, COPPER_NUB),
+                Pair.of(WAXED_EXPOSED_COPPER_NUB, EXPOSED_COPPER_NUB),
+                Pair.of(WAXED_WEATHERED_COPPER_NUB, WEATHERED_COPPER_NUB),
+                Pair.of(WAXED_OXIDIZED_COPPER_NUB, OXIDIZED_COPPER_NUB)
+        ).forEach((pair) -> quickWaxing(exporter, pair.first.get(), pair.second.get()));
     }
 
 
