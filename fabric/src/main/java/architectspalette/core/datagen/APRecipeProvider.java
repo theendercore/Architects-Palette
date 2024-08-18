@@ -121,6 +121,27 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
                 .save(exporter);
 
+
+        // Molten Nether Brick
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MOLTEN_NETHER_BRICKS.get(), 4)
+                .pattern("XY")
+                .pattern("YX")
+                .define('X', Blocks.NETHER_BRICKS)
+                .define('Y', Blocks.MAGMA_BLOCK)
+                .unlockedBy(getHasName(Blocks.NETHER_BRICKS), has(Blocks.NETHER_BRICKS))
+                .save(exporter);
+
+
+        // Coarse Snow
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, COARSE_SNOW.get(), 4)
+                .requires(Items.SNOW_BLOCK)
+                .requires(Items.GRAVEL)
+                .requires(Items.SNOW_BLOCK)
+                .requires(Items.GRAVEL)
+                .unlockedBy(getHasName(Items.SNOW_BLOCK), has(Items.SNOW_BLOCK))
+                .save(exporter);
+
+
         // Acacia Totems
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ACACIA_TOTEM_WING.get(), 2)
                 .pattern("sl")
