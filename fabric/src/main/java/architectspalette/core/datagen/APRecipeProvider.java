@@ -56,8 +56,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         //
         makeTwistedWoodRecipes(exporter);
         //
+        makeEndStoneRecipes(exporter);
         makeCageLanternRecipes(exporter);
-        //
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         makeDripstoneRecipes(exporter);
@@ -540,6 +540,20 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
 
+
+    private void makeEndStoneRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, CHORAL_END_STONE_BRICKS.get(), 1)
+                .requires(Blocks.END_STONE_BRICKS)
+                .requires(Items.CHORUS_FRUIT)
+                .unlockedBy(getHasName(Items.CHORUS_FRUIT), has(Items.CHORUS_FRUIT))
+                .save(exporter);
+
+        quickChiseledRecipe(exporter, CHISELED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICK_SLAB, Blocks.END_STONE_BRICKS);
+        quickStoneCutting(exporter, CHISELED_END_STONE_BRICKS.get(), Blocks.END_STONE);
+
+        quickHeavyRecipe(exporter, HEAVY_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+    }
+
     private void makeCageLanternRecipes(RecipeOutput exporter) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
                 .pattern(" g ")
@@ -568,7 +582,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
                 .save(exporter);
     }
-
 
     private void makeBoardRecipes(RecipeOutput exporter) {
         boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
@@ -610,14 +623,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
         quickStoneCutting(exporter, DRIPSTONE_PILLAR.get(), Blocks.DRIPSTONE_BLOCK);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_DRIPSTONE_BRICKS.get(), 9)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', DRIPSTONE_BRICKS.get())
-                .unlockedBy(getHasName(DRIPSTONE_BRICKS.get()), has(DRIPSTONE_BRICKS.get()))
-                .save(exporter);
-        quickStoneCutting(exporter, HEAVY_DRIPSTONE_BRICKS.get(), DRIPSTONE_BRICKS.get());
+        quickHeavyRecipe(exporter, HEAVY_DRIPSTONE_BRICKS.get(), DRIPSTONE_BRICKS.get());
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, DRIPSTONE_LAMP.get(), 1)
                 .pattern(" x ")
@@ -643,14 +649,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
         quickStoneCutting(exporter, CALCITE_PILLAR.get(), Blocks.CALCITE);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_CALCITE_BRICKS.get(), 9)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', CALCITE_BRICKS.get())
-                .unlockedBy(getHasName(CALCITE_BRICKS.get()), has(CALCITE_BRICKS.get()))
-                .save(exporter);
-        quickStoneCutting(exporter, HEAVY_CALCITE_BRICKS.get(), CALCITE_BRICKS.get());
+        quickHeavyRecipe(exporter, HEAVY_CALCITE_BRICKS.get(), CALCITE_BRICKS.get());
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, CALCITE_LAMP.get(), 1)
                 .pattern(" x ")
@@ -682,14 +681,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickChiseledRecipe(exporter, CHISELED_TUFF.get(), TUFF_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), TUFF_BRICKS.get());
         quickStoneCutting(exporter, CHISELED_TUFF.get(), Blocks.TUFF);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_TUFF_BRICKS.get(), 9)
-                .pattern("###")
-                .pattern("###")
-                .pattern("###")
-                .define('#', TUFF_BRICKS.get())
-                .unlockedBy(getHasName(TUFF_BRICKS.get()), has(TUFF_BRICKS.get()))
-                .save(exporter);
-        quickStoneCutting(exporter, HEAVY_TUFF_BRICKS.get(), TUFF_BRICKS.get());
+        quickHeavyRecipe(exporter, HEAVY_TUFF_BRICKS.get(), TUFF_BRICKS.get());
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_LAMP.get(), 1)
                 .pattern(" x ")

@@ -26,6 +26,8 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.registry.APBlocks.DRIPSTONE_BRICKS;
+import static architectspalette.core.registry.APBlocks.HEAVY_DRIPSTONE_BRICKS;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
@@ -165,6 +167,21 @@ public interface RecipeHelper {
                 .unlockedBy(getHasName(base), hasItems(base))
                 .save(output);
         quickStoneCutting(output, result, base);
+    }
+
+    static void quickHeavyRecipe(RecipeOutput output, ItemLike result, ItemLike base) {
+        quick3x3Recipe(output, result, base, 9);
+        quickStoneCutting(output, result, base);
+    }
+
+    static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base, int count) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', base)
+                .unlockedBy(getHasName(base), has(base))
+                .save(output);
     }
 
     static void quickChiseledRecipe(RecipeOutput output, ItemLike result, ItemLike slab, ItemLike base) {
