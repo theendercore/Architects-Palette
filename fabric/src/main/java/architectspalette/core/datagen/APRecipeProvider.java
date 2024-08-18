@@ -50,7 +50,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeOsseousRecipes(exporter);
         makeWitheredRecipes(exporter);
         makeEntwineRecipes(exporter);
-        //
+        makeGlowstoneRecipes(exporter);
         makeGildedSandstoneRecipes(exporter);
         makeBlackstoneRecipes(exporter);
         makeTwistedWoodRecipes(exporter);
@@ -501,6 +501,16 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
     }
 
+    private void makeGlowstoneRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, POLISHED_GLOWSTONE.get(), Blocks.GLOWSTONE, 4);
+        quickStoneCutting(exporter, POLISHED_GLOWSTONE.get(), Blocks.GLOWSTONE);
+
+        quickStoneCutting(exporter, POLISHED_GLOWSTONE.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.GLOWSTONE, 2);
+        quickStoneCutting(exporter, POLISHED_GLOWSTONE.getPart(StoneBlockSet.SetComponent.WALL), Blocks.GLOWSTONE);
+
+        quickChiseledRecipe(exporter, RUNIC_GLOWSTONE.get(), POLISHED_GLOWSTONE.getPart(StoneBlockSet.SetComponent.SLAB), POLISHED_GLOWSTONE.get());
+        quickStoneCutting(exporter, RUNIC_GLOWSTONE.get(), Blocks.GLOWSTONE);
+    }
 
     private void makeGildedSandstoneRecipes(RecipeOutput exporter) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GILDED_SANDSTONE.get(), 2)
