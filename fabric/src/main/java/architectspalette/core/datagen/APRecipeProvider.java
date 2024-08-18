@@ -55,7 +55,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBlackstoneRecipes(exporter);
         //
         makeTwistedWoodRecipes(exporter);
-        //
+        makeBasaltRecipes(exporter);
         makeEndStoneRecipes(exporter);
         makeCageLanternRecipes(exporter);
         makeBoardRecipes(exporter);
@@ -131,7 +131,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(getHasName(Blocks.NETHER_BRICKS), has(Blocks.NETHER_BRICKS))
                 .save(exporter);
 
-
         // Coarse Snow
         ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, COARSE_SNOW.get(), 4)
                 .requires(Items.SNOW_BLOCK)
@@ -140,7 +139,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .requires(Items.GRAVEL)
                 .unlockedBy(getHasName(Items.SNOW_BLOCK), has(Items.SNOW_BLOCK))
                 .save(exporter);
-
 
         // Acacia Totems
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ACACIA_TOTEM_WING.get(), 2)
@@ -560,7 +558,24 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .group("wooden_button").save(exporter);
     }
 
+    private void makeBasaltRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, BASALT_TILES.get(), Blocks.POLISHED_BASALT, 4);
+        quickStoneCutting(exporter, BASALT_TILES.get(), Blocks.POLISHED_BASALT);
+        quickStoneCutting(exporter, BASALT_TILES.get(), Blocks.BASALT);
 
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.POLISHED_BASALT, 2);
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.POLISHED_BASALT);
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.WALL), Blocks.POLISHED_BASALT);
+
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.BASALT, 2);
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.BASALT);
+        quickStoneCutting(exporter, BASALT_TILES.getPart(StoneBlockSet.SetComponent.WALL), Blocks.BASALT);
+
+
+        quickChiseledRecipe(exporter, CHISELED_BASALT_TILES.get(), BASALT_TILES.getPart(StoneBlockSet.SetComponent.SLAB), BASALT_TILES.get());
+        quickStoneCutting(exporter, CHISELED_BASALT_TILES.get(), Blocks.POLISHED_BASALT);
+        quickStoneCutting(exporter, CHISELED_BASALT_TILES.get(), Blocks.BASALT);
+    }
 
     private void makeEndStoneRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, CHORAL_END_STONE_BRICKS.get(), 1)
