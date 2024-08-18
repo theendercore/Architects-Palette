@@ -61,7 +61,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         //
-        //
+        makeTuffRecipes(exporter);
         makeNetherBrassRecipes(exporter);
         makeEsoterrackRecipes(exporter);
         makeOnyxRecipes(exporter);
@@ -78,7 +78,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
-        quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
 
     }
 
@@ -583,6 +582,45 @@ public class APRecipeProvider extends FabricRecipeProvider {
         railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
     }
 
+
+    private void makeTuffRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_BRICKS.get(), 9)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("###")
+                .define('#', Blocks.TUFF)
+                .unlockedBy(getHasName(Blocks.TUFF), has(Blocks.TUFF))
+                .save(exporter);
+        quickStoneCutting(exporter, TUFF_BRICKS.get(), Blocks.TUFF);
+
+        quickStoneCutting(exporter, TUFF_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.TUFF, 2);
+        quickStoneCutting(exporter, TUFF_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.TUFF);
+        quickStoneCutting(exporter, TUFF_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), Blocks.TUFF);
+
+        quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
+        quickStoneCutting(exporter, TUFF_PILLAR.get(), Blocks.TUFF);
+
+        quickChiseledRecipe(exporter, CHISELED_TUFF.get(), TUFF_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), TUFF_BRICKS.get());
+        quickStoneCutting(exporter, CHISELED_TUFF.get(), Blocks.TUFF);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_TUFF_BRICKS.get(), 9)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', TUFF_BRICKS.get())
+                .unlockedBy(getHasName(TUFF_BRICKS.get()), has(TUFF_BRICKS.get()))
+                .save(exporter);
+        quickStoneCutting(exporter, HEAVY_TUFF_BRICKS.get(), TUFF_BRICKS.get());
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_LAMP.get(), 1)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', Blocks.TUFF)
+                .define('y', Items.GLOW_LICHEN)
+                .unlockedBy(getHasName(Blocks.TUFF), has(Blocks.TUFF))
+                .save(exporter);
+    }
 
     private void makeNetherBrassRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, BRASS_BLEND.get(), 4)
