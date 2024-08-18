@@ -64,11 +64,11 @@ public class APRecipeProvider extends FabricRecipeProvider {
         //
         makeNetherBrassRecipes(exporter);
         //
+        makeOnyxRecipes(exporter);
         makeWardstoneRecipes(exporter);
         makeAncientPlatingRecipes(exporter);
         makeNubRecipes(exporter);
         makeOracleRecipes(exporter);
-        //
 
 
         makeWarpingRecipes(exporter);
@@ -79,7 +79,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
-        quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
 
     }
@@ -646,6 +645,16 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
     }
 
+
+    private void makeOnyxRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, ONYX.get(), ONYX_BRICKS.get(), 4);
+        quickStoneCutting(exporter, ONYX_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), ONYX.get(), 2);
+        quickStoneCutting(exporter, ONYX_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), ONYX.get());
+        quickStoneCutting(exporter, ONYX_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), ONYX.get());
+
+        quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
+        quickStoneCutting(exporter, ONYX_PILLAR.get(), ONYX.get());
+    }
 
     private void makeWardstoneRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, WARDSTONE_BLEND.get(), 4)
