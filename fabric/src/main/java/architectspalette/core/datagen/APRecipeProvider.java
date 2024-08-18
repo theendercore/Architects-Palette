@@ -61,6 +61,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
         //
+        makeCalciteRecipes(exporter);
         makeTuffRecipes(exporter);
         makeNetherBrassRecipes(exporter);
         makeEsoterrackRecipes(exporter);
@@ -582,6 +583,36 @@ public class APRecipeProvider extends FabricRecipeProvider {
         railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
     }
 
+
+    private void makeCalciteRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, CALCITE_BRICKS.get(), Blocks.CALCITE, 4);
+        quickStoneCutting(exporter, CALCITE_BRICKS.get(), Blocks.CALCITE);
+
+        quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.CALCITE, 2);
+        quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.CALCITE);
+        quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), Blocks.CALCITE);
+
+        quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
+        quickStoneCutting(exporter, CALCITE_PILLAR.get(), Blocks.CALCITE);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_CALCITE_BRICKS.get(), 9)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', CALCITE_BRICKS.get())
+                .unlockedBy(getHasName(CALCITE_BRICKS.get()), has(CALCITE_BRICKS.get()))
+                .save(exporter);
+        quickStoneCutting(exporter, HEAVY_CALCITE_BRICKS.get(), CALCITE_BRICKS.get());
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, CALCITE_LAMP.get(), 1)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', CALCITE_BRICKS.get())
+                .define('y', Items.GLOW_INK_SAC)
+                .unlockedBy(getHasName(CALCITE_BRICKS.get()), has(CALCITE_BRICKS.get()))
+                .save(exporter);
+    }
 
     private void makeTuffRecipes(RecipeOutput exporter) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_BRICKS.get(), 9)
