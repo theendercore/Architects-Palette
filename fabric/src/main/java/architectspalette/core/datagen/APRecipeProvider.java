@@ -74,7 +74,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeNubRecipes(exporter);
         makeOracleRecipes(exporter);
 
-
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
@@ -250,6 +249,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('s', Blocks.STONE_SLAB)
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
+                .save(exporter);
+
+        // Charcoal Block
+        brickRecipe(exporter, APBlocks.CHARCOAL_BLOCK.get(), Items.CHARCOAL, 4);
+        ShapelessRecipeBuilder.shapeless(MISC, Items.CHARCOAL)
+                .requires(APBlocks.CHARCOAL_BLOCK.get())
+                .unlockedBy(getHasName(APBlocks.CHARCOAL_BLOCK.get()), has(APBlocks.CHARCOAL_BLOCK.get()))
                 .save(exporter);
     }
 
