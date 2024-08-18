@@ -608,7 +608,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .pattern("xyx")
                 .pattern(" x ")
                 .define('x', DRIPSTONE_BRICKS.get())
-                .define('y', Items.GLOW_INK_SAC)
+                .define('y', Items.AMETHYST_SHARD)
                 .unlockedBy(getHasName(DRIPSTONE_BRICKS.get()), has(DRIPSTONE_BRICKS.get()))
                 .save(exporter);
     }
@@ -647,7 +647,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
     private void makeTuffRecipes(RecipeOutput exporter) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_BRICKS.get(), 9)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, TUFF_BRICKS.get(), 8)
                 .pattern("###")
                 .pattern("# #")
                 .pattern("###")
@@ -895,7 +895,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickSmeltingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
         quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
         quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
-        quickSmeltingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmeltingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), HEAVY_END_STONE_BRICKS.get());
         quickSmeltingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
 
 
