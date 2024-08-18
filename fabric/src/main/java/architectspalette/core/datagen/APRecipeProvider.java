@@ -42,7 +42,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeAbyssalineRecipes(exporter);
         makeHadalineRecipes(exporter);
         //
-        makeMyoniteBrickRecipes(exporter);
+        makeMyoniteRecipes(exporter);
         makeOlivestoneBrickRecipes(exporter);
         makeAlgalBrickRecipes(exporter);
         makeOreBrickRecipes(exporter);
@@ -325,8 +325,44 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
-    private void makeMyoniteBrickRecipes(RecipeOutput exporter) {
 
+    private void makeMyoniteRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MYONITE.get(), 8)
+                .pattern("###")
+                .pattern("#O#")
+                .pattern("###")
+                .define('#', Blocks.STONE_BRICKS)
+                .define('O', Items.RED_MUSHROOM)
+                .unlockedBy(getHasName(Items.RED_MUSHROOM), has(Items.RED_MUSHROOM))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MYONITE.get(), 8)
+                .pattern("###")
+                .pattern("#O#")
+                .pattern("###")
+                .define('#', Blocks.STONE_BRICKS)
+                .define('O', Items.BROWN_MUSHROOM)
+                .unlockedBy(getHasName(Items.BROWN_MUSHROOM), has(Items.BROWN_MUSHROOM))
+                .save(exporter);
+
+
+        brickRecipe(exporter, MYONITE_BRICK.get(), MYONITE.get(), 4);
+        quickStoneCutting(exporter, MYONITE_BRICK.get(), MYONITE.get());
+
+        quickStoneCutting(exporter, MYONITE_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), MYONITE.get(), 2);
+        quickStoneCutting(exporter, MYONITE_BRICK.getPart(StoneBlockSet.SetComponent.STAIRS), MYONITE.get());
+        quickStoneCutting(exporter, MYONITE_BRICK.getPart(StoneBlockSet.SetComponent.WALL), MYONITE.get());
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, MUSHY_MYONITE_BRICK.get())
+                .requires(MYONITE_BRICK.get())
+                .requires(Items.BROWN_MUSHROOM)
+                .unlockedBy("has_myonite_bricks", hasItem(MYONITE_BRICK))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, MUSHY_MYONITE_BRICK.get())
+                .requires(MYONITE_BRICK.get())
+                .requires(Items.RED_MUSHROOM)
+                .unlockedBy("has_myonite_bricks", hasItem(MYONITE_BRICK))
+                .save(exporter);
 
     }
 
