@@ -60,7 +60,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         //
         makeBoardRecipes(exporter);
         railingRecipes(exporter);
-        //
+        makeDripstoneRecipes(exporter);
         makeCalciteRecipes(exporter);
         makeTuffRecipes(exporter);
         makeNetherBrassRecipes(exporter);
@@ -75,11 +75,8 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
-        quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
-        quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
-
     }
 
     private void miscRecipes(RecipeOutput exporter) {
@@ -583,6 +580,38 @@ public class APRecipeProvider extends FabricRecipeProvider {
         railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
     }
 
+    private void makeDripstoneRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, DRIPSTONE_BRICKS.get(), Blocks.DRIPSTONE_BLOCK, 4);
+        quickStoneCutting(exporter, DRIPSTONE_BRICKS.get(), Blocks.DRIPSTONE_BLOCK);
+
+        quickStoneCutting(exporter, DRIPSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.DRIPSTONE_BLOCK, 2);
+        quickStoneCutting(exporter, DRIPSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.DRIPSTONE_BLOCK);
+        quickStoneCutting(exporter, DRIPSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), Blocks.DRIPSTONE_BLOCK);
+
+        quickChiseledRecipe(exporter, CHISELED_DRIPSTONE.get(), DRIPSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), DRIPSTONE_BRICKS.get());
+        quickStoneCutting(exporter, CHISELED_DRIPSTONE.get(), Blocks.DRIPSTONE_BLOCK);
+
+        quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
+        quickStoneCutting(exporter, DRIPSTONE_PILLAR.get(), Blocks.DRIPSTONE_BLOCK);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, HEAVY_DRIPSTONE_BRICKS.get(), 9)
+                .pattern("###")
+                .pattern("###")
+                .pattern("###")
+                .define('#', DRIPSTONE_BRICKS.get())
+                .unlockedBy(getHasName(DRIPSTONE_BRICKS.get()), has(DRIPSTONE_BRICKS.get()))
+                .save(exporter);
+        quickStoneCutting(exporter, HEAVY_DRIPSTONE_BRICKS.get(), DRIPSTONE_BRICKS.get());
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, DRIPSTONE_LAMP.get(), 1)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', DRIPSTONE_BRICKS.get())
+                .define('y', Items.GLOW_INK_SAC)
+                .unlockedBy(getHasName(DRIPSTONE_BRICKS.get()), has(DRIPSTONE_BRICKS.get()))
+                .save(exporter);
+    }
 
     private void makeCalciteRecipes(RecipeOutput exporter) {
         brickRecipe(exporter, CALCITE_BRICKS.get(), Blocks.CALCITE, 4);
@@ -591,6 +620,9 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.CALCITE, 2);
         quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.CALCITE);
         quickStoneCutting(exporter, CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), Blocks.CALCITE);
+
+        quickChiseledRecipe(exporter, CHISELED_CALCITE.get(), CALCITE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), CALCITE_BRICKS.get());
+        quickStoneCutting(exporter, CHISELED_CALCITE.get(), Blocks.CALCITE);
 
         quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
         quickStoneCutting(exporter, CALCITE_PILLAR.get(), Blocks.CALCITE);
