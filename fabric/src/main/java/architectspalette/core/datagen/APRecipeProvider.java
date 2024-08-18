@@ -42,7 +42,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         miscRecipes(exporter);
         makeAbyssalineRecipes(exporter);
         makeHadalineRecipes(exporter);
-        //
+        makeFishRecipes(exporter);
         makeMyoniteRecipes(exporter);
         makeOlivestoneBrickRecipes(exporter);
         makeAlgalBrickRecipes(exporter);
@@ -326,6 +326,13 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
+    private void makeFishRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, COD_LOG.get(), Items.COD, 6);
+        brickRecipe(exporter, COD_SCALES.get(), COD_LOG.get(), 3);
+
+        brickRecipe(exporter, SALMON_LOG.get(), Items.SALMON, 6);
+        brickRecipe(exporter, SALMON_SCALES.get(), SALMON_LOG.get(), 3);
+    }
 
     private void makeMyoniteRecipes(RecipeOutput exporter) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MYONITE.get(), 8)
