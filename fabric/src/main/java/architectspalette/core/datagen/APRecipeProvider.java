@@ -121,6 +121,22 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
                 .save(exporter);
 
+        // Acacia Totems
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ACACIA_TOTEM_WING.get(), 2)
+                .pattern("sl")
+                .define('s', Items.STICK)
+                .define('l', Items.ACACIA_LEAVES)
+                .unlockedBy(getHasName(Items.ACACIA_LEAVES), has(Items.ACACIA_LEAVES))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GRINNING_ACACIA_TOTEM.get(), 2)
+                .pattern("s#s")
+                .pattern(" # ")
+                .define('#', Items.STRIPPED_ACACIA_LOG)
+                .define('s', Items.STICK)
+                .unlockedBy(getHasName(Items.STRIPPED_ACACIA_LOG), has(Items.STRIPPED_ACACIA_LOG))
+                .save(exporter);
+
 
         // ENDER_PEARL_BLOCK
         ShapelessRecipeBuilder.shapeless(MISC, ENDER_PEARL_BLOCK.get(), 1)
