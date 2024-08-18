@@ -50,6 +50,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeOsseousRecipes(exporter);
         makeWitheredRecipes(exporter);
         makeEntwineRecipes(exporter);
+        makeHeavyStoneBricks(exporter);
         makeGlowstoneRecipes(exporter);
         makeGildedSandstoneRecipes(exporter);
         makeBlackstoneRecipes(exporter);
@@ -323,6 +324,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
+
     private void makeAlgalBrickRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, ALGAL_BLEND.get(), 2)
                 .requires(Items.CLAY_BALL)
@@ -499,6 +501,21 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
 
         quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
+    }
+
+    private void makeHeavyStoneBricks(RecipeOutput exporter) {
+        quickHeavyRecipe(exporter, HEAVY_STONE_BRICKS.get(), Blocks.STONE_BRICKS);
+        quickHeavyRecipe(exporter, HEAVY_MOSSY_STONE_BRICKS.get(), Blocks.MOSSY_STONE_BRICKS);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, HEAVY_MOSSY_STONE_BRICKS.get(), 1)
+                .requires(HEAVY_STONE_BRICKS.get())
+                .requires(Items.VINE)
+                .unlockedBy(getHasName(HEAVY_STONE_BRICKS.get()), has(HEAVY_STONE_BRICKS.get()))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, HEAVY_MOSSY_STONE_BRICKS.get(), 1)
+                .requires(HEAVY_STONE_BRICKS.get())
+                .requires(Items.MOSS_BLOCK)
+                .unlockedBy(getHasName(HEAVY_STONE_BRICKS.get()), has(HEAVY_STONE_BRICKS.get()))
+                .save(exporter);
     }
 
     private void makeGlowstoneRecipes(RecipeOutput exporter) {
