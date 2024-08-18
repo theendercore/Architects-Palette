@@ -173,7 +173,9 @@ public interface RecipeHelper {
         quick3x3Recipe(output, result, base, 9);
         quickStoneCutting(output, result, base);
     }
-
+    static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base ) {
+        quick3x3Recipe(output, result, base, 1);
+    }
     static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base, int count) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
                 .pattern("###")

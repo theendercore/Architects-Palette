@@ -105,15 +105,15 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .unlockedBy(hasName(SPOOL), hasItem(SPOOL))
                 .save(exporter);
 
-        // rotten blocks
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
-                .pattern("xxx")
-                .pattern("xxx")
-                .pattern("xxx")
-                .define('x', Items.ROTTEN_FLESH)
-                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
+        //Scute Block
+        quick3x3Recipe(exporter, SCUTE_BLOCK.get(), Items.TURTLE_SCUTE);
+        ShapelessRecipeBuilder.shapeless(MISC, Items.TURTLE_SCUTE, 9)
+                .requires(SCUTE_BLOCK.get())
+                .unlockedBy(hasName(SCUTE_BLOCK), hasItem(SCUTE_BLOCK))
                 .save(exporter);
 
+        // Rotten Blocks
+        quick3x3Recipe(exporter, ROTTEN_FLESH_BLOCK.get(), Items.ROTTEN_FLESH);
         ShapelessRecipeBuilder.shapeless(MISC, Items.ROTTEN_FLESH, 9)
                 .requires(ROTTEN_FLESH_BLOCK.get())
                 .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
@@ -500,7 +500,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
         quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
     }
-
 
 
     private void makeGildedSandstoneRecipes(RecipeOutput exporter) {
