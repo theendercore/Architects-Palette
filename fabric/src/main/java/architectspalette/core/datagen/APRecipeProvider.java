@@ -39,6 +39,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
         StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
 
         miscRecipes(exporter);
+        makeAbyssalineRecipes(exporter);
         //
         makeAlgalBrickRecipes(exporter);
         makeOreBrickRecipes(exporter);
@@ -72,12 +73,11 @@ public class APRecipeProvider extends FabricRecipeProvider {
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
 
-        quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE_BRICKS.get());
+        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
         quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
         quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
         quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
         quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
-        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
         quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
         quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
         quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
@@ -220,6 +220,51 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
+    }
+
+    private void makeAbyssalineRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ABYSSALINE.get(), 12)
+                .pattern("O#O")
+                .pattern("# #")
+                .pattern("O#O")
+                .define('#', Items.PRISMARINE_SHARD)
+                .define('O', Items.OBSIDIAN)
+                .unlockedBy(getHasName(Items.OBSIDIAN), has(Items.OBSIDIAN))
+                .save(exporter);
+
+        brickRecipe(exporter, ABYSSALINE_BRICKS.get(), ABYSSALINE.get(), 4);
+        quickStoneCutting(exporter, ABYSSALINE_BRICKS.get(), ABYSSALINE.get());
+        quickStoneCutting(exporter, ABYSSALINE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), ABYSSALINE.get(), 2);
+
+        brickRecipe(exporter, ABYSSALINE_TILES.get(), ABYSSALINE_BRICKS.get(), 4);
+        quickStoneCutting(exporter, ABYSSALINE_TILES.get(), ABYSSALINE_BRICKS.get());
+        quickStoneCutting(exporter, ABYSSALINE_TILES.get(), ABYSSALINE.get());
+        quickStoneCutting(exporter, ABYSSALINE_TILES.getPart(StoneBlockSet.SetComponent.SLAB), ABYSSALINE_BRICKS.get(), 2);
+        quickStoneCutting(exporter, ABYSSALINE_TILES.getPart(StoneBlockSet.SetComponent.SLAB), ABYSSALINE.get(), 2);
+
+        quickChiseledRecipe(exporter, CHISELED_ABYSSALINE_BRICKS.get(), ABYSSALINE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), ABYSSALINE_BRICKS.get());
+        quickStoneCutting(exporter, CHISELED_ABYSSALINE_BRICKS.get(), ABYSSALINE.get());
+
+        quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE.get());
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ABYSSALINE_LAMP_BLOCK.get(), 8)
+                .pattern("OCO")
+                .pattern("#C#")
+                .pattern("OCO")
+                .define('#', Items.PRISMARINE_SHARD)
+                .define('O', Items.OBSIDIAN)
+                .define('C', Items.PRISMARINE_CRYSTALS)
+                .unlockedBy(getHasName(Items.OBSIDIAN), has(Items.OBSIDIAN))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ABYSSALINE_PLATING.get(), 8)
+                .pattern("xxx")
+                .pattern("x x")
+                .pattern("xxx")
+                .define('x', ABYSSALINE.get())
+                .unlockedBy(getHasName(ABYSSALINE.get()), has(ABYSSALINE.get()))
+                .save(exporter);
+        quickStoneCutting(exporter, ABYSSALINE_PLATING.get(), ABYSSALINE.get());
     }
 
     private void makeAlgalBrickRecipes(RecipeOutput exporter) {
