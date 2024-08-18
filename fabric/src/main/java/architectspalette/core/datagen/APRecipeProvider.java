@@ -37,30 +37,115 @@ public class APRecipeProvider extends FabricRecipeProvider {
         StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
 
         miscRecipes(exporter);
+        //
+        makeAlgalBrickRecipes(exporter);
+        makeOreBrickRecipes(exporter);
+        makeFlintRecipes(exporter);
+        makePolishedPackedIceRecipes(exporter);
+        makeSunmetalRecipes(exporter);
+        makeOsseousRecipes(exporter);
+        makeWitheredRecipes(exporter);
+        makeEntwineRecipes(exporter);
+        //
+        //
+        makeBlackstoneRecipes(exporter);
+        //
+        makeTwistedWoodRecipes(exporter);
+        //
+        makeCageLanternRecipes(exporter);
+        //
+        makeBoardRecipes(exporter);
+        railingRecipes(exporter);
+        //
+        //
+        makeNetherBrassRecipes(exporter);
+        //
+        makeWardstoneRecipes(exporter);
+        makeAncientPlatingRecipes(exporter);
+        //
+
+
 
         makeWarpingRecipes(exporter);
         smeltingRecipes(exporter);
-        makePillarRecipes(exporter);
-        makeOreBrickRecipes(exporter);
-        makeBoardRecipes(exporter);
-        railingRecipes(exporter);
-        makeWoodRecipes(exporter);
-        makeCageLanternRecipes(exporter);
 
-        makeWardstoneRecipes(exporter);
-        makeFlintRecipes(exporter);
-        makeWitheredRecipes(exporter);
-        makeOsseousRecipes(exporter);
-        makeNetherBrassRecipes(exporter);
-        makeSunmetalRecipes(exporter);
-        makeBlackstoneRecipes(exporter);
-        makeEntwineRecipes(exporter);
-        makeAncientPlatingRecipes(exporter);
-        makePolishedPackedIceRecipes(exporter);
-        makeAlgalBrickRecipes(exporter);
+        quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE_BRICKS.get());
+        quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
+        quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
+        quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
+        quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
+        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
+        quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
+        quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
+        quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
+
     }
 
     private void miscRecipes(RecipeOutput exporter) {
+        //Plating & Pipe
+        brickRecipe(exporter, PIPE.get(), PLATING_BLOCK.get(), 4);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PLATING_BLOCK.get(), 8)
+                .pattern(" x ")
+                .pattern("xyx")
+                .pattern(" x ")
+                .define('x', Items.IRON_NUGGET)
+                .define('y', Items.IRON_INGOT)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SUNSTONE.get(), 4)
+                .pattern("XY")
+                .pattern("YX")
+                .define('X', Items.BASALT)
+                .define('Y', SUNMETAL_BLEND.get())
+                .unlockedBy(getHasName(SUNMETAL_BLEND.get()), has(SUNMETAL_BLEND.get()))
+                .save(exporter);
+
+
+        // rotten blocks
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
+                .pattern("xxx")
+                .pattern("xxx")
+                .pattern("xxx")
+                .define('x', Items.ROTTEN_FLESH)
+                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.ROTTEN_FLESH, 9)
+                .requires(ROTTEN_FLESH_BLOCK.get())
+                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
+                .save(exporter);
+
+
+        // ENDER_PEARL_BLOCK
+        ShapelessRecipeBuilder.shapeless(MISC, ENDER_PEARL_BLOCK.get(), 1)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, Items.ENDER_PEARL, 4)
+                .requires(ENDER_PEARL_BLOCK.get())
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
+                .save(exporter);
+
+
+        //UNOBTANIUM
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UNOBTANIUM_BLOCK.get(), 1)
+                .pattern("xx")
+                .pattern("xx")
+                .define('x', UNOBTANIUM.get())
+                .unlockedBy(hasName(UNOBTANIUM_BLOCK), hasItem(UNOBTANIUM_BLOCK))
+                .save(exporter);
+
+        ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
+                .requires(UNOBTANIUM_BLOCK.get())
+                .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
+                .save(exporter);
+
+
         //Base recipes for blocks
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SHEET_METAL.get(), 64)
                 .pattern("x")
@@ -143,106 +228,33 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('b', MOONSHALE)
                 .unlockedBy(getHasName(MOONSHALE), has(MOONSHALE.get()))
                 .save(exporter);
-
-//        UNOBTANIUM
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, UNOBTANIUM_BLOCK.get(), 1)
-                .pattern("xx")
-                .pattern("xx")
-                .define('x', UNOBTANIUM.get())
-                .unlockedBy(hasName(UNOBTANIUM_BLOCK), hasItem(UNOBTANIUM_BLOCK))
-                .save(exporter);
-
-        ShapelessRecipeBuilder.shapeless(MISC, UNOBTANIUM.get(), 5)
-                .requires(UNOBTANIUM_BLOCK.get())
-                .unlockedBy(getHasName(UNOBTANIUM.get()), has(UNOBTANIUM.get()))
-                .save(exporter);
-
-        // ender pearl
-        ShapelessRecipeBuilder.shapeless(MISC, ENDER_PEARL_BLOCK.get(), 1)
-                .requires(Items.ENDER_PEARL)
-                .requires(Items.ENDER_PEARL)
-                .requires(Items.ENDER_PEARL)
-                .requires(Items.ENDER_PEARL)
-                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
-                .save(exporter);
-
-        ShapelessRecipeBuilder.shapeless(MISC, Items.ENDER_PEARL, 4)
-                .requires(ENDER_PEARL_BLOCK.get())
-                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
-                .save(exporter);
-
-
-        // rotten blocks
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ROTTEN_FLESH_BLOCK.get(), 1)
-                .pattern("xxx")
-                .pattern("xxx")
-                .pattern("xxx")
-                .define('x', Items.ROTTEN_FLESH)
-                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
-                .save(exporter);
-
-        ShapelessRecipeBuilder.shapeless(MISC, Items.ROTTEN_FLESH, 9)
-                .requires(ROTTEN_FLESH_BLOCK.get())
-                .unlockedBy(hasName(ROTTEN_FLESH_BLOCK), hasItem(ROTTEN_FLESH_BLOCK))
-                .save(exporter);
-
-        // Plating & Piping
-        brickRecipe(exporter, PIPE.get(), PLATING_BLOCK.get(), 4);
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, PLATING_BLOCK.get(), 8)
-                .pattern(" x ")
-                .pattern("xyx")
-                .pattern(" x ")
-                .define('x', Items.IRON_NUGGET)
-                .define('y', Items.IRON_INGOT)
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SUNSTONE.get(), 4)
-                .pattern("XY")
-                .pattern("YX")
-                .define('X', Items.BASALT)
-                .define('Y', SUNMETAL_BLEND.get())
-                .unlockedBy(getHasName(SUNMETAL_BLEND.get()), has(SUNMETAL_BLEND.get()))
-                .save(exporter);
     }
 
-    private void smeltingRecipes(RecipeOutput exporter) {
-        quickSmeltingRecipe(exporter, MOONSHALE, CRATERSTONE);
-        quickSmeltingRecipe(exporter, APItems.ALGAL_BRICK.get(), ALGAL_BLEND.get());
-        quickSmeltingRecipe(exporter, Items.BLACK_DYE, WITHERED_BONE.get());
-        quickSmeltingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
-        quickSmeltingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
-        quickSmeltingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
-        quickSmeltingRecipe(exporter, WARDSTONE_BRICK.get(), WARDSTONE_BLEND.get());
+    private void makeAlgalBrickRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, ALGAL_BLEND.get(), 2)
+                .requires(Items.CLAY_BALL)
+                .requires(Items.KELP)
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .save(exporter);
 
-        //Crack recipes
-        quickSmeltingRecipe(exporter, CRACKED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.get());
-        quickSmeltingRecipe(exporter, CRACKED_BASALT_TILES.get(), BASALT_TILES.get());
-        quickSmeltingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
-        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
-        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
-        quickSmeltingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
-        quickSmeltingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
+        brickRecipe(exporter, APBlocks.ALGAL_BRICK.get(), APItems.ALGAL_BRICK.get(), 4);
 
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_LAMP.get(), 1)
+                .pattern("xdx")
+                .pattern("ddd")
+                .pattern("xdx")
+                .define('d', Items.GLOWSTONE_DUST)
+                .define('x', APItems.ALGAL_BRICK.get())
+                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
+                .save(exporter);
 
-        quickSmokingRecipe(exporter, APBlocks.CHARCOAL_BLOCK.get(), ItemTags.LOGS_THAT_BURN);
+        quickChiseledRecipe(exporter, CHISELED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), APBlocks.ALGAL_BRICK.get());
 
-
-        quickBlastingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
-        quickBlastingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
-        quickBlastingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
-    }
-
-    private void makePillarRecipes(RecipeOutput exporter) {
-        quickPillarRecipe(exporter, ABYSSALINE_PILLAR.get(), ABYSSALINE_BRICKS.get());
-        quickPillarRecipe(exporter, CALCITE_PILLAR.get(), CALCITE_BRICKS.get());
-        quickPillarRecipe(exporter, DRIPSTONE_PILLAR.get(), DRIPSTONE_BRICKS.get());
-        quickPillarRecipe(exporter, ESOTERRACK_PILLAR.get(), ESOTERRACK.get());
-        quickPillarRecipe(exporter, GILDED_SANDSTONE_PILLAR.get(), GILDED_SANDSTONE.get());
-        quickPillarRecipe(exporter, HADALINE_PILLAR.get(), HADALINE_BRICKS.get());
-        quickPillarRecipe(exporter, OLIVESTONE_PILLAR.get(), OLIVESTONE_BRICK.get());
-        quickPillarRecipe(exporter, ONYX_PILLAR.get(), ONYX_BRICKS.get());
-        quickPillarRecipe(exporter, TUFF_PILLAR.get(), TUFF_BRICKS.get());
+        ShapelessRecipeBuilder.shapeless(MISC, OVERGROWN_ALGAL_BRICK.get(), 1)
+                .requires(APBlocks.ALGAL_BRICK.get())
+                .requires(Items.KELP)
+                .unlockedBy(getHasName(APBlocks.ALGAL_BRICK.get()), has(APBlocks.ALGAL_BRICK.get()))
+                .save(exporter);
     }
 
     private void makeOreBrickRecipes(RecipeOutput exporter) {
@@ -255,143 +267,6 @@ public class APRecipeProvider extends FabricRecipeProvider {
         oreBrickRecipe(exporter, REDSTONE_BRICKS.get(), Items.REDSTONE);
     }
 
-    private void makeBoardRecipes(RecipeOutput exporter) {
-        boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
-        boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
-        boardRecipe(exporter, CRIMSON_BOARDS.get(), Blocks.CRIMSON_PLANKS);
-        boardRecipe(exporter, DARK_OAK_BOARDS.get(), Blocks.DARK_OAK_PLANKS);
-        boardRecipe(exporter, JUNGLE_BOARDS.get(), Blocks.JUNGLE_PLANKS);
-        boardRecipe(exporter, MANGROVE_BOARDS.get(), Blocks.MANGROVE_PLANKS);
-        boardRecipe(exporter, OAK_BOARDS.get(), Blocks.OAK_PLANKS);
-        boardRecipe(exporter, SPRUCE_BOARDS.get(), Blocks.SPRUCE_PLANKS);
-        boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
-        boardRecipe(exporter, WARPED_BOARDS.get(), Blocks.WARPED_PLANKS);
-    }
-
-    private void railingRecipes(RecipeOutput exporter) {
-        railingRecipe(exporter, ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
-        railingRecipe(exporter, BIRCH_RAILING.get(), Blocks.BIRCH_PLANKS);
-        railingRecipe(exporter, CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
-        railingRecipe(exporter, DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
-        railingRecipe(exporter, JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
-        railingRecipe(exporter, MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
-        railingRecipe(exporter, OAK_RAILING.get(), Blocks.OAK_PLANKS);
-        railingRecipe(exporter, SPRUCE_RAILING.get(), Blocks.SPRUCE_PLANKS);
-        railingRecipe(exporter, TWISTED_RAILING.get(), TWISTED_PLANKS.get());
-        railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
-    }
-
-    private void makeWarpingRecipes(RecipeOutput exporter) {
-        netherWarpingRecipe(exporter, ESOTERRACK.get(), Blocks.ANDESITE);
-        netherWarpingRecipe(exporter, ONYX.get(), Blocks.GRANITE);
-        netherWarpingRecipe(exporter, NEBULITE.get(), Blocks.DIORITE);
-        netherWarpingRecipe(exporter, MOONSHALE.get(), Blocks.STONE);
-        netherWarpingRecipe(exporter, MOONSHALE.getChild(BRICKS).get(), Blocks.STONE_BRICKS);
-        netherWarpingRecipe(exporter, CRATERSTONE.get(), Blocks.COBBLESTONE);
-
-        netherWarpingRecipe(exporter, WARPSTONE.get(), Blocks.CLAY);
-        netherWarpingRecipe(exporter, UNOBTANIUM.get(), Items.NETHERITE_INGOT);
-
-        netherWarpingRecipe(exporter, TWISTED_SAPLING.get(), ItemTags.SAPLINGS);
-        netherWarpingRecipe(exporter, TWISTED_PLANKS.get(), ItemTags.PLANKS);
-        netherWarpingRecipe(exporter, TWISTED_LOG.get(), ItemTags.LOGS);
-        netherWarpingRecipe(exporter, TWISTED_LEAVES.get(), ItemTags.LEAVES);
-
-        netherWarpingRecipe(exporter, MOONSTONE.get(), SUNSTONE.get());
-
-        netherWarpingRecipe(exporter, HADALINE_TILES.get(), ABYSSALINE_TILES.get());
-        netherWarpingRecipe(exporter, HADALINE_PLATING.get(), ABYSSALINE_PLATING.get());
-        netherWarpingRecipe(exporter, HADALINE_PILLAR.get(), ABYSSALINE_PILLAR.get());
-        netherWarpingRecipe(exporter, HADALINE_LAMP_BLOCK.get(), ABYSSALINE_LAMP_BLOCK.get());
-        netherWarpingRecipe(exporter, HADALINE.get(), ABYSSALINE.get());
-        netherWarpingRecipe(exporter, HADALINE_BRICKS.get(), ABYSSALINE_BRICKS.get());
-        netherWarpingRecipe(exporter, CHISELED_HADALINE_BRICKS.get(), CHISELED_ABYSSALINE_BRICKS.get());
-
-        netherWarpingRecipe(exporter, ENTRAILS.get(), ROTTEN_FLESH_BLOCK.get());
-    }
-
-    private void makeWoodRecipes(RecipeOutput exporter) {
-        // (ender) this is messy, but it works
-        woodFromLogs(exporter, TWISTED_WOOD.get(), TWISTED_LOG.get());
-        woodFromLogs(exporter, STRIPPED_TWISTED_WOOD.get(), STRIPPED_TWISTED_LOG.get());
-
-        trapdoorBuilder(TWISTED_TRAPDOOR.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("wooden_trapdoor").save(exporter);
-        pressurePlateBuilder(RecipeCategory.REDSTONE, TWISTED_PRESSURE_PLATE.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("pressurePlate").save(exporter);
-        planksFromLogs(exporter, TWISTED_PLANKS.get(), APTags.TWISTED_LOGS_ITEM, 4);
-        fenceBuilder(TWISTED_FENCE.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("wooden_fence").save(exporter);
-        fenceGateBuilder(TWISTED_FENCE_GATE.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("wooden_fence_gate").save(exporter);
-        doorBuilder(TWISTED_DOOR.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("wooden_door").save(exporter);
-        buttonBuilder(TWISTED_BUTTON.get(), ingredient(TWISTED_PLANKS))
-                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
-                .group("wooden_button").save(exporter);
-    }
-
-    private void makeCageLanternRecipes(RecipeOutput exporter) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
-                .pattern(" g ")
-                .pattern("blb")
-                .define('g', Items.GLASS_PANE)
-                .define('l', Items.GLOWSTONE_DUST)
-                .define('b', APItems.ALGAL_BRICK.get())
-                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GLOWSTONE_CAGE_LANTERN.get(), 1)
-                .pattern(" g ")
-                .pattern("blb")
-                .define('g', Items.GLASS_PANE)
-                .define('l', Items.GLOWSTONE_DUST)
-                .define('b', APTags.WITHERED_BONES)
-                .unlockedBy(getHasName(APItems.WITHERED_BONE.get()), has(APTags.WITHERED_BONES))
-                .save(exporter);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, REDSTONE_CAGE_LANTERN.get(), 1)
-                .pattern(" g ")
-                .pattern("blb")
-                .define('g', Items.GLASS_PANE)
-                .define('l', Items.REDSTONE)
-                .define('b', Items.IRON_NUGGET)
-                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
-                .save(exporter);
-    }
-
-    private void makeWardstoneRecipes(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(MISC, WARDSTONE_BLEND.get(), 4)
-                .requires(Items.NETHER_WART)
-                .requires(Items.LAPIS_LAZULI)
-                .requires(Items.NETHER_WART)
-                .unlockedBy(getHasName(Items.NETHER_WART), has(Items.NETHER_WART))
-                .save(exporter);
-
-        brickRecipe(exporter, WARDSTONE.get(), WARDSTONE_BRICK.get(), 4);
-        quickChiseledRecipe(exporter, CHISELED_WARDSTONE.get(), WARDSTONE.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get());
-
-        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get(), 2);
-        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), WARDSTONE.get());
-        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), WARDSTONE.get());
-
-        quickStoneCutting(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get());
-        brickRecipe(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get(), 4);
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, WARDSTONE_LAMP.get(), 4)
-                .pattern("xxx")
-                .pattern("x x")
-                .pattern("xxx")
-                .define('x', WARDSTONE_BRICKS.get())
-                .unlockedBy(hasName(WARDSTONE_BRICKS), hasItem(WARDSTONE_BRICKS))
-                .save(exporter);
-        quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
-    }
-
     private void makeFlintRecipes(RecipeOutput exporter) {
         brickRecipe(exporter, FLINT_BLOCK.get(), Items.FLINT, 4);
         brickRecipe(exporter, FLINT_TILES.get(), FLINT_BLOCK.get(), 4);
@@ -402,6 +277,64 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, FLINT_TILES.getPart(StoneBlockSet.SetComponent.WALL), FLINT_BLOCK.get());
 
         quickPillarRecipe(exporter, FLINT_PILLAR.get(), FLINT_BLOCK.get());
+    }
+
+    private void makePolishedPackedIceRecipes(RecipeOutput exporter) {
+        brickRecipe(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE, 4);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE);
+
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.PACKED_ICE, 2);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.PACKED_ICE);
+        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.WALL), Blocks.PACKED_ICE);
+
+        quickChiseledRecipe(exporter, CHISELED_PACKED_ICE.get(), POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), POLISHED_PACKED_ICE.get());
+        quickStoneCutting(exporter, CHISELED_PACKED_ICE.get(), Blocks.PACKED_ICE);
+
+        quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
+        quickStoneCutting(exporter, PACKED_ICE_PILLAR.get(), Blocks.PACKED_ICE);
+    }
+
+    private void makeSunmetalRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, SUNMETAL_BLEND.get(), 4)
+                .requires(Items.SOUL_SAND, 2)
+                .requires(Items.GOLD_NUGGET, 2)
+                .unlockedBy(getHasName(Items.SOUL_SAND), has(Items.SOUL_SAND))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(MISC, SUNMETAL_BARS.get(), 16)
+                .pattern("bbb")
+                .pattern("bbb")
+                .define('b', SUNMETAL_BRICK.get())
+                .unlockedBy(getHasName(SUNMETAL_BRICK.get()), has(SUNMETAL_BRICK.get()))
+                .save(exporter);
+
+        brickRecipe(exporter, SUNMETAL.get(), SUNMETAL_BRICK.get(), 4);
+
+        quickChiseledRecipe(exporter, CHISELED_SUNMETAL_BLOCK.get(), SUNMETAL.getPart(StoneBlockSet.SetComponent.SLAB), SUNMETAL.get());
+
+        quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL_BRICK.get());
+    }
+
+    private void makeOsseousRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, LIT_OSSEOUS_SKULL.get(), 1)
+                .pattern("X")
+                .pattern("Y")
+                .define('X', OSSEOUS_SKULL.get())
+                .define('Y', Items.TORCH)
+                .unlockedBy(hasName(OSSEOUS_SKULL), hasItem(OSSEOUS_SKULL))
+                .save(exporter);
+
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), Items.BONE_BLOCK, 2);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.STAIRS), Items.BONE_BLOCK);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.WALL), Items.BONE_BLOCK);
+        quickStoneCutting(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK);
+
+        brickRecipe(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK, 4);
+        quickStoneCutting(exporter, OSSEOUS_SKULL.get(), Items.BONE_BLOCK);
+        quickChiseledRecipe(exporter, OSSEOUS_SKULL.get(), OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), OSSEOUS_BRICK.get());
+
+        quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
+        quickStoneCutting(exporter, OSSEOUS_PILLAR.get(), Items.BONE_BLOCK);
     }
 
     private void makeWitheredRecipes(RecipeOutput exporter) {
@@ -452,27 +385,142 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickStoneCutting(exporter, WITHERED_OSSEOUS_PILLAR.get(), WITHERED_BONE_BLOCK.get());
     }
 
-    private void makeOsseousRecipes(RecipeOutput exporter) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, LIT_OSSEOUS_SKULL.get(), 1)
-                .pattern("X")
-                .pattern("Y")
-                .define('X', OSSEOUS_SKULL.get())
-                .define('Y', Items.TORCH)
-                .unlockedBy(hasName(OSSEOUS_SKULL), hasItem(OSSEOUS_SKULL))
+    private void makeEntwineRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_ROD.get(), 4)
+                .pattern("XYX")
+                .define('X', Items.IRON_NUGGET)
+                .define('Y', Items.ENDER_PEARL)
+                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
                 .save(exporter);
 
-        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), Items.BONE_BLOCK, 2);
-        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.STAIRS), Items.BONE_BLOCK);
-        quickStoneCutting(exporter, OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.WALL), Items.BONE_BLOCK);
-        quickStoneCutting(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK);
+        brickRecipe(exporter, ENTWINE.get(), ENTWINE_ROD.get(), 4);
 
-        brickRecipe(exporter, OSSEOUS_BRICK.get(), Items.BONE_BLOCK, 4);
-        quickStoneCutting(exporter, OSSEOUS_SKULL.get(), Items.BONE_BLOCK);
-        quickChiseledRecipe(exporter, OSSEOUS_SKULL.get(), OSSEOUS_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), OSSEOUS_BRICK.get());
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_BARS.get(), 16)
+                .pattern("###")
+                .pattern("###")
+                .define('#', ENTWINE_ROD.get())
+                .unlockedBy(getHasName(ENTWINE_ROD.get()), has(ENTWINE_ROD.get()))
+                .save(exporter);
 
-        quickPillarRecipe(exporter, OSSEOUS_PILLAR.get(), OSSEOUS_BRICK.get());
-        quickStoneCutting(exporter, OSSEOUS_PILLAR.get(), Items.BONE_BLOCK);
+        quickChiseledRecipe(exporter, CHISELED_ENTWINE.get(), ENTWINE.getPart(StoneBlockSet.SetComponent.SLAB), ENTWINE.get());
+
+
+        quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
     }
+
+
+    private void makeBlackstoneRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE.get(), 1)
+                .requires(Items.BLACKSTONE)
+                .requires(Items.WEEPING_VINES)
+                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE_BRICKS.get(), 1)
+                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
+                .requires(Items.WEEPING_VINES)
+                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
+                .save(exporter);
+        quickStoneCutting(exporter, WEEPING_BLACKSTONE_BRICKS.get(), WEEPING_BLACKSTONE.get(), 1);
+
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE.get(), 1)
+                .requires(Items.BLACKSTONE)
+                .requires(Items.TWISTING_VINES)
+                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
+                .save(exporter);
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE_BRICKS.get(), 1)
+                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
+                .requires(Items.TWISTING_VINES)
+                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
+                .save(exporter);
+        quickStoneCutting(exporter, TWISTING_BLACKSTONE_BRICKS.get(), TWISTING_BLACKSTONE.get(), 1);
+
+    }
+
+
+    private void makeTwistedWoodRecipes(RecipeOutput exporter) {
+        // (ender) this is messy, but it works
+        woodFromLogs(exporter, TWISTED_WOOD.get(), TWISTED_LOG.get());
+        woodFromLogs(exporter, STRIPPED_TWISTED_WOOD.get(), STRIPPED_TWISTED_LOG.get());
+
+        trapdoorBuilder(TWISTED_TRAPDOOR.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("wooden_trapdoor").save(exporter);
+        pressurePlateBuilder(RecipeCategory.REDSTONE, TWISTED_PRESSURE_PLATE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("pressurePlate").save(exporter);
+        planksFromLogs(exporter, TWISTED_PLANKS.get(), APTags.TWISTED_LOGS_ITEM, 4);
+        fenceBuilder(TWISTED_FENCE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("wooden_fence").save(exporter);
+        fenceGateBuilder(TWISTED_FENCE_GATE.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("wooden_fence_gate").save(exporter);
+        doorBuilder(TWISTED_DOOR.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("wooden_door").save(exporter);
+        buttonBuilder(TWISTED_BUTTON.get(), ingredient(TWISTED_PLANKS))
+                .unlockedBy(hasName(TWISTED_PLANKS), hasItem(TWISTED_PLANKS))
+                .group("wooden_button").save(exporter);
+    }
+
+
+    private void makeCageLanternRecipes(RecipeOutput exporter) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.GLOWSTONE_DUST)
+                .define('b', APItems.ALGAL_BRICK.get())
+                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, GLOWSTONE_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.GLOWSTONE_DUST)
+                .define('b', APTags.WITHERED_BONES)
+                .unlockedBy(getHasName(APItems.WITHERED_BONE.get()), has(APTags.WITHERED_BONES))
+                .save(exporter);
+
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, REDSTONE_CAGE_LANTERN.get(), 1)
+                .pattern(" g ")
+                .pattern("blb")
+                .define('g', Items.GLASS_PANE)
+                .define('l', Items.REDSTONE)
+                .define('b', Items.IRON_NUGGET)
+                .unlockedBy(getHasName(Items.REDSTONE), has(Items.REDSTONE))
+                .save(exporter);
+    }
+
+
+
+    private void makeBoardRecipes(RecipeOutput exporter) {
+        boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
+        boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
+        boardRecipe(exporter, CRIMSON_BOARDS.get(), Blocks.CRIMSON_PLANKS);
+        boardRecipe(exporter, DARK_OAK_BOARDS.get(), Blocks.DARK_OAK_PLANKS);
+        boardRecipe(exporter, JUNGLE_BOARDS.get(), Blocks.JUNGLE_PLANKS);
+        boardRecipe(exporter, MANGROVE_BOARDS.get(), Blocks.MANGROVE_PLANKS);
+        boardRecipe(exporter, OAK_BOARDS.get(), Blocks.OAK_PLANKS);
+        boardRecipe(exporter, SPRUCE_BOARDS.get(), Blocks.SPRUCE_PLANKS);
+        boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
+        boardRecipe(exporter, WARPED_BOARDS.get(), Blocks.WARPED_PLANKS);
+    }
+
+    private void railingRecipes(RecipeOutput exporter) {
+        railingRecipe(exporter, ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
+        railingRecipe(exporter, BIRCH_RAILING.get(), Blocks.BIRCH_PLANKS);
+        railingRecipe(exporter, CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
+        railingRecipe(exporter, DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
+        railingRecipe(exporter, JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
+        railingRecipe(exporter, MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
+        railingRecipe(exporter, OAK_RAILING.get(), Blocks.OAK_PLANKS);
+        railingRecipe(exporter, SPRUCE_RAILING.get(), Blocks.SPRUCE_PLANKS);
+        railingRecipe(exporter, TWISTED_RAILING.get(), TWISTED_PLANKS.get());
+        railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
+    }
+
 
     private void makeNetherBrassRecipes(RecipeOutput exporter) {
         ShapelessRecipeBuilder.shapeless(MISC, BRASS_BLEND.get(), 4)
@@ -534,75 +582,32 @@ public class APRecipeProvider extends FabricRecipeProvider {
         quickPillarRecipe(exporter, NETHER_BRASS_PILLAR.get(), APBlocks.NETHER_BRASS.get());
     }
 
-    private void makeSunmetalRecipes(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(MISC, SUNMETAL_BLEND.get(), 4)
-                .requires(Items.SOUL_SAND, 2)
-                .requires(Items.GOLD_NUGGET, 2)
-                .unlockedBy(getHasName(Items.SOUL_SAND), has(Items.SOUL_SAND))
+
+    private void makeWardstoneRecipes(RecipeOutput exporter) {
+        ShapelessRecipeBuilder.shapeless(MISC, WARDSTONE_BLEND.get(), 4)
+                .requires(Items.NETHER_WART)
+                .requires(Items.LAPIS_LAZULI)
+                .requires(Items.NETHER_WART)
+                .unlockedBy(getHasName(Items.NETHER_WART), has(Items.NETHER_WART))
                 .save(exporter);
 
-        ShapedRecipeBuilder.shaped(MISC, SUNMETAL_BARS.get(), 16)
-                .pattern("bbb")
-                .pattern("bbb")
-                .define('b', SUNMETAL_BRICK.get())
-                .unlockedBy(getHasName(SUNMETAL_BRICK.get()), has(SUNMETAL_BRICK.get()))
+        brickRecipe(exporter, WARDSTONE.get(), WARDSTONE_BRICK.get(), 4);
+        quickChiseledRecipe(exporter, CHISELED_WARDSTONE.get(), WARDSTONE.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get());
+
+        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.SLAB), WARDSTONE.get(), 2);
+        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.STAIRS), WARDSTONE.get());
+        quickStoneCutting(exporter, WARDSTONE_BRICKS.getPart(StoneBlockSet.SetComponent.WALL), WARDSTONE.get());
+
+        quickStoneCutting(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get());
+        brickRecipe(exporter, WARDSTONE_BRICKS.get(), WARDSTONE.get(), 4);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, WARDSTONE_LAMP.get(), 4)
+                .pattern("xxx")
+                .pattern("x x")
+                .pattern("xxx")
+                .define('x', WARDSTONE_BRICKS.get())
+                .unlockedBy(hasName(WARDSTONE_BRICKS), hasItem(WARDSTONE_BRICKS))
                 .save(exporter);
-
-        brickRecipe(exporter, SUNMETAL.get(), SUNMETAL_BRICK.get(), 4);
-
-        quickChiseledRecipe(exporter, CHISELED_SUNMETAL_BLOCK.get(), SUNMETAL.getPart(StoneBlockSet.SetComponent.SLAB), SUNMETAL.get());
-
-        quickPillarRecipe(exporter, SUNMETAL_PILLAR.get(), SUNMETAL_BRICK.get());
-    }
-
-    private void makeBlackstoneRecipes(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE.get(), 1)
-                .requires(Items.BLACKSTONE)
-                .requires(Items.WEEPING_VINES)
-                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
-                .save(exporter);
-        ShapelessRecipeBuilder.shapeless(MISC, WEEPING_BLACKSTONE_BRICKS.get(), 1)
-                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
-                .requires(Items.WEEPING_VINES)
-                .unlockedBy(getHasName(Items.WEEPING_VINES), has(Items.WEEPING_VINES))
-                .save(exporter);
-        quickStoneCutting(exporter, WEEPING_BLACKSTONE_BRICKS.get(), WEEPING_BLACKSTONE.get(), 1);
-
-        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE.get(), 1)
-                .requires(Items.BLACKSTONE)
-                .requires(Items.TWISTING_VINES)
-                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
-                .save(exporter);
-        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, TWISTING_BLACKSTONE_BRICKS.get(), 1)
-                .requires(Items.POLISHED_BLACKSTONE_BRICKS)
-                .requires(Items.TWISTING_VINES)
-                .unlockedBy(getHasName(Items.TWISTING_VINES), has(Items.TWISTING_VINES))
-                .save(exporter);
-        quickStoneCutting(exporter, TWISTING_BLACKSTONE_BRICKS.get(), TWISTING_BLACKSTONE.get(), 1);
-
-    }
-
-    private void makeEntwineRecipes(RecipeOutput exporter) {
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_ROD.get(), 4)
-                .pattern("XYX")
-                .define('X', Items.IRON_NUGGET)
-                .define('Y', Items.ENDER_PEARL)
-                .unlockedBy(getHasName(Items.ENDER_PEARL), has(Items.ENDER_PEARL))
-                .save(exporter);
-
-        brickRecipe(exporter, ENTWINE.get(), ENTWINE_ROD.get(), 4);
-
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ENTWINE_BARS.get(), 16)
-                .pattern("###")
-                .pattern("###")
-                .define('#', ENTWINE_ROD.get())
-                .unlockedBy(getHasName(ENTWINE_ROD.get()), has(ENTWINE_ROD.get()))
-                .save(exporter);
-
-        quickChiseledRecipe(exporter, CHISELED_ENTWINE.get(), ENTWINE.getPart(StoneBlockSet.SetComponent.SLAB), ENTWINE.get());
-
-
-        quickPillarRecipe(exporter, ENTWINE_PILLAR.get(), ENTWINE.get());
+        quickPillarRecipe(exporter, WARDSTONE_PILLAR.get(), WARDSTONE.get());
     }
 
     private void makeAncientPlatingRecipes(RecipeOutput exporter) {
@@ -625,45 +630,70 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     }
 
-    private void makePolishedPackedIceRecipes(RecipeOutput exporter) {
-        brickRecipe(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE, 4);
-        quickStoneCutting(exporter, POLISHED_PACKED_ICE.get(), Blocks.PACKED_ICE);
 
-        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), Blocks.PACKED_ICE, 2);
-        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.STAIRS), Blocks.PACKED_ICE);
-        quickStoneCutting(exporter, POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.WALL), Blocks.PACKED_ICE);
 
-        quickChiseledRecipe(exporter, CHISELED_PACKED_ICE.get(), POLISHED_PACKED_ICE.getPart(StoneBlockSet.SetComponent.SLAB), POLISHED_PACKED_ICE.get());
-        quickStoneCutting(exporter, CHISELED_PACKED_ICE.get(), Blocks.PACKED_ICE);
 
-        quickPillarRecipe(exporter, PACKED_ICE_PILLAR.get(), POLISHED_PACKED_ICE.get());
-        quickStoneCutting(exporter, PACKED_ICE_PILLAR.get(), Blocks.PACKED_ICE);
+
+
+
+
+
+
+
+    private void smeltingRecipes(RecipeOutput exporter) {
+        quickSmeltingRecipe(exporter, MOONSHALE, CRATERSTONE);
+        quickSmeltingRecipe(exporter, APItems.ALGAL_BRICK.get(), ALGAL_BLEND.get());
+        quickSmeltingRecipe(exporter, Items.BLACK_DYE, WITHERED_BONE.get());
+        quickSmeltingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
+        quickSmeltingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
+        quickSmeltingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
+        quickSmeltingRecipe(exporter, WARDSTONE_BRICK.get(), WARDSTONE_BLEND.get());
+
+        //Crack recipes
+        quickSmeltingRecipe(exporter, CRACKED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.get());
+        quickSmeltingRecipe(exporter, CRACKED_BASALT_TILES.get(), BASALT_TILES.get());
+        quickSmeltingRecipe(exporter, CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_BRICKS.get(), OLIVESTONE_BRICK.get());
+        quickSmeltingRecipe(exporter, CRACKED_OLIVESTONE_TILES.get(), OLIVESTONE_TILE.get());
+        quickSmeltingRecipe(exporter, HEAVY_CRACKED_END_STONE_BRICKS.get(), Blocks.END_STONE_BRICKS);
+        quickSmeltingRecipe(exporter, HEAVY_CRACKED_STONE_BRICKS.get(), HEAVY_STONE_BRICKS.get());
+
+
+        quickSmokingRecipe(exporter, APBlocks.CHARCOAL_BLOCK.get(), ItemTags.LOGS_THAT_BURN);
+
+
+        quickBlastingRecipe(exporter, SUNMETAL_BRICK.get(), SUNMETAL_BLEND.get());
+        quickBlastingRecipe(exporter, APItems.NETHER_BRASS.get(), BRASS_BLEND.get());
+        quickBlastingRecipe(exporter, SMOOTH_NETHER_BRASS.get(), APBlocks.NETHER_BRASS.get());
     }
 
-    private void makeAlgalBrickRecipes(RecipeOutput exporter) {
-        ShapelessRecipeBuilder.shapeless(MISC, ALGAL_BLEND.get(), 2)
-                .requires(Items.CLAY_BALL)
-                .requires(Items.KELP)
-                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
-                .save(exporter);
+    private void makeWarpingRecipes(RecipeOutput exporter) {
+        netherWarpingRecipe(exporter, ESOTERRACK.get(), Blocks.ANDESITE);
+        netherWarpingRecipe(exporter, ONYX.get(), Blocks.GRANITE);
+        netherWarpingRecipe(exporter, NEBULITE.get(), Blocks.DIORITE);
+        netherWarpingRecipe(exporter, MOONSHALE.get(), Blocks.STONE);
+        netherWarpingRecipe(exporter, MOONSHALE.getChild(BRICKS).get(), Blocks.STONE_BRICKS);
+        netherWarpingRecipe(exporter, CRATERSTONE.get(), Blocks.COBBLESTONE);
 
-        brickRecipe(exporter, APBlocks.ALGAL_BRICK.get(), APItems.ALGAL_BRICK.get(), 4);
+        netherWarpingRecipe(exporter, WARPSTONE.get(), Blocks.CLAY);
+        netherWarpingRecipe(exporter, UNOBTANIUM.get(), Items.NETHERITE_INGOT);
 
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, ALGAL_LAMP.get(), 1)
-                .pattern("xdx")
-                .pattern("ddd")
-                .pattern("xdx")
-                .define('d', Items.GLOWSTONE_DUST)
-                .define('x', APItems.ALGAL_BRICK.get())
-                .unlockedBy(getHasName(APItems.ALGAL_BRICK.get()), has(APItems.ALGAL_BRICK.get()))
-                .save(exporter);
+        netherWarpingRecipe(exporter, TWISTED_SAPLING.get(), ItemTags.SAPLINGS);
+        netherWarpingRecipe(exporter, TWISTED_PLANKS.get(), ItemTags.PLANKS);
+        netherWarpingRecipe(exporter, TWISTED_LOG.get(), ItemTags.LOGS);
+        netherWarpingRecipe(exporter, TWISTED_LEAVES.get(), ItemTags.LEAVES);
 
-        quickChiseledRecipe(exporter, CHISELED_ALGAL_BRICKS.get(), APBlocks.ALGAL_BRICK.getPart(StoneBlockSet.SetComponent.SLAB), APBlocks.ALGAL_BRICK.get());
+        netherWarpingRecipe(exporter, MOONSTONE.get(), SUNSTONE.get());
 
-        ShapelessRecipeBuilder.shapeless(MISC, OVERGROWN_ALGAL_BRICK.get(), 1)
-                .requires(APBlocks.ALGAL_BRICK.get())
-                .requires(Items.KELP)
-                .unlockedBy(getHasName(APBlocks.ALGAL_BRICK.get()), has(APBlocks.ALGAL_BRICK.get()))
-                .save(exporter);
+        netherWarpingRecipe(exporter, HADALINE_TILES.get(), ABYSSALINE_TILES.get());
+        netherWarpingRecipe(exporter, HADALINE_PLATING.get(), ABYSSALINE_PLATING.get());
+        netherWarpingRecipe(exporter, HADALINE_PILLAR.get(), ABYSSALINE_PILLAR.get());
+        netherWarpingRecipe(exporter, HADALINE_LAMP_BLOCK.get(), ABYSSALINE_LAMP_BLOCK.get());
+        netherWarpingRecipe(exporter, HADALINE.get(), ABYSSALINE.get());
+        netherWarpingRecipe(exporter, HADALINE_BRICKS.get(), ABYSSALINE_BRICKS.get());
+        netherWarpingRecipe(exporter, CHISELED_HADALINE_BRICKS.get(), CHISELED_ABYSSALINE_BRICKS.get());
+
+        netherWarpingRecipe(exporter, ENTRAILS.get(), ROTTEN_FLESH_BLOCK.get());
     }
+
 }
