@@ -11,6 +11,7 @@ import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.APBiomeModifications;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BurnableBlockItem;
+import architectspalette.core.util.DebugCommand;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -37,6 +38,10 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
 
         APVerticalSlabsCondition.registerCondition();
         FuelRegistry.INSTANCE.add(APItems.CHARCOAL_BLOCK.get(), ((BurnableBlockItem) APItems.CHARCOAL_BLOCK.get()).getBurnTime());
+
+
+        // Debug
+        DebugCommand.registerDebugCommand();
     }
 
     @Override
