@@ -1,9 +1,6 @@
 package architectspalette.core.util.model;
 
-import architectspalette.content.blocks.CageLanternBlock;
-import architectspalette.content.blocks.NubBlock;
-import architectspalette.content.blocks.PipeBlock;
-import architectspalette.content.blocks.VerticalSlabBlock;
+import architectspalette.content.blocks.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -11,10 +8,11 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
+import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.util.model.Models.*;
-import static net.minecraft.data.models.BlockModelGenerators.createSlab;
-import static net.minecraft.data.models.BlockModelGenerators.createStairs;
+import static net.minecraft.data.models.BlockModelGenerators.*;
 
 public interface ModelHelpers {
 
@@ -177,11 +175,93 @@ public interface ModelHelpers {
         nubUnique(gen, block, block);
     }
 
+    // Wood Set
+    static void fenceGate(BlockModelGenerators gen, Block block, Block textureBlock) {
+        var texture = TextureMapping.defaultTexture(model(textureBlock));
+        var open = ModelTemplates.FENCE_GATE_OPEN.create(block, texture, gen.modelOutput);
+        var closed = ModelTemplates.FENCE_GATE_CLOSED.create(block, texture, gen.modelOutput);
+        var wallOpen = ModelTemplates.FENCE_GATE_WALL_OPEN.create(block, texture, gen.modelOutput);
+        var wallClosed = ModelTemplates.FENCE_GATE_WALL_CLOSED.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(BlockModelGenerators.createFenceGate(block, open, closed, wallOpen, wallClosed, true));
+    }
+
+    static void button(BlockModelGenerators gen, Block block, Block textureBlock) {
+        var texture = TextureMapping.defaultTexture(model(textureBlock));
+        var btn = ModelTemplates.BUTTON.create(block, texture, gen.modelOutput);
+        var btnPressed = ModelTemplates.BUTTON_PRESSED.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(BlockModelGenerators.createButton(block, btn, btnPressed));
+        var resourceLocation3 = ModelTemplates.BUTTON_INVENTORY.create(block, texture, gen.modelOutput);
+        gen.delegateItemModel(block, resourceLocation3);
+    }
+
+    static void pressurePlate(BlockModelGenerators gen, Block block, Block textureBlock) {
+        var texture = TextureMapping.defaultTexture(model(textureBlock));
+        var up = ModelTemplates.PRESSURE_PLATE_UP.create(block, texture, gen.modelOutput);
+        var down = ModelTemplates.PRESSURE_PLATE_DOWN.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(BlockModelGenerators.createPressurePlate(block, up, down));
+    }
 
     // Misc
     static void pillar(BlockModelGenerators gen, Block block) {
         gen.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
     }
+
+    static void sidePillar(BlockModelGenerators gen, Block block) {
+        customPillar(gen, block, "_top", "");
+    }
+
+    static void customPillar(BlockModelGenerators gen, Block block, String topSuffix, String sideSuffix) {
+        var texture = TextureMapping.defaultTexture(model(block))
+                .put(TextureSlot.END, model(block).withSuffix(topSuffix))
+                .put(TextureSlot.SIDE, model(block).withSuffix(sideSuffix));
+        var base = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
+        var horizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createRotatedPillarWithHorizontalVariant(block, base, horizontal));
+    }
+
+    static void runicGlowstone(BlockModelGenerators gen, Block block) {
+        TextureMapping texture = new TextureMapping()
+                .put(TextureSlot.PARTICLE,model(block).withSuffix( "_top"))
+                .put(TextureSlot.DOWN, model(block).withSuffix( "_bottom"))
+                .put(TextureSlot.UP,model(block).withSuffix( "_top"))
+                .put(TextureSlot.NORTH,model(block).withSuffix( "_north"))
+                .put(TextureSlot.EAST,model(block).withSuffix( "_east"))
+                .put(TextureSlot.SOUTH,model(block).withSuffix( "_south"))
+                .put(TextureSlot.WEST,model(block).withSuffix( "_west"));
+
+        var model = ModelTemplates.CUBE.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
+    }
+
+    static void rotatableColumn(BlockModelGenerators gen, Block block) {
+        var model = TexturedModel.COLUMN.create(block, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
+    }
+
+    static void staticPillar(BlockModelGenerators gen, Block block) {
+        gen.blockStateOutput.accept(createSimpleBlock(block, TexturedModel.COLUMN.create(block, gen.modelOutput)));
+    }
+
+    static void staticSidePillar(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(model(block))
+                .put(TextureSlot.END, model(block).withSuffix("_top"))
+                .put(TextureSlot.SIDE, model(block));
+        var base = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, base));
+    }
+
+    static void staticPillarNamed(BlockModelGenerators gen, Block block, String top, String side) {
+        var texture = TextureMapping.defaultTexture(model(block))
+                .put(TextureSlot.END, modLoc("block/" + top))
+                .put(TextureSlot.SIDE, modLoc("block/" + side));
+        var model = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, model));
+    }
+  /* static void aliasedTrivialBlock(BlockModelGenerators gen, Block block, String alias) {
+        var texture = TextureMapping.defaultTexture(modLoc("block/" + alias)).put(TextureSlot.ALL, modLoc("block/" + alias));
+        var model = ModelTemplates.CUBE_ALL.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, model));
+    }*/
 
     static void cageLantern(BlockModelGenerators gen, Block block) {
         var texture = TextureMapping.defaultTexture(model(block));
@@ -226,6 +306,53 @@ public interface ModelHelpers {
                 .select(Direction.Axis.X, Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
         ));
         gen.delegateItemModel(block, middle);
+    }
+
+    static void heavyBrick(BlockModelGenerators gen, Block block) {
+        var halfTexture = TextureMapping.defaultTexture(model(block))
+                .put(HALF, model(block).withSuffix("_half"));
+        var rlTexture = halfTexture.copyAndUpdate(RIGHT, model(block).withSuffix("_right"))
+                .put(LEFT, model(block).withSuffix("_left"));
+        var fullTexture = rlTexture.copyAndUpdate(TextureSlot.BOTTOM, model(block).withSuffix("_bottom"))
+                .put(TextureSlot.TOP, model(block).withSuffix("_top"));
+        var half = HEAVY_BRICKS_HALF.create(block, halfTexture, gen.modelOutput);
+        var top = HEAVY_BRICKS_TOP.create(block, halfTexture.copyAndUpdate(TextureSlot.TOP, model(block).withSuffix("_top")), gen.modelOutput);
+        var bottom = HEAVY_BRICKS_BOTTOM.create(block, halfTexture.copyAndUpdate(TextureSlot.BOTTOM, model(block).withSuffix("_bottom")), gen.modelOutput);
+        var north = HEAVY_BRICKS_NORTH.create(block, fullTexture, gen.modelOutput);
+        var east = HEAVY_BRICKS_EAST.create(block, rlTexture, gen.modelOutput);
+        var south = HEAVY_BRICKS_SOUTH.create(block, fullTexture, gen.modelOutput);
+        var west = HEAVY_BRICKS_WEST.create(block, rlTexture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
+                .with(PropertyDispatch.properties(BigBrickBlock.FACING, BigBrickBlock.PAIRED)
+                        .generate((dir, paired) -> (paired) ? switch (dir) {
+                            case DOWN -> Variant.variant().with(VariantProperties.MODEL, top);
+                            case UP -> Variant.variant().with(VariantProperties.MODEL, bottom);
+
+                            case NORTH -> Variant.variant().with(VariantProperties.MODEL, north);
+                            case SOUTH -> Variant.variant().with(VariantProperties.MODEL, south);
+                            case WEST -> Variant.variant().with(VariantProperties.MODEL, west);
+                            case EAST -> Variant.variant().with(VariantProperties.MODEL, east);
+                        } : Variant.variant().with(VariantProperties.MODEL, half))
+
+                ));
+        gen.delegateItemModel(block, half);
+    }
+
+    static void sunstone(BlockModelGenerators gen, Block block) {
+        var base = ModelTemplates.CUBE_ALL.create(block, allTexture(block, ""), gen.modelOutput);
+        var dim = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_dim",allTexture(block, "_dim"), gen.modelOutput);
+        var bright = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_bright",allTexture(block, "_bright"), gen.modelOutput);
+
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(SunstoneBlock.LIGHT)
+                .select(0, Variant.variant().with(VariantProperties.MODEL, base))
+                .select(1, Variant.variant().with(VariantProperties.MODEL, dim))
+                .select(2, Variant.variant().with(VariantProperties.MODEL, bright))
+        ));
+        gen.delegateItemModel(block, bright);
+    }
+
+    static TextureMapping allTexture(Block block, String suffix) {
+        return TextureMapping.defaultTexture(model(block)).put(TextureSlot.ALL, model(block).withSuffix(suffix));
     }
 
     static ResourceLocation model(Block block) {

@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
 // Thanks!
 public class BigBrickBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    private static final BooleanProperty PAIRED = BooleanProperty.create("paired");
+    public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
     public final BrickType TYPE;
 
     public BigBrickBlock(Properties properties) {
