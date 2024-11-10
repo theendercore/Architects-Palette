@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 import static architectspalette.core.APConstants.LOGGER;
 import static architectspalette.core.registry.APBlocks.*;
+import static architectspalette.core.util.model.ModelHelpers.boards;
 import static architectspalette.core.util.model.ModelHelpers.*;
 import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
 
@@ -38,8 +39,10 @@ public interface ModelGenHelper {
 
                 var parent = (n.parent != null) ? n.parent.get() : null;
                 switch (n.type) {
-                    case BASE, BRICKS, CRACKED, MOSSY, TILES, CHISELED, POLISHED, LAMP, DARK, PLATING ->
-                            gen.createTrivialCube(block);
+                    case BASE, BRICKS, CRACKED, MOSSY, TILES, CHISELED, POLISHED, LAMP, DARK, PLATING -> {
+                        if (n.getDataFlag(BlockNode.DataFlag.BOARDS)) boards(gen, block);
+                        else gen.createTrivialCube(block);
+                    }
                     case PILLAR -> pillar(gen, block);
                     case SLAB -> slab(gen, block, parent);
                     case VERTICAL_SLAB -> verticalSlab(gen, block, parent);

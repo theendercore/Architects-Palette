@@ -3,6 +3,7 @@ package architectspalette.core.registry;
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.PipeBlock;
 import architectspalette.content.blocks.abyssaline.*;
+import architectspalette.content.blocks.boards.BoardBlock;
 import architectspalette.content.blocks.entrails.DrippyBlock;
 import architectspalette.content.blocks.flint.FlintBlock;
 import architectspalette.content.blocks.flint.FlintPillarBlock;
@@ -230,16 +231,16 @@ public class APBlocks {
     public static final Supplier<Block> ENDER_PEARL_BLOCK = createBlock("ender_pearl_block", () -> new Block(APBlockProperties.ENDER_PEARL));
 
     // Boards
-    public static final BlockNode OAK_BOARDS      = createBoardNode("oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
-    public static final BlockNode BIRCH_BOARDS    = createBoardNode("birch_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS)));
-    public static final BlockNode SPRUCE_BOARDS   = createBoardNode("spruce_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
-    public static final BlockNode JUNGLE_BOARDS   = createBoardNode("jungle_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
-    public static final BlockNode DARK_OAK_BOARDS = createBoardNode("dark_oak_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
-    public static final BlockNode ACACIA_BOARDS   = createBoardNode("acacia_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
-    public static final BlockNode CRIMSON_BOARDS  = createBoardNode("crimson_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
-    public static final BlockNode WARPED_BOARDS   = createBoardNode("warped_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
-    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
-    public static final BlockNode TWISTED_BOARDS  = createBoardNode("twisted_boards", () -> new Block(APBlockProperties.TwistedWood()));
+    public static final BlockNode OAK_BOARDS      = createBoardNode("oak_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
+    public static final BlockNode BIRCH_BOARDS    = createBoardNode("birch_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS)));
+    public static final BlockNode SPRUCE_BOARDS   = createBoardNode("spruce_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
+    public static final BlockNode JUNGLE_BOARDS   = createBoardNode("jungle_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
+    public static final BlockNode DARK_OAK_BOARDS = createBoardNode("dark_oak_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
+    public static final BlockNode ACACIA_BOARDS   = createBoardNode("acacia_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
+    public static final BlockNode CRIMSON_BOARDS  = createBoardNode("crimson_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
+    public static final BlockNode WARPED_BOARDS   = createBoardNode("warped_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
+    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final BlockNode TWISTED_BOARDS  = createBoardNode("twisted_boards", () -> new BoardBlock(APBlockProperties.TwistedWood()));
 
     // Railings
     public static final Supplier<Block> OAK_RAILING      = createBlock("oak_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));

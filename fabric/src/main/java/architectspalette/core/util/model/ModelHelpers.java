@@ -2,6 +2,7 @@ package architectspalette.core.util.model;
 
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
+import architectspalette.content.blocks.boards.Boards;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.WallSide;
 
@@ -110,8 +112,8 @@ public interface ModelHelpers {
 
     static BlockStateGenerator createVerticalSlab(Block block, ResourceLocation half, ResourceLocation full) {
         return MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(VerticalSlabBlock.TYPE)
-                .select(VerticalSlabBlock.VerticalSlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, full))
-                .select(VerticalSlabBlock.VerticalSlabType.NORTH, Variant.variant().with(VariantProperties.MODEL, half))
+                .select(VerticalSlabBlock.VerticalSlabType.DOUBLE, modelVariant(full))
+                .select(VerticalSlabBlock.VerticalSlabType.NORTH, modelVariant(half))
                 .select(VerticalSlabBlock.VerticalSlabType.EAST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.MODEL, half))
                 .select(VerticalSlabBlock.VerticalSlabType.SOUTH, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.MODEL, half))
                 .select(VerticalSlabBlock.VerticalSlabType.WEST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.MODEL, half))
@@ -171,7 +173,7 @@ public interface ModelHelpers {
         var base = NUB.create(block, texture, gen.modelOutput);
         var horizontal = NUB_HORIZONTAL.createWithSuffix(block, "_horizontal", texture, gen.modelOutput);
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(NubBlock.FACING)
-                .select(Direction.NORTH, Variant.variant().with(VariantProperties.MODEL, horizontal))
+                .select(Direction.NORTH, modelVariant(horizontal))
                 .select(Direction.EAST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.MODEL, horizontal))
                 .select(Direction.SOUTH, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.MODEL, horizontal))
                 .select(Direction.WEST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.MODEL, horizontal))
@@ -245,17 +247,17 @@ public interface ModelHelpers {
         var inventory = FW_INVENTORY.create(block, texture, gen.modelOutput);
 
         gen.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
-                .with(condition(WallBlock.UP, true), Variant.variant().with(VariantProperties.MODEL, post))
-                .with(ModelHelpers.centerTall, Variant.variant().with(VariantProperties.MODEL, centerTall))
-                .with(ModelHelpers.centerShort, Variant.variant().with(VariantProperties.MODEL, centerShort))
-                .with(condition(WallBlock.NORTH_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, northShort))
-                .with(condition(WallBlock.EAST_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, eastShort))
-                .with(condition(WallBlock.SOUTH_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, southShort))
-                .with(condition(WallBlock.WEST_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, westShort))
-                .with(condition(WallBlock.NORTH_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, northTall))
-                .with(condition(WallBlock.EAST_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, eastTall))
-                .with(condition(WallBlock.SOUTH_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, southTall))
-                .with(condition(WallBlock.WEST_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, westTall))
+                .with(condition(WallBlock.UP, true), modelVariant(post))
+                .with(ModelHelpers.centerTall, modelVariant(centerTall))
+                .with(ModelHelpers.centerShort, modelVariant(centerShort))
+                .with(condition(WallBlock.NORTH_WALL, WallSide.LOW), modelVariant(northShort))
+                .with(condition(WallBlock.EAST_WALL, WallSide.LOW), modelVariant(eastShort))
+                .with(condition(WallBlock.SOUTH_WALL, WallSide.LOW), modelVariant(southShort))
+                .with(condition(WallBlock.WEST_WALL, WallSide.LOW), modelVariant(westShort))
+                .with(condition(WallBlock.NORTH_WALL, WallSide.TALL), modelVariant(northTall))
+                .with(condition(WallBlock.EAST_WALL, WallSide.TALL), modelVariant(eastTall))
+                .with(condition(WallBlock.SOUTH_WALL, WallSide.TALL), modelVariant(southTall))
+                .with(condition(WallBlock.WEST_WALL, WallSide.TALL), modelVariant(westTall))
         );
         gen.delegateItemModel(block, inventory);
     }
@@ -331,13 +333,11 @@ public interface ModelHelpers {
         var topCharged = ModelTemplates.SLAB_TOP.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
         var fullCharged = model(fullBlock).withSuffix("_charged");
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.properties(BlockStateProperties.SLAB_TYPE, AbyssalineBlock.CHARGED)
-                .generate((type, charge) -> Variant.variant().with(VariantProperties.MODEL,
-                        switch (type) {
-                            case BOTTOM -> (charge) ? bottomCharged : bottom;
-                            case TOP -> (charge) ? topCharged : top;
-                            case DOUBLE -> (charge) ? fullCharged : full;
-                        }
-                ))));
+                .generate((type, charge) -> modelVariant(switch (type) {
+                    case BOTTOM -> (charge) ? bottomCharged : bottom;
+                    case TOP -> (charge) ? topCharged : top;
+                    case DOUBLE -> (charge) ? fullCharged : full;
+                }))));
         gen.delegateItemModel(block, bottom);
     }
 
@@ -375,10 +375,30 @@ public interface ModelHelpers {
     }
 
     static MultiVariantGenerator chargedMap(Block block, ResourceLocation model, ResourceLocation chargedModel) {
-        return MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(AbyssalineBlock.CHARGED)
-                .select(false, Variant.variant().with(VariantProperties.MODEL, model))
-                .select(true, Variant.variant().with(VariantProperties.MODEL, chargedModel))
-        );
+        return booleanMap(block, model, chargedModel, AbyssalineBlock.CHARGED);
+    }
+
+    // Boards
+    static void boards(BlockModelGenerators gen, Block block) {
+        var normalId = model(block);
+        var oddId = model(block).withSuffix("_odd");
+        var normalTx = new TextureMapping().put(TextureSlot.END, normalId).put(TextureSlot.SIDE, normalId);
+        var oddTx = new TextureMapping().put(TextureSlot.ALL, oddId).put(TextureSlot.SIDE, oddId);
+        var endsOddTx = new TextureMapping().put(TextureSlot.ALL, oddId).put(TextureSlot.SIDE, normalId);
+        var sidesOddTx = new TextureMapping().put(TextureSlot.END, normalId).put(TextureSlot.SIDE, oddId);
+
+        var model = ModelTemplates.CUBE_COLUMN.create(block, normalTx, gen.modelOutput);
+        var oddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_odd", oddTx, gen.modelOutput);
+        var endsOddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_ends_odd", endsOddTx, gen.modelOutput);
+        var sidesOddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_sides_odd", sidesOddTx, gen.modelOutput);
+
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(Boards.TYPE)
+                .select(Boards.BoardType.NORMAL, modelVariant(model))
+                .select(Boards.BoardType.ODD, modelVariant(oddModel))
+                .select(Boards.BoardType.ENDS_ODD, modelVariant(endsOddModel))
+                .select(Boards.BoardType.SIDES_ODD, modelVariant(sidesOddModel))
+        ));
+        gen.delegateItemModel(block, model);
     }
 
     // Misc
@@ -386,10 +406,11 @@ public interface ModelHelpers {
         gen.blockStateOutput.accept(createSimpleBlock(block, model.create(block, TextureMapping.defaultTexture(block), gen.modelOutput)));
     }
 
-    static void tile(BlockModelGenerators gen, Block block){
+    static void tile(BlockModelGenerators gen, Block block) {
         var model = TILE.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block)), gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, model));
     }
+
     static void pillar(BlockModelGenerators gen, Block block) {
         gen.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
     }
@@ -409,7 +430,7 @@ public interface ModelHelpers {
 
     static void rotatableColumn(BlockModelGenerators gen, Block block) {
         var model = TexturedModel.COLUMN.create(block, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(gen.createColumnWithFacing()));
     }
 
     static void staticPillar(BlockModelGenerators gen, Block block) {
@@ -440,8 +461,8 @@ public interface ModelHelpers {
         var lit = CAGE_LANTERN.createWithSuffix(block, "_lit", litTexture, gen.modelOutput);
 
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(CageLanternBlock.LIT)
-                .select(false, Variant.variant().with(VariantProperties.MODEL, base))
-                .select(true, Variant.variant().with(VariantProperties.MODEL, lit))
+                .select(false, modelVariant(base))
+                .select(true, modelVariant(lit))
         ).with(PropertyDispatch.property(CageLanternBlock.FACING)
                 .select(Direction.DOWN, Variant.variant())
                 .select(Direction.EAST, Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
@@ -466,9 +487,9 @@ public interface ModelHelpers {
         var bottom = PIPE.createWithSuffix(block, "_bottom", bottomTexture, gen.modelOutput);
 
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(PipeBlock.PART)
-                .select(PipeBlock.PipeBlockPart.MIDDLE, Variant.variant().with(VariantProperties.MODEL, middle))
-                .select(PipeBlock.PipeBlockPart.TOP, Variant.variant().with(VariantProperties.MODEL, top))
-                .select(PipeBlock.PipeBlockPart.BOTTOM, Variant.variant().with(VariantProperties.MODEL, bottom))
+                .select(PipeBlock.PipeBlockPart.MIDDLE, modelVariant(middle))
+                .select(PipeBlock.PipeBlockPart.TOP, modelVariant(top))
+                .select(PipeBlock.PipeBlockPart.BOTTOM, modelVariant(bottom))
         ).with(PropertyDispatch.property(PipeBlock.AXIS)
                 .select(Direction.Axis.Y, Variant.variant())
                 .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
@@ -494,14 +515,14 @@ public interface ModelHelpers {
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
                 .with(PropertyDispatch.properties(BigBrickBlock.FACING, BigBrickBlock.PAIRED)
                         .generate((dir, paired) -> (paired) ? switch (dir) {
-                            case DOWN -> Variant.variant().with(VariantProperties.MODEL, top);
-                            case UP -> Variant.variant().with(VariantProperties.MODEL, bottom);
+                            case DOWN -> modelVariant(top);
+                            case UP -> modelVariant(bottom);
 
-                            case NORTH -> Variant.variant().with(VariantProperties.MODEL, north);
-                            case SOUTH -> Variant.variant().with(VariantProperties.MODEL, south);
-                            case WEST -> Variant.variant().with(VariantProperties.MODEL, west);
-                            case EAST -> Variant.variant().with(VariantProperties.MODEL, east);
-                        } : Variant.variant().with(VariantProperties.MODEL, half))
+                            case NORTH -> modelVariant(north);
+                            case SOUTH -> modelVariant(south);
+                            case WEST -> modelVariant(west);
+                            case EAST -> modelVariant(east);
+                        } : modelVariant(half))
 
                 ));
         gen.delegateItemModel(block, half);
@@ -513,9 +534,9 @@ public interface ModelHelpers {
         var bright = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_bright", allTexture(block, "_bright"), gen.modelOutput);
 
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(SunstoneBlock.LIGHT)
-                .select(0, Variant.variant().with(VariantProperties.MODEL, base))
-                .select(1, Variant.variant().with(VariantProperties.MODEL, dim))
-                .select(2, Variant.variant().with(VariantProperties.MODEL, bright))
+                .select(0, modelVariant(base))
+                .select(1, modelVariant(dim))
+                .select(2, modelVariant(bright))
         ));
         gen.delegateItemModel(block, bright);
     }
@@ -531,13 +552,13 @@ public interface ModelHelpers {
                 .put(TextureSlot.WEST, model(block).withSuffix("_west"));
 
         var model = ModelTemplates.CUBE.create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(gen.createColumnWithFacing()));
     }
 
     static void totemWing(BlockModelGenerators gen, Block block) {
         var texture = TextureMapping.defaultTexture(block);
         var model = FLAT_PANE.create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(createHorizontalFacingDispatch()));
         gen.createSimpleFlatItemModel(block);
     }
 
@@ -550,14 +571,14 @@ public interface ModelHelpers {
                 .put(TextureSlot.PARTICLE, modLoc("block/acacia_totem_side"));
 
         var model = ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(createHorizontalFacingDispatch()));
         gen.delegateItemModel(block, model);
     }
 
     static void copyTotem(BlockModelGenerators gen, Block block, int number) {
         var texture = TextureMapping.defaultTexture(block).put(TextureSlot.FRONT, modLoc("block/acacia_totem_face" + number));
         var model = createModel("blank_acacia_totem", Optional.empty(), TextureSlot.FRONT).create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(createHorizontalFacingDispatch()));
         gen.delegateItemModel(block, model);
     }
 
@@ -568,7 +589,7 @@ public interface ModelHelpers {
     }
 
     static void makeHazardSign(BlockModelGenerators gen, Block block) {
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model(block))).with(createHorizontalFacingDispatch()));
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model(block))).with(createHorizontalFacingDispatch()));
         gen.createSimpleFlatItemModel(block);
     }
 
@@ -579,6 +600,13 @@ public interface ModelHelpers {
         var model = new ModelTemplate(Optional.of(mcLoc("block/chain")), Optional.empty(), TextureSlot.PARTICLE, TextureSlot.ALL).create(block, texture, gen.modelOutput);
         gen.createAxisAlignedPillarBlockCustomModel(block, model);
         gen.createSimpleFlatItemModel(block.asItem());
+    }
+
+    static MultiVariantGenerator booleanMap(Block block, ResourceLocation falseModel, ResourceLocation trueModel, BooleanProperty propert) {
+        return MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(propert)
+                .select(false, modelVariant(falseModel))
+                .select(true, modelVariant(trueModel))
+        );
     }
 
     // Util
@@ -608,4 +636,7 @@ public interface ModelHelpers {
         return Condition.condition().term(property, comparable);
     }
 
+    static Variant modelVariant(ResourceLocation model) {
+        return Variant.variant().with(VariantProperties.MODEL, model);
+    }
 }
