@@ -89,7 +89,7 @@ public class RegistryUtils {
     public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
         BlockNode node = new BlockNode.Builder()
                 .tool(BlockNode.Tool.AXE)
-                .exclude(MODELS)
+//                .exclude(MODELS)
                 .base((Supplier<Block>) createBlock(name, supplier))
                 .commonVariants()
                 .flag(BlockNode.DataFlag.BOARDS)

@@ -1,6 +1,7 @@
 package architectspalette.core.util.model;
 
 import architectspalette.content.blocks.*;
+import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -8,6 +9,11 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.WallSide;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +24,20 @@ import static architectspalette.core.util.model.Models.*;
 import static net.minecraft.data.models.BlockModelGenerators.*;
 
 public interface ModelHelpers {
+
+    Condition centerTall = Condition.or(
+            condition(WallBlock.NORTH_WALL, WallSide.TALL),
+            condition(WallBlock.EAST_WALL, WallSide.TALL),
+            condition(WallBlock.SOUTH_WALL, WallSide.TALL),
+            condition(WallBlock.WEST_WALL, WallSide.TALL)
+    );
+    Condition centerShort = Condition.or(
+            condition(WallBlock.UP, false),
+            Condition.condition().term(WallBlock.NORTH_WALL, WallSide.LOW, WallSide.NONE),
+            Condition.condition().term(WallBlock.EAST_WALL, WallSide.LOW, WallSide.NONE),
+            Condition.condition().term(WallBlock.SOUTH_WALL, WallSide.LOW, WallSide.NONE),
+            Condition.condition().term(WallBlock.WEST_WALL, WallSide.LOW, WallSide.NONE)
+    );
 
     static void stairs(BlockModelGenerators gen, Block block, Block texture) {
         stairs(gen, block, texture, texture);
@@ -41,8 +61,11 @@ public interface ModelHelpers {
     }
 
     // Slabs
-    static void slab(BlockModelGenerators gen, Block block, Block texture) {
-        slab(gen, block, texture, texture, texture);
+    static void slab(BlockModelGenerators gen, Block block, TextureMapping texture, ResourceLocation full) {
+        var id = ModelTemplates.SLAB_BOTTOM.create(block, texture, gen.modelOutput);
+        var id2 = ModelTemplates.SLAB_TOP.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSlab(block, id, id2, full));
+        gen.delegateItemModel(block, id);
     }
 
     static void slab(BlockModelGenerators gen, Block block, Block ends, Block side, Block full) {
@@ -50,16 +73,20 @@ public interface ModelHelpers {
                 .put(TextureSlot.BOTTOM, model(ends))
                 .put(TextureSlot.SIDE, model(side))
                 .put(TextureSlot.TOP, model(ends));
-        slab(gen, block, texture, full);
+        slab(gen, block, texture, model(full));
     }
 
-    static void slab(BlockModelGenerators gen, Block block, TextureMapping texture, Block full) {
-        var id = ModelTemplates.SLAB_BOTTOM.create(block, texture, gen.modelOutput);
-        var id2 = ModelTemplates.SLAB_TOP.create(block, texture, gen.modelOutput);
-        var id3 = model(full);
+    static void slab(BlockModelGenerators gen, Block block, Block texture) {
+        slab(gen, block, texture, texture, texture);
+    }
 
-        gen.blockStateOutput.accept(createSlab(block, id, id2, id3));
-        gen.delegateItemModel(block, id);
+    static void specialSlab(BlockModelGenerators gen, Block block, Block ends) {
+        TextureMapping texture = TextureMapping.defaultTexture(block)
+                .put(TextureSlot.BOTTOM, model(ends))
+                .put(TextureSlot.SIDE, model(block))
+                .put(TextureSlot.TOP, model(ends));
+        var full = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(block, "_full", texture, gen.modelOutput);
+        slab(gen, block, texture, full);
     }
 
     // Vertical Slab
@@ -202,6 +229,160 @@ public interface ModelHelpers {
         var up = ModelTemplates.PRESSURE_PLATE_UP.create(block, texture, gen.modelOutput);
         var down = ModelTemplates.PRESSURE_PLATE_DOWN.create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(BlockModelGenerators.createPressurePlate(block, up, down));
+    }
+
+    // Fancy Wall
+    static void fancyWall(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(block)
+                .put(TextureSlot.WALL, model(block));
+        var centerShort = FW_CENTER_SHORT.create(block, texture, gen.modelOutput);
+        var centerTall = FW_CENTER_TALL.create(block, texture, gen.modelOutput);
+        var northShort = FW_NORTH_SHORT.create(block, texture, gen.modelOutput);
+        var northTall = FW_NORTH_TALL.create(block, texture, gen.modelOutput);
+        var eastShort = FW_EAST_SHORT.create(block, texture, gen.modelOutput);
+        var eastTall = FW_EAST_TALL.create(block, texture, gen.modelOutput);
+        var southShort = FW_SOUTH_SHORT.create(block, texture, gen.modelOutput);
+        var southTall = FW_SOUTH_TALL.create(block, texture, gen.modelOutput);
+        var westShort = FW_WEST_SHORT.create(block, texture, gen.modelOutput);
+        var westTall = FW_WEST_TALL.create(block, texture, gen.modelOutput);
+        var post = FW_POST.create(block, texture, gen.modelOutput);
+        var inventory = FW_INVENTORY.create(block, texture, gen.modelOutput);
+
+        gen.blockStateOutput.accept(MultiPartGenerator.multiPart(block)
+                .with(condition(WallBlock.UP, true), Variant.variant().with(VariantProperties.MODEL, post))
+                .with(ModelHelpers.centerTall, Variant.variant().with(VariantProperties.MODEL, centerTall))
+                .with(ModelHelpers.centerShort, Variant.variant().with(VariantProperties.MODEL, centerShort))
+                .with(condition(WallBlock.NORTH_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, northShort))
+                .with(condition(WallBlock.EAST_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, eastShort))
+                .with(condition(WallBlock.SOUTH_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, southShort))
+                .with(condition(WallBlock.WEST_WALL, WallSide.LOW), Variant.variant().with(VariantProperties.MODEL, westShort))
+                .with(condition(WallBlock.NORTH_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, northTall))
+                .with(condition(WallBlock.EAST_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, eastTall))
+                .with(condition(WallBlock.SOUTH_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, southTall))
+                .with(condition(WallBlock.WEST_WALL, WallSide.TALL), Variant.variant().with(VariantProperties.MODEL, westTall))
+        );
+        gen.delegateItemModel(block, inventory);
+    }
+
+    // Abyssaline
+    static void abyssalineStaticPillar(BlockModelGenerators gen, Block block) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.END, abyssaline(block, "_top"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side"));
+        var chargedTexture = new TextureMapping()
+                .put(TextureSlot.END, abyssaline(block, "_top_charged"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side_charged"));
+        var model = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
+        var chargedModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        gen.blockStateOutput.accept(chargedMap(block, model, chargedModel));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void abyssalineStaticPillarTB(BlockModelGenerators gen, Block block) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.TOP, abyssaline(block, "_top"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side"))
+                .put(TextureSlot.BOTTOM, abyssaline(block, "_bottom"));
+        var chargedTexture = new TextureMapping()
+                .put(TextureSlot.TOP, abyssaline(block, "_top_charged"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side_charged"))
+                .put(TextureSlot.BOTTOM, abyssaline(block, "_bottom_charged"));
+        var model = ModelTemplates.CUBE_BOTTOM_TOP.create(block, texture, gen.modelOutput);
+        var chargedModel = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        gen.blockStateOutput.accept(chargedMap(block, model, chargedModel));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void abyssalineCube(BlockModelGenerators gen, Block block) {
+        var texture = new TextureMapping().put(TextureSlot.ALL, abyssaline(block, ""));
+        var chargedTexture = new TextureMapping().put(TextureSlot.ALL, abyssaline(block, "_charged"));
+        var model = ModelTemplates.CUBE_ALL.create(block, texture, gen.modelOutput);
+        var chargedModel = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        gen.blockStateOutput.accept(chargedMap(block, model, chargedModel));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void abyssalinePillar(BlockModelGenerators gen, Block block) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.END, abyssaline(block, "_top"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side"));
+        var chargedTexture = new TextureMapping()
+                .put(TextureSlot.END, abyssaline(block, "_top_charged"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side_charged"));
+        var model = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
+        var chargedModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        gen.blockStateOutput.accept(chargedMap(block, model, chargedModel).with(PropertyDispatch.property(RotatedPillarBlock.AXIS)
+                .select(Direction.Axis.Y, Variant.variant())
+                .select(Direction.Axis.Z, Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                .select(Direction.Axis.X, Variant.variant().with(VariantProperties.X_ROT, VariantProperties.Rotation.R90).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+        ));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void abyssalineSlab(BlockModelGenerators gen, Block block, Block fullBlock) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.BOTTOM, abyssaline(fullBlock, ""))
+                .put(TextureSlot.TOP, abyssaline(fullBlock, ""))
+                .put(TextureSlot.SIDE, abyssaline(fullBlock, ""));
+        var chargedTexture = new TextureMapping()
+                .put(TextureSlot.BOTTOM, abyssaline(fullBlock, "_charged"))
+                .put(TextureSlot.TOP, abyssaline(fullBlock, "_charged"))
+                .put(TextureSlot.SIDE, abyssaline(fullBlock, "_charged"));
+        var bottom = ModelTemplates.SLAB_BOTTOM.create(block, texture, gen.modelOutput);
+        var top = ModelTemplates.SLAB_TOP.create(block, texture, gen.modelOutput);
+        var full = model(fullBlock);
+        var bottomCharged = ModelTemplates.SLAB_BOTTOM.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        var topCharged = ModelTemplates.SLAB_TOP.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        var fullCharged = model(fullBlock).withSuffix("_charged");
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.properties(BlockStateProperties.SLAB_TYPE, AbyssalineBlock.CHARGED)
+                .generate((type, charge) -> Variant.variant().with(VariantProperties.MODEL,
+                        switch (type) {
+                            case BOTTOM -> (charge) ? bottomCharged : bottom;
+                            case TOP -> (charge) ? topCharged : top;
+                            case DOUBLE -> (charge) ? fullCharged : full;
+                        }
+                ))));
+        gen.delegateItemModel(block, bottom);
+    }
+
+    static void abyssalineVerticalSlab(BlockModelGenerators gen, Block block, Block full) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.BOTTOM, abyssaline(full, ""))
+                .put(TextureSlot.TOP, abyssaline(full, ""))
+                .put(TextureSlot.SIDE, abyssaline(full, ""));
+        var chargedTexture = new TextureMapping()
+                .put(TextureSlot.BOTTOM, abyssaline(full, "_charged"))
+                .put(TextureSlot.TOP, abyssaline(full, "_charged"))
+                .put(TextureSlot.SIDE, abyssaline(full, "_charged"));
+        var slab = VERTICAL_SLAB.create(block, texture, gen.modelOutput);
+        var chargedSlab = VERTICAL_SLAB.createWithSuffix(block, "_charged", chargedTexture, gen.modelOutput);
+        var fullModel = model(full);
+        var fullCharged = model(full).withSuffix("_charged");
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.properties(VerticalSlabBlock.TYPE, AbyssalineBlock.CHARGED)
+                .generate((type, charge) -> {
+                    var variant = Variant.variant();
+                    var slabModel = charge ? chargedSlab : slab;
+                    switch (type) {
+                        case DOUBLE -> variant.with(VariantProperties.MODEL, (charge) ? fullCharged : fullModel);
+                        case NORTH -> variant.with(VariantProperties.MODEL, slabModel);
+                        case EAST ->
+                                variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90).with(VariantProperties.MODEL, slabModel);
+                        case SOUTH ->
+                                variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180).with(VariantProperties.MODEL, slabModel);
+                        case WEST ->
+                                variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270).with(VariantProperties.MODEL, slabModel);
+                    }
+                    return variant;
+                })
+        ));
+        gen.delegateItemModel(block, slab);
+    }
+
+    static MultiVariantGenerator chargedMap(Block block, ResourceLocation model, ResourceLocation chargedModel) {
+        return MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(AbyssalineBlock.CHARGED)
+                .select(false, Variant.variant().with(VariantProperties.MODEL, model))
+                .select(true, Variant.variant().with(VariantProperties.MODEL, chargedModel))
+        );
     }
 
     // Misc
@@ -359,6 +540,7 @@ public interface ModelHelpers {
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
         gen.createSimpleFlatItemModel(block);
     }
+
     static void totem(BlockModelGenerators gen, Block block) {
         var texture = TextureMapping.defaultTexture(block)
                 .put(TextureSlot.TOP, modLoc("block/acacia_totem_top"))
@@ -411,10 +593,18 @@ public interface ModelHelpers {
         return modelPrefixed(block, "nubs/");
     }
 
+    static ResourceLocation abyssaline(Block block, String suffix) {
+        ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
+        return resourceLocation.withPrefix("block/abyssaline/").withSuffix(suffix);
+    }
+
     static ResourceLocation modelPrefixed(Block block, String prefix) {
         ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
         return resourceLocation.withPrefix("block/" + prefix);
     }
 
+    static <T extends Comparable<T>> Condition.TerminalCondition condition(Property<T> property, T comparable) {
+        return Condition.condition().term(property, comparable);
+    }
 
 }

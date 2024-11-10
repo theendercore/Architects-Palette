@@ -41,6 +41,31 @@ public interface Models {
 
     ModelTemplate FLAT_PANE = template("flat_pane", TextureSlot.TEXTURE);
 
+    // Fancy Walls
+    ModelTemplate FW_CENTER_SHORT = fancyWall("center_short", "_center_short", TextureSlot.WALL);
+    ModelTemplate FW_CENTER_TALL = fancyWall("center_tall", "_center_tall", TextureSlot.WALL);
+
+    ModelTemplate FW_NORTH_SHORT = fancyWall("north_short", "_north_short", TextureSlot.WALL);
+    ModelTemplate FW_NORTH_TALL = fancyWall("north_tall", "_north_tall", TextureSlot.WALL);
+
+    ModelTemplate FW_EAST_SHORT = fancyWall("east_short", "_east_short", TextureSlot.WALL);
+    ModelTemplate FW_EAST_TALL = fancyWall("east_tall", "_east_tall", TextureSlot.WALL);
+
+    ModelTemplate FW_SOUTH_SHORT = fancyWall("south_short", "_south_short", TextureSlot.WALL);
+    ModelTemplate FW_SOUTH_TALL = fancyWall("south_tall", "_south_tall", TextureSlot.WALL);
+
+    ModelTemplate FW_WEST_SHORT = fancyWall("west_short", "_west_short", TextureSlot.WALL);
+    ModelTemplate FW_WEST_TALL = fancyWall("west_tall", "_west_tall", TextureSlot.WALL);
+
+    ModelTemplate FW_POST = fancyWall("post", "_post", TextureSlot.WALL);
+    ModelTemplate FW_INVENTORY = fancyWall("inventory", "_inventory", TextureSlot.WALL);
+
+
+
+    private static ModelTemplate fancyWall(String string, String suffix, TextureSlot... textureSlots) {
+        return createModel("template/fancy_walls/" + string, Optional.of(suffix), textureSlots);
+    }
+
     private static ModelTemplate template(String string, TextureSlot... textureSlots) {
         return createModel("template/" + string, Optional.empty(), textureSlots);
     }

@@ -404,7 +404,6 @@ public class APBlocks {
             .tool(BlockNode.Tool.PICK)
             .base(createBlock("moonshale", () -> new Block(APBlockProperties.MOONSHALE)))
             .commonVariants()
-            .exclude(BlockNode.ExcludeFlag.MODELS)
             .variants(BlockNode.BlockType.CHISELED)
             .bricks(b -> {
                 b.commonVariants();

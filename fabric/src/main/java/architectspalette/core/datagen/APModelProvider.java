@@ -29,17 +29,17 @@ public class APModelProvider extends FabricModelProvider {
         StoneBlockSet.forAllSets((s) -> makeBlockSetModels(gen, s));
 
         // Make createAbyssaline function
-        gen.createTrivialCube(APBlocks.ABYSSALINE.get());
-        gen.createTrivialCube(APBlocks.CHISELED_ABYSSALINE_BRICKS.get());
-        pillar(gen, APBlocks.ABYSSALINE_PILLAR.get());
-        gen.createTrivialCube(APBlocks.ABYSSALINE_LAMP_BLOCK.get());
-        gen.createTrivialCube(APBlocks.ABYSSALINE_PLATING.get());
+        abyssalineStaticPillar(gen, APBlocks.ABYSSALINE.get());
+        abyssalineCube(gen, APBlocks.CHISELED_ABYSSALINE_BRICKS.get());
+        abyssalinePillar(gen, APBlocks.ABYSSALINE_PILLAR.get());
+        abyssalinePillar(gen, APBlocks.ABYSSALINE_LAMP_BLOCK.get());
+        abyssalineStaticPillarTB(gen, APBlocks.ABYSSALINE_PLATING.get());
 
-        gen.createTrivialCube(APBlocks.HADALINE.get());
-        gen.createTrivialCube(APBlocks.CHISELED_HADALINE_BRICKS.get());
-        pillar(gen, APBlocks.HADALINE_PILLAR.get());
-        gen.createTrivialCube(APBlocks.HADALINE_LAMP_BLOCK.get());
-        gen.createTrivialCube(APBlocks.HADALINE_PLATING.get());
+        abyssalineStaticPillar(gen, APBlocks.HADALINE.get());
+        abyssalineCube(gen, APBlocks.CHISELED_HADALINE_BRICKS.get());
+        abyssalinePillar(gen, APBlocks.HADALINE_PILLAR.get());
+        abyssalinePillar(gen, APBlocks.HADALINE_LAMP_BLOCK.get());
+        abyssalineStaticPillarTB(gen, APBlocks.HADALINE_PLATING.get());
 
         gen.woodProvider(APBlocks.SALMON_LOG.get()).logWithHorizontal(APBlocks.SALMON_LOG.get()).wood(APBlocks.SALMON_SCALES.get());
         gen.woodProvider(APBlocks.COD_LOG.get()).logWithHorizontal(APBlocks.COD_LOG.get()).wood(APBlocks.COD_SCALES.get());
