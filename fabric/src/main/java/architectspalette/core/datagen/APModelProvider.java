@@ -131,6 +131,11 @@ public class APModelProvider extends FabricModelProvider {
         cageLantern(gen, APBlocks.ALGAL_CAGE_LANTERN.get());
 
         //totems
+        totemWing(gen, APBlocks.ACACIA_TOTEM_WING.get());
+        copyTotem(gen, APBlocks.GRINNING_ACACIA_TOTEM.get(), 1);
+        copyTotem(gen, APBlocks.PLACID_ACACIA_TOTEM.get(), 2);
+        copyTotem(gen, APBlocks.SHOCKED_ACACIA_TOTEM.get(), 3);
+        totem(gen, APBlocks.BLANK_ACACIA_TOTEM.get());
 
         gen.createTrivialCube(APBlocks.ENDER_PEARL_BLOCK.get());
 
@@ -146,14 +151,44 @@ public class APModelProvider extends FabricModelProvider {
         railing(gen, APBlocks.MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
         railing(gen, APBlocks.TWISTED_RAILING.get(), APBlocks.TWISTED_PLANKS.get());
 
+        sidePillar(gen, APBlocks.DRIPSTONE_PILLAR.get());
+        staticSidePillar(gen, APBlocks.CHISELED_DRIPSTONE.get());
+        heavyBrick(gen, APBlocks.HEAVY_DRIPSTONE_BRICKS.get());
+        gen.createTrivialCube(APBlocks.DRIPSTONE_LAMP.get());
 
+        sidePillar(gen, APBlocks.CALCITE_PILLAR.get());
+        gen.createTrivialCube(APBlocks.CHISELED_CALCITE.get());
+        heavyBrick(gen, APBlocks.HEAVY_CALCITE_BRICKS.get());
+        gen.createTrivialCube(APBlocks.CALCITE_LAMP.get());
+
+        sidePillar(gen, APBlocks.TUFF_PILLAR.get());
+        staticSidePillar(gen, APBlocks.CHISELED_TUFF.get());
+        heavyBrick(gen, APBlocks.HEAVY_TUFF_BRICKS.get());
+        gen.createTrivialCube(APBlocks.TUFF_LAMP.get());
+
+        sidePillar(gen, APBlocks.HELIODOR_ROD.get());
+        sidePillar(gen, APBlocks.EKANITE_ROD.get());
+        sidePillar(gen, APBlocks.MONAZITE_ROD.get());
+
+        gen.createTrivialCube(APBlocks.UNOBTANIUM_BLOCK.get());
+
+        sidePillar(gen, APBlocks.NETHER_BRASS_PILLAR.get());
+        createSoulFire(gen, APBlocks.NETHER_BRASS_FIRE.get());
+        chain(gen, APBlocks.NETHER_BRASS_CHAIN.get());
         gen.createLantern(APBlocks.NETHER_BRASS_LANTERN.get());
+        gen.createNormalTorch(APBlocks.NETHER_BRASS_TORCH.get(), APBlocks.NETHER_BRASS_WALL_TORCH.get());
 
-        gen.createFloorFireModels(APBlocks.NETHER_BRASS_FIRE.get());
-        gen.createSideFireModels(APBlocks.NETHER_BRASS_FIRE.get());
-        gen.createTopFireModels(APBlocks.NETHER_BRASS_FIRE.get());
+        sidePillar(gen, APBlocks.ESOTERRACK_PILLAR.get());
+
+        sidePillar(gen, APBlocks.ONYX_PILLAR.get());
+
+        gen.createTrivialCube(APBlocks.CHISELED_WARDSTONE.get());
+        sidePillar(gen, APBlocks.WARDSTONE_PILLAR.get());
+        gen.createTrivialCube(APBlocks.WARDSTONE_LAMP.get());
 
         generateNubs(gen);
+
+        makeHazardSign(gen, APBlocks.HAZARD_SIGN.get());
     }
 
     private void generateNubs(BlockModelGenerators gen) {

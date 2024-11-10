@@ -8,8 +8,11 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 
+import java.util.List;
+import java.util.Optional;
+
+import static architectspalette.core.APConstants.mcLoc;
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.util.model.Models.*;
 import static net.minecraft.data.models.BlockModelGenerators.*;
@@ -202,6 +205,10 @@ public interface ModelHelpers {
     }
 
     // Misc
+    static void createTrivialBlock(BlockModelGenerators gen, Block block, ModelTemplate model) {
+        gen.blockStateOutput.accept(createSimpleBlock(block, model.create(block, TextureMapping.defaultTexture(block), gen.modelOutput)));
+    }
+
     static void pillar(BlockModelGenerators gen, Block block) {
         gen.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
     }
@@ -217,20 +224,6 @@ public interface ModelHelpers {
         var base = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
         var horizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(createRotatedPillarWithHorizontalVariant(block, base, horizontal));
-    }
-
-    static void runicGlowstone(BlockModelGenerators gen, Block block) {
-        TextureMapping texture = new TextureMapping()
-                .put(TextureSlot.PARTICLE,model(block).withSuffix( "_top"))
-                .put(TextureSlot.DOWN, model(block).withSuffix( "_bottom"))
-                .put(TextureSlot.UP,model(block).withSuffix( "_top"))
-                .put(TextureSlot.NORTH,model(block).withSuffix( "_north"))
-                .put(TextureSlot.EAST,model(block).withSuffix( "_east"))
-                .put(TextureSlot.SOUTH,model(block).withSuffix( "_south"))
-                .put(TextureSlot.WEST,model(block).withSuffix( "_west"));
-
-        var model = ModelTemplates.CUBE.create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
     }
 
     static void rotatableColumn(BlockModelGenerators gen, Block block) {
@@ -257,11 +250,6 @@ public interface ModelHelpers {
         var model = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, model));
     }
-  /* static void aliasedTrivialBlock(BlockModelGenerators gen, Block block, String alias) {
-        var texture = TextureMapping.defaultTexture(modLoc("block/" + alias)).put(TextureSlot.ALL, modLoc("block/" + alias));
-        var model = ModelTemplates.CUBE_ALL.create(block, texture, gen.modelOutput);
-        gen.blockStateOutput.accept(createSimpleBlock(block, model));
-    }*/
 
     static void cageLantern(BlockModelGenerators gen, Block block) {
         var texture = TextureMapping.defaultTexture(model(block));
@@ -340,8 +328,8 @@ public interface ModelHelpers {
 
     static void sunstone(BlockModelGenerators gen, Block block) {
         var base = ModelTemplates.CUBE_ALL.create(block, allTexture(block, ""), gen.modelOutput);
-        var dim = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_dim",allTexture(block, "_dim"), gen.modelOutput);
-        var bright = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_bright",allTexture(block, "_bright"), gen.modelOutput);
+        var dim = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_dim", allTexture(block, "_dim"), gen.modelOutput);
+        var bright = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_bright", allTexture(block, "_bright"), gen.modelOutput);
 
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(SunstoneBlock.LIGHT)
                 .select(0, Variant.variant().with(VariantProperties.MODEL, base))
@@ -349,6 +337,66 @@ public interface ModelHelpers {
                 .select(2, Variant.variant().with(VariantProperties.MODEL, bright))
         ));
         gen.delegateItemModel(block, bright);
+    }
+
+    static void runicGlowstone(BlockModelGenerators gen, Block block) {
+        TextureMapping texture = new TextureMapping()
+                .put(TextureSlot.PARTICLE, model(block).withSuffix("_top"))
+                .put(TextureSlot.DOWN, model(block).withSuffix("_bottom"))
+                .put(TextureSlot.UP, model(block).withSuffix("_top"))
+                .put(TextureSlot.NORTH, model(block).withSuffix("_north"))
+                .put(TextureSlot.EAST, model(block).withSuffix("_east"))
+                .put(TextureSlot.SOUTH, model(block).withSuffix("_south"))
+                .put(TextureSlot.WEST, model(block).withSuffix("_west"));
+
+        var model = ModelTemplates.CUBE.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(gen.createColumnWithFacing()));
+    }
+
+    static void totemWing(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(block);
+        var model = FLAT_PANE.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.createSimpleFlatItemModel(block);
+    }
+    static void totem(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(block)
+                .put(TextureSlot.TOP, modLoc("block/acacia_totem_top"))
+                .put(TextureSlot.BOTTOM, modLoc("block/acacia_totem_bottom"))
+                .put(TextureSlot.SIDE, modLoc("block/acacia_totem_side"))
+                .put(TextureSlot.FRONT, modLoc("block/acacia_totem_side"))
+                .put(TextureSlot.PARTICLE, modLoc("block/acacia_totem_side"));
+
+        var model = ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void copyTotem(BlockModelGenerators gen, Block block, int number) {
+        var texture = TextureMapping.defaultTexture(block).put(TextureSlot.FRONT, modLoc("block/acacia_totem_face" + number));
+        var model = createModel("blank_acacia_totem", Optional.empty(), TextureSlot.FRONT).create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model)).with(createHorizontalFacingDispatch()));
+        gen.delegateItemModel(block, model);
+    }
+
+    static void createSoulFire(BlockModelGenerators gen, Block block) {
+        List<ResourceLocation> list = gen.createFloorFireModels(block);
+        List<ResourceLocation> list2 = gen.createSideFireModels(block);
+        gen.blockStateOutput.accept(MultiPartGenerator.multiPart(block).with(wrapModels(list, (variant) -> variant)).with(wrapModels(list2, (variant) -> variant)).with(wrapModels(list2, (variant) -> variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))).with(wrapModels(list2, (variant) -> variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))).with(wrapModels(list2, (variant) -> variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))));
+    }
+
+    static void makeHazardSign(BlockModelGenerators gen, Block block) {
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, model(block))).with(createHorizontalFacingDispatch()));
+        gen.createSimpleFlatItemModel(block);
+    }
+
+    static void chain(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(block)
+                .put(TextureSlot.PARTICLE, model(block))
+                .put(TextureSlot.ALL, model(block));
+        var model = new ModelTemplate(Optional.of(mcLoc("block/chain")), Optional.empty(), TextureSlot.PARTICLE, TextureSlot.ALL).create(block, texture, gen.modelOutput);
+        gen.createAxisAlignedPillarBlockCustomModel(block, model);
+        gen.createSimpleFlatItemModel(block.asItem());
     }
 
     static TextureMapping allTexture(Block block, String suffix) {
@@ -367,4 +415,6 @@ public interface ModelHelpers {
         ResourceLocation resourceLocation = BuiltInRegistries.BLOCK.getKey(block);
         return resourceLocation.withPrefix("block/" + prefix);
     }
+
+
 }

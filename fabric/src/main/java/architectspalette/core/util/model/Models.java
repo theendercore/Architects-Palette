@@ -31,24 +31,25 @@ public interface Models {
     // HEAVY Bricks
     ModelTemplate HEAVY_BRICKS_HALF = template("heavy_bricks/half", "_half", HALF);
 
-    ModelTemplate HEAVY_BRICKS_BOTTOM = template("heavy_bricks/bottom","_bottom", TextureSlot.BOTTOM, HALF);
-    ModelTemplate HEAVY_BRICKS_TOP = template("heavy_bricks/top","_top", TextureSlot.TOP, HALF);
+    ModelTemplate HEAVY_BRICKS_BOTTOM = template("heavy_bricks/bottom", "_bottom", TextureSlot.BOTTOM, HALF);
+    ModelTemplate HEAVY_BRICKS_TOP = template("heavy_bricks/top", "_top", TextureSlot.TOP, HALF);
 
-    ModelTemplate HEAVY_BRICKS_NORTH = template("heavy_bricks/north","_north", TextureSlot.TOP, TextureSlot.BOTTOM, RIGHT, LEFT, HALF);
+    ModelTemplate HEAVY_BRICKS_NORTH = template("heavy_bricks/north", "_north", TextureSlot.TOP, TextureSlot.BOTTOM, RIGHT, LEFT, HALF);
     ModelTemplate HEAVY_BRICKS_EAST = template("heavy_bricks/east", "_east", RIGHT, LEFT, HALF);
-    ModelTemplate HEAVY_BRICKS_SOUTH = template("heavy_bricks/south","_south", TextureSlot.TOP, TextureSlot.BOTTOM, RIGHT, LEFT, HALF);
-    ModelTemplate HEAVY_BRICKS_WEST = template("heavy_bricks/west","_west", RIGHT, LEFT, HALF);
+    ModelTemplate HEAVY_BRICKS_SOUTH = template("heavy_bricks/south", "_south", TextureSlot.TOP, TextureSlot.BOTTOM, RIGHT, LEFT, HALF);
+    ModelTemplate HEAVY_BRICKS_WEST = template("heavy_bricks/west", "_west", RIGHT, LEFT, HALF);
 
+    ModelTemplate FLAT_PANE = template("flat_pane", TextureSlot.TEXTURE);
 
     private static ModelTemplate template(String string, TextureSlot... textureSlots) {
-        return model("template/" + string, Optional.empty(), textureSlots);
+        return createModel("template/" + string, Optional.empty(), textureSlots);
     }
 
     private static ModelTemplate template(String string, String suffix, TextureSlot... textureSlots) {
-        return model("template/" + string, Optional.of(suffix), textureSlots);
+        return createModel("template/" + string, Optional.of(suffix), textureSlots);
     }
 
-    private static ModelTemplate model(String string, Optional<String> suffix, TextureSlot... textureSlots) {
+    static ModelTemplate createModel(String string, Optional<String> suffix, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(modLoc("block/" + string)), suffix, textureSlots);
     }
 
