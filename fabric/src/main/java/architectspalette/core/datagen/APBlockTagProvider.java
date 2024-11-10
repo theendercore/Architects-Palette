@@ -182,17 +182,15 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
             }
         });
 
-        BlockNode.forAllBaseNodes((node) -> {
-            node.forEach((n) -> {
-                var tag = getOrCreateTagBuilder(n.tool.getToolTag());
-                tag.add(n.get());
-                //TODO: Mining level, other tags
-                if (n.tool.getMiningTag() != null) {
-                    var levelTag = getOrCreateTagBuilder(n.tool.getMiningTag());
-                    levelTag.add(n.get());
-                }
-            });
-        });
+        BlockNode.forAllBaseNodes((node) -> node.forEach((n) -> {
+            var tag = getOrCreateTagBuilder(n.tool.getToolTag());
+            tag.add(n.get());
+            //TODO: Mining level, other tags
+            if (n.tool.getMiningTag() != null) {
+                var levelTag = getOrCreateTagBuilder(n.tool.getMiningTag());
+                levelTag.add(n.get());
+            }
+        }));
 
         pickaxeTag();
         axeTag();
@@ -332,7 +330,9 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 WARPED_RAILING,
                 CRIMSON_RAILING,
                 JUNGLE_RAILING,
-                MANGROVE_RAILING
+                MANGROVE_RAILING,
+                CHERRY_RAILING,
+                BAMBOO_RAILING
         ).add(ACACIA_TOTEM_WING.get());
     }
 

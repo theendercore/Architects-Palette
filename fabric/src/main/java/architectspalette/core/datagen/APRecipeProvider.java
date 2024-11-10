@@ -744,29 +744,33 @@ public class APRecipeProvider extends FabricRecipeProvider {
     }
 
     private void makeBoardRecipes(RecipeOutput exporter) {
-        boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
-        boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
-        boardRecipe(exporter, CRIMSON_BOARDS.get(), Blocks.CRIMSON_PLANKS);
-        boardRecipe(exporter, DARK_OAK_BOARDS.get(), Blocks.DARK_OAK_PLANKS);
-        boardRecipe(exporter, JUNGLE_BOARDS.get(), Blocks.JUNGLE_PLANKS);
-        boardRecipe(exporter, MANGROVE_BOARDS.get(), Blocks.MANGROVE_PLANKS);
         boardRecipe(exporter, OAK_BOARDS.get(), Blocks.OAK_PLANKS);
+        boardRecipe(exporter, BIRCH_BOARDS.get(), Blocks.BIRCH_PLANKS);
+        boardRecipe(exporter, JUNGLE_BOARDS.get(), Blocks.JUNGLE_PLANKS);
         boardRecipe(exporter, SPRUCE_BOARDS.get(), Blocks.SPRUCE_PLANKS);
-        boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
+        boardRecipe(exporter, DARK_OAK_BOARDS.get(), Blocks.DARK_OAK_PLANKS);
+        boardRecipe(exporter, ACACIA_BOARDS.get(), Blocks.ACACIA_PLANKS);
+        boardRecipe(exporter, MANGROVE_BOARDS.get(), Blocks.MANGROVE_PLANKS);
+        boardRecipe(exporter, CHERRY_BOARDS.get(), Blocks.CHERRY_PLANKS);
+        boardRecipe(exporter, BAMBOO_BOARDS.get(), Blocks.BAMBOO_PLANKS);
+        boardRecipe(exporter, CRIMSON_BOARDS.get(), Blocks.CRIMSON_PLANKS);
         boardRecipe(exporter, WARPED_BOARDS.get(), Blocks.WARPED_PLANKS);
+        boardRecipe(exporter, TWISTED_BOARDS.get(), TWISTED_PLANKS.get());
     }
 
     private void railingRecipes(RecipeOutput exporter) {
-        railingRecipe(exporter, ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
-        railingRecipe(exporter, BIRCH_RAILING.get(), Blocks.BIRCH_PLANKS);
-        railingRecipe(exporter, CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
-        railingRecipe(exporter, DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
-        railingRecipe(exporter, JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
-        railingRecipe(exporter, MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
         railingRecipe(exporter, OAK_RAILING.get(), Blocks.OAK_PLANKS);
+        railingRecipe(exporter, BIRCH_RAILING.get(), Blocks.BIRCH_PLANKS);
         railingRecipe(exporter, SPRUCE_RAILING.get(), Blocks.SPRUCE_PLANKS);
-        railingRecipe(exporter, TWISTED_RAILING.get(), TWISTED_PLANKS.get());
+        railingRecipe(exporter, JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
+        railingRecipe(exporter, DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
+        railingRecipe(exporter, ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
+        railingRecipe(exporter, MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
+        railingRecipe(exporter, CHERRY_RAILING.get(), Blocks.CHERRY_PLANKS);
+        railingRecipe(exporter, BAMBOO_RAILING.get(), Blocks.BAMBOO_PLANKS);
+        railingRecipe(exporter, CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
         railingRecipe(exporter, WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
+        railingRecipe(exporter, TWISTED_RAILING.get(), TWISTED_PLANKS.get());
     }
 
     private void makeDripstoneRecipes(RecipeOutput exporter) {

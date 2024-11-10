@@ -237,9 +237,11 @@ public class APBlocks {
     public static final BlockNode JUNGLE_BOARDS   = createBoardNode("jungle_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
     public static final BlockNode DARK_OAK_BOARDS = createBoardNode("dark_oak_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
     public static final BlockNode ACACIA_BOARDS   = createBoardNode("acacia_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
+    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final BlockNode CHERRY_BOARDS   = createBoardNode("cherry_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final BlockNode BAMBOO_BOARDS   = createBoardNode("bamboo_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)));
     public static final BlockNode CRIMSON_BOARDS  = createBoardNode("crimson_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
     public static final BlockNode WARPED_BOARDS   = createBoardNode("warped_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
-    public static final BlockNode MANGROVE_BOARDS = createBoardNode("mangrove_boards", () -> new BoardBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final BlockNode TWISTED_BOARDS  = createBoardNode("twisted_boards", () -> new BoardBlock(APBlockProperties.TwistedWood()));
 
     // Railings
@@ -249,9 +251,11 @@ public class APBlocks {
     public static final Supplier<Block> JUNGLE_RAILING   = createBlock("jungle_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)));
     public static final Supplier<Block> DARK_OAK_RAILING = createBlock("dark_oak_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
     public static final Supplier<Block> ACACIA_RAILING   = createBlock("acacia_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS)));
+    public static final Supplier<Block> MANGROVE_RAILING = createBlock("mangrove_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final Supplier<Block> CHERRY_RAILING   = createBlock("cherry_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final Supplier<Block> BAMBOO_RAILING   = createBlock("bamboo_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)));
     public static final Supplier<Block> CRIMSON_RAILING  = createBlock("crimson_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)));
     public static final Supplier<Block> WARPED_RAILING   = createBlock("warped_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WARPED_PLANKS)));
-    public static final Supplier<Block> MANGROVE_RAILING = createBlock("mangrove_railing", () -> new RailingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final Supplier<Block> TWISTED_RAILING  = createBlock("twisted_railing", () -> new RailingBlock(APBlockProperties.TwistedWood()));
 
     // New stone block sets
@@ -366,9 +370,7 @@ public class APBlocks {
             .base(createBlock("bread_block", () -> new BreadBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BROWN_WOOL))))
             .addPart(BlockNode.BlockType.SLAB, b -> b.exclude(BlockNode.ExcludeFlag.MODELS))
             .addPart(BlockNode.BlockType.NUB)
-            .addPart(BlockNode.BlockType.SPECIAL, b -> {
-                b.setName("crustless_bread_block");
-            })
+            .addPart(BlockNode.BlockType.SPECIAL, b -> b.setName("crustless_bread_block"))
             .build();
 
     public static final BlockNode ORACLE_BLOCK = new BlockNode.Builder()
@@ -384,9 +386,7 @@ public class APBlocks {
                 b.slabs();
                 b.variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.WALL);
             })
-            .addPart(BlockNode.BlockType.SPECIAL, b -> {
-                b.setName("framed_oracle_block");
-            })
+            .addPart(BlockNode.BlockType.SPECIAL, b -> b.setName("framed_oracle_block"))
             .addPart(BlockNode.BlockType.LAMP, b -> b.base(createBlock("oracle_lamp", () -> new Block(APBlockProperties.ORACLE_LAMP))))
             .build();
 
@@ -412,9 +412,7 @@ public class APBlocks {
                 b.withPart(BlockNode.BlockType.CHISELED)
                         .setName("moonshale_flagstone");
             })
-            .addPart(BlockNode.BlockType.SPECIAL, builder -> {
-                builder.setName("bordered_moonshale");
-            })
+            .addPart(BlockNode.BlockType.SPECIAL, builder -> builder.setName("bordered_moonshale"))
             .build();
     public static final BlockNode CRATERSTONE = new BlockNode.Builder()
             .tool(BlockNode.Tool.PICK)

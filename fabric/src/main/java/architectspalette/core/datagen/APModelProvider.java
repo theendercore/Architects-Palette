@@ -146,9 +146,11 @@ public class APModelProvider extends FabricModelProvider {
         railing(gen, APBlocks.JUNGLE_RAILING.get(), Blocks.JUNGLE_PLANKS);
         railing(gen, APBlocks.DARK_OAK_RAILING.get(), Blocks.DARK_OAK_PLANKS);
         railing(gen, APBlocks.ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
+        railing(gen, APBlocks.MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
+        railing(gen, APBlocks.CHERRY_RAILING.get(), Blocks.CHERRY_PLANKS);
+        railing(gen, APBlocks.BAMBOO_RAILING.get(), Blocks.BAMBOO_PLANKS);
         railing(gen, APBlocks.CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
         railing(gen, APBlocks.WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
-        railing(gen, APBlocks.MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
         railing(gen, APBlocks.TWISTED_RAILING.get(), APBlocks.TWISTED_PLANKS.get());
 
         sidePillar(gen, APBlocks.DRIPSTONE_PILLAR.get());
