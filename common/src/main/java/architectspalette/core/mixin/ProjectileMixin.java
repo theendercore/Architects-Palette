@@ -22,7 +22,6 @@ public abstract class ProjectileMixin {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void bounce(CallbackInfo ci) {
-        // (ender) if this is still pp then im an infant
         Projectile projectile = (Projectile) (Object) this;
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(projectile, this::canHitEntity);
         if (projectileImpact(projectile, hitresult)) {

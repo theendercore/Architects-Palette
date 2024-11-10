@@ -24,13 +24,13 @@ import static architectspalette.core.util.model.Models.*;
 import static net.minecraft.data.models.BlockModelGenerators.*;
 
 public interface ModelHelpers {
-
     Condition centerTall = Condition.or(
             condition(WallBlock.NORTH_WALL, WallSide.TALL),
             condition(WallBlock.EAST_WALL, WallSide.TALL),
             condition(WallBlock.SOUTH_WALL, WallSide.TALL),
             condition(WallBlock.WEST_WALL, WallSide.TALL)
     );
+
     Condition centerShort = Condition.or(
             condition(WallBlock.UP, false),
             Condition.condition().term(WallBlock.NORTH_WALL, WallSide.LOW, WallSide.NONE),
@@ -164,10 +164,6 @@ public interface ModelHelpers {
 
     static void railing(BlockModelGenerators gen, Block block, Block textureBlock) {
         railing(gen, block, TextureMapping.defaultTexture(model(textureBlock)));
-    }
-
-    static void railing(BlockModelGenerators gen, Block block) {
-        railing(gen, block, block);
     }
 
     // Nub
@@ -390,6 +386,10 @@ public interface ModelHelpers {
         gen.blockStateOutput.accept(createSimpleBlock(block, model.create(block, TextureMapping.defaultTexture(block), gen.modelOutput)));
     }
 
+    static void tile(BlockModelGenerators gen, Block block){
+        var model = TILE.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block)), gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, model));
+    }
     static void pillar(BlockModelGenerators gen, Block block) {
         gen.createRotatedPillarWithHorizontalVariant(block, TexturedModel.COLUMN, TexturedModel.COLUMN_HORIZONTAL);
     }
@@ -581,6 +581,7 @@ public interface ModelHelpers {
         gen.createSimpleFlatItemModel(block.asItem());
     }
 
+    // Util
     static TextureMapping allTexture(Block block, String suffix) {
         return TextureMapping.defaultTexture(model(block)).put(TextureSlot.ALL, model(block).withSuffix(suffix));
     }

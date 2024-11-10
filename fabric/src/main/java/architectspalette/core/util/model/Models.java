@@ -15,6 +15,8 @@ public interface Models {
     TextureSlot RIGHT = key("right");
     TextureSlot LEFT = key("left");
 
+    ModelTemplate TILE = template("tile", TextureSlot.ALL);
+
     ModelTemplate NUB = template("nub", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
     ModelTemplate NUB_HORIZONTAL = template("nub_horizontal", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
 
@@ -59,7 +61,6 @@ public interface Models {
 
     ModelTemplate FW_POST = fancyWall("post", "_post", TextureSlot.WALL);
     ModelTemplate FW_INVENTORY = fancyWall("inventory", "_inventory", TextureSlot.WALL);
-
 
 
     private static ModelTemplate fancyWall(String string, String suffix, TextureSlot... textureSlots) {

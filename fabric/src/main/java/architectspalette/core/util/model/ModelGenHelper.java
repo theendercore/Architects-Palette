@@ -1,7 +1,6 @@
 package architectspalette.core.util.model;
 
 import architectspalette.core.platform.Services;
-import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -16,25 +15,20 @@ import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 import static architectspalette.core.APConstants.LOGGER;
+import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.util.model.ModelHelpers.*;
 import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
 
 public interface ModelGenHelper {
-    List<StoneBlockSet> uniqueNubs = Stream.of(APBlocks.PLATING_BLOCK, APBlocks.NETHER_BRASS).toList();
-
-    Map<Block, BiConsumer<BlockModelGenerators, Block>> specialGenerators = Map.of(
-            APBlocks.ORACLE_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
-            APBlocks.MOONSHALE.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
-            APBlocks.BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), ModelGenHelper::makeBread
+    List<StoneBlockSet> uniqueNubs = Stream.of(PLATING_BLOCK, NETHER_BRASS).toList();
+    Map<Block, BiConsumer<BlockModelGenerators, Block>> specialGens = Map.of(
+            ORACLE_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
+            MOONSHALE.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
+            BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), ModelGenHelper::makeBread
     );
-
-    List<StoneBlockSet> specialModels = Stream.of(
-            APBlocks.PLATING_BLOCK, APBlocks.POLISHED_GLOWSTONE, APBlocks.NETHER_BRASS, APBlocks.ANCIENT_PLATING, APBlocks.WARDSTONE
-    ).toList();
-
-    List<StoneBlockSet> abyssalineModels = Stream.of(
-            APBlocks.ABYSSALINE_BRICKS, APBlocks.ABYSSALINE_TILES, APBlocks.HADALINE_BRICKS, APBlocks.HADALINE_TILES
-    ).toList();
+    List<StoneBlockSet> complex = Stream.of(PLATING_BLOCK, POLISHED_GLOWSTONE, NETHER_BRASS, ANCIENT_PLATING, WARDSTONE).toList();
+    List<StoneBlockSet> abyssaline = Stream.of(ABYSSALINE_BRICKS, ABYSSALINE_TILES, HADALINE_BRICKS, HADALINE_TILES).toList();
+    List<StoneBlockSet> tiles = Stream.of(FLINT_TILES, GILDED_SANDSTONE, BASALT_TILES).toList();
 
     static void makeNodeModels(BlockModelGenerators gen, BlockNode node) {
         LOGGER.info("Processing node: {}", node.getName());
@@ -53,11 +47,11 @@ public interface ModelGenHelper {
                     case WALL -> wall(gen, block, parent);
                     case FENCE -> fence(gen, block, parent);
                     case NUB -> {
-                        if (node == APBlocks.BREAD_BLOCK) nubUnique(gen, block);
+                        if (node == BREAD_BLOCK) nubUnique(gen, block);
                         else nub(gen, block);
                     }
                     case SPECIAL -> {
-                        var generator = specialGenerators.get(block);
+                        var generator = specialGens.get(block);
                         if (generator != null) generator.accept(gen, block);
                         else
                             LOGGER.warn("Special block [{}] not defined for node: {}", block.getName().getString(), node.getName());
@@ -74,22 +68,24 @@ public interface ModelGenHelper {
         set.forEachPart((part, block) -> {
             switch (part) {
                 case BLOCK -> {
-                    if (abyssalineModels.contains(set)) abyssalineCube(gen, block);
+                    if (abyssaline.contains(set)) abyssalineCube(gen, block);
+                    else if (set == CUT_NETHER_BRASS) staticSidePillar(gen, block);
+                    else if (tiles.contains(set)) tile(gen, block);
                     else gen.createTrivialCube(block);
                 }
                 case PILLAR -> pillar(gen, block);
                 case SLAB -> {
-                    if (specialModels.contains(set)) specialSlab(gen, block, parent);
-                    else if (abyssalineModels.contains(set)) abyssalineSlab(gen, block, parent);
+                    if (complex.contains(set)) specialSlab(gen, block, parent);
+                    else if (abyssaline.contains(set)) abyssalineSlab(gen, block, parent);
                     else slab(gen, block, parent);
                 }
                 case VERTICAL_SLAB -> {
-                    if (abyssalineModels.contains(set)) abyssalineVerticalSlab(gen, block, parent);
+                    if (abyssaline.contains(set)) abyssalineVerticalSlab(gen, block, parent);
                     else verticalSlab(gen, block, parent);
                 }
                 case STAIRS -> stairs(gen, block, parent);
                 case WALL -> {
-                    if (specialModels.contains(set)) fancyWall(gen, block);
+                    if (complex.contains(set)) fancyWall(gen, block);
                     else wall(gen, block, parent);
                 }
                 case FENCE -> fence(gen, block, parent);

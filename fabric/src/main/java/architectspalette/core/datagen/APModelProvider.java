@@ -52,7 +52,7 @@ public class APModelProvider extends FabricModelProvider {
         gen.createTrivialCube(APBlocks.CRACKED_OLIVESTONE_BRICKS.get());
         gen.createTrivialCube(APBlocks.CRACKED_OLIVESTONE_TILES.get());
         gen.createTrivialCube(APBlocks.CHISELED_OLIVESTONE.get());
-        gen.createTrivialCube(APBlocks.ILLUMINATED_OLIVESTONE.get());
+        tile(gen, APBlocks.ILLUMINATED_OLIVESTONE.get());
 
         gen.createTrivialCube(APBlocks.CRACKED_ALGAL_BRICKS.get());
         gen.createTrivialCube(APBlocks.CHISELED_ALGAL_BRICKS.get());
@@ -110,12 +110,12 @@ public class APModelProvider extends FabricModelProvider {
         fence(gen, APBlocks.TWISTED_FENCE.get(), APBlocks.TWISTED_PLANKS.get());
         fenceGate(gen, APBlocks.TWISTED_FENCE_GATE.get(), APBlocks.TWISTED_PLANKS.get());
         gen.createDoor(APBlocks.TWISTED_DOOR.get());
-        gen.createTrapdoor(APBlocks.TWISTED_TRAPDOOR.get());
+        gen.createOrientableTrapdoor(APBlocks.TWISTED_TRAPDOOR.get());
         button(gen, APBlocks.TWISTED_BUTTON.get(), APBlocks.TWISTED_PLANKS.get());
         pressurePlate(gen, APBlocks.TWISTED_PRESSURE_PLATE.get(), APBlocks.TWISTED_PLANKS.get());
         gen.createPlant(APBlocks.TWISTED_SAPLING.get(), APBlocks.POTTED_TWISTED_SAPLING.get(), BlockModelGenerators.TintState.NOT_TINTED);
 
-        gen.createTrivialCube(APBlocks.CRACKED_BASALT_TILES.get());
+        tile(gen, APBlocks.CRACKED_BASALT_TILES.get());
         staticPillar(gen, APBlocks.CHISELED_BASALT_TILES.get());
 
         sunstone(gen, APBlocks.SUNSTONE.get());
@@ -170,7 +170,7 @@ public class APModelProvider extends FabricModelProvider {
         sidePillar(gen, APBlocks.EKANITE_ROD.get());
         sidePillar(gen, APBlocks.MONAZITE_ROD.get());
 
-        gen.createTrivialCube(APBlocks.UNOBTANIUM_BLOCK.get());
+        tile(gen, APBlocks.UNOBTANIUM_BLOCK.get());
 
         sidePillar(gen, APBlocks.NETHER_BRASS_PILLAR.get());
         createSoulFire(gen, APBlocks.NETHER_BRASS_FIRE.get());

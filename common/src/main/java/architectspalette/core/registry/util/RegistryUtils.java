@@ -2,7 +2,6 @@ package architectspalette.core.registry.util;
 
 import architectspalette.content.blocks.NubBlock;
 import architectspalette.core.platform.Services;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -18,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 import static architectspalette.core.registry.APBlocks.boards;
-import static architectspalette.core.registry.util.BlockNode.ExcludeFlag.MODELS;
 import static architectspalette.core.util.KeyMaker.vanillaTab;
 
 public class RegistryUtils {
@@ -89,7 +87,6 @@ public class RegistryUtils {
     public static BlockNode createBoardNode(String name, Supplier<? extends Block> supplier) {
         BlockNode node = new BlockNode.Builder()
                 .tool(BlockNode.Tool.AXE)
-//                .exclude(MODELS)
                 .base((Supplier<Block>) createBlock(name, supplier))
                 .commonVariants()
                 .flag(BlockNode.DataFlag.BOARDS)
