@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Optional;
 
 @Mixin(AxeItem.class)
-public class AxeItemMixin {
+public abstract class AxeItemMixin {
     @Unique
     private boolean isAPWeatheringCopper = false;
 

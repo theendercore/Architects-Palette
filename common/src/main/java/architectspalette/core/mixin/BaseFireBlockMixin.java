@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(BaseFireBlock.class)
-public class BaseFireBlockMixin {
+public abstract class BaseFireBlockMixin {
 
     //Idk if this is the best way to implement a new fire, it was just the most straight forward. I did no research.
     @Inject(method = "getState", at = @At("RETURN"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
