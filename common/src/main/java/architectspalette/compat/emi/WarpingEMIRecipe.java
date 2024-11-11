@@ -1,3 +1,4 @@
+/*
 package architectspalette.compat.emi;
 
 import architectspalette.core.crafting.WarpingRecipe;
@@ -36,3 +37,4 @@ public class WarpingEMIRecipe extends BasicEmiRecipe {
         widgets.addTooltipText(List.of(tossPrompt), 49, 12, 18, 35);
     }
 }
+*/

@@ -1,6 +1,7 @@
 package architectspalette.core.event;
 
 import architectspalette.core.model.BoardModel;
+import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
@@ -39,7 +40,7 @@ public class ModelBakeEventHandler {
         //Note; Not all model swaps are registered here.
 //        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
 //        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
-//        register(APBlocksFG.SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register((RegistryObject<? extends Block>) APBlocks.SHEET_METAL.getObject() , model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 //        register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
 //        for (BlockNode board : APBlocks.boards) {

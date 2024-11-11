@@ -1,3 +1,4 @@
+/*
 package architectspalette.compat.emi;
 
 import architectspalette.content.blocks.BigBrickBlock;
@@ -121,3 +122,4 @@ public class EMIPlugin implements EmiPlugin {
         }
     }
 }
+*/
