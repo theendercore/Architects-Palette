@@ -16,6 +16,20 @@ public class SpriteShift {
     private static final Map<String, SpriteShift> entries = new HashMap<>();
     private static Boolean areTexturesReady = false;
 
+    protected ResourceLocation fromLocation;
+    protected ResourceLocation toLocation;
+    protected float uShift;
+    protected float vShift;
+    protected float vHeight;
+
+    private SpriteShift(ResourceLocation from_block, ResourceLocation to_block) {
+        fromLocation = from_block;
+        toLocation = to_block;
+        if (areTexturesReady) {
+            init();
+        }
+    }
+
     public static SpriteShift getShift(ResourceLocation from_block, ResourceLocation to_block) {
         String key = from_block.toString() + "->" + to_block.toString();
         if (entries.containsKey(key)) {
@@ -25,6 +39,7 @@ public class SpriteShift {
         entries.put(key, shift);
         return shift;
     }
+
     public static SpriteShift getShift(String from_block, String to_block) {
         return getShift(modLoc(from_block), modLoc(to_block));
     }
@@ -36,35 +51,28 @@ public class SpriteShift {
         }
     }
 
-    protected TextureAtlasSprite from;
-    protected TextureAtlasSprite to;
-    protected ResourceLocation fromLocation;
-    protected ResourceLocation toLocation;
-
-    private SpriteShift(ResourceLocation from_block, ResourceLocation to_block) {
-        fromLocation = from_block;
-        toLocation = to_block;
-        if (areTexturesReady) {
-            init();
-        }
-    }
     private void init() {
         Function<ResourceLocation, TextureAtlasSprite> atlas = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
-        from = atlas.apply(fromLocation);
-        to = atlas.apply(toLocation);
+        var from = atlas.apply(fromLocation);
+        var to = atlas.apply(toLocation);
+
+        uShift = to.getU0() - from.getU0();
+        vShift = to.getV0() - from.getV0();
+        vHeight = from.getV1() - from.getV0();
     }
 
     //Could optimize by saving this value. Hell, should probably just not save the sprites.
+    // (ender) well I did  that :)
     public float getUShift() {
-        return to.getU0() - from.getU0();
+        return uShift;
     }
 
     public float getVShift() {
-        return to.getV0() - from.getV0();
+        return vShift;
     }
 
     public float getVHeight() {
-        return from.getV1() - from.getV0();
+        return vHeight;
     }
 
 }
