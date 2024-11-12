@@ -26,7 +26,7 @@ public class SheetMetalModel extends ForwardingBakedModel implements SheetMetalH
 
     @Override // (Ender) Stolen from AP Fabric
     public void emitBlockQuads(BlockAndTintGetter blockView, BlockState state, BlockPos pos, Supplier<RandomSource> randomSupplier, RenderContext context) {
-        var data = new Data();
+        var data = new SheetData();
         SheetMetalHelper.initializeData(blockView, pos, state, data);
         context.pushTransform(quad -> {
             var dir = quad.lightFace();

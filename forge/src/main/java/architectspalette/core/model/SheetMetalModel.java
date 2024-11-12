@@ -23,7 +23,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class SheetMetalModel extends BakedModelWrapperWithData implements SheetMetalHelper {
-    private static final ModelProperty<Data> CT_PROPERTY = new ModelProperty<>();
+    private static final ModelProperty<SheetData> CT_PROPERTY = new ModelProperty<>();
     private final SpriteShift spriteShift;
 
     public SheetMetalModel(BakedModel originalModel, SpriteShift spriteShift) {
@@ -33,7 +33,7 @@ public class SheetMetalModel extends BakedModelWrapperWithData implements SheetM
 
     @Override
     protected ModelData.Builder gatherModelData(ModelData.Builder builder, BlockAndTintGetter world, BlockPos pos, BlockState state) {
-        var data = new Data();
+        var data = new SheetData();
         SheetMetalHelper.initializeData(world, pos, state, data);
         return builder.with(CT_PROPERTY, data);
     }
@@ -43,7 +43,7 @@ public class SheetMetalModel extends BakedModelWrapperWithData implements SheetM
         List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
 
         if (!extraData.has(CT_PROPERTY)) return quads;
-        Data data = extraData.get(CT_PROPERTY);
+        SheetData data = extraData.get(CT_PROPERTY);
         if (data == null) return quads;
 
         quads = new ArrayList<>(quads);

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Arrays;
 
 public interface SheetMetalHelper {
-    static void initializeData(BlockAndTintGetter world, BlockPos pos, BlockState state, Data data) {
+    static void initializeData(BlockAndTintGetter world, BlockPos pos, BlockState state, SheetData data) {
         var checkPos = new BlockPos.MutableBlockPos();
         for (var face : Direction.values()) {
             if (Block.shouldRenderFace(state, world, pos, face, checkPos.setWithOffset(pos, face)) || state.getBlock() instanceof WallBlock) {
@@ -43,10 +43,10 @@ public interface SheetMetalHelper {
         return getUpDirection(face).getOpposite();
     }
 
-    class Data {
+    class SheetData {
         private final int[] indices = new int[6];
 
-        public Data() {
+        public SheetData() {
             Arrays.fill(indices, -1);
         }
 
