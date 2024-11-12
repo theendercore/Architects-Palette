@@ -15,17 +15,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.client.model.data.ModelProperty;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class BoardModel extends BakedModelWrapperWithData {
-
+public class BoardModel extends BakedModelWrapperWithData implements BoardHelper {
     //The model property used to store the board data.
     private static final ModelProperty<BoardData> BOARD_PROPERTY = new ModelProperty<>();
-
     private final SpriteShift spriteShift;
 
     public BoardModel(BakedModel originalModel, SpriteShift boardShift) {
@@ -40,12 +39,10 @@ public class BoardModel extends BakedModelWrapperWithData {
     }
 
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData extraData, RenderType renderType) {
-        List<BakedQuad> quads =  super.getQuads(state, side, rand, extraData, renderType);
+    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData extraData, RenderType renderType) {
+        List<BakedQuad> quads = super.getQuads(state, side, rand, extraData, renderType);
 
-        if (!extraData.has(BOARD_PROPERTY))
-            return quads;
-
+        if (!extraData.has(BOARD_PROPERTY)) return quads;
         BoardData data = extraData.get(BOARD_PROPERTY);
         if (data == null) return quads;
 
@@ -53,26 +50,7 @@ public class BoardModel extends BakedModelWrapperWithData {
 
         for (int i = 0; i < quads.size(); i++) {
             BakedQuad quad = quads.get(i);
-            boolean shift;
-            //Check for being horizontal.
-            if (quad.getDirection().get3DDataValue() >= 2) {
-                //If the horizontal faces should be shifted
-                shift = data.getHorizontal();
-                //Check for north/south
-                if ((quad.getDirection().get3DDataValue() < 4)) {
-                    shift = !shift;
-                }
-            }
-            //Vertical face.
-            else {
-                //If the vertical faces should be shifted
-                shift = data.getVertical();
-                if (quad.getDirection().get3DDataValue() == 0) {
-                    shift = !shift;
-                }
-            }
-
-            if (shift) {
+            if (BoardHelper.shouldShift(quad.getDirection(), data)) {
                 BakedQuad newQuad = QuadHelper.clone(quad);
                 int[] vertexData = newQuad.getVertices();
                 float uShift = spriteShift.getUShift();
@@ -84,33 +62,9 @@ public class BoardModel extends BakedModelWrapperWithData {
                     QuadHelper.setU(vertexData, vertex, u + uShift);
                     QuadHelper.setV(vertexData, vertex, v + vShift);
                 }
-
                 quads.set(i, newQuad);
             }
-
         }
-
         return quads;
-    }
-
-    private static class BoardData {
-        private final boolean isXOdd;
-        private final boolean isZOdd;
-        public BoardData(BlockPos pos) {
-            this(isOdd(pos.getX()), isOdd(pos.getZ()));
-        }
-        public BoardData(boolean isOddX, boolean isOddZ) {
-            this.isXOdd = isOddX;
-            this.isZOdd = isOddZ;
-        }
-        public boolean getHorizontal() {
-            return (isZOdd ^ isXOdd);
-        }
-        public boolean getVertical() {
-            return isXOdd;
-        }
-        private static boolean isOdd(int num) {
-            return (Math.abs(num) % 2) == 1;
-        }
     }
 }

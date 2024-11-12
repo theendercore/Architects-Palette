@@ -2,7 +2,6 @@ package architectspalette.core.util.model;
 
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
-import architectspalette.content.blocks.boards.Boards;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -378,29 +377,6 @@ public interface ModelHelpers {
         return booleanMap(block, model, chargedModel, AbyssalineBlock.CHARGED);
     }
 
-    // Boards
-    static void boards(BlockModelGenerators gen, Block block) {
-        var normalId = model(block);
-        var oddId = model(block).withSuffix("_odd");
-        var normalTx = new TextureMapping().put(TextureSlot.END, normalId).put(TextureSlot.SIDE, normalId);
-        var oddTx = new TextureMapping().put(TextureSlot.ALL, oddId).put(TextureSlot.SIDE, oddId);
-        var endsOddTx = new TextureMapping().put(TextureSlot.ALL, oddId).put(TextureSlot.SIDE, normalId);
-        var sidesOddTx = new TextureMapping().put(TextureSlot.END, normalId).put(TextureSlot.SIDE, oddId);
-
-        var model = ModelTemplates.CUBE_COLUMN.create(block, normalTx, gen.modelOutput);
-        var oddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_odd", oddTx, gen.modelOutput);
-        var endsOddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_ends_odd", endsOddTx, gen.modelOutput);
-        var sidesOddModel = ModelTemplates.CUBE_COLUMN.createWithSuffix(block, "_sides_odd", sidesOddTx, gen.modelOutput);
-
-        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(Boards.TYPE)
-                .select(Boards.BoardType.NORMAL, modelVariant(model))
-                .select(Boards.BoardType.ODD, modelVariant(oddModel))
-                .select(Boards.BoardType.ENDS_ODD, modelVariant(endsOddModel))
-                .select(Boards.BoardType.SIDES_ODD, modelVariant(sidesOddModel))
-        ));
-        gen.delegateItemModel(block, model);
-    }
-
     // Misc
     static void createTrivialBlock(BlockModelGenerators gen, Block block, ModelTemplate model) {
         gen.blockStateOutput.accept(createSimpleBlock(block, model.create(block, TextureMapping.defaultTexture(block), gen.modelOutput)));
@@ -435,6 +411,14 @@ public interface ModelHelpers {
 
     static void staticPillar(BlockModelGenerators gen, Block block) {
         gen.blockStateOutput.accept(createSimpleBlock(block, TexturedModel.COLUMN.create(block, gen.modelOutput)));
+    }
+    static void staticCubeTB(BlockModelGenerators gen, Block block) {
+        var texture = new TextureMapping()
+                .put(TextureSlot.TOP, abyssaline(block, "_top"))
+                .put(TextureSlot.SIDE, abyssaline(block, "_side"))
+                .put(TextureSlot.BOTTOM, abyssaline(block, "_bottom"));
+        var model = ModelTemplates.CUBE_BOTTOM_TOP.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, model));
     }
 
     static void staticSidePillar(BlockModelGenerators gen, Block block) {

@@ -46,7 +46,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         APCommon.initClient();
 
         RegisterParticleProvidersEventHandler.registerParticleFactories();
-        ModelLoaderEvent.init();
+        ModelBakeEventHandler.init();
     }
 
     @Override

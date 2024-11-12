@@ -3,6 +3,7 @@ package architectspalette.core.event;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
+import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -33,22 +34,13 @@ public class ModelBakeEventHandler {
     @SubscribeEvent
     public static void onModelBake(ModelEvent.ModifyBakingResult event) {
         Map<ModelResourceLocation, BakedModel> modelRegistry = event.getModels();
-//
-//        SpriteShift birchShift = new SpriteShift(rl("block/birch_boards"), rl("block/birch_boards_odd"));
-//        register(APBlocks.BIRCH_BOARDS, model -> new BoardModel(model, birchShift));
-
         //Note; Not all model swaps are registered here.
-//        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
         register((RegistryObject<? extends Block>) SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
         register((RegistryObject<? extends Block>) SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
-//        for (BlockNode board : APBlocks.boards) {
-//            var wall = board.getChild(BlockNode.BlockType.WALL);
-//            var shift = SpriteShift.getShift("block/" + board.getName(), "block/" + board.getName() + "_odd");
-//            register(wall, model -> new BoardModel(model, shift));
-//        }
-//        SpriteShift.onTexturesDoneStitching();
-
+        APBlocks.boards.forEach((b) ->
+                b.forEach((n) -> register((RegistryObject<? extends Block>) n.block, model -> new BoardModel(model, SpriteShift.getShift("block/" + b.getName(), "block/" + b.getName() + "_odd"))))
+        );
         customBlockModels.forEach((entry, factory) -> swapModels(modelRegistry, getAllBlockStateModelLocations(entry), factory));
 
     }
@@ -56,17 +48,13 @@ public class ModelBakeEventHandler {
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
     @SuppressWarnings("unused")
     public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation blockToRegister, ResourceLocation baseBoardBlock) {
-        var inBlockFolder = ResourceLocation.fromNamespaceAndPath(baseBoardBlock.getNamespace(), "block/" + baseBoardBlock.getPath());
-        var odd = ResourceLocation.fromNamespaceAndPath(inBlockFolder.getNamespace(), inBlockFolder.getPath() + "_odd");
+        var inBlockFolder = baseBoardBlock.withPrefix("block/");
+        var odd = inBlockFolder.withSuffix("_odd");
         register(supplier, blockToRegister, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
     }
 
     private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, List<ModelResourceLocation> locations, Function<BakedModel, T> modelFactory) {
-        locations.forEach(location -> swapModels(modelRegistry, location, modelFactory));
-    }
-
-    private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, ModelResourceLocation location, Function<BakedModel, T> modelFactory) {
-        modelRegistry.put(location, modelFactory.apply(modelRegistry.get(location)));
+        locations.forEach(location -> modelRegistry.put(location, modelFactory.apply(modelRegistry.get(location))));
     }
 
     private static List<ModelResourceLocation> getAllBlockStateModelLocations(Entry entry) {
