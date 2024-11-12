@@ -8,7 +8,9 @@
     "LootItemAccessor",
     "LootPoolBuilderAccessor"
   ],
-  "client": [],
+  "client": [
+    "TextureAtlasMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

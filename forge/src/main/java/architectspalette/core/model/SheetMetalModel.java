@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static architectspalette.core.APConstants.LOGGER;
-
 @OnlyIn(Dist.CLIENT)
 public class SheetMetalModel extends BakedModelWrapperWithData {
 
