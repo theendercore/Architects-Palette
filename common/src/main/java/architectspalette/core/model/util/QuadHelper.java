@@ -8,20 +8,21 @@ import java.util.Arrays;
 
 // Copied from Create's QuadHelper (As per the license, Copyright (c) simibubi)
 // https://github.com/Creators-of-Create/Create/blob/mc1.18/dev/src/main/java/com/simibubi/create/foundation/block/render/QuadHelper.java
+// (ender) update link https://github.com/Creators-of-Create/Create/blob/mc1.20.1/dev/src/main/java/com/simibubi/create/foundation/model/BakedQuadHelper.java#L11
 // I'm not really sure how this math works, so I can't really appropriate it in any meaningful way.
 public class QuadHelper {
 
     public static final VertexFormat FORMAT = DefaultVertexFormat.BLOCK;
     public static final int VERTEX_STRIDE = FORMAT.getVertexSize() / 4;
 
-    public static final int X_OFFSET = 0;
-    public static final int Y_OFFSET = 1;
-    public static final int Z_OFFSET = 2;
-    public static final int COLOR_OFFSET = 3;
+//    public static final int X_OFFSET = 0;
+//    public static final int Y_OFFSET = 1;
+//    public static final int Z_OFFSET = 2;
+//    public static final int COLOR_OFFSET = 3;
     public static final int U_OFFSET = 4;
     public static final int V_OFFSET = 5;
-    public static final int LIGHT_OFFSET = 6;
-    public static final int NORMAL_OFFSET = 7;
+//    public static final int LIGHT_OFFSET = 6;
+//    public static final int NORMAL_OFFSET = 7;
 
     private QuadHelper() {
     }

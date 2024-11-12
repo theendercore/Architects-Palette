@@ -3,10 +3,7 @@ package architectspalette.core;
 import architectspalette.core.datagen.*;
 import architectspalette.core.datagen.worldgen.APFeatureCreator;
 import architectspalette.core.datagen.worldgen.APWorldGenProvider;
-import architectspalette.core.event.CreativeModeTabEventHandler;
-import architectspalette.core.event.ModifyLootTableEventHandler;
-import architectspalette.core.event.RegisterParticleProvidersEventHandler;
-import architectspalette.core.event.TradingEventHandler;
+import architectspalette.core.event.*;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.APBiomeModifications;
 import architectspalette.core.registry.APItems;
@@ -49,6 +46,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         APCommon.initClient();
 
         RegisterParticleProvidersEventHandler.registerParticleFactories();
+        ModelLoaderEvent.init();
     }
 
     @Override
