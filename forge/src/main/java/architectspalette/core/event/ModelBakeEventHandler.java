@@ -3,7 +3,6 @@ package architectspalette.core.event;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
-import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -24,6 +23,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
+import static architectspalette.core.registry.APBlocks.SHEET_METAL;
 
 @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelBakeEventHandler {
@@ -40,15 +40,15 @@ public class ModelBakeEventHandler {
         //Note; Not all model swaps are registered here.
 //        register(APBlocksFG.UNOBTANIUM_BLOCK, TileModel::new);
 //        register(APBlocksFG.HAZARD_BLOCK.getObject(), HazardModel::new);
-        register((RegistryObject<? extends Block>) APBlocks.SHEET_METAL.getObject() , model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
-//        register(APBlocksFG.SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register((RegistryObject<? extends Block>) SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register((RegistryObject<? extends Block>) SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
 //        for (BlockNode board : APBlocks.boards) {
 //            var wall = board.getChild(BlockNode.BlockType.WALL);
 //            var shift = SpriteShift.getShift("block/" + board.getName(), "block/" + board.getName() + "_odd");
 //            register(wall, model -> new BoardModel(model, shift));
 //        }
-        //SpriteShift.onTexturesDoneStitching();
+//        SpriteShift.onTexturesDoneStitching();
 
         customBlockModels.forEach((entry, factory) -> swapModels(modelRegistry, getAllBlockStateModelLocations(entry), factory));
 
@@ -57,13 +57,13 @@ public class ModelBakeEventHandler {
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
     @SuppressWarnings("unused")
     public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation blockToRegister, ResourceLocation baseBoardBlock) {
-        var inBlockFolder = ResourceLocation.fromNamespaceAndPath(baseBoardBlock.getNamespace(),"block/" + baseBoardBlock.getPath());
+        var inBlockFolder = ResourceLocation.fromNamespaceAndPath(baseBoardBlock.getNamespace(), "block/" + baseBoardBlock.getPath());
         var odd = ResourceLocation.fromNamespaceAndPath(inBlockFolder.getNamespace(), inBlockFolder.getPath() + "_odd");
         register(supplier, blockToRegister, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
     }
 
     private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, List<ModelResourceLocation> locations, Function<BakedModel, T> modelFactory) {
-        locations.forEach( location -> swapModels(modelRegistry, location, modelFactory));
+        locations.forEach(location -> swapModels(modelRegistry, location, modelFactory));
     }
 
     private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, ModelResourceLocation location, Function<BakedModel, T> modelFactory) {
@@ -93,6 +93,7 @@ public class ModelBakeEventHandler {
     private static class Entry {
         private final ResourceLocation resourceLocation;
         private final Supplier<? extends Block> block;
+
         public Entry(ResourceLocation resourceLocation, Supplier<? extends Block> block) {
             this.resourceLocation = resourceLocation;
             this.block = block;

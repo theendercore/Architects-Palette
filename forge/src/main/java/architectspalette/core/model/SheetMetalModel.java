@@ -3,8 +3,6 @@ package architectspalette.core.model;
 import architectspalette.core.model.util.BakedModelWrapperWithData;
 import architectspalette.core.model.util.QuadHelper;
 import architectspalette.core.model.util.SpriteShift;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormatElement;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
@@ -33,7 +31,6 @@ public class SheetMetalModel extends BakedModelWrapperWithData {
 
     //The model property used to store the board data.
     private static final ModelProperty<Data> CT_PROPERTY = new ModelProperty<>();
-    private static boolean debugValue = true;
     private final SpriteShift spriteShift;
 
     public SheetMetalModel(BakedModel originalModel, SpriteShift spriteShift) {
@@ -94,12 +91,6 @@ public class SheetMetalModel extends BakedModelWrapperWithData {
         if (data == null) return quads;
 
         quads = new ArrayList<>(quads);
-        if (debugValue) {
-            LOGGER.info("UV offset: {}", DefaultVertexFormat.BLOCK.getOffset(VertexFormatElement.UV));
-            quads.forEach(quad -> LOGGER.info("Quad: {} |\n - {}|\n - {}", quad.getDirection(), quad.getSprite(), quad.getVertices()));
-            debugValue = false;
-        }
-
 
         for (int i = 0; i < quads.size(); i++) {
             BakedQuad quad = quads.get(i);
@@ -111,7 +102,6 @@ public class SheetMetalModel extends BakedModelWrapperWithData {
                 float uShift = spriteShift.getUShift();
                 float extraShift = (spriteShift.getVHeight() * index);
                 float vShift = spriteShift.getVShift() + extraShift;
-
                 for (int vertex = 0; vertex < 4; vertex++) {
                     float u = QuadHelper.getU(vertexData, vertex);
                     float v = QuadHelper.getV(vertexData, vertex);
