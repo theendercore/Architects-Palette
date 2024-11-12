@@ -49,7 +49,7 @@ public interface DebugCommand {
 
             world.setBlock(pos, state, Block.UPDATE_ALL);
 
-            if (row > 24) {
+            if (row > 27) {
                 height++;
                 row = 0;
                 continue;
