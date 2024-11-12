@@ -383,7 +383,7 @@ public interface ModelHelpers {
     }
 
     static void tile(BlockModelGenerators gen, Block block) {
-        var model = TILE.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block)), gen.modelOutput);
+        var model = TILES.create(block, TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block)), gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, model));
     }
 

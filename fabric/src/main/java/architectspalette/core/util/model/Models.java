@@ -15,7 +15,7 @@ public interface Models {
     TextureSlot RIGHT = key("right");
     TextureSlot LEFT = key("left");
 
-    ModelTemplate TILE = template("tile", TextureSlot.ALL);
+    ModelTemplate TILES = template("tiles", TextureSlot.ALL);
 
     ModelTemplate NUB = template("nub", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
     ModelTemplate NUB_HORIZONTAL = template("nub_horizontal", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
