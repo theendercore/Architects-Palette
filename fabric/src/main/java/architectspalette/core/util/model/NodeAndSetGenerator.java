@@ -1,12 +1,8 @@
 package architectspalette.core.util.model;
 
-import architectspalette.core.platform.Services;
 import architectspalette.core.registry.util.BlockNode;
 import architectspalette.core.registry.util.StoneBlockSet;
 import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.model.ModelTemplates;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -16,17 +12,18 @@ import java.util.stream.Stream;
 
 import static architectspalette.core.APConstants.LOGGER;
 import static architectspalette.core.registry.APBlocks.*;
+import static architectspalette.core.registry.util.BlockNode.BlockType.SLAB;
+import static architectspalette.core.registry.util.BlockNode.BlockType.TILES;
 import static architectspalette.core.util.model.ModelHelpers.*;
-import static net.minecraft.data.models.BlockModelGenerators.createSimpleBlock;
 
-public interface ModelGenHelper {
+public interface NodeAndSetGenerator {
     List<StoneBlockSet> uniqueNubs = Stream.of(PLATING_BLOCK, NETHER_BRASS).toList();
-    Map<Block, BiConsumer<BlockModelGenerators, Block>> specialGens = Map.of(
-            ORACLE_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
-            MOONSHALE.getChild(BlockNode.BlockType.SPECIAL).get(), BlockModelGenerators::createTrivialCube,
-            BREAD_BLOCK.getChild(BlockNode.BlockType.SPECIAL).get(), ModelGenHelper::makeBread
+    Map<BlockNode, BiConsumer<BlockModelGenerators, Block>> specialGens = Map.of(
+            ORACLE_BLOCK, BlockModelGenerators::createTrivialCube,
+            MOONSHALE, BlockModelGenerators::createTrivialCube,
+            BREAD_BLOCK, ModelHelpers::specialBread
     );
-    List<StoneBlockSet> complex = Stream.of(PLATING_BLOCK, POLISHED_GLOWSTONE, NETHER_BRASS, ANCIENT_PLATING, WARDSTONE).toList();
+    List<StoneBlockSet> fancy = Stream.of(PLATING_BLOCK, POLISHED_GLOWSTONE, NETHER_BRASS, ANCIENT_PLATING, WARDSTONE).toList();
     List<StoneBlockSet> abyssaline = Stream.of(ABYSSALINE_BRICKS, ABYSSALINE_TILES, HADALINE_BRICKS, HADALINE_TILES).toList();
     List<StoneBlockSet> tiles = Stream.of(FLINT_TILES, GILDED_SANDSTONE, BASALT_TILES).toList();
 
@@ -35,13 +32,10 @@ public interface ModelGenHelper {
         node.forEach((n) -> {
             if (!n.getFlag(BlockNode.ExcludeFlag.MODELS)) {
                 Block block = n.get();
-
                 var parent = (n.parent != null) ? n.parent.get() : null;
                 switch (n.type) {
                     case BASE, BRICKS, CRACKED, MOSSY, TILES, CHISELED, POLISHED, LAMP, DARK, PLATING -> {
-                        if (block == CEREBRAL_BLOCK.getChild(BlockNode.BlockType.TILES).get()) {
-                            cerebralTiles(gen, block);
-                        } else switch (n.style) {
+                        switch (n.style) {
                             case CUBE -> gen.createTrivialCube(block);
                             case TOP_SIDES -> staticPillar(gen, block);
                             case TOP_SIDE_BOTTOM -> staticCubeTB(gen, block);
@@ -58,7 +52,7 @@ public interface ModelGenHelper {
                         else nub(gen, block);
                     }
                     case SPECIAL -> {
-                        var generator = specialGens.get(block);
+                        var generator = specialGens.get(node);
                         if (generator != null) generator.accept(gen, block);
                         else
                             LOGGER.warn("Special block [{}] not defined for node: {}", block.getName().getString(), node.getName());
@@ -72,42 +66,42 @@ public interface ModelGenHelper {
         var name = set.get().getName().getString();
         LOGGER.info("Processing Set: {}", name);
         var parent = set.get();
+        var isAbyssaline = abyssaline.contains(set);
         set.forEachPart((part, block) -> {
             switch (part) {
                 case BLOCK -> {
-                    if (abyssaline.contains(set)) abyssalineCube(gen, block);
+                    if (isAbyssaline) abyssalineCube(gen, block);
                     else if (set == CUT_NETHER_BRASS) staticSidePillar(gen, block);
                     else if (tiles.contains(set)) tile(gen, block);
                     else gen.createTrivialCube(block);
                 }
                 case PILLAR -> pillar(gen, block);
                 case SLAB -> {
-                    if (complex.contains(set)) specialSlab(gen, block, parent);
-                    else if (abyssaline.contains(set)) abyssalineSlab(gen, block, parent);
+                    if (fancy.contains(set)) specialSlab(gen, block, parent);
+                    else if (isAbyssaline) abyssalineSlab(gen, block, parent);
                     else slab(gen, block, parent);
                 }
                 case VERTICAL_SLAB -> {
-                    if (abyssaline.contains(set)) abyssalineVerticalSlab(gen, block, parent);
+                    if (isAbyssaline) abyssalineVerticalSlab(gen, block, parent);
                     else verticalSlab(gen, block, parent);
                 }
                 case STAIRS -> stairs(gen, block, parent);
                 case WALL -> {
-                    if (complex.contains(set)) fancyWall(gen, block);
+                    if (fancy.contains(set)) fancyWall(gen, block);
                     else wall(gen, block, parent);
                 }
                 case FENCE -> fence(gen, block, parent);
                 case NUB -> {
-                    if ((uniqueNubs.contains(set))) nubUnique(gen, block);
+                    if (uniqueNubs.contains(set)) nubUnique(gen, block);
                     else nub(gen, block);
                 }
             }
         });
     }
 
-    static void makeBread(BlockModelGenerators gen, Block block) {
-        var texture = TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block));
-        var model = ModelTemplates.CUBE_ALL.create(Services.REGISTRY.getId(() -> block).withPrefix("block/bread/"), texture, gen.modelOutput);
-        gen.blockStateOutput.accept(createSimpleBlock(block, model));
-        gen.delegateItemModel(block, model);
+    static void excludedModelGen(BlockModelGenerators gen) {
+        cerebralTiles(gen, CEREBRAL_BLOCK.getChild(TILES).get());
+        bread(gen, BREAD_BLOCK.get());
+        breadSlab(gen, BREAD_BLOCK.getChild(SLAB).get(), BREAD_BLOCK.get());
     }
 }

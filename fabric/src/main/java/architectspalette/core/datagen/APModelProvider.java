@@ -14,8 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.stream.Stream;
 
-import static architectspalette.core.util.model.ModelGenHelper.makeBlockSetModels;
-import static architectspalette.core.util.model.ModelGenHelper.makeNodeModels;
+import static architectspalette.core.util.model.NodeAndSetGenerator.*;
 import static architectspalette.core.util.model.ModelHelpers.*;
 
 public class APModelProvider extends FabricModelProvider {
@@ -27,6 +26,7 @@ public class APModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators gen) {
         BlockNode.forAllBaseNodes((n) -> makeNodeModels(gen, n));
         StoneBlockSet.forAllSets((s) -> makeBlockSetModels(gen, s));
+        excludedModelGen(gen);
 
         // Make createAbyssaline function
         abyssalineStaticPillar(gen, APBlocks.ABYSSALINE.get());

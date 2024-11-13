@@ -2,6 +2,7 @@ package architectspalette.core.util.model;
 
 import architectspalette.content.blocks.*;
 import architectspalette.content.blocks.abyssaline.AbyssalineBlock;
+import architectspalette.core.platform.Services;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
@@ -16,13 +17,17 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.WallSide;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import static architectspalette.content.blocks.BreadBlock.BreadPart;
 import static architectspalette.core.APConstants.mcLoc;
 import static architectspalette.core.APConstants.modLoc;
 import static architectspalette.core.util.model.Models.*;
 import static net.minecraft.data.models.BlockModelGenerators.*;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS;
 
 public interface ModelHelpers {
     Condition centerTall = Condition.or(
@@ -606,17 +611,102 @@ public interface ModelHelpers {
 
     static void cerebralTiles(BlockModelGenerators gen, Block block) {
         var texture1 = TextureMapping.cube(model(block));
-        var texture2 = TextureMapping.cube(model(block).withSuffix("1"));
-        var texture3 = TextureMapping.cube(model(block).withSuffix("2"));
+        var texture2 = TextureMapping.cube(model(block).withSuffix("_1"));
+        var texture3 = TextureMapping.cube(model(block).withSuffix("_2"));
 
         var model1 = ModelTemplates.CUBE_ALL.create(block, texture1, gen.modelOutput);
-        var model2 = ModelTemplates.CUBE_ALL.create(block, texture2, gen.modelOutput);
-        var model3 = ModelTemplates.CUBE_ALL.create(block, texture3, gen.modelOutput);
+        var model2 = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_1", texture2, gen.modelOutput);
+        var model3 = ModelTemplates.CUBE_ALL.createWithSuffix(block, "_2", texture3, gen.modelOutput);
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model1), modelVariant(model2), modelVariant(model3)));
         gen.delegateItemModel(block, model1);
     }
 
+    // Bread
+    static void breadSlab(BlockModelGenerators gen, Block block, Block parent) {
+        var inside = model(parent).withSuffix("_inside");
+        var sides = model(parent).withSuffix("_side");
+
+        var fullTex = TextureMapping.column(sides, inside);
+        var slabTex = new TextureMapping()
+                .put(TextureSlot.BOTTOM, inside)
+                .put(TextureSlot.SIDE, sides)
+                .put(TextureSlot.TOP, inside);
+
+        var bottom = ModelTemplates.SLAB_BOTTOM.create(id(block).withPath(it -> "block/bread/" + it + "_bottom"), slabTex, gen.modelOutput);
+        var top = ModelTemplates.SLAB_TOP.create(id(block).withPath(it -> "block/bread/" + it + "_top"), slabTex, gen.modelOutput);
+        var full = ModelTemplates.CUBE_BOTTOM_TOP.create(id(block).withPath(it -> "block/bread/" + it + "_full"), fullTex, gen.modelOutput);
+        gen.blockStateOutput.accept(createSlab(block, bottom, top, full));
+        gen.delegateItemModel(block, bottom);
+    }
+
+    static void bread(BlockModelGenerators gen, Block block) {
+        var modelLoc = id(block).withPrefix("block/bread/");
+        var id = model(block);
+        var inside = id.withSuffix("_inside");
+        var side = id.withSuffix("_side");
+        var sideLeft = id.withSuffix("_side_left");
+        var sideRight = id.withSuffix("_side_right");
+        var bottom = id.withSuffix("_bottom");
+        var top = id.withSuffix("_top");
+        var end = id.withSuffix("_end");
+
+
+        var wholeTex = TextureMapping.particle(inside)
+                .put(TextureSlot.UP, top)
+                .put(TextureSlot.DOWN, bottom)
+                .put(TextureSlot.NORTH, side)
+                .put(TextureSlot.EAST, side)
+                .put(TextureSlot.SOUTH, side)
+                .put(TextureSlot.WEST, side);
+        var leftTex = TextureMapping.particle(inside)
+                .put(TextureSlot.UP, top.withSuffix("_left"))
+                .put(TextureSlot.DOWN, bottom.withSuffix("_left"))
+                .put(TextureSlot.NORTH, inside)
+                .put(TextureSlot.EAST, sideLeft)
+                .put(TextureSlot.SOUTH, end)
+                .put(TextureSlot.WEST, sideRight);
+        var midTex = TextureMapping.particle(inside)
+                .put(TextureSlot.UP, top.withSuffix("_middle"))
+                .put(TextureSlot.DOWN, bottom.withSuffix("_middle"))
+                .put(TextureSlot.NORTH, inside)
+                .put(TextureSlot.EAST, side.withSuffix("_middle"))
+                .put(TextureSlot.SOUTH, inside)
+                .put(TextureSlot.WEST, side.withSuffix("_middle"));
+        var rightTex = TextureMapping.particle(inside)
+                .put(TextureSlot.UP, top.withSuffix("_right"))
+                .put(TextureSlot.DOWN, bottom.withSuffix("_right"))
+                .put(TextureSlot.NORTH, end)
+                .put(TextureSlot.EAST, sideRight)
+                .put(TextureSlot.SOUTH, inside)
+                .put(TextureSlot.WEST, sideLeft);
+
+        var whole = ModelTemplates.CUBE.create(modelLoc.withSuffix("_whole"), wholeTex, gen.modelOutput);
+        var left = ModelTemplates.CUBE.create(modelLoc.withSuffix("_left"), leftTex, gen.modelOutput);
+        var middle = ModelTemplates.CUBE.create(modelLoc.withSuffix("_middle"), midTex, gen.modelOutput);
+        var right = ModelTemplates.CUBE.create(modelLoc.withSuffix("_right"), rightTex, gen.modelOutput);
+        var map = new HashMap<>(Map.of(BreadPart.WHOLE, whole, BreadPart.LEFT, left, BreadPart.MIDDLE, middle, BreadPart.RIGHT, right));
+
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.properties(BreadBlock.PART, HORIZONTAL_AXIS).generate((part, axis) -> {
+            var variant = modelVariant(map.get(part));
+            if (axis == Direction.Axis.X && part != BreadPart.WHOLE)
+                variant = variant.with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270);
+            return variant;
+        })));
+        gen.delegateItemModel(block, whole);
+    }
+
+    static void specialBread(BlockModelGenerators gen, Block block) {
+        var texture = TextureMapping.defaultTexture(block).put(TextureSlot.ALL, model(block));
+        var model = ModelTemplates.CUBE_ALL.create(id(block).withPrefix("block/bread/"), texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createSimpleBlock(block, model));
+        gen.delegateItemModel(block, model);
+    }
+
     // Util
+    static ResourceLocation id(Block block) {
+        return Services.REGISTRY.getId(() -> block);
+    }
+
     static TextureMapping allTexture(Block block, String suffix) {
         return TextureMapping.defaultTexture(model(block)).put(TextureSlot.ALL, model(block).withSuffix(suffix));
     }

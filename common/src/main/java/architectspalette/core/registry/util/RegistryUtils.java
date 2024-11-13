@@ -98,6 +98,16 @@ public class RegistryUtils {
 //        });
         return node;
     }
+
+    public static BlockNode createOreBrickNode(String ore) {
+        return new BlockNode.Builder()
+                .tool(BlockNode.Tool.PICK)
+                .base(createBlock(ore + "_ore_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS))))
+                .addPart(BlockNode.BlockType.CRACKED)
+                .addPart(BlockNode.BlockType.CHISELED)
+                .commonVariants()
+                .build();
+    }
     //(ender-?) is this needed?
 //	public static <B extends Block> StoneBlockSet createBoardSet(String name, Supplier<? extends B> supplier) {
 //		StoneBlockSet boardSet = new StoneBlockSet(createBlock(name, supplier), StoneBlockSet.SetGroup.NO_WALLS).woodify();
