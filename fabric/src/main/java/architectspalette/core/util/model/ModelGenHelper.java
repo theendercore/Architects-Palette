@@ -39,11 +39,13 @@ public interface ModelGenHelper {
                 var parent = (n.parent != null) ? n.parent.get() : null;
                 switch (n.type) {
                     case BASE, BRICKS, CRACKED, MOSSY, TILES, CHISELED, POLISHED, LAMP, DARK, PLATING -> {
-                       switch (n.style){
-                           case CUBE -> gen.createTrivialCube(block);
-                           case TOP_SIDES -> staticPillar(gen, block);
-                           case TOP_SIDE_BOTTOM -> staticCubeTB(gen, block);
-                       }
+                        if (block == CEREBRAL_BLOCK.getChild(BlockNode.BlockType.TILES).get()) {
+                            cerebralTiles(gen, block);
+                        } else switch (n.style) {
+                            case CUBE -> gen.createTrivialCube(block);
+                            case TOP_SIDES -> staticPillar(gen, block);
+                            case TOP_SIDE_BOTTOM -> staticCubeTB(gen, block);
+                        }
                     }
                     case PILLAR -> pillar(gen, block);
                     case SLAB -> slab(gen, block, parent);

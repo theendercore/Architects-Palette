@@ -151,10 +151,6 @@ public interface ModelHelpers {
         fence(gen, block, TextureMapping.defaultTexture(model(textureBlock)));
     }
 
-    static void fence(BlockModelGenerators gen, Block block) {
-        fence(gen, block, block);
-    }
-
     // Railing
     static void railing(BlockModelGenerators gen, Block block, TextureMapping texture) {
         var post = RAILING_POST.create(block, texture, gen.modelOutput);
@@ -426,6 +422,7 @@ public interface ModelHelpers {
     static void staticPillar(BlockModelGenerators gen, Block block) {
         gen.blockStateOutput.accept(createSimpleBlock(block, TexturedModel.COLUMN.create(block, gen.modelOutput)));
     }
+
     static void staticCubeTB(BlockModelGenerators gen, Block block) {
         var texture = new TextureMapping()
                 .put(TextureSlot.TOP, abyssaline(block, "_top"))
@@ -605,6 +602,18 @@ public interface ModelHelpers {
                 .select(false, modelVariant(falseModel))
                 .select(true, modelVariant(trueModel))
         );
+    }
+
+    static void cerebralTiles(BlockModelGenerators gen, Block block) {
+        var texture1 = TextureMapping.cube(model(block));
+        var texture2 = TextureMapping.cube(model(block).withSuffix("1"));
+        var texture3 = TextureMapping.cube(model(block).withSuffix("2"));
+
+        var model1 = ModelTemplates.CUBE_ALL.create(block, texture1, gen.modelOutput);
+        var model2 = ModelTemplates.CUBE_ALL.create(block, texture2, gen.modelOutput);
+        var model3 = ModelTemplates.CUBE_ALL.create(block, texture3, gen.modelOutput);
+        gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model1), modelVariant(model2), modelVariant(model3)));
+        gen.delegateItemModel(block, model1);
     }
 
     // Util

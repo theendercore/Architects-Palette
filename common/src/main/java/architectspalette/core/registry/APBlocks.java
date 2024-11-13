@@ -394,10 +394,7 @@ public class APBlocks {
             .base(createBlock("cerebral_block", () -> new Block(APBlockProperties.CEREBRAL)))
             .slabs()
             .variants(BlockNode.BlockType.STAIRS, BlockNode.BlockType.WALL, BlockNode.BlockType.PILLAR)
-            .tiles(b -> {
-                b.exclude(BlockNode.ExcludeFlag.MODELS);
-                b.commonVariants();
-            })
+            .tiles(BlockNode.Builder::commonVariants)
             .build();
 
     public static final BlockNode MOONSHALE = new BlockNode.Builder()
