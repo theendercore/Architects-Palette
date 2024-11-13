@@ -16,8 +16,9 @@ import static net.minecraft.commands.Commands.literal;
 // (ender) I needed this for testing if I got all the models
 public interface DebugCommand {
     static void registerDebugCommand() {
-        CommandRegistrationCallback.EVENT.register((dispatcher, bCtx, env) ->
-                dispatcher.register(literal("ap_block").executes(DebugCommand::funnyPlace)));
+        if (Services.PLATFORM.isDevelopmentEnvironment())
+            CommandRegistrationCallback.EVENT.register((dispatcher, bCtx, env) ->
+                    dispatcher.register(literal("ap_block").executes(DebugCommand::funnyPlace)));
     }
 
     static int funnyPlace(CommandContext<CommandSourceStack> ctx) {
