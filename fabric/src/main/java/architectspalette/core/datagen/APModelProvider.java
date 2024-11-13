@@ -148,7 +148,7 @@ public class APModelProvider extends FabricModelProvider {
         railing(gen, APBlocks.ACACIA_RAILING.get(), Blocks.ACACIA_PLANKS);
         railing(gen, APBlocks.MANGROVE_RAILING.get(), Blocks.MANGROVE_PLANKS);
         railing(gen, APBlocks.CHERRY_RAILING.get(), Blocks.CHERRY_PLANKS);
-        railing(gen, APBlocks.BAMBOO_RAILING.get(), Blocks.BAMBOO_PLANKS);
+        railingCustom(gen, APBlocks.BAMBOO_RAILING.get(), Blocks.BAMBOO_FENCE);
         railing(gen, APBlocks.CRIMSON_RAILING.get(), Blocks.CRIMSON_PLANKS);
         railing(gen, APBlocks.WARPED_RAILING.get(), Blocks.WARPED_PLANKS);
         railing(gen, APBlocks.TWISTED_RAILING.get(), APBlocks.TWISTED_PLANKS.get());

@@ -16,6 +16,9 @@ public interface Models {
     TextureSlot LEFT = key("left");
 
     ModelTemplate TILES = template("tiles", TextureSlot.ALL);
+    ModelTemplate FLAT_PANE = template("flat_pane", TextureSlot.TEXTURE);
+    ModelTemplate CAGE_LANTERN = template("cage_lantern", TextureSlot.TEXTURE);
+    ModelTemplate PIPE = template("pipe", TextureSlot.TEXTURE, FACE, INNER, TextureSlot.EDGE);
 
     ModelTemplate NUB = template("nub", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
     ModelTemplate NUB_HORIZONTAL = template("nub_horizontal", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
@@ -23,12 +26,17 @@ public interface Models {
     ModelTemplate VERTICAL_SLAB = template("vertical_slab", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
     ModelTemplate Vertical_SLAB_TINTED = template("vertical_slab", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
 
+    // Railings
     ModelTemplate RAILING_POST = template("railing/post", "_post", TextureSlot.TEXTURE);
     ModelTemplate RAILING_SIDE = template("railing/side", "_side", TextureSlot.TEXTURE);
     ModelTemplate RAILING_INVENTORY = template("railing/inventory", "_inventory", TextureSlot.TEXTURE);
 
-    ModelTemplate CAGE_LANTERN = template("cage_lantern", TextureSlot.TEXTURE);
-    ModelTemplate PIPE = template("pipe", TextureSlot.TEXTURE, FACE, INNER, TextureSlot.EDGE);
+    ModelTemplate CUSTOM_RAILING_POST = template("railing/custom_post", "_post", TextureSlot.TEXTURE);
+    ModelTemplate CUSTOM_RAILING_SIDE_NORTH = template("railing/custom_side_north", "_side_north", TextureSlot.TEXTURE);
+    ModelTemplate CUSTOM_RAILING_SIDE_EAST = template("railing/custom_side_east", "_side_east", TextureSlot.TEXTURE);
+    ModelTemplate CUSTOM_RAILING_SIDE_SOUTH = template("railing/custom_side_south", "_side_south", TextureSlot.TEXTURE);
+    ModelTemplate CUSTOM_RAILING_SIDE_WEST = template("railing/custom_side_west", "_side_west", TextureSlot.TEXTURE);
+    ModelTemplate CUSTOM_RAILING_INVENTORY = template("railing/custom_inventory", "_inventory", TextureSlot.TEXTURE);
 
     // HEAVY Bricks
     ModelTemplate HEAVY_BRICKS_HALF = template("heavy_bricks/half", "_half", HALF);
@@ -40,8 +48,6 @@ public interface Models {
     ModelTemplate HEAVY_BRICKS_EAST = template("heavy_bricks/east", "_east", RIGHT, LEFT, HALF);
     ModelTemplate HEAVY_BRICKS_SOUTH = template("heavy_bricks/south", "_south", TextureSlot.TOP, TextureSlot.BOTTOM, RIGHT, LEFT, HALF);
     ModelTemplate HEAVY_BRICKS_WEST = template("heavy_bricks/west", "_west", RIGHT, LEFT, HALF);
-
-    ModelTemplate FLAT_PANE = template("flat_pane", TextureSlot.TEXTURE);
 
     // Fancy Walls
     ModelTemplate FW_CENTER_SHORT = fancyWall("center_short", "_center_short", TextureSlot.WALL);
@@ -61,7 +67,6 @@ public interface Models {
 
     ModelTemplate FW_POST = fancyWall("post", "_post", TextureSlot.WALL);
     ModelTemplate FW_INVENTORY = fancyWall("inventory", "_inventory", TextureSlot.WALL);
-
 
     private static ModelTemplate fancyWall(String string, String suffix, TextureSlot... textureSlots) {
         return createModel("template/fancy_walls/" + string, Optional.of(suffix), textureSlots);

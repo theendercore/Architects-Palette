@@ -167,6 +167,20 @@ public interface ModelHelpers {
         railing(gen, block, TextureMapping.defaultTexture(model(textureBlock)));
     }
 
+    static void railingCustom(BlockModelGenerators gen, Block block, TextureMapping texture) {
+        var post = CUSTOM_RAILING_POST.create(block, texture, gen.modelOutput);
+        var north = CUSTOM_RAILING_SIDE_NORTH.create(block, texture, gen.modelOutput);
+        var east = CUSTOM_RAILING_SIDE_EAST.create(block, texture, gen.modelOutput);
+        var south = CUSTOM_RAILING_SIDE_SOUTH.create(block, texture, gen.modelOutput);
+        var west = CUSTOM_RAILING_SIDE_WEST.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(BlockModelGenerators.createCustomFence(block, post, north, east, south, west));
+        gen.delegateItemModel(block, CUSTOM_RAILING_INVENTORY.create(block, texture, gen.modelOutput));
+    }
+
+    static void railingCustom(BlockModelGenerators gen, Block block, Block textureBlock) {
+        railingCustom(gen, block, TextureMapping.defaultTexture(model(textureBlock)));
+    }
+
     // Nub
     static void nub(BlockModelGenerators gen, Block block, TextureMapping texture) {
         var base = NUB.create(block, texture, gen.modelOutput);
