@@ -287,42 +287,34 @@ public interface RecipeHelper {
             String hasBase = "has_" + Objects.requireNonNull(Services.REGISTRY.getId(() -> base)).getPath();
             int stoneCuttingCount = getStoneCuttingCount(part);
             switch (part) {
-                case SLAB -> {
-                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
-                            .pattern("xxx")
-                            .define('x', base)
-                            .unlockedBy(hasBase, hasItems(base))
-                            .save(output);
-                }
+                case SLAB -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                        .pattern("xxx")
+                        .define('x', base)
+                        .unlockedBy(hasBase, hasItems(base))
+                        .save(output);
                 case VERTICAL_SLAB -> {
                     var slab = set.getPart(StoneBlockSet.SetComponent.SLAB);
                     makeVerticalSlabs(conditional, block, slab, base, hasBase);
                 }
-                case STAIRS -> {
-                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
-                            .pattern("x  ")
-                            .pattern("xx ")
-                            .pattern("xxx")
-                            .define('x', base)
-                            .unlockedBy(hasBase, hasItems(base))
-                            .save(output);
-                }
-                case WALL -> {
-                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
-                            .pattern("xxx")
-                            .pattern("xxx")
-                            .define('x', base)
-                            .unlockedBy(hasBase, hasItems(base))
-                            .save(output);
-                }
-                case PILLAR -> {
-                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 2)
-                            .pattern("x")
-                            .pattern("x")
-                            .define('x', base)
-                            .unlockedBy(hasBase, hasItems(base))
-                            .save(output);
-                }
+                case STAIRS -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
+                        .pattern("x  ")
+                        .pattern("xx ")
+                        .pattern("xxx")
+                        .define('x', base)
+                        .unlockedBy(hasBase, hasItems(base))
+                        .save(output);
+                case WALL -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                        .pattern("xxx")
+                        .pattern("xxx")
+                        .define('x', base)
+                        .unlockedBy(hasBase, hasItems(base))
+                        .save(output);
+                case PILLAR -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 2)
+                        .pattern("x")
+                        .pattern("x")
+                        .define('x', base)
+                        .unlockedBy(hasBase, hasItems(base))
+                        .save(output);
                 case FENCE, NUB, BLOCK -> {
                 }
             }
@@ -365,11 +357,10 @@ public interface RecipeHelper {
                                     .save(output, modLoc(n.getName() + "_from_" + Services.REGISTRY.getId(tiles).getPath()));
                         }
                     }
-                    case CRACKED -> {
-                        SimpleCookingRecipeBuilder.smelting(Ingredient.of(parent), BUILDING_BLOCKS, block, .1f, 200)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output, smeltingName(block, parent));
-                    }
+                    case CRACKED ->
+                            SimpleCookingRecipeBuilder.smelting(Ingredient.of(parent), BUILDING_BLOCKS, block, .1f, 200)
+                                    .unlockedBy(hasBase, hasItems(node.get()))
+                                    .save(output, smeltingName(block, parent));
                     case MOSSY, NUB -> {
                     }
                     case TILES -> {
@@ -405,54 +396,44 @@ public interface RecipeHelper {
                                     .save(output);
                         }
                     }
-                    case PILLAR -> {
-                        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 2)
-                                .pattern("x")
-                                .pattern("x")
-                                .define('x', parent)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output);
-                    }
-                    case SLAB -> {
-                        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
-                                .pattern("xxx")
-                                .define('x', parent)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output);
-                    }
+                    case PILLAR -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 2)
+                            .pattern("x")
+                            .pattern("x")
+                            .define('x', parent)
+                            .unlockedBy(hasBase, hasItems(node.get()))
+                            .save(output);
+                    case SLAB -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                            .pattern("xxx")
+                            .define('x', parent)
+                            .unlockedBy(hasBase, hasItems(node.get()))
+                            .save(output);
                     case VERTICAL_SLAB -> {
                         var slab = n.getSibling(SLAB).get();
                         makeVerticalSlabs(conditional, block, slab, parent, hasBase);
                     }
-                    case STAIRS -> {
-                        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
-                                .pattern("x  ")
-                                .pattern("xx ")
-                                .pattern("xxx")
-                                .define('x', parent)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output);
-                    }
-                    case WALL -> {
-                        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
-                                .pattern("xxx")
-                                .pattern("xxx")
-                                .define('x', parent)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output);
-                    }
+                    case STAIRS -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
+                            .pattern("x  ")
+                            .pattern("xx ")
+                            .pattern("xxx")
+                            .define('x', parent)
+                            .unlockedBy(hasBase, hasItems(node.get()))
+                            .save(output);
+                    case WALL -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
+                            .pattern("xxx")
+                            .pattern("xxx")
+                            .define('x', parent)
+                            .unlockedBy(hasBase, hasItems(node.get()))
+                            .save(output);
                     case FENCE -> {
                         //TODO: fence recipe
                     }
-                    case PLATING -> {
-                        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 8)
-                                .pattern("xxx")
-                                .pattern("x x")
-                                .pattern("xxx")
-                                .define('x', parent)
-                                .unlockedBy(hasBase, hasItems(node.get()))
-                                .save(output);
-                    }
+                    case PLATING -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 8)
+                            .pattern("xxx")
+                            .pattern("x x")
+                            .pattern("xxx")
+                            .define('x', parent)
+                            .unlockedBy(hasBase, hasItems(node.get()))
+                            .save(output);
                     case DARK -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 8)
                             .pattern("xxx")
                             .pattern("xdx")
