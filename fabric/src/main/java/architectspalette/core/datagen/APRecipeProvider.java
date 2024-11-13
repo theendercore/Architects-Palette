@@ -1,5 +1,6 @@
 package architectspalette.core.datagen;
 
+import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.APTags;
@@ -9,10 +10,7 @@ import com.ibm.icu.impl.Pair;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -36,8 +34,10 @@ public class APRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(RecipeOutput exporter) {
-        BlockNode.forAllBaseNodes((node) -> processBlockNode(exporter, node));
-        StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter, set));
+        var conditional = this.withConditions(exporter, APVerticalSlabsCondition.INSTANCE);
+
+        BlockNode.forAllBaseNodes((node) -> processBlockNode(exporter,conditional, node));
+        StoneBlockSet.forAllSets((set) -> processStoneBlockSet(exporter,conditional, set));
 
         miscRecipes(exporter);
         makeAbyssalineRecipes(exporter);

@@ -149,7 +149,7 @@ public class JEIPlugin implements IModPlugin {
         }
 
         protected void registerInfo(IRecipeRegistration register, String infoString) {
-            register.addIngredientInfo(blocks.stream().map(ItemStack::new).toList(), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
+            register.addIngredientInfo(blocks.stream().filter((it) -> VerticalSlabs.isVisible(it::asItem)).map(ItemStack::new).toList(), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
             blocks.clear();
         }
     }

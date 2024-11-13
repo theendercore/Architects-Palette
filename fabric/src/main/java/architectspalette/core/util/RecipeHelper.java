@@ -26,14 +26,15 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.modLoc;
-import static architectspalette.core.registry.APBlocks.DRIPSTONE_BRICKS;
-import static architectspalette.core.registry.APBlocks.HEAVY_DRIPSTONE_BRICKS;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
+import static net.minecraft.data.recipes.RecipeBuilder.getDefaultRecipeId;
 import static net.minecraft.data.recipes.RecipeCategory.BUILDING_BLOCKS;
 import static net.minecraft.data.recipes.RecipeProvider.*;
 
 public interface RecipeHelper {
+
+    Map<String, Boolean> stonecuttingMap = new HashMap<>();
 
     static String hasName(Supplier<Block> itemLike) {
         return getHasName(itemLike.get());
@@ -46,7 +47,6 @@ public interface RecipeHelper {
     static Ingredient ingredient(Supplier<Block> itemLike) {
         return Ingredient.of(itemLike.get());
     }
-
 
     private static ResourceLocation smeltingName(ItemLike item, ItemLike from) {
         return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smelting");
@@ -72,9 +72,7 @@ public interface RecipeHelper {
         return modLoc("blasting/" + getItemName(item) + "_from_" + getItemName(from) + "_blasting");
     }
 
-    Map<String, Boolean> stonecuttingMap = new HashMap<>();
-
-    private static ResourceLocation cuttingName(ItemLike item, ItemLike from) {
+    static ResourceLocation cuttingName(ItemLike item, ItemLike from) {
         var string = getItemName(item);
         if (stonecuttingMap.put(string, true) != null) {
             string += "_from_" + getItemName(from);
@@ -173,9 +171,11 @@ public interface RecipeHelper {
         quick3x3Recipe(output, result, base, 9);
         quickStoneCutting(output, result, base);
     }
-    static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base ) {
+
+    static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base) {
         quick3x3Recipe(output, result, base, 1);
     }
+
     static void quick3x3Recipe(RecipeOutput output, ItemLike result, ItemLike base, int count) {
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, result, count)
                 .pattern("###")
@@ -235,23 +235,23 @@ public interface RecipeHelper {
                 .save(output);
     }
 
-    private static int getStoneCuttingCount(BlockNode.BlockType type) {
+    static int getStoneCuttingCount(BlockNode.BlockType type) {
         return switch (type) {
-            case BASE, CRACKED, MOSSY, LAMP, DARK, SPECIAL -> 0;
+            case BASE, CRACKED, MOSSY, LAMP, DARK, SPECIAL, VERTICAL_SLAB -> 0;
             case BRICKS, FENCE, TILES, CHISELED, PILLAR, STAIRS, WALL, PLATING, POLISHED -> 1;
-            case NUB, SLAB, VERTICAL_SLAB -> 2;
+            case NUB, SLAB -> 2;
         };
     }
 
-    private static int getStoneCuttingCount(StoneBlockSet.SetComponent type) {
+    static int getStoneCuttingCount(StoneBlockSet.SetComponent type) {
         return switch (type) {
-            case BLOCK -> 0;
+            case BLOCK, VERTICAL_SLAB -> 0;
             case FENCE, PILLAR, STAIRS, WALL -> 1;
-            case NUB, SLAB, VERTICAL_SLAB -> 2;
+            case NUB, SLAB -> 2;
         };
     }
 
-    private static Ingredient getStonecuttingIngredients(BlockNode node) {
+    static Ingredient getStonecuttingIngredients(BlockNode node) {
         //Traverse the tree in reverse until we hit a step that doesn't use stonecutting.
         var list = new ArrayList<BlockNode>();
         var last = node;
@@ -263,7 +263,25 @@ public interface RecipeHelper {
         return Ingredient.of(stream);
     }
 
-    static void processStoneBlockSet(RecipeOutput output, StoneBlockSet set) {
+    static void makeVerticalSlabs(RecipeOutput conditional, Block verticalSlab, Block slab, Block base, String hasBase) {
+        var id = getDefaultRecipeId(verticalSlab);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, verticalSlab, 6)
+                .pattern("x")
+                .pattern("x")
+                .pattern("x")
+                .define('x', slab)
+                .unlockedBy(hasBase, hasItems(base))
+                .save(conditional, id.withPrefix("vertical_slab/"));
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, verticalSlab, 2)
+                .unlockedBy(hasBase, hasItems(base))
+                .save(conditional, id.withPrefix("vertical_slab/stonecutting/"));
+        ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
+                .requires(verticalSlab)
+                .unlockedBy(hasBase, hasItems(base))
+                .save(conditional, getDefaultRecipeId(slab).withPath((it) -> "vertical_slab/" + it + "_revert"));
+    }
+
+    static void processStoneBlockSet(RecipeOutput output, RecipeOutput conditional, StoneBlockSet set) {
         var base = set.getPart(StoneBlockSet.SetComponent.BLOCK);
         set.forEachPart((part, block) -> {
             String hasBase = "has_" + Objects.requireNonNull(Services.REGISTRY.getId(() -> base)).getPath();
@@ -277,8 +295,8 @@ public interface RecipeHelper {
                             .save(output);
                 }
                 case VERTICAL_SLAB -> {
-                    stoneCuttingCount = 0;
-                    /*do stuff later*/
+                    var slab = set.getPart(StoneBlockSet.SetComponent.SLAB);
+                    makeVerticalSlabs(conditional, block, slab, base, hasBase);
                 }
                 case STAIRS -> {
                     ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
@@ -318,7 +336,7 @@ public interface RecipeHelper {
         });
     }
 
-    static void processBlockNode(RecipeOutput output, BlockNode node) {
+    static void processBlockNode(RecipeOutput output, RecipeOutput conditional, BlockNode node) {
         String hasBase = "has_" + node.getName();
         APConstants.LOGGER.info("Processing block node: " + node.getName());
         node.forEach((n -> {
@@ -352,7 +370,7 @@ public interface RecipeHelper {
                                 .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output, smeltingName(block, parent));
                     }
-                    case MOSSY -> {
+                    case MOSSY, NUB -> {
                     }
                     case TILES -> {
                         //Brick conversion recipe
@@ -395,9 +413,6 @@ public interface RecipeHelper {
                                 .unlockedBy(hasBase, hasItems(node.get()))
                                 .save(output);
                     }
-                    case NUB -> {
-
-                    }
                     case SLAB -> {
                         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 6)
                                 .pattern("xxx")
@@ -406,43 +421,8 @@ public interface RecipeHelper {
                                 .save(output);
                     }
                     case VERTICAL_SLAB -> {
-                        //Special case with stoneCuttingCount here. The slabs make their own conditional stonecutting recipe
-                        stoneCuttingCount = 0;
                         var slab = n.getSibling(SLAB).get();
-                        //Craft from slabs
-                        //I have no idea how this shit works
-
-//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-//                                .recipe((c) -> {
-//                                    ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 3)
-//                                            .pattern("x")
-//                                            .pattern("x")
-//                                            .pattern("x")
-//                                            .group("vertical_slab")
-//                                            .define('x', slab)
-//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-//                                            .save(c);
-//                                })
-//                                .save(output, modLoc("vslabs/" + n.getName()));
-//                        //Revert to slab from vslab
-//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-//                                .recipe((c) -> {
-//                                    ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
-//                                            .group("vertical_slab_revert")
-//                                            .requires(block)
-//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-//                                            .save(c);
-//                                })
-//                                .save(output, modLoc("vslabs/" + n.getName() + "_revert"));
-//                        //Stonecut from block to vslab
-//                        ConditionalRecipe.builder().mainCondition(APVerticalSlabsCondition.INSTANCE)
-//                                .recipe((c) -> {
-//                                    SingleItemRecipeBuilder.stonecutting(getStonecuttingIngredients(n), BUILDING_BLOCKS, block, 2)
-//                                            .unlockedBy(hasBase, InventoryChangeTrigger.TriggerInstance.hasItems(node.get()))
-//                                            .save(c);
-//                                })
-//                                .save(output, modLoc("vslabs/stonecutting/" + n.getName()));
-//
+                        makeVerticalSlabs(conditional, block, slab, parent, hasBase);
                     }
                     case STAIRS -> {
                         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
