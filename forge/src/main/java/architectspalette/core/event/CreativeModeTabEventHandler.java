@@ -1,5 +1,6 @@
 package architectspalette.core.event;
 
+import architectspalette.core.integration.VerticalSlabs;
 import architectspalette.core.platform.ForgeRegistryHelper;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,10 +19,7 @@ public class CreativeModeTabEventHandler {
     public static void onCreativeTabRegister(BuildCreativeModeTabContentsEvent event) {
         List<Supplier<? extends Item>> itemlist = ForgeRegistryHelper.CREATIVE_TAB_ITEMS_MAP.get(event.getTabKey());
         if (itemlist != null) {
-            // (ender) add this back later
-//                if (!(item.get() instanceof VerticalSlabBlock && !VerticalSlabBlock.isQuarkEnabled())) {
-            event.acceptAll(itemlist.stream().map((it) -> it.get().getDefaultInstance()).toList());
-//                }
+            event.acceptAll(itemlist.stream().filter(VerticalSlabs::isVisible).map((it) -> it.get().getDefaultInstance()).toList());
         }
     }
 }

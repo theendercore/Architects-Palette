@@ -2,6 +2,7 @@ package architectspalette.compat.emi;
 
 import architectspalette.content.blocks.BigBrickBlock;
 import architectspalette.content.blocks.CageLanternBlock;
+import architectspalette.core.integration.VerticalSlabs;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APRecipes;
@@ -31,9 +32,14 @@ public class EMIPlugin implements EmiPlugin {
     static final EmiStack ICON = EmiStack.of(APBlocks.WARPSTONE.get());
     public static final EmiRecipeCategory WARPING_CATEGORY = new EmiRecipeCategory(modLoc("warping"), ICON, ICON);
 
+    protected static BlockListBuilder builder() {
+        return new BlockListBuilder();
+    }
 
     @Override
     public void register(EmiRegistry registry) {
+        registry.removeEmiStacks((it) -> !VerticalSlabs.isVisible(() -> it.getItemStack().getItem()));
+
         registry.addCategory(WARPING_CATEGORY);
 
         RecipeManager manager = registry.getRecipeManager();
@@ -74,10 +80,6 @@ public class EMIPlugin implements EmiPlugin {
                 .add(WARDSTONE, WARDSTONE_BRICKS)
                 .add(WARDSTONE_PILLAR, CHISELED_WARDSTONE, WARDSTONE_LAMP)
                 .registerInfo(registry, "wardstone");
-    }
-
-    protected static BlockListBuilder builder() {
-        return new BlockListBuilder();
     }
 
     protected static class BlockListBuilder {

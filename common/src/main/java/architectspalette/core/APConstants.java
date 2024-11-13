@@ -17,6 +17,4 @@ public class APConstants {
     public static ResourceLocation mcLoc(String path) {
         return ResourceLocation.withDefaultNamespace(path);
     }
-
-    public static final ResourceLocation VERTICAL_SLABS_CONDITION = modLoc("enable_vertical_slabs");
 }

@@ -2,7 +2,9 @@ package architectspalette.compat;
 
 import architectspalette.content.blocks.BigBrickBlock;
 import architectspalette.content.blocks.CageLanternBlock;
+import architectspalette.content.blocks.VerticalSlabBlock;
 import architectspalette.core.crafting.WarpingRecipe;
+import architectspalette.core.integration.VerticalSlabs;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APRecipes;
 import architectspalette.core.registry.util.BlockNode;
@@ -34,8 +36,24 @@ import static architectspalette.core.registry.APBlocks.*;
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
 
-    protected static final ResourceLocation PLUGIN_ID = modLoc("jei_plugin");
     public static final Supplier<RecipeType<RecipeHolder<WarpingRecipe>>> WARPING = () -> RecipeType.createFromVanilla(APRecipes.WARPING.get());
+    protected static final ResourceLocation PLUGIN_ID = modLoc("jei_plugin");
+
+    protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
+        addItemInfo(register, item.get(), infoString);
+    }
+
+    protected static void addItemInfo(IRecipeRegistration register, StoneBlockSet stoneSet, String infoString) {
+        stoneSet.forEach((block -> addItemInfo(register, block, infoString)));
+    }
+
+    protected static void addItemInfo(IRecipeRegistration register, ItemLike item, String infoString) {
+        register.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
+    }
+
+    protected static BlockListBuilder builder() {
+        return new BlockListBuilder();
+    }
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -54,6 +72,12 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        if (!VerticalSlabs.areVisible()) {
+            registration.getIngredientManager().removeIngredientsAtRuntime(
+                    VanillaTypes.ITEM_STACK,
+                    Services.REGISTRY.getModBlocks().stream().filter(b -> b instanceof VerticalSlabBlock).map(ItemStack::new).toList()
+            );
+        }
         //Register recipes
         registration.addRecipes(WARPING.get(), Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(APRecipes.WARPING.get()));
 
@@ -93,43 +117,29 @@ public class JEIPlugin implements IModPlugin {
                 .registerInfo(registration, "wardstone");
     }
 
-    protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
-        addItemInfo(register, item.get(), infoString);
-    }
-
-    protected static void addItemInfo(IRecipeRegistration register, StoneBlockSet stoneSet, String infoString) {
-        stoneSet.forEach((block -> addItemInfo(register, block, infoString)));
-    }
-
-    protected static void addItemInfo(IRecipeRegistration register, ItemLike item, String infoString) {
-        register.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
-    }
-
-
-    protected static BlockListBuilder builder() {
-        return new BlockListBuilder();
-    }
-
     protected static class BlockListBuilder {
         protected final List<Block> blocks = new ArrayList<>();
 
-          protected BlockListBuilder add(BlockNode... nodes) {
-              for (BlockNode node : nodes)
-                  node.forEach((n) -> blocks.add(n.get()));
-              return this;
-          }
-          protected BlockListBuilder add(StoneBlockSet... sets) {
-              for (StoneBlockSet set : sets) {
-                  set.forEach(blocks::add);
-              }
-              return this;
-          }
-          protected BlockListBuilder add(Predicate<Block> filter) {
-              for (Block entry : Services.REGISTRY.getModBlocks()) {
-                  if (filter.test(entry)) blocks.add(entry);
-              }
-              return this;
-          }
+        protected BlockListBuilder add(BlockNode... nodes) {
+            for (BlockNode node : nodes)
+                node.forEach((n) -> blocks.add(n.get()));
+            return this;
+        }
+
+        protected BlockListBuilder add(StoneBlockSet... sets) {
+            for (StoneBlockSet set : sets) {
+                set.forEach(blocks::add);
+            }
+            return this;
+        }
+
+        protected BlockListBuilder add(Predicate<Block> filter) {
+            for (Block entry : Services.REGISTRY.getModBlocks()) {
+                if (filter.test(entry)) blocks.add(entry);
+            }
+            return this;
+        }
+
         @SafeVarargs
         private BlockListBuilder add(Supplier<? extends Block>... blockList) {
             for (Supplier<? extends Block> block : blockList) {
