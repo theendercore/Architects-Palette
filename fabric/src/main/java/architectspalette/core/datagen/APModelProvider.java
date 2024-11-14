@@ -66,7 +66,7 @@ public class APModelProvider extends FabricModelProvider {
 
         staticPillar(gen, APBlocks.CHISELED_SUNMETAL_BLOCK.get());
         pillar(gen, APBlocks.SUNMETAL_PILLAR.get());
-        // sunmetal bars
+        sunmetalBars(gen, APBlocks.SUNMETAL_BARS.get());
 
         pillar(gen, APBlocks.OSSEOUS_PILLAR.get());
         staticPillarNamed(gen, APBlocks.OSSEOUS_SKULL.get(), "osseous_skull_top", "osseous_skull");
@@ -80,7 +80,7 @@ public class APModelProvider extends FabricModelProvider {
 
         pillar(gen, APBlocks.ENTWINE_PILLAR.get());
         gen.createTrivialCube(APBlocks.CHISELED_ENTWINE.get());
-        // entwine bars
+        entwineBars(gen, APBlocks.ENTWINE_BARS.get());
 
         // Heavy Bricks
         heavyBrick(gen, APBlocks.HEAVY_STONE_BRICKS.get());

@@ -10,6 +10,7 @@ import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -700,6 +701,53 @@ public interface ModelHelpers {
         var model = ModelTemplates.CUBE_ALL.create(id(block).withPrefix("block/bread/"), texture, gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, model));
         gen.delegateItemModel(block, model);
+    }
+
+    // Bars
+    static void sunmetalBars(BlockModelGenerators gen, Block block) {
+        var id = model(block);
+        var top = id.withSuffix("_top");
+        var topTx = TextureMapping.particle(id).put(TextureSlot.EDGE, top).put(BARS, top);
+        var barsTx = TextureMapping.particle(id).put(TextureSlot.EDGE, id).put(BARS, id);
+        var sideTx = barsTx.copyAndUpdate(TextureSlot.TOP, top);
+
+        var postEnds = BARS_POST_ENDS.create(block, topTx, gen.modelOutput);
+        var post = BARS_POST.create(block, topTx, gen.modelOutput);
+        var cap = BARS_CAP.create(block, barsTx, gen.modelOutput);
+        var capAlt = BARS_CAP_ALT.create(block, barsTx, gen.modelOutput);
+        var side = BARS_SIDE.create(block, sideTx, gen.modelOutput);
+        var sideAlt = BARS_SIDE_ALT.create(block, sideTx, gen.modelOutput);
+
+        gen.blockStateOutput.accept(createBars(block, postEnds, post, cap, capAlt, side, sideAlt));
+        gen.createSimpleFlatItemModel(block);
+    }
+
+    static void entwineBars(BlockModelGenerators gen, Block block) {
+        var id = model(block);
+        var texture = new TextureMapping().put(TextureSlot.EDGE, id).put(BARS, id).put(TextureSlot.TOP, id);
+
+        var postEnds = BARS_POST_ENDS.create(block, texture, gen.modelOutput);
+        var post = BARS_POST.create(block, texture, gen.modelOutput);
+        var cap = BARS_CAP.create(block, texture, gen.modelOutput);
+        var capAlt = BARS_CAP_ALT.create(block, texture, gen.modelOutput);
+        var side = BARS_SIDE.create(block, texture, gen.modelOutput);
+        var sideAlt = BARS_SIDE_ALT.create(block, texture, gen.modelOutput);
+        gen.blockStateOutput.accept(createBars(block, postEnds, post, cap, capAlt, side, sideAlt));
+        gen.createSimpleFlatItemModel(block);
+    }
+
+    static MultiPartGenerator createBars(Block block, ResourceLocation postEnds, ResourceLocation post, ResourceLocation cap, ResourceLocation capAlt, ResourceLocation side, ResourceLocation sideAlt) {
+        return MultiPartGenerator.multiPart(block)
+                .with(modelVariant(postEnds))
+                .with(condition(FenceBlock.NORTH, false).term(FenceBlock.EAST, false).term(FenceBlock.SOUTH, false).term(FenceBlock.WEST, false), modelVariant(post))
+                .with(condition(FenceBlock.NORTH, true).term(FenceBlock.EAST, false).term(FenceBlock.SOUTH, false).term(FenceBlock.WEST, false), modelVariant(cap))
+                .with(condition(FenceBlock.NORTH, false).term(FenceBlock.EAST, true).term(FenceBlock.SOUTH, false).term(FenceBlock.WEST, false), modelVariant(cap).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(condition(FenceBlock.NORTH, false).term(FenceBlock.EAST, false).term(FenceBlock.SOUTH, true).term(FenceBlock.WEST, false), modelVariant(capAlt))
+                .with(condition(FenceBlock.NORTH, false).term(FenceBlock.EAST, false).term(FenceBlock.SOUTH, false).term(FenceBlock.WEST, true), modelVariant(capAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(condition(FenceBlock.NORTH, true), modelVariant(side))
+                .with(condition(FenceBlock.EAST, true), modelVariant(side).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(condition(FenceBlock.SOUTH, true), modelVariant(sideAlt))
+                .with(condition(FenceBlock.WEST, true), modelVariant(sideAlt).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90));
     }
 
     // Util

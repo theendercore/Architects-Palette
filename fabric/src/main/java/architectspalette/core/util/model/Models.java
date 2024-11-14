@@ -10,6 +10,7 @@ import static architectspalette.core.APConstants.modLoc;
 public interface Models {
     TextureSlot FACE = key("face");
     TextureSlot INNER = key("inner");
+    TextureSlot BARS = key("bars");
 
     TextureSlot HALF = key("half");
     TextureSlot RIGHT = key("right");
@@ -25,6 +26,14 @@ public interface Models {
 
     ModelTemplate VERTICAL_SLAB = template("vertical_slab", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
     ModelTemplate Vertical_SLAB_TINTED = template("vertical_slab", TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.SIDE);
+
+    // Bars
+    ModelTemplate BARS_POST_ENDS = template("bars/post_ends","_post_ends", TextureSlot.EDGE);
+    ModelTemplate BARS_POST = template("bars/post", "_post", BARS);
+    ModelTemplate BARS_CAP = template("bars/cap", "_cap", BARS, TextureSlot.EDGE);
+    ModelTemplate BARS_CAP_ALT = template("bars/cap_alt","_cap_alt", BARS, TextureSlot.EDGE);
+    ModelTemplate BARS_SIDE = template("bars/side","_side", BARS, TextureSlot.EDGE, TextureSlot.TOP);
+    ModelTemplate BARS_SIDE_ALT = template("bars/side_alt", "_side_alt", BARS, TextureSlot.EDGE, TextureSlot.TOP);
 
     // Railings
     ModelTemplate RAILING_POST = template("railing/post", "_post", TextureSlot.TEXTURE);
