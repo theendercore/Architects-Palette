@@ -32,9 +32,8 @@ public class RegisterModelLoadersEventHandler {
     public static final String MODELTYPE_BOARDS = "boards";
     static {
         WrappedModelLoader.register(MODELTYPE_BOARDS, (context, bakedModel, blockModel) -> {
-            ResourceLocation particle = blockModel.getMaterial("particle").texture();
-            var odd = ResourceLocation.fromNamespaceAndPath(particle.getNamespace(), particle.getPath() + "_odd");
-            return new BoardModel(bakedModel, SpriteShift.getShift(particle, odd));
+            ResourceLocation texture = blockModel.getMaterial("particle").texture();
+            return new BoardModel(bakedModel, SpriteShift.getShift(texture, texture.withSuffix("_odd")));
         });
     }
     @SubscribeEvent

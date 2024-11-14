@@ -9,6 +9,8 @@
     "LootPoolBuilderAccessor"
   ],
   "client": [
+    "BlockModelDeserializerMixin",
+    "BlockModelMixin",
     "TextureAtlasMixin"
   ],
   "server": [],

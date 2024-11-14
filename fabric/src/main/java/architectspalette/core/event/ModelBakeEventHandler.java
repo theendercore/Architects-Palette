@@ -65,9 +65,9 @@ public class ModelBakeEventHandler {
 
         public void collectSwaps() {
             APBlocks.SHEET_METAL.forEach((n) -> swapBlockModel(n, model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct"))));
-            APBlocks.boards.forEach((b) ->
+         /*   APBlocks.boards.forEach((b) ->
                     b.forEach((n) -> swapBlockModel(n, model -> new BoardModel(model, SpriteShift.getShift("block/" + b.getName(), "block/" + b.getName() + "_odd"))))
-            );
+            );*/
         }
     }
 }
