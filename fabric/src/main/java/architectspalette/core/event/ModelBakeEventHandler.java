@@ -1,6 +1,5 @@
 package architectspalette.core.event;
 
-import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
 import architectspalette.core.platform.Services;
@@ -22,14 +21,6 @@ import java.util.function.Supplier;
 public class ModelBakeEventHandler {
     public static void init() {
         ModelLoadingPlugin.register(ctx -> ctx.modifyModelAfterBake().register(new ModelSwapper()));
-    }
-
-    // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
-    // (ender) I have no idea if this works
-    public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation baseBoardBlock) {
-        var inBlockFolder = baseBoardBlock.withPrefix("block/");
-        var odd = inBlockFolder.withSuffix("_odd");
-        ModelSwapper.swapBlockModel(supplier, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
     }
 
     // (Ender) Stolen from AP Fabric
@@ -64,10 +55,8 @@ public class ModelBakeEventHandler {
         }
 
         public void collectSwaps() {
+            // (ender) Not all models are handled here, there are also data-driven ones
             APBlocks.SHEET_METAL.forEach((n) -> swapBlockModel(n, model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct"))));
-         /*   APBlocks.boards.forEach((b) ->
-                    b.forEach((n) -> swapBlockModel(n, model -> new BoardModel(model, SpriteShift.getShift("block/" + b.getName(), "block/" + b.getName() + "_odd"))))
-            );*/
         }
     }
 }

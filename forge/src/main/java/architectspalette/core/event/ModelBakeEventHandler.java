@@ -3,7 +3,6 @@ package architectspalette.core.event;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
-import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -38,11 +37,7 @@ public class ModelBakeEventHandler {
         register((RegistryObject<? extends Block>) SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
         register((RegistryObject<? extends Block>) SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
-        APBlocks.boards.forEach((b) ->
-                b.forEach((n) -> register((RegistryObject<? extends Block>) n.block, model -> new BoardModel(model, SpriteShift.getShift("block/" + b.getName(), "block/" + b.getName() + "_odd"))))
-        );
         customBlockModels.forEach((entry, factory) -> swapModels(modelRegistry, getAllBlockStateModelLocations(entry), factory));
-
     }
 
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
@@ -63,9 +58,7 @@ public class ModelBakeEventHandler {
 
     private static List<ModelResourceLocation> getAllBlockStateModelLocations(Block block, ResourceLocation resourceLocation) {
         List<ModelResourceLocation> models = new ArrayList<>();
-        block.getStateDefinition().getPossibleStates().forEach(state -> {
-            models.add(BlockModelShaper.stateToModelLocation(resourceLocation, state));
-        });
+        block.getStateDefinition().getPossibleStates().forEach(state -> models.add(BlockModelShaper.stateToModelLocation(resourceLocation, state)));
         return models;
     }
 

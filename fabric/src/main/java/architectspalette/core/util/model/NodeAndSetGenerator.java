@@ -14,6 +14,7 @@ import static architectspalette.core.APConstants.LOGGER;
 import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.SLAB;
 import static architectspalette.core.registry.util.BlockNode.BlockType.TILES;
+import static architectspalette.core.util.model.BoardModelGenerator.makeBoards;
 import static architectspalette.core.util.model.ModelHelpers.*;
 
 public interface NodeAndSetGenerator {
@@ -28,6 +29,7 @@ public interface NodeAndSetGenerator {
     List<StoneBlockSet> tiles = Stream.of(FLINT_TILES, GILDED_SANDSTONE, BASALT_TILES).toList();
 
     static void makeNodeModels(BlockModelGenerators gen, BlockNode node) {
+        if (boards.contains(node)) return;
         LOGGER.info("Processing node: {}", node.getName());
         node.forEach((n) -> {
             if (!n.getFlag(BlockNode.ExcludeFlag.MODELS)) {
@@ -103,5 +105,6 @@ public interface NodeAndSetGenerator {
         cerebralTiles(gen, CEREBRAL_BLOCK.getChild(TILES).get());
         bread(gen, BREAD_BLOCK.get());
         breadSlab(gen, BREAD_BLOCK.getChild(SLAB).get(), BREAD_BLOCK.get());
+        makeBoards(gen);
     }
 }
