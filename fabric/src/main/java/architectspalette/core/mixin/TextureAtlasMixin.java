@@ -17,9 +17,7 @@ public abstract class TextureAtlasMixin {
     @Shadow @Final private ResourceLocation location;
 
     @Inject(method = "upload", at = @At("TAIL"))
-    void ap$customUpload(SpriteLoader.Preparations preparations, CallbackInfo ci) {
-        if (this.location == InventoryMenu.BLOCK_ATLAS){
-            SpriteShift.onTexturesDoneStitching();
-        }
+    void ap$switchTextures(SpriteLoader.Preparations preparations, CallbackInfo ci) {
+        if (this.location == InventoryMenu.BLOCK_ATLAS) SpriteShift.onTexturesDoneStitching();
     }
 }
