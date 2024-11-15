@@ -1,5 +1,6 @@
 package architectspalette.core.event;
 
+import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.SheetMetalModel;
 import architectspalette.core.model.util.SpriteShift;
 import architectspalette.core.registry.util.BlockNode;
@@ -39,15 +40,13 @@ public class ModelBakeEventHandler {
         customBlockModels.forEach((entry, factory) -> swapModels(modelRegistry, getAllBlockStateModelLocations(entry), factory));
     }
 
-    // (ender) Use the wrapped models instead please
-/*
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
-    @SuppressWarnings("unused")
+    @Deprecated()// (ender) Use the wrapped models instead please
     public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation blockToRegister, ResourceLocation baseBoardBlock) {
         var inBlockFolder = baseBoardBlock.withPrefix("block/");
         var odd = inBlockFolder.withSuffix("_odd");
         register(supplier, blockToRegister, model -> new BoardModel(model, SpriteShift.getShift(inBlockFolder, odd)));
-    }*/
+    }
 
     private static <T extends BakedModel> void swapModels(Map<ModelResourceLocation, BakedModel> modelRegistry, List<ModelResourceLocation> locations, Function<BakedModel, T> modelFactory) {
         locations.forEach(location -> modelRegistry.put(location, modelFactory.apply(modelRegistry.get(location))));
