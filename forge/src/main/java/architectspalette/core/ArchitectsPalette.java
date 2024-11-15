@@ -4,7 +4,6 @@ import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.ForgeRegistryHelper;
 import architectspalette.core.registry.APBiomeModifiers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,10 +18,6 @@ import static architectspalette.core.APConstants.MOD_ID;
 
 @Mod(value = MOD_ID)
 public class ArchitectsPalette {
-
-    public static ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-    }
 
     public ArchitectsPalette() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

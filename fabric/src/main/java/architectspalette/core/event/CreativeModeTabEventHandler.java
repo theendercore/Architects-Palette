@@ -25,7 +25,7 @@ public class CreativeModeTabEventHandler {
             }
         });
         // (ender) Temporary creative tab
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, modLoc(MOD_ID), FabricItemGroup.builder()
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, rl(MOD_ID), FabricItemGroup.builder()
                 .title(Component.translatable(MOD_NAME))
                 .icon(() -> new ItemStack(APBlocks.CHISELED_ABYSSALINE_BRICKS.get()))
                 .displayItems((parameters, output) -> output.acceptAll(BuiltInRegistries.ITEM.stream()

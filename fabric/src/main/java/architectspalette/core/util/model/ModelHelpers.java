@@ -25,7 +25,7 @@ import java.util.Optional;
 
 import static architectspalette.content.blocks.BreadBlock.BreadPart;
 import static architectspalette.core.APConstants.mcLoc;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.util.model.Models.*;
 import static net.minecraft.data.models.BlockModelGenerators.*;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_AXIS;
@@ -448,8 +448,8 @@ public interface ModelHelpers {
 
     static void staticPillarNamed(BlockModelGenerators gen, Block block, String top, String side) {
         var texture = TextureMapping.defaultTexture(model(block))
-                .put(TextureSlot.END, modLoc("block/" + top))
-                .put(TextureSlot.SIDE, modLoc("block/" + side));
+                .put(TextureSlot.END, rl("block/" + top))
+                .put(TextureSlot.SIDE, rl("block/" + side));
         var model = ModelTemplates.CUBE_COLUMN.create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, model));
     }
@@ -565,11 +565,11 @@ public interface ModelHelpers {
 
     static void totem(BlockModelGenerators gen, Block block) {
         var texture = TextureMapping.defaultTexture(block)
-                .put(TextureSlot.TOP, modLoc("block/acacia_totem_top"))
-                .put(TextureSlot.BOTTOM, modLoc("block/acacia_totem_bottom"))
-                .put(TextureSlot.SIDE, modLoc("block/acacia_totem_side"))
-                .put(TextureSlot.FRONT, modLoc("block/acacia_totem_side"))
-                .put(TextureSlot.PARTICLE, modLoc("block/acacia_totem_side"));
+                .put(TextureSlot.TOP, rl("block/acacia_totem_top"))
+                .put(TextureSlot.BOTTOM, rl("block/acacia_totem_bottom"))
+                .put(TextureSlot.SIDE, rl("block/acacia_totem_side"))
+                .put(TextureSlot.FRONT, rl("block/acacia_totem_side"))
+                .put(TextureSlot.PARTICLE, rl("block/acacia_totem_side"));
 
         var model = ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM.create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(createHorizontalFacingDispatch()));
@@ -577,7 +577,7 @@ public interface ModelHelpers {
     }
 
     static void copyTotem(BlockModelGenerators gen, Block block, int number) {
-        var texture = TextureMapping.defaultTexture(block).put(TextureSlot.FRONT, modLoc("block/acacia_totem_face" + number));
+        var texture = TextureMapping.defaultTexture(block).put(TextureSlot.FRONT, rl("block/acacia_totem_face" + number));
         var model = createModel("blank_acacia_totem", Optional.empty(), TextureSlot.FRONT).create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, modelVariant(model)).with(createHorizontalFacingDispatch()));
         gen.delegateItemModel(block, model);

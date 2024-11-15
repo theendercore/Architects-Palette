@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.APBlocks.*;
 import static architectspalette.core.registry.APItems.*;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
@@ -348,7 +348,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('#', Blocks.STONE_BRICKS)
                 .define('O', Items.RED_MUSHROOM)
                 .unlockedBy(getHasName(Items.RED_MUSHROOM), has(Items.RED_MUSHROOM))
-                .save(exporter, modLoc("myonite_red"));
+                .save(exporter, rl("myonite_red"));
 
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, MYONITE.get(), 8)
                 .pattern("###")
@@ -357,7 +357,7 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .define('#', Blocks.STONE_BRICKS)
                 .define('O', Items.BROWN_MUSHROOM)
                 .unlockedBy(getHasName(Items.BROWN_MUSHROOM), has(Items.BROWN_MUSHROOM))
-                .save(exporter, modLoc("myonite_brown"));
+                .save(exporter, rl("myonite_brown"));
 
 
         brickRecipe(exporter, MYONITE_BRICK.get(), MYONITE.get(), 4);
@@ -371,12 +371,12 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .requires(MYONITE_BRICK.get())
                 .requires(Items.BROWN_MUSHROOM)
                 .unlockedBy("has_myonite_bricks", hasItem(MYONITE_BRICK))
-                .save(exporter, modLoc("mushy_brown_myonite"));
+                .save(exporter, rl("mushy_brown_myonite"));
         ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, MUSHY_MYONITE_BRICK.get())
                 .requires(MYONITE_BRICK.get())
                 .requires(Items.RED_MUSHROOM)
                 .unlockedBy("has_myonite_bricks", hasItem(MYONITE_BRICK))
-                .save(exporter, modLoc("mushy_red_myonite"));
+                .save(exporter, rl("mushy_red_myonite"));
 
     }
 
@@ -597,12 +597,12 @@ public class APRecipeProvider extends FabricRecipeProvider {
                 .requires(HEAVY_STONE_BRICKS.get())
                 .requires(Items.VINE)
                 .unlockedBy(getHasName(HEAVY_STONE_BRICKS.get()), has(HEAVY_STONE_BRICKS.get()))
-                .save(exporter, modLoc("heavy_mossy_stone_bricks_vine"));
+                .save(exporter, rl("heavy_mossy_stone_bricks_vine"));
         ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, HEAVY_MOSSY_STONE_BRICKS.get(), 1)
                 .requires(HEAVY_STONE_BRICKS.get())
                 .requires(Items.MOSS_BLOCK)
                 .unlockedBy(getHasName(HEAVY_STONE_BRICKS.get()), has(HEAVY_STONE_BRICKS.get()))
-                .save(exporter, modLoc("heavy_mossy_stone_bricks_moss"));
+                .save(exporter, rl("heavy_mossy_stone_bricks_moss"));
     }
 
     private void makeGlowstoneRecipes(RecipeOutput exporter) {

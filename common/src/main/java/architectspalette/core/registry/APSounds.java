@@ -8,14 +8,14 @@ import net.minecraft.world.level.block.SoundType;
 
 import java.util.function.Supplier;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 @SuppressWarnings("deprecation")
 public class APSounds {
     public static void init(){}
 
     private static Supplier<SoundEvent> register(String key) {
-        return Services.REGISTRY.registerSoundEvent(key, () -> SoundEvent.createVariableRangeEvent(modLoc(key)));
+        return Services.REGISTRY.registerSoundEvent(key, () -> SoundEvent.createVariableRangeEvent(rl(key)));
     }
 
     public static final Supplier<SoundEvent> BLOCK_ENTWINE_PLACE = register("block.entwine.place");

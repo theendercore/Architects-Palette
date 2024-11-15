@@ -20,11 +20,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<WarpingRecipe>> {
 
-    public static final ResourceLocation UID = modLoc("warping");
+    public static final ResourceLocation UID = rl("warping");
 
     private final Component title;
     private final IDrawable background;
@@ -32,7 +32,7 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
 
     public WarpingRecipeCategory(IGuiHelper helper) {
         title = Component.translatable(MOD_ID + ".info.warping_recipe_title");
-        background = helper.createDrawable(modLoc("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
+        background = helper.createDrawable(rl("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
         icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get()));
     }
 

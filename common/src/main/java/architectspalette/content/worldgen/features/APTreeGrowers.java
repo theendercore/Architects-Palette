@@ -7,9 +7,9 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import java.util.Optional;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class APTreeGrowers {
-    private static final ResourceKey<ConfiguredFeature<?, ?>> key = ResourceKey.create(Registries.CONFIGURED_FEATURE, modLoc("twisted_tree"));
+    private static final ResourceKey<ConfiguredFeature<?, ?>> key = ResourceKey.create(Registries.CONFIGURED_FEATURE, rl("twisted_tree"));
     public static final TreeGrower WARPED_TREE = new TreeGrower("warped",Optional.empty(), Optional.of(key), Optional.empty());
 }

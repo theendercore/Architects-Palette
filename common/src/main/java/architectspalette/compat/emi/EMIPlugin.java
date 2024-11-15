@@ -25,12 +25,12 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.APBlocks.*;
 
 public class EMIPlugin implements EmiPlugin {
     static final EmiStack ICON = EmiStack.of(APBlocks.WARPSTONE.get());
-    public static final EmiRecipeCategory WARPING_CATEGORY = new EmiRecipeCategory(modLoc("warping"), ICON, ICON);
+    public static final EmiRecipeCategory WARPING_CATEGORY = new EmiRecipeCategory(rl("warping"), ICON, ICON);
 
     protected static BlockListBuilder builder() {
         return new BlockListBuilder();
@@ -118,7 +118,7 @@ public class EMIPlugin implements EmiPlugin {
                     blocks.stream().filter((it) -> VerticalSlabs.isVisible(it::asItem))
                             .map((i) -> EmiIngredient.of(Ingredient.of(i))).toList(),
                     List.of(Component.translatable(MOD_ID + ".info." + infoString)),
-                    modLoc("info/" + infoString)
+                    rl("info/" + infoString)
             ));
             blocks.clear();
         }

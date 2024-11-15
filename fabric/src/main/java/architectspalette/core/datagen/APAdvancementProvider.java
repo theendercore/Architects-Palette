@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class APAdvancementProvider extends FabricAdvancementProvider {
     public APAdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
@@ -31,7 +31,7 @@ public class APAdvancementProvider extends FabricAdvancementProvider {
     }
 
     private String named(String id) {
-        return modLoc(id).toString();
+        return rl(id).toString();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class APAdvancementProvider extends FabricAdvancementProvider {
                 .display(APBlocks.CHISELED_ABYSSALINE_BRICKS.get().asItem(),
                         getTranslationKey("advancement.root"),
                         getTranslationKey("advancement.root.desc"),
-                        modLoc("textures/block/myonite_bricks.png"),
+                        rl("textures/block/myonite_bricks.png"),
                         AdvancementType.TASK, false, false, false)
                 .addCriterion("craftingtable", InventoryChangeTrigger.TriggerInstance.hasItems(new ItemLike[]{}))
                 .save(consumer, named("main/root"));

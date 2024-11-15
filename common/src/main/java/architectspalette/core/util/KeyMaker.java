@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static architectspalette.core.APConstants.mcLoc;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class KeyMaker {
     public static ResourceKey<PlacedFeature> placedFeature(String name) {
@@ -26,11 +26,11 @@ public class KeyMaker {
     }
 
     public static <T> ResourceKey<T> modKey(ResourceKey<? extends Registry<T>> resourceKey, String name) {
-        return ResourceKey.create(resourceKey, modLoc(name));
+        return ResourceKey.create(resourceKey, rl(name));
     }
 
     public static <T> TagKey<T> modTag(ResourceKey<? extends Registry<T>> key, String name) {
-        return tag(key, modLoc(name));
+        return tag(key, rl(name));
     }
 
     // (ender) should only be used to reference other mod tags, and only optinaly

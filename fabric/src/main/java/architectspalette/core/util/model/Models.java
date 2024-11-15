@@ -5,7 +5,7 @@ import net.minecraft.data.models.model.TextureSlot;
 
 import java.util.Optional;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public interface Models {
     TextureSlot FACE = key("face");
@@ -90,7 +90,7 @@ public interface Models {
     }
 
     static ModelTemplate createModel(String string, Optional<String> suffix, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(modLoc("block/" + string)), suffix, textureSlots);
+        return new ModelTemplate(Optional.of(rl("block/" + string)), suffix, textureSlots);
     }
 
     private static TextureSlot key(String string) {

@@ -11,7 +11,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class APBiomeModifications {
 
@@ -35,11 +35,11 @@ public class APBiomeModifications {
     }
 
     private static void addFeature(String id, GenerationStep.Decoration decoration, ResourceKey<PlacedFeature> resourceKey, ResourceKey<Biome> biome) {
-        BiomeModifications.create(modLoc(id)).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(biome), context -> context.getGenerationSettings().addFeature(decoration, resourceKey));
+        BiomeModifications.create(rl(id)).add(ModificationPhase.ADDITIONS, BiomeSelectors.includeByKey(biome), context -> context.getGenerationSettings().addFeature(decoration, resourceKey));
     }
 
     // (ender) dont @ me this is simpler
     private static ResourceKey<PlacedFeature> key(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, modLoc(name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, rl(name));
     }
 }

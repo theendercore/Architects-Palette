@@ -12,11 +12,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.List;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 public class WarpingEMIRecipe extends BasicEmiRecipe {
     private final RecipeHolder<WarpingRecipe> RECIPE;
-    public static final EmiTexture PORTAL_TEXTURE = new EmiTexture(modLoc("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
+    public static final EmiTexture PORTAL_TEXTURE = new EmiTexture(rl("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
 
     public WarpingEMIRecipe(RecipeHolder<WarpingRecipe> recipe) {
         super(EMIPlugin.WARPING_CATEGORY, recipe.id(), 117, 57);

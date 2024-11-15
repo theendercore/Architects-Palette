@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.util.BlockNode.BlockType.*;
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.RecipeBuilder.getDefaultRecipeId;
@@ -49,27 +49,27 @@ public interface RecipeHelper {
     }
 
     private static ResourceLocation smeltingName(ItemLike item, ItemLike from) {
-        return modLoc("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smelting");
+        return rl("smelting/" + getItemName(item) + "_from_" + getItemName(from) + "_smelting");
     }
 
     private static ResourceLocation smokingName(ItemLike item, ItemLike from) {
-        return modLoc("smoking/" + getItemName(item) + "_from_" + getItemName(from) + "_smoking");
+        return rl("smoking/" + getItemName(item) + "_from_" + getItemName(from) + "_smoking");
     }
 
     private static ResourceLocation smokingName(ItemLike item, String from) {
-        return modLoc("smoking/" + getItemName(item) + "_from_" + from + "_smoking");
+        return rl("smoking/" + getItemName(item) + "_from_" + from + "_smoking");
     }
 
     private static ResourceLocation warpingName(ItemLike item, ItemLike from) {
-        return modLoc("warping/" + getItemName(item) + "_from_" + getItemName(from) + "_warping");
+        return rl("warping/" + getItemName(item) + "_from_" + getItemName(from) + "_warping");
     }
 
     private static ResourceLocation warpingName(ItemLike item, String from) {
-        return modLoc("warping/" + getItemName(item) + "_from_" + from + "_warping");
+        return rl("warping/" + getItemName(item) + "_from_" + from + "_warping");
     }
 
     private static ResourceLocation blastingName(ItemLike item, ItemLike from) {
-        return modLoc("blasting/" + getItemName(item) + "_from_" + getItemName(from) + "_blasting");
+        return rl("blasting/" + getItemName(item) + "_from_" + getItemName(from) + "_blasting");
     }
 
     static ResourceLocation cuttingName(ItemLike item, ItemLike from) {
@@ -77,7 +77,7 @@ public interface RecipeHelper {
         if (stonecuttingMap.put(string, true) != null) {
             string += "_from_" + getItemName(from);
         }
-        return modLoc("stonecutting/" + string);
+        return rl("stonecutting/" + string);
     }
 
     static void netherWarpingRecipe(RecipeOutput output, ItemLike result, ItemLike from) {
@@ -354,7 +354,7 @@ public interface RecipeHelper {
                                     .pattern("xx")
                                     .define('x', tiles.get())
                                     .unlockedBy(hasBase, hasItems(node.get()))
-                                    .save(output, modLoc(n.getName() + "_from_" + Services.REGISTRY.getId(tiles).getPath()));
+                                    .save(output, rl(n.getName() + "_from_" + Services.REGISTRY.getId(tiles).getPath()));
                         }
                     }
                     case CRACKED ->
@@ -373,7 +373,7 @@ public interface RecipeHelper {
                                     .pattern("xx")
                                     .define('x', bricks.get())
                                     .unlockedBy(hasBase, hasItems(node.get()))
-                                    .save(output, modLoc(n.getName() + "_from_" + Services.REGISTRY.getId(bricks).getPath()));
+                                    .save(output, rl(n.getName() + "_from_" + Services.REGISTRY.getId(bricks).getPath()));
                         }
                         //Default recipe if there are no bricks
                         else {

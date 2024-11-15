@@ -11,13 +11,14 @@ public class APConstants {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     public static final String MODEL_TYPE_BOARDS = "boards";
-    public static final ResourceLocation WRAPPER_LOADER = modLoc("wrapped");
+    public static final ResourceLocation WRAPPER_LOADER = rl("wrapped");
 
-    public static ResourceLocation modLoc(String path) {
+    public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static ResourceLocation mcLoc(String path) {
         return ResourceLocation.withDefaultNamespace(path);
     }
+
 }

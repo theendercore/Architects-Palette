@@ -30,14 +30,14 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.APBlocks.*;
 
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
 
     public static final Supplier<RecipeType<RecipeHolder<WarpingRecipe>>> WARPING = () -> RecipeType.createFromVanilla(APRecipes.WARPING.get());
-    protected static final ResourceLocation PLUGIN_ID = modLoc("jei_plugin");
+    protected static final ResourceLocation PLUGIN_ID = rl("jei_plugin");
 
     protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
         addItemInfo(register, item.get(), infoString);

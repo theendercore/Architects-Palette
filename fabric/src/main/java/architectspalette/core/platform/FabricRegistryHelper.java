@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
-import static architectspalette.core.APConstants.modLoc;
+import static architectspalette.core.APConstants.rl;
 
 // Note: Registry entries MUST!!! be stored in a local variable before being put in a supplier
 public class FabricRegistryHelper implements IRegistryHelper {
@@ -38,7 +38,7 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @SafeVarargs
     @Override
     public final <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
-        T item = Registry.register(BuiltInRegistries.ITEM, modLoc(name), type.get());
+        T item = Registry.register(BuiltInRegistries.ITEM, rl(name), type.get());
         Supplier<T> supplierItem = () -> item;
         if (groups != null) {
             for (ResourceKey<CreativeModeTab> tab : groups) {
@@ -50,19 +50,19 @@ public class FabricRegistryHelper implements IRegistryHelper {
 
     @Override
     public <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type) {
-        T block = Registry.register(BuiltInRegistries.BLOCK, modLoc(name), type.get());
+        T block = Registry.register(BuiltInRegistries.BLOCK, rl(name), type.get());
         return () -> block;
     }
 
     @Override
     public <T extends SoundEvent> Supplier<T> registerSoundEvent(String name, Supplier<T> type) {
-        T sound = Registry.register(BuiltInRegistries.SOUND_EVENT, modLoc(name), type.get());
+        T sound = Registry.register(BuiltInRegistries.SOUND_EVENT, rl(name), type.get());
         return () -> sound;
     }
 
     @Override
     public <T extends ParticleType<?>> Supplier<T> registerParticleType(String name, Supplier<T> type) {
-        T particle = Registry.register(BuiltInRegistries.PARTICLE_TYPE, modLoc(name), type.get());
+        T particle = Registry.register(BuiltInRegistries.PARTICLE_TYPE, rl(name), type.get());
         return () -> particle;
     }
 
@@ -74,19 +74,19 @@ public class FabricRegistryHelper implements IRegistryHelper {
 
     @Override
     public <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> type) {
-        T feature = Registry.register(BuiltInRegistries.FEATURE, modLoc(name), type.get());
+        T feature = Registry.register(BuiltInRegistries.FEATURE, rl(name), type.get());
         return () -> feature;
     }
 
     @Override
     public <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type) {
-        T recipeSerializer = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, modLoc(name), type.get());
+        T recipeSerializer = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, rl(name), type.get());
         return () -> recipeSerializer;
     }
 
     @Override
     public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
-        T recipeType = Registry.register(BuiltInRegistries.RECIPE_TYPE, modLoc(name), type.get());
+        T recipeType = Registry.register(BuiltInRegistries.RECIPE_TYPE, rl(name), type.get());
         return () -> recipeType;
     }
 

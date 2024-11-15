@@ -8,7 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.APConstants.LOGGER;
-import static architectspalette.core.ArchitectsPalette.rl;
+import static architectspalette.core.APConstants.rl;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public class MissingMappingsEventHandler {

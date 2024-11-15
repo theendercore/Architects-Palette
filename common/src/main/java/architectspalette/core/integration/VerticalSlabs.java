@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public abstract class VerticalSlabs {
     public static boolean quarkEnabled, checkedQuark;
     public static String QUARK_ID = "quark";
-    public static ResourceLocation VERTICAL_SLABS_CONDITION = APConstants.modLoc("enable_vertical_slabs");
+    public static ResourceLocation VERTICAL_SLABS_CONDITION = APConstants.rl("enable_vertical_slabs");
 
     public static boolean areVisible() {
         if (!checkedQuark) {
