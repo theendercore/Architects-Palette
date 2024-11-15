@@ -29,10 +29,6 @@ public class APCommon {
         ParticleRegistry.init();
 
         APRecipes.init();
-
-        if (Services.PLATFORM.isModLoaded(APConstants.MOD_ID)) {
-            APConstants.LOGGER.info("I am loaded my self");
-        }
     }
 
     public static void lateInit() {
