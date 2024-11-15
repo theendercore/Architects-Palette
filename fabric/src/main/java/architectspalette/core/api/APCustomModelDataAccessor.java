@@ -1,6 +1,5 @@
-package architectspalette.core.util;
+package architectspalette.core.api;
 
-import architectspalette.core.api.CustomModelLoader;
 import net.minecraft.client.renderer.block.model.BlockModel;
 
 public interface APCustomModelDataAccessor {

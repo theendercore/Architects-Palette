@@ -32,7 +32,6 @@ public class APLootTablesProvider extends FabricBlockLootTableProvider {
         Services.REGISTRY.getModBlocks().forEach(this::processBlock);
 
 
-
         // (ender) then override special cases
         APBlocks.POLISHED_PACKED_ICE.forEach(this::dropWhenSilkTouch);
         this.dropWhenSilkTouch(APBlocks.CHISELED_PACKED_ICE.get());
@@ -84,23 +83,13 @@ public class APLootTablesProvider extends FabricBlockLootTableProvider {
         // (ender) this looks ugly, I don't like java.
         // And don't say just make it one line, I cant read that
         return LootTable.lootTable()
-                .withPool(
-                        this.applyExplosionCondition(
-                                block,
-                                LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block))
-                        )
-                )
-                .withPool(
-                        this.applyExplosionCondition(
-                                Items.HEART_OF_THE_SEA,
-                                LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.HEART_OF_THE_SEA))
-                        ).conditionally(
-                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
-                                        StatePropertiesPredicate.Builder.properties().hasProperty(AbyssalineBlock.CHARGED, true)
-                                ).build()
-                        )
-                );
+                .withPool(this.applyExplosionCondition(block, LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block))
+                ))
+                .withPool(this.applyExplosionCondition(Items.HEART_OF_THE_SEA, LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.HEART_OF_THE_SEA))
+                ).conditionally(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
+                        StatePropertiesPredicate.Builder.properties().hasProperty(AbyssalineBlock.CHARGED, true)
+                ).build()));
     }
 }

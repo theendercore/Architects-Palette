@@ -10,6 +10,9 @@ public class APConstants {
     public static final String MOD_NAME = "ArchitectsPalette";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
+    public static final String MODEL_TYPE_BOARDS = "boards";
+    public static final ResourceLocation WRAPPER_LOADER = modLoc("wrapped");
+
     public static ResourceLocation modLoc(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }

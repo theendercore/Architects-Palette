@@ -1,5 +1,6 @@
 package architectspalette.core.event;
 
+import architectspalette.core.APConstants;
 import architectspalette.core.api.CustomModelLoader;
 import architectspalette.core.model.BoardModel;
 import architectspalette.core.model.util.SpriteShift;
@@ -18,23 +19,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import static architectspalette.core.APConstants.modLoc;
-import static architectspalette.core.util.APCustomModelDataAccessor.getData;
-import static architectspalette.core.util.APCustomModelDataAccessor.setData;
+import static architectspalette.core.api.APCustomModelDataAccessor.getData;
+import static architectspalette.core.api.APCustomModelDataAccessor.setData;
 
 public class APModelLoaders {
-    public static final String MODEL_TYPE_BOARDS = "boards";
-    public static final ResourceLocation WRAPPER_LOADER = modLoc("wrapped");
-
     static {
-        WrappedModelLoader.register(MODEL_TYPE_BOARDS, (baked, model) -> {
+        WrappedModelLoader.register(APConstants.MODEL_TYPE_BOARDS, (baked, model) -> {
             ResourceLocation texture = model.getMaterial("particle").texture();
             return new BoardModel(baked, SpriteShift.getShift(texture, texture.withSuffix("_odd")));
         });
     }
 
     public static void init() {
-        CustomModelLoader.register(WRAPPER_LOADER, new WrappedModelLoader());
+        CustomModelLoader.register(APConstants.WRAPPER_LOADER, new WrappedModelLoader());
     }
 
 
@@ -52,7 +49,7 @@ public class APModelLoaders {
 
         @Override
         public ResourceLocation getLoader() {
-            return WRAPPER_LOADER;
+            return APConstants.WRAPPER_LOADER;
         }
     }
 

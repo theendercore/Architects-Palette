@@ -1,7 +1,7 @@
 package architectspalette.core.mixin;
 
 import architectspalette.core.api.CustomModelLoader;
-import architectspalette.core.util.APCustomModelDataAccessor;
+import architectspalette.core.api.APCustomModelDataAccessor;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;

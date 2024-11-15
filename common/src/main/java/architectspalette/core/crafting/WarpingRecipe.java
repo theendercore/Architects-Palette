@@ -24,6 +24,7 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
         this.output = output;
         this.dimension = dimension;
     }
+
     public ResourceLocation getDimension() {
         return this.dimension;
     }
@@ -84,7 +85,7 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
                         )
                         .apply(instance, WarpingRecipe::new)
         );
-        public static final StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> STREAM_CODEC =  StreamCodec.composite(
+        public static final StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> STREAM_CODEC = StreamCodec.composite(
                 Ingredient.CONTENTS_STREAM_CODEC,
                 recipe -> recipe.input,
                 ItemStack.STREAM_CODEC,
@@ -93,11 +94,6 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
                 recipe -> recipe.dimension,
                 WarpingRecipe::new
         );
-
-        // (ender) In case the codec above doesn't work, this is how you could write it.
-//                StreamCodec.of(
-//                WarpingRecipe2.Serializer::toNetwork, WarpingRecipe2.Serializer::fromNetwork
-//        );
 
         @Override
         public MapCodec<WarpingRecipe> codec() {
@@ -108,22 +104,5 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
         public StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> streamCodec() {
             return STREAM_CODEC;
         }
-
-//        private static WarpingRecipe2 fromNetwork(RegistryFriendlyByteBuf buf) {
-//            String s = buf.readUtf();
-//            CraftingBookCategory craftingbookcategory = buf.readEnum(CraftingBookCategory.class);
-//            ShapedRecipePattern shapedrecipepattern = ShapedRecipePattern.STREAM_CODEC.decode(buf);
-//            ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
-//            boolean flag = buf.readBoolean();
-//            return new ShapedRecipe(s, craftingbookcategory, shapedrecipepattern, itemstack, flag);
-//        }
-//
-//        private static void toNetwork(RegistryFriendlyByteBuf buf, WarpingRecipe2 recipe) {
-//            buf.writeUtf(recipe.group);
-//            buf.writeEnum(recipe.category);
-//            ShapedRecipePattern.STREAM_CODEC.encode(buf, recipe.pattern);
-//            ItemStack.STREAM_CODEC.encode(buf, recipe.result);
-//            buf.writeBoolean(recipe.showNotification);
-//        }
     }
 }

@@ -55,7 +55,7 @@ public class ModelBakeEventHandler {
         }
 
         public void collectSwaps() {
-            // (ender) Not all models are handled here, there are also data-driven ones
+            // (ender) Not all models are handled here, there are also data-driven ones Look for WrappedModelLoader
             APBlocks.SHEET_METAL.forEach((n) -> swapBlockModel(n, model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct"))));
         }
     }

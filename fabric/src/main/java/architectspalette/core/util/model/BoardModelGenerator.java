@@ -7,11 +7,11 @@ import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
+import static architectspalette.core.model.WrappedModelTemplate.boardWarp;
 import static architectspalette.core.registry.APBlocks.boards;
 import static architectspalette.core.util.model.ModelHelpers.createVerticalSlab;
 import static architectspalette.core.util.model.ModelHelpers.model;
 import static architectspalette.core.util.model.Models.VERTICAL_SLAB;
-import static architectspalette.core.util.model.WrappedModelTemplate.wrap;
 import static net.minecraft.data.models.BlockModelGenerators.*;
 
 public interface BoardModelGenerator {
@@ -33,7 +33,7 @@ public interface BoardModelGenerator {
 
     static void board(BlockModelGenerators gen, Block block) {
         var tex = TextureMapping.cube(block);
-        var id = wrap(ModelTemplates.CUBE_ALL).create(block, tex, gen.modelOutput);
+        var id = boardWarp(ModelTemplates.CUBE_ALL).create(block, tex, gen.modelOutput);
         gen.blockStateOutput.accept(createSimpleBlock(block, id));
         gen.delegateItemModel(block, id);
     }
@@ -43,8 +43,8 @@ public interface BoardModelGenerator {
                 .put(TextureSlot.BOTTOM, model(full))
                 .put(TextureSlot.SIDE, model(full))
                 .put(TextureSlot.TOP, model(full));
-        var id = wrap(ModelTemplates.SLAB_BOTTOM).create(block, texture, gen.modelOutput);
-        var id2 = wrap(ModelTemplates.SLAB_TOP).create(block, texture, gen.modelOutput);
+        var id = boardWarp(ModelTemplates.SLAB_BOTTOM).create(block, texture, gen.modelOutput);
+        var id2 = boardWarp(ModelTemplates.SLAB_TOP).create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(createSlab(block, id, id2, model(full)));
         gen.delegateItemModel(block, id);
     }
@@ -54,7 +54,7 @@ public interface BoardModelGenerator {
                 .put(TextureSlot.BOTTOM, model(full))
                 .put(TextureSlot.SIDE, model(full))
                 .put(TextureSlot.TOP, model(full));
-        var vSlab = wrap(VERTICAL_SLAB).create(block, texture, gen.modelOutput);
+        var vSlab = boardWarp(VERTICAL_SLAB).create(block, texture, gen.modelOutput);
         gen.blockStateOutput.accept(createVerticalSlab(block, vSlab, model(full)));
         gen.delegateItemModel(block, vSlab);
     }
@@ -64,9 +64,9 @@ public interface BoardModelGenerator {
                 .put(TextureSlot.BOTTOM, model(full))
                 .put(TextureSlot.SIDE, model(full))
                 .put(TextureSlot.TOP, model(full));
-        ResourceLocation id = wrap(ModelTemplates.STAIRS_INNER).create(block, texture, gen.modelOutput);
-        ResourceLocation id2 = wrap(ModelTemplates.STAIRS_STRAIGHT).create(block, texture, gen.modelOutput);
-        ResourceLocation id3 = wrap(ModelTemplates.STAIRS_OUTER).create(block, texture, gen.modelOutput);
+        ResourceLocation id = boardWarp(ModelTemplates.STAIRS_INNER).create(block, texture, gen.modelOutput);
+        ResourceLocation id2 = boardWarp(ModelTemplates.STAIRS_STRAIGHT).create(block, texture, gen.modelOutput);
+        ResourceLocation id3 = boardWarp(ModelTemplates.STAIRS_OUTER).create(block, texture, gen.modelOutput);
 
         gen.blockStateOutput.accept(createStairs(block, id, id2, id3));
         gen.delegateItemModel(block, id2);
@@ -74,11 +74,11 @@ public interface BoardModelGenerator {
 
     static void boardWall(BlockModelGenerators gen, Block wallBlock, Block full) {
         TextureMapping texture = TextureMapping.defaultTexture(model(wallBlock)).put(TextureSlot.WALL, model(full));
-        ResourceLocation id = wrap(ModelTemplates.WALL_POST).create(wallBlock, texture, gen.modelOutput);
-        ResourceLocation id2 = wrap(ModelTemplates.WALL_LOW_SIDE).create(wallBlock, texture, gen.modelOutput);
-        ResourceLocation id3 = wrap(ModelTemplates.WALL_TALL_SIDE).create(wallBlock, texture, gen.modelOutput);
+        ResourceLocation id = boardWarp(ModelTemplates.WALL_POST).create(wallBlock, texture, gen.modelOutput);
+        ResourceLocation id2 = boardWarp(ModelTemplates.WALL_LOW_SIDE).create(wallBlock, texture, gen.modelOutput);
+        ResourceLocation id3 = boardWarp(ModelTemplates.WALL_TALL_SIDE).create(wallBlock, texture, gen.modelOutput);
         gen.blockStateOutput.accept(BlockModelGenerators.createWall(wallBlock, id, id2, id3));
-        gen.delegateItemModel(wallBlock, wrap(ModelTemplates.WALL_INVENTORY).create(wallBlock, texture, gen.modelOutput));
+        gen.delegateItemModel(wallBlock, boardWarp(ModelTemplates.WALL_INVENTORY).create(wallBlock, texture, gen.modelOutput));
 
     }
 }

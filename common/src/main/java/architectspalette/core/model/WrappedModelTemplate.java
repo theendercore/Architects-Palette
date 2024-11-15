@@ -1,4 +1,4 @@
-package architectspalette.core.util.model;
+package architectspalette.core.model;
 
 import com.google.gson.JsonObject;
 import net.minecraft.data.models.model.ModelTemplate;
@@ -11,14 +11,24 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import static architectspalette.core.APConstants.MODEL_TYPE_BOARDS;
+
 public class WrappedModelTemplate extends ModelTemplate {
-    public WrappedModelTemplate(Optional<ResourceLocation> optional, Optional<String> optional2, TextureSlot... textureSlots) {
+    public String type;
+
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    public WrappedModelTemplate(Optional<ResourceLocation> optional, Optional<String> optional2, String type, TextureSlot... textureSlots) {
         super(optional, optional2, textureSlots);
+        this.type = type;
     }
 
+
+    public static WrappedModelTemplate boardWarp(ModelTemplate template) {
+        return wrap(template, MODEL_TYPE_BOARDS);
+    }
     // (ender) some reflection cuz im too lazy to write an accessor
-    @SuppressWarnings("unchecked")
-    static WrappedModelTemplate wrap(ModelTemplate template) {
+    @SuppressWarnings({"unchecked", "SameParameterValue"})
+    public  static WrappedModelTemplate wrap(ModelTemplate template, String type) {
         try {
             Field modelFiled = template.getClass().getDeclaredField("model");
             modelFiled.setAccessible(true);
@@ -30,6 +40,7 @@ public class WrappedModelTemplate extends ModelTemplate {
             return new WrappedModelTemplate(
                     (Optional<ResourceLocation>) modelFiled.get(template),
                     (Optional<String>) suffixFiled.get(template),
+                    type,
                     ((Set<TextureSlot>) requiredSlotsFiled.get(template)).toArray(new TextureSlot[0])
             );
         } catch (Exception e) {
@@ -41,7 +52,7 @@ public class WrappedModelTemplate extends ModelTemplate {
     public @NotNull JsonObject createBaseTemplate(@NotNull ResourceLocation resourceLocation, @NotNull Map<TextureSlot, ResourceLocation> map) {
         var wrappedModel = new JsonObject();
         wrappedModel.addProperty("loader", "architects_palette:wrapped");
-        wrappedModel.addProperty("wrapper_type", "boards");
+        wrappedModel.addProperty("wrapper_type", type);
         wrappedModel.add("wrapped_model", super.createBaseTemplate(resourceLocation, map));
         return wrappedModel;
     }

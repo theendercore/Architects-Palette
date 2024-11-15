@@ -34,8 +34,6 @@ public class ArchitectsPalette {
         modEventBus.addListener(EventPriority.LOWEST, this::setupCommon);
         modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
 
-        // (ender) the rest will be heavily reworked in the future.
-
         var LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
         LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
         LOOT.register(modEventBus);

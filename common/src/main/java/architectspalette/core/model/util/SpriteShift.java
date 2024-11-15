@@ -62,7 +62,7 @@ public class SpriteShift {
     }
 
     //Could optimize by saving this value. Hell, should probably just not save the sprites.
-    // (ender) well I did  that :)
+    // (ender) well I did that :)
     public float getUShift() {
         return uShift;
     }

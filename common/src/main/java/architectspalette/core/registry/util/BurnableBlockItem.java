@@ -18,7 +18,7 @@ public class BurnableBlockItem extends BlockItem {
     }
 
     // (ender) this is here for forge other is for fabric
-    public int getBurnTime(ItemStack itemStack, RecipeType type) {
+    public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
         return this.burnTime;
     }
     public int getBurnTime() {
