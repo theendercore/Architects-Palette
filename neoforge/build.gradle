@@ -36,7 +36,7 @@ neoForge {
     }
 }
 
-//sourceSets.main.resources.srcDir('../common/src/main/generated')
+sourceSets.main.resources.srcDir('../common/src/main/generated')
 
 dependencies {
     api("fuzs.forgeconfigapiport:forgeconfigapiport-neoforge:${config_port_version}")
