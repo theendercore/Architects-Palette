@@ -48,11 +48,6 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
         CRITERIA.register(modEventBus);
     }
 
-    @Override
-    public void resisterConfig() {
-//        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
-    }
-
     @SafeVarargs
     @Override
     public final <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {

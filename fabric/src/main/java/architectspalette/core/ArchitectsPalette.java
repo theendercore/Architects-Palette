@@ -1,5 +1,6 @@
 package architectspalette.core;
 
+import architectspalette.core.config.APConfig;
 import architectspalette.core.datagen.*;
 import architectspalette.core.datagen.worldgen.APFeatureCreator;
 import architectspalette.core.datagen.worldgen.APWorldGenProvider;
@@ -9,6 +10,7 @@ import architectspalette.core.registry.APBiomeModifications;
 import architectspalette.core.registry.APItems;
 import architectspalette.core.registry.util.BurnableBlockItem;
 import architectspalette.core.util.DebugCommand;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -16,12 +18,16 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.neoforged.fml.config.ModConfig;
+
+import static architectspalette.core.APConstants.MOD_ID;
 
 public class ArchitectsPalette implements ModInitializer, ClientModInitializer, DataGeneratorEntrypoint {
 
     @Override
     public void onInitialize() {
-        APCommon.initConfig();
+        NeoForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
+
 
         APCommon.init();
         APCommon.lateInit();

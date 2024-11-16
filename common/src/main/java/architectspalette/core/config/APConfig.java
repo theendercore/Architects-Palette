@@ -1,21 +1,21 @@
 package architectspalette.core.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class APConfig {
 
-    public static ForgeConfigSpec COMMON_CONFIG;
+    public static ModConfigSpec COMMON_CONFIG;
 
-    public static ForgeConfigSpec.BooleanValue VILLAGER_TRADES_ENABLED;
-    public static ForgeConfigSpec.BooleanValue WANDERER_TRADES_ENABLED;
-    public static ForgeConfigSpec.BooleanValue VERTICAL_SLABS_FORCED;
-    public static ForgeConfigSpec.DoubleValue SUNSTONE_SPREAD_CHANCE;
-    public static ForgeConfigSpec.BooleanValue GLOBAL_WORLDGEN_TOGGLE;
-    public static ForgeConfigSpec.BooleanValue NETHER_CRYSTAL_TOGGLE;
+    public static ModConfigSpec.BooleanValue VILLAGER_TRADES_ENABLED;
+    public static ModConfigSpec.BooleanValue WANDERER_TRADES_ENABLED;
+    public static ModConfigSpec.BooleanValue VERTICAL_SLABS_FORCED;
+    public static ModConfigSpec.DoubleValue SUNSTONE_SPREAD_CHANCE;
+    public static ModConfigSpec.BooleanValue GLOBAL_WORLDGEN_TOGGLE;
+    public static ModConfigSpec.BooleanValue NETHER_CRYSTAL_TOGGLE;
 
     static {
 
-        ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
+        ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
         BUILDER.comment("The following options require a server restart to take effect.").push("Restart_Required");
         BUILDER.comment("World Generation Options").push("World_Gen");
@@ -41,7 +41,7 @@ public class APConfig {
         COMMON_CONFIG = BUILDER.build();
     }
 
-    public static boolean worldGenCheck(ForgeConfigSpec.BooleanValue configOption) {
+    public static boolean worldGenCheck(ModConfigSpec.BooleanValue configOption) {
         return GLOBAL_WORLDGEN_TOGGLE.get() && configOption.get();
     }
 

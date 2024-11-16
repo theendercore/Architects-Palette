@@ -25,8 +25,6 @@ public interface IRegistryHelper {
 
     Map<ResourceKey<CreativeModeTab>, ArrayList<Supplier<? extends Item>>> CREATIVE_TAB_ITEMS_MAP = new HashMap<>();
 
-    void resisterConfig();  // (ender) for some reason you cant import (ModConfig.Type, IConfigSpec<?>) in common
-
     default void addCreativeTabItems(@Nullable ResourceKey<CreativeModeTab> tab, Supplier<? extends Item> item) {
         if (tab == null) return;
         var itemList = CREATIVE_TAB_ITEMS_MAP.get(tab);

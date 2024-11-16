@@ -1,8 +1,6 @@
 package architectspalette.core.platform;
 
-import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.services.IRegistryHelper;
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.advancements.CriterionTrigger;
@@ -20,7 +18,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraftforge.fml.config.ModConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,9 +28,8 @@ import static architectspalette.core.APConstants.rl;
 
 // Note: Registry entries MUST!!! be stored in a local variable before being put in a supplier
 public class FabricRegistryHelper implements IRegistryHelper {
-    @Override
-    public void resisterConfig() {
-        ForgeConfigRegistry.INSTANCE.register(MOD_ID, ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
+    public static ResourceLocation blockId(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block);
     }
 
     @SafeVarargs
@@ -113,9 +109,5 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> List<T> getModBlocks() {
         return (List<T>) BuiltInRegistries.BLOCK.stream().filter(it -> blockId(it).getNamespace().equals(MOD_ID)).toList();
-    }
-
-    public static ResourceLocation blockId(Block block) {
-        return BuiltInRegistries.BLOCK.getKey(block);
     }
 }

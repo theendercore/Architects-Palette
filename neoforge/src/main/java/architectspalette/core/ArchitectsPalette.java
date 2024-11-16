@@ -1,14 +1,15 @@
 package architectspalette.core;
 
 
+import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.NeoForgeRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 
 import static architectspalette.core.APConstants.MOD_ID;
 
@@ -16,7 +17,7 @@ import static architectspalette.core.APConstants.MOD_ID;
 public class ArchitectsPalette {
 
     public ArchitectsPalette(IEventBus modBus, ModContainer container) {
-        APCommon.initConfig();
+        container.registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
 
         APCommon.init();
         NeoForgeRegistryHelper.register(modBus);
@@ -37,7 +38,7 @@ public class ArchitectsPalette {
 
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks neoforge :)
-//        APCommon.lateInit();
+        APCommon.lateInit();
     }
 
     void setupClient(final FMLClientSetupEvent event) {
