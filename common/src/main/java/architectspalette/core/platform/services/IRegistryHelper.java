@@ -1,5 +1,6 @@
 package architectspalette.core.platform.services;
 
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -52,6 +53,8 @@ public interface IRegistryHelper {
     <T extends RecipeSerializer<?>> Supplier<T> registerRecipeSerializer(String name, Supplier<T> type);
 
     <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type);
+
+    <T extends CriterionTrigger<?>> Supplier<T> registerCriterion(String name, Supplier<T> type);
 
     <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type);
 

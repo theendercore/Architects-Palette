@@ -29,10 +29,10 @@ public class APCommon {
         ParticleRegistry.init();
 
         APRecipes.init();
+        APCriterion.init();
     }
 
     public static void lateInit() {
-        APCriterion.init();
         APBlockProperties.registerFlammables();
         APTrades.registerTrades();
     }

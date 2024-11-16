@@ -31,7 +31,7 @@ public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.
         });
 
         public static Criterion<TriggerInstance> simple(){
-            return APCriterion.CARVE_TOTEM.createCriterion(new TriggerInstance(Optional.empty()));
+            return APCriterion.CARVE_TOTEM.get().createCriterion(new TriggerInstance(Optional.empty()));
         }
 
         public boolean test() {

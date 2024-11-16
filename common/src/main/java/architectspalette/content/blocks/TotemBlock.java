@@ -87,7 +87,7 @@ public class TotemBlock extends Block {
             stack.hurtAndBreak(1, player, (hand == InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
             world.playSound(player, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1, 1);
             if (player instanceof ServerPlayer) {
-                APCriterion.CARVE_TOTEM.trigger((ServerPlayer) player);
+                APCriterion.CARVE_TOTEM.get().trigger((ServerPlayer) player);
             }
             return ItemInteractionResult.sidedSuccess(world.isClientSide);
         }

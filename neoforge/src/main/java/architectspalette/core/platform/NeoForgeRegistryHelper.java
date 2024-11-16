@@ -2,6 +2,7 @@ package architectspalette.core.platform;
 
 import architectspalette.core.APConstants;
 import architectspalette.core.platform.services.IRegistryHelper;
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
@@ -34,6 +35,7 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, MOD_ID);
+    public static final DeferredRegister<CriterionTrigger<?>> CRITERIA = DeferredRegister.create(BuiltInRegistries.TRIGGER_TYPES, MOD_ID);
 
     public static void register(IEventBus modEventBus) {
         SOUNDS.register(modEventBus);
@@ -43,6 +45,7 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
         FEATURES.register(modEventBus);
         RECIPE_TYPES.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
+        CRITERIA.register(modEventBus);
     }
 
     @Override
@@ -96,6 +99,11 @@ public class NeoForgeRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
         return RECIPE_TYPES.register(name, type);
+    }
+
+    @Override
+    public <T extends CriterionTrigger<?>> Supplier<T> registerCriterion(String name, Supplier<T> type) {
+        return CRITERIA.register(name, type);
     }
 
     @SuppressWarnings("deprecation")

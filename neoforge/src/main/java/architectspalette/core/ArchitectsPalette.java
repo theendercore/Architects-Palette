@@ -37,7 +37,7 @@ public class ArchitectsPalette {
 
     void setupCommon(final FMLCommonSetupEvent event) {
         // (ender) Thanks neoforge :)
-        APCommon.lateInit();
+//        APCommon.lateInit();
     }
 
     void setupClient(final FMLClientSetupEvent event) {

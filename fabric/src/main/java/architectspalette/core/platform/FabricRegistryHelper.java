@@ -5,6 +5,7 @@ import architectspalette.core.platform.services.IRegistryHelper;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
@@ -88,6 +89,12 @@ public class FabricRegistryHelper implements IRegistryHelper {
     public <T extends RecipeType<?>> Supplier<T> registerRecipeType(String name, Supplier<T> type) {
         T recipeType = Registry.register(BuiltInRegistries.RECIPE_TYPE, rl(name), type.get());
         return () -> recipeType;
+    }
+
+    @Override
+    public <T extends CriterionTrigger<?>> Supplier<T> registerCriterion(String name, Supplier<T> type) {
+        T criterion = Registry.register(BuiltInRegistries.TRIGGER_TYPES, rl(name), type.get());
+        return () -> criterion;
     }
 
     @Override

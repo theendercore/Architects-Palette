@@ -1,23 +1,15 @@
 package architectspalette.core.integration;
 
 import architectspalette.core.integration.advancement.CarveTotemTrigger;
-import net.minecraft.advancements.CriterionTrigger;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import architectspalette.core.platform.Services;
 
-import static architectspalette.core.APConstants.rl;
+import java.util.function.Supplier;
 
 
 public class APCriterion {
+    public static Supplier<CarveTotemTrigger> CARVE_TOTEM = Services.REGISTRY.registerCriterion("carve_totem", () -> new CarveTotemTrigger());
+
     // (ender) this is here to just initialize things
     public static void init() {
-    }
-
-    public static CarveTotemTrigger CARVE_TOTEM = register(rl("carve_totem"), new CarveTotemTrigger());
-
-    // (ender) there doesn't seam to be a loader specific way to register criteria
-    public static <T extends CriterionTrigger<?>> T register(ResourceLocation name, T criterion) {
-        return Registry.register(BuiltInRegistries.TRIGGER_TYPES, name, criterion);
     }
 }
