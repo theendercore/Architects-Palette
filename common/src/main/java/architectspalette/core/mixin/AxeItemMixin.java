@@ -22,7 +22,7 @@ public abstract class AxeItemMixin {
     @Unique
     private boolean isAPWeatheringCopper = false;
 
-    @Inject(method = "evaluateNewBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/WeatheringCopper;getPrevious(Lnet/minecraft/world/level/block/state/BlockState;)Ljava/util/Optional;"), cancellable = true)
+ /*   @Inject(method = "evaluateNewBlockState", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/WeatheringCopper;getPrevious(Lnet/minecraft/world/level/block/state/BlockState;)Ljava/util/Optional;"), cancellable = true)
     private void doTheCopperMagicEvents(Level level, BlockPos pos, Player player, BlockState state, CallbackInfoReturnable<Optional<BlockState>> cir) {
         if (isAPWeatheringCopper) {
             Optional<BlockState> waxed = APWeatheringCopper.getUnWaxed(state);
@@ -39,7 +39,7 @@ public abstract class AxeItemMixin {
                 cir.setReturnValue(weathered);
             }
         }
-    }
+    }*/
 
     @Inject(method = "getStripped", at = @At("RETURN"), cancellable = true)
     private void doTheMagicStripping(BlockState oldState, CallbackInfoReturnable<Optional<BlockState>> cir) {

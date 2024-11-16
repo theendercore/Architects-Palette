@@ -1,6 +1,7 @@
 package architectspalette.core;
 
 
+import net.minecraft.world.level.block.StairBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
@@ -8,14 +9,8 @@ import net.neoforged.fml.common.Mod;
 public class ArchitectsPalette {
 
     public ArchitectsPalette(IEventBus eventBus) {
-
-        // This method is invoked by the NeoForge mod loader when it is ready
-        // to load your mod. You can access NeoForge and Common code in this
-        // project.
-
         // Use NeoForge to bootstrap the Common mod.
         APConstants.LOGGER.info("Hello NeoForge world!");
-        APCommonClass.init();
-
+//        APCommon.init();
     }
 }
