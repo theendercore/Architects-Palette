@@ -33,7 +33,7 @@ public abstract class VerticalSlabs {
     }
 
     public static boolean isVisible(ItemLike item) {
-        if (item instanceof BlockItem block && block.getBlock() instanceof VerticalSlabBlock) {
+        if (item.asItem() instanceof BlockItem block && block.getBlock() instanceof VerticalSlabBlock) {
             return areVisible();
         } else return true;
     }
