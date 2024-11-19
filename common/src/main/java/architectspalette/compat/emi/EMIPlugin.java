@@ -38,7 +38,7 @@ public class EMIPlugin implements EmiPlugin {
 
     @Override
     public void register(EmiRegistry registry) {
-        registry.removeEmiStacks((it) -> !VerticalSlabs.isVisible(() -> it.getItemStack().getItem()));
+        registry.removeEmiStacks((it) -> !VerticalSlabs.isVisible(it.getItemStack().getItem()));
 
         registry.addCategory(WARPING_CATEGORY);
 
@@ -115,7 +115,7 @@ public class EMIPlugin implements EmiPlugin {
 
         protected void registerInfo(EmiRegistry register, String infoString) {
             register.addRecipe(new EmiInfoRecipe(
-                    blocks.stream().filter((it) -> VerticalSlabs.isVisible(it::asItem))
+                    blocks.stream().filter(VerticalSlabs::isVisible)
                             .map((i) -> EmiIngredient.of(Ingredient.of(i))).toList(),
                     List.of(Component.translatable(MOD_ID + ".info." + infoString)),
                     rl("info/" + infoString)

@@ -16,6 +16,7 @@ public class APCommon {
 
         APRecipes.init();
         APCriterion.init();
+        APTab.init();
     }
 
     public static void lateInit() {

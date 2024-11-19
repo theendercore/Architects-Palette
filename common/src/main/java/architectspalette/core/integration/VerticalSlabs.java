@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.function.Supplier;
 
@@ -31,9 +32,13 @@ public abstract class VerticalSlabs {
         return dummyObject;
     }
 
-    public static boolean isVisible(Supplier<? extends Item> item) {
-        if (item.get() instanceof BlockItem block && block.getBlock() instanceof VerticalSlabBlock) {
+    public static boolean isVisible(ItemLike item) {
+        if (item instanceof BlockItem block && block.getBlock() instanceof VerticalSlabBlock) {
             return areVisible();
         } else return true;
+    }
+
+    public static boolean isVisible(Supplier<? extends Item> item) {
+        return isVisible(item.get());
     }
 }

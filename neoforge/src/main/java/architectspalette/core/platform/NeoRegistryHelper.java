@@ -8,11 +8,13 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +38,7 @@ public class NeoRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, MOD_ID);
     public static final DeferredRegister<CriterionTrigger<?>> CRITERIA = DeferredRegister.create(BuiltInRegistries.TRIGGER_TYPES, MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, MOD_ID);
 
     public static void register(IEventBus modEventBus) {
         SOUNDS.register(modEventBus);
@@ -46,6 +49,7 @@ public class NeoRegistryHelper implements IRegistryHelper {
         RECIPE_TYPES.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
         CRITERIA.register(modEventBus);
+        TABS.register(modEventBus);
     }
 
     @SafeVarargs
@@ -101,6 +105,11 @@ public class NeoRegistryHelper implements IRegistryHelper {
         return CRITERIA.register(name, type);
     }
 
+    @Override
+    public Supplier<CreativeModeTab> registerTab(String id, Component name, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator entries) {
+        return TABS.register(id, ()-> CreativeModeTab.builder().title(name).icon(icon).displayItems(entries).build());
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type) {
@@ -117,5 +126,11 @@ public class NeoRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> List<T> getModBlocks() {
         return (List<T>) BLOCKS.getEntries().stream().map(DeferredHolder::get).toList();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T extends Item> List<T> getModItems() {
+        return (List<T>) ITEMS.getEntries().stream().map(DeferredHolder::get).toList();
     }
 }

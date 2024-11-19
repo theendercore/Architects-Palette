@@ -4,11 +4,13 @@ import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -54,11 +56,14 @@ public interface IRegistryHelper {
 
     <T extends CriterionTrigger<?>> Supplier<T> registerCriterion(String name, Supplier<T> type);
 
+    Supplier<CreativeModeTab> registerTab(String id, Component name, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator entries);
+
     <T extends Block> void setRenderLayer(Supplier<T> block, RenderType type);
 
     @Nullable
     <T extends Block> ResourceLocation getId(Supplier<T> block);
 
     <T extends Block> List<T> getModBlocks();
+    <T extends Item> List<T> getModItems();
 
 }

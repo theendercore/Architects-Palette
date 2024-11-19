@@ -2,6 +2,7 @@ package architectspalette.core;
 
 
 import architectspalette.core.config.APConfig;
+import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.platform.NeoRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -25,6 +26,8 @@ public class ArchitectsPalette {
         modBus.addListener(EventPriority.LOWEST, this::setupCommon);
         modBus.addListener(EventPriority.LOWEST, this::setupClient);
 
+        modBus.addListener(CreativeModeTabEventHandler::onCreativeTabRegister);
+
      /*   var LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
         LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
         LOOT.register(modEventBus);
@@ -32,12 +35,9 @@ public class ArchitectsPalette {
         APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modEventBus);
 
         APVerticalSlabsCondition.registerCondition(modEventBus);*/
-
-//        NeoForge.EVENT_BUS.register(this);
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {
-        // (ender) Thanks neoforge :)
         APCommon.lateInit();
     }
 
