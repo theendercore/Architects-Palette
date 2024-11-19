@@ -28,7 +28,7 @@ public class ArchitectsPalette {
         NeoRegistryHelper.register(modBus);
 
         modBus.addListener(EventPriority.LOWEST, this::setupCommon);
-        modBus.addListener(EventPriority.LOWEST,this::setupClient);
+        modBus.addListener(EventPriority.LOWEST, this::setupClient);
 
         // Events
         modBus.addListener(CreativeModeTabEventHandler::onCreativeTabRegister);
@@ -38,8 +38,9 @@ public class ArchitectsPalette {
         APVerticalSlabsCondition.registerCondition(modBus);
 
         modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
-        modBus.addListener(ModelBakeEventHandler::onModelBake);
+        modBus.addListener(TextureStitchEventHandler::onTextureStitchPost);
         modBus.addListener(RegisterModelLoadersEventHandler::registerModelLoaders);
+        modBus.addListener(ModelBakeEventHandler::onModelBake);
 
         APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modBus);
     }
