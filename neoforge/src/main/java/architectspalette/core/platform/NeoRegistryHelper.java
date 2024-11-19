@@ -27,7 +27,7 @@ import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.MOD_ID;
 
-public class NeoForgeRegistryHelper implements IRegistryHelper {
+public class NeoRegistryHelper implements IRegistryHelper {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, APConstants.MOD_ID);
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MOD_ID);

@@ -2,7 +2,7 @@ package architectspalette.core;
 
 
 import architectspalette.core.config.APConfig;
-import architectspalette.core.platform.NeoForgeRegistryHelper;
+import architectspalette.core.platform.NeoRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -20,7 +20,7 @@ public class ArchitectsPalette {
         container.registerConfig(ModConfig.Type.COMMON, APConfig.COMMON_CONFIG);
 
         APCommon.init();
-        NeoForgeRegistryHelper.register(modBus);
+        NeoRegistryHelper.register(modBus);
 
         modBus.addListener(EventPriority.LOWEST, this::setupCommon);
         modBus.addListener(EventPriority.LOWEST, this::setupClient);
