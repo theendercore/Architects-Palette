@@ -2,14 +2,14 @@ package architectspalette.core.integration;
 
 import architectspalette.core.config.APConfig;
 import architectspalette.core.platform.Services;
-import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import static architectspalette.core.APConstants.LOGGER;
 import static architectspalette.core.APConstants.MOD_ID;
@@ -20,10 +20,10 @@ public class APVerticalSlabsCondition implements ICondition {
     public static final MapCodec<APVerticalSlabsCondition> CODEC = MapCodec.unit(INSTANCE).stable();
 
     // (ender) I put this here since there is no reason to make a file if its only one condition
-    public static void registerCondition(final IEventBus modEventBus) {
-        var CONDITION = DeferredRegister.create(ForgeRegistries.CONDITION_SERIALIZERS, MOD_ID);
+    public static void registerCondition(final IEventBus modBus) {
+        var CONDITION = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, MOD_ID);
         CONDITION.register(VERTICAL_SLABS_CONDITION.getPath(), () -> APVerticalSlabsCondition.CODEC);
-        CONDITION.register(modEventBus);
+        CONDITION.register(modBus);
     }
 
     /*
@@ -32,23 +32,23 @@ public class APVerticalSlabsCondition implements ICondition {
      */
     // (ender) so this is no longer just stolen from Abnormals Core, like I took the original code and re-wrote it, so IDK
     @Override
-    public boolean test(IContext context, DynamicOps<?> ops) {
+    public boolean test(@NotNull IContext context) {
         if (APConfig.VERTICAL_SLABS_FORCED.get()) return true;
         if (Services.PLATFORM.isModLoaded(VerticalSlabs.QUARK_ID)) {
-            var codec = ForgeRegistries.CONDITION_SERIALIZERS.get().getValue(ResourceLocation.tryParse("quark:flag"));
+            var codec = NeoForgeRegistries.CONDITION_SERIALIZERS.get(ResourceLocation.tryParse("quark:flag"));
             if (codec == null) return false;
             var optCondition = codec.codec().decode(JsonOps.INSTANCE, VerticalSlabs.conditionObj());
             if (optCondition.isError()) {
                 LOGGER.error("Failed to parse Vertical Slabs condition: {}", optCondition.error());
                 return false;
             }
-            optCondition.getOrThrow().getFirst().test(context, ops);
+            optCondition.getOrThrow().getFirst().test(context);
         }
         return false;
     }
 
     @Override
-    public MapCodec<? extends APVerticalSlabsCondition> codec() {
+    public @NotNull MapCodec<? extends APVerticalSlabsCondition> codec() {
         return CODEC;
     }
 }

@@ -5,6 +5,7 @@ import architectspalette.core.config.APConfig;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
+import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.NeoRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
@@ -37,10 +38,10 @@ public class ArchitectsPalette {
         modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
         WitheredBoneLootModifier.register(modBus);
 
-     /*   // Biomes need to be registered before features.
-        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modEventBus);
+        // Biomes need to be registered before features.
+//        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modBus);
 
-        APVerticalSlabsCondition.registerCondition(modEventBus);*/
+        APVerticalSlabsCondition.registerCondition(modBus);
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {
