@@ -3,6 +3,7 @@ package architectspalette.core;
 
 import architectspalette.core.config.APConfig;
 import architectspalette.core.event.CreativeModeTabEventHandler;
+import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.platform.NeoRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
@@ -32,6 +33,8 @@ public class ArchitectsPalette {
         modBus.addListener(CreativeModeTabEventHandler::onCreativeTabRegister);
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onTradesLoaded);
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onWanderingTradesLoaded);
+        modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
+
 
      /*   var LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
         LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
