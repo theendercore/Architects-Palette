@@ -65,9 +65,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
         //fabric
         copy(ConventionalBlockTags.STONES, ConventionalItemTags.STONES);
         // forge
-        copy(ModdedTags.FORGE_STONE, ModdedTags.FORGE_STONE_ITEM);
-        copy(ModdedTags.FORGE_ICES_PACKEDICE, ModdedTags.FORGE_ICES_PACKEDICE_ITEM);
-        copy(ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS_ITEM);
+        copy(ModdedTags.STORAGE_BLOCKS_ENDER_PEARLS, ModdedTags.STORAGE_BLOCKS_ENDER_PEARLS_ITEM);
 
     }
 
@@ -76,7 +74,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void compatabilityTags() {
-        getOrCreateTag(ModdedTags.FORGE_BONES_WITHER, WITHERED_BONE);
+        getOrCreateTag(ModdedTags.BONES_WITHER, WITHERED_BONE);
     }
 
 

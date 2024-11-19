@@ -14,14 +14,9 @@ public interface ModdedTags {
     TagKey<Item> QUARK_VERTICAL_SLAB_ITEM = itemTag("quark:vertical_slab");
 
     //Forge compatibility
-    TagKey<Block> FORGE_STONE = blockTag("forge:stone");
-    TagKey<Block> FORGE_ICES_PACKEDICE = blockTag("forge:ices/packedice");
-    TagKey<Block> FORGE_STORAGE_BLOCKS_ENDER_PEARLS = blockTag("forge:storage_blocks/ender_pearls");
-
-    TagKey<Item> FORGE_STONE_ITEM = itemTag("forge:stone");
-    TagKey<Item> FORGE_ICES_PACKEDICE_ITEM = itemTag("forge:ices/packedice");
-    TagKey<Item> FORGE_STORAGE_BLOCKS_ENDER_PEARLS_ITEM = itemTag("forge:storage_blocks/ender_pearls");
-    TagKey<Item> FORGE_BONES_WITHER = itemTag("forge:bones/wither");
+    TagKey<Block> STORAGE_BLOCKS_ENDER_PEARLS = blockTag("c:storage_blocks/ender_pearls");
+    TagKey<Item> STORAGE_BLOCKS_ENDER_PEARLS_ITEM = itemTag("c:storage_blocks/ender_pearls");
+    TagKey<Item> BONES_WITHER = itemTag("c:bones/wither");
 
 
 

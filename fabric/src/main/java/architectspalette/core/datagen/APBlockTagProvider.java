@@ -158,9 +158,7 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         // fabric
         getOrCreateTag(ConventionalBlockTags.STONES, MYONITE);
         // forge
-        getOrCreateTag(ModdedTags.FORGE_STONE, MYONITE);
-        getOrCreateTag(ModdedTags.FORGE_ICES_PACKEDICE, POLISHED_PACKED_ICE);
-        getOrCreateTag(ModdedTags.FORGE_STORAGE_BLOCKS_ENDER_PEARLS, ENDER_PEARL_BLOCK);
+        getOrCreateTag(ModdedTags.STORAGE_BLOCKS_ENDER_PEARLS, ENDER_PEARL_BLOCK);
     }
 
     private void abyssalineTags() {
