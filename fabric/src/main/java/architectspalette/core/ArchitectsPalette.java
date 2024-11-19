@@ -32,7 +32,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         APCommon.init();
         APCommon.lateInit();
 
-        //events
+        // Events
         CreativeModeTabEventHandler.modifyTabs();
         TradingEventHandler.registerTrades();
         ModifyLootTableEventHandler.modify();
