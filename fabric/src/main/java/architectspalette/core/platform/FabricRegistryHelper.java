@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +34,13 @@ import static architectspalette.core.APConstants.rl;
 // Note: Registry entries MUST!!! be stored in a local variable before being put in a supplier
 public class FabricRegistryHelper implements IRegistryHelper {
     public static Map<Block, ResourceLocation> BLOCKS = new HashMap<>();
-    public static Map<Item, ResourceLocation> ITEMS = new HashMap<>();
+    public static List<Item> ITEMS = new ArrayList<>();
 
     @SafeVarargs
     @Override
     public final <T extends Item> Supplier<T> registerItem(String name, Supplier<T> type, ResourceKey<CreativeModeTab>... groups) {
         T item = Registry.register(BuiltInRegistries.ITEM, rl(name), type.get());
-        ITEMS.put(item, rl(name));
+        ITEMS.add(item);
         Supplier<T> supplierItem = () -> item;
         if (groups != null) {
             for (ResourceKey<CreativeModeTab> tab : groups) {
@@ -115,15 +116,13 @@ public class FabricRegistryHelper implements IRegistryHelper {
         return BLOCKS.get(blockSupplier.get());
     }
 
-    @SuppressWarnings("unchecked") // (ender) again, shut up java
     @Override
-    public <T extends Block> List<T> getModBlocks() {
-        return (List<T>) BLOCKS.keySet().stream().toList();
+    public List<? extends Block> getModBlocks() {
+        return BLOCKS.keySet().stream().toList();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends Item> List<T> getModItems() {
-        return (List<T>) ITEMS.keySet().stream().toList();
+    public List<? extends Item> getModItems() {
+        return ITEMS;
     }
 }

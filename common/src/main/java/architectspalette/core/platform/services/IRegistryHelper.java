@@ -63,7 +63,7 @@ public interface IRegistryHelper {
     @Nullable
     <T extends Block> ResourceLocation getId(Supplier<T> block);
 
-    <T extends Block> List<T> getModBlocks();
-    <T extends Item> List<T> getModItems();
+    List<? extends Block> getModBlocks();
 
+    List<? extends Item> getModItems();
 }

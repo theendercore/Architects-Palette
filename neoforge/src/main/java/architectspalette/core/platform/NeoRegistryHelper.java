@@ -125,15 +125,13 @@ public class NeoRegistryHelper implements IRegistryHelper {
         return ((DeferredHolder<?, ?>) blockSupplier).getId();
     }
 
-    @SuppressWarnings("unchecked") // (ender) shut up java
     @Override
-    public <T extends Block> List<T> getModBlocks() {
-        return (List<T>) BLOCKS.getEntries().stream().map(DeferredHolder::get).toList();
+    public List<? extends Block> getModBlocks() {
+        return BLOCKS.getEntries().stream().map(DeferredHolder::get).toList();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public <T extends Item> List<T> getModItems() {
-        return (List<T>) ITEMS.getEntries().stream().map(DeferredHolder::get).toList();
+    public List<? extends Item> getModItems() {
+        return ITEMS.getEntries().stream().map(DeferredHolder::get).toList();
     }
 }
