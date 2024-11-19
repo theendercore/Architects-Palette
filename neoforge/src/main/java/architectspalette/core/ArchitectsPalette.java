@@ -5,6 +5,7 @@ import architectspalette.core.config.APConfig;
 import architectspalette.core.event.CreativeModeTabEventHandler;
 import architectspalette.core.event.RegisterParticleProvidersEventHandler;
 import architectspalette.core.event.TradingEventHandler;
+import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.NeoRegistryHelper;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -34,12 +35,9 @@ public class ArchitectsPalette {
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onTradesLoaded);
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onWanderingTradesLoaded);
         modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
+        WitheredBoneLootModifier.register(modBus);
 
-
-     /*   var LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
-        LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
-        LOOT.register(modEventBus);
-        // Biomes need to be registered before features.
+     /*   // Biomes need to be registered before features.
         APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modEventBus);
 
         APVerticalSlabsCondition.registerCondition(modEventBus);*/
