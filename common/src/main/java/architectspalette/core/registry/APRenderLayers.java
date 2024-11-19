@@ -23,9 +23,8 @@ public class APRenderLayers {
                 NETHER_BRASS_FIRE, NETHER_BRASS_TORCH, NETHER_BRASS_WALL_TORCH, NETHER_BRASS_CHAIN, NETHER_BRASS_LANTERN
         ).forEach((it) -> Services.REGISTRY.setRenderLayer(it, RenderType.cutout()));
 
-        Services.REGISTRY.setRenderLayer(HELIODOR_ROD, RenderType.translucent());
-        Services.REGISTRY.setRenderLayer(EKANITE_ROD, RenderType.translucent());
-        Services.REGISTRY.setRenderLayer(MONAZITE_ROD, RenderType.translucent());
+        Stream.of(HELIODOR_ROD,EKANITE_ROD, MONAZITE_ROD)
+                .forEach((it) -> Services.REGISTRY.setRenderLayer(it, RenderType.translucent()));
 
         //I'm lazy
         // (ender) no you are a programmer.
