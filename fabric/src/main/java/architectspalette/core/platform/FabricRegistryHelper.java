@@ -118,12 +118,12 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @SuppressWarnings("unchecked") // (ender) again, shut up java
     @Override
     public <T extends Block> List<T> getModBlocks() {
-        return (List<T>) BLOCKS.keySet();
+        return (List<T>) BLOCKS.keySet().stream().toList();
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public <T extends Item> List<T> getModItems() {
-        return (List<T>) ITEMS.keySet();
+        return (List<T>) ITEMS.keySet().stream().toList();
     }
 }
