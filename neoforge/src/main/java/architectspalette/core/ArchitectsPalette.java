@@ -8,6 +8,7 @@ import architectspalette.core.event.TradingEventHandler;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.NeoRegistryHelper;
+import architectspalette.core.registry.APBiomeModifiers;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -37,11 +38,9 @@ public class ArchitectsPalette {
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onWanderingTradesLoaded);
         modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
         WitheredBoneLootModifier.register(modBus);
-
-        // Biomes need to be registered before features.
-//        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modBus);
-
         APVerticalSlabsCondition.registerCondition(modBus);
+
+        APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modBus);
     }
 
     void setupCommon(final FMLCommonSetupEvent event) {
