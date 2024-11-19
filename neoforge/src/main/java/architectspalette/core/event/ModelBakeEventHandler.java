@@ -9,11 +9,9 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ModelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +20,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.registry.APBlocks.SHEET_METAL;
 
-@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelBakeEventHandler {
 
     private static final Map<Entry, Function<BakedModel, ? extends BakedModel>> customBlockModels = new HashMap<>();
@@ -34,8 +30,8 @@ public class ModelBakeEventHandler {
     public static void onModelBake(ModelEvent.ModifyBakingResult event) {
         Map<ModelResourceLocation, BakedModel> modelRegistry = event.getModels();
         // (ender) Not all models are handled here, there are also data-driven ones Look for WrappedModelLoader
-        register((RegistryObject<? extends Block>) SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
-        register((RegistryObject<? extends Block>) SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register((DeferredHolder<Block, ? extends Block>) SHEET_METAL.getObject(), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
+        register((DeferredHolder<Block, ? extends Block>) SHEET_METAL.getChild(BlockNode.BlockType.WALL), model -> new SheetMetalModel(model, SpriteShift.getShift("block/sheet_metal_block", "block/sheet_metal_block_ct")));
 
         customBlockModels.forEach((entry, factory) -> swapModels(modelRegistry, getAllBlockStateModelLocations(entry), factory));
     }
@@ -62,7 +58,7 @@ public class ModelBakeEventHandler {
         return models;
     }
 
-    public static <T extends BakedModel> void register(RegistryObject<? extends Block> registryObject, Function<BakedModel, T> modelFactory) {
+    public static <T extends BakedModel> void register(DeferredHolder<Block, ? extends Block> registryObject, Function<BakedModel, T> modelFactory) {
         register(registryObject, registryObject.getId(), modelFactory);
     }
 

@@ -107,7 +107,7 @@ public class NeoRegistryHelper implements IRegistryHelper {
 
     @Override
     public Supplier<CreativeModeTab> registerTab(String id, Component name, Supplier<ItemStack> icon, CreativeModeTab.DisplayItemsGenerator entries) {
-        return TABS.register(id, ()-> CreativeModeTab.builder().title(name).icon(icon).displayItems(entries).build());
+        return TABS.register(id, () -> CreativeModeTab.builder().title(name).icon(icon).displayItems(entries).build());
     }
 
     @SuppressWarnings("deprecation")
@@ -119,7 +119,10 @@ public class NeoRegistryHelper implements IRegistryHelper {
     @Nullable
     @Override
     public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
-        return ((DeferredHolder<Block, T>) blockSupplier).getId();
+        if (!(blockSupplier instanceof DeferredHolder)) {
+            return null;
+        }
+        return ((DeferredHolder<?, ?>) blockSupplier).getId();
     }
 
     @SuppressWarnings("unchecked") // (ender) shut up java

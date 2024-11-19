@@ -2,9 +2,7 @@ package architectspalette.core;
 
 
 import architectspalette.core.config.APConfig;
-import architectspalette.core.event.CreativeModeTabEventHandler;
-import architectspalette.core.event.RegisterParticleProvidersEventHandler;
-import architectspalette.core.event.TradingEventHandler;
+import architectspalette.core.event.*;
 import architectspalette.core.integration.APVerticalSlabsCondition;
 import architectspalette.core.loot.WitheredBoneLootModifier;
 import architectspalette.core.platform.NeoRegistryHelper;
@@ -30,15 +28,18 @@ public class ArchitectsPalette {
         NeoRegistryHelper.register(modBus);
 
         modBus.addListener(EventPriority.LOWEST, this::setupCommon);
-        modBus.addListener(EventPriority.LOWEST, this::setupClient);
+        modBus.addListener(EventPriority.LOWEST,this::setupClient);
 
         // Events
         modBus.addListener(CreativeModeTabEventHandler::onCreativeTabRegister);
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onTradesLoaded);
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onWanderingTradesLoaded);
-        modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
         WitheredBoneLootModifier.register(modBus);
         APVerticalSlabsCondition.registerCondition(modBus);
+
+        modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
+        modBus.addListener(ModelBakeEventHandler::onModelBake);
+        modBus.addListener(RegisterModelLoadersEventHandler::registerModelLoaders);
 
         APBiomeModifiers.BIOME_MODIFIER_SERIALIZER.register(modBus);
     }
