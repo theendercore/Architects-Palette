@@ -58,6 +58,18 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     private void woodenTags() {
         // Add boards to all the stuff wood stuff
+        boards.forEach(n -> n.forEach(block -> {
+            var tag = switch (block.type) {
+                case SLAB -> BlockTags.WOODEN_SLABS;
+                case VERTICAL_SLAB -> null; //(ender) does quark have wooden vertical slabs tag?
+                case STAIRS -> BlockTags.WOODEN_STAIRS;
+                case WALL -> null; //(ender) this is here for later
+                case FENCE -> BlockTags.WOODEN_FENCES;
+                default -> null;
+            };
+            if (tag == null) return;
+            getOrCreateTag(tag, block);
+        }));
 
 
         // processed
