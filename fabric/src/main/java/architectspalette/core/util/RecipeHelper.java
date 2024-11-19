@@ -263,7 +263,7 @@ public interface RecipeHelper {
         return Ingredient.of(stream);
     }
 
-    static void makeVerticalSlabs(RecipeOutput conditional, Block verticalSlab, Block slab, Block base, String hasBase) {
+    static void makeVerticalSlabs(RecipeOutput conditional, Block verticalSlab, Block slab, Block base, String hasBase, Boolean hasCutting) {
         var id = getDefaultRecipeId(verticalSlab);
         ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, verticalSlab, 6)
                 .pattern("x")
@@ -272,9 +272,11 @@ public interface RecipeHelper {
                 .define('x', slab)
                 .unlockedBy(hasBase, hasItems(base))
                 .save(conditional, id.withPrefix("vertical_slab/"));
-        SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, verticalSlab, 2)
-                .unlockedBy(hasBase, hasItems(base))
-                .save(conditional, id.withPrefix("vertical_slab/stonecutting/"));
+        if (hasCutting) {
+            SingleItemRecipeBuilder.stonecutting(Ingredient.of(base), BUILDING_BLOCKS, verticalSlab, 2)
+                    .unlockedBy(hasBase, hasItems(base))
+                    .save(conditional, id.withPrefix("vertical_slab/stonecutting/"));
+        }
         ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, slab, 1)
                 .requires(verticalSlab)
                 .unlockedBy(hasBase, hasItems(base))
@@ -294,7 +296,7 @@ public interface RecipeHelper {
                         .save(output);
                 case VERTICAL_SLAB -> {
                     var slab = set.getPart(StoneBlockSet.SetComponent.SLAB);
-                    makeVerticalSlabs(conditional, block, slab, base, hasBase);
+                    makeVerticalSlabs(conditional, block, slab, base, hasBase, set.hasStoneCuttingRecipes);
                 }
                 case STAIRS -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
                         .pattern("x  ")
@@ -409,7 +411,7 @@ public interface RecipeHelper {
                             .save(output);
                     case VERTICAL_SLAB -> {
                         var slab = n.getSibling(SLAB).get();
-                        makeVerticalSlabs(conditional, block, slab, parent, hasBase);
+                        makeVerticalSlabs(conditional, block, slab, parent, hasBase, node.tool != BlockNode.Tool.AXE);
                     }
                     case STAIRS -> ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, block, 4)
                             .pattern("x  ")
