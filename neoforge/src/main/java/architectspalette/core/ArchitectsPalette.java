@@ -36,6 +36,7 @@ public class ArchitectsPalette {
         NeoForge.EVENT_BUS.addListener(TradingEventHandler::onWanderingTradesLoaded);
         WitheredBoneLootModifier.register(modBus);
         APVerticalSlabsCondition.registerCondition(modBus);
+        NeoForge.EVENT_BUS.addListener(BlockToolModificationEventHandler::addCustomStripping);
 
         modBus.addListener(RegisterParticleProvidersEventHandler::registerParticleFactories);
         modBus.addListener(TextureStitchEventHandler::onTextureStitchPost);
