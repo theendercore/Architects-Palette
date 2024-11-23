@@ -7,7 +7,8 @@
   "mixins": [
     "FabricDataGenHelperMixin",
     "LootItemAccessor",
-    "LootPoolBuilderAccessor"
+    "LootPoolBuilderAccessor",
+    "ModelTemplateAccessor"
   ],
   "client": [
     "BlockModelDeserializerMixin",
