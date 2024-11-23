@@ -26,14 +26,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 import static architectspalette.core.APConstants.rl;
 
 // Note: Registry entries MUST!!! be stored in a local variable before being put in a supplier
 public class FabricRegistryHelper implements IRegistryHelper {
-    public static Map<Block, ResourceLocation> BLOCKS = new HashMap<>();
+    public static List<Block> BLOCKS = new ArrayList<>();
     public static List<Item> ITEMS = new ArrayList<>();
 
     @SafeVarargs
@@ -53,7 +52,7 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Override
     public <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> type) {
         T block = Registry.register(BuiltInRegistries.BLOCK, rl(name), type.get());
-        BLOCKS.put(block, rl(name));
+        BLOCKS.add(block);
         return () -> block;
     }
 
@@ -113,12 +112,13 @@ public class FabricRegistryHelper implements IRegistryHelper {
     @Nullable
     @Override
     public <T extends Block> ResourceLocation getId(Supplier<T> blockSupplier) {
-        return BLOCKS.get(blockSupplier.get());
+        var id = BuiltInRegistries.BLOCK.getKey(blockSupplier.get());
+        return (id == BuiltInRegistries.BLOCK.getDefaultKey()) ? null : id;
     }
 
     @Override
     public List<? extends Block> getModBlocks() {
-        return BLOCKS.keySet().stream().toList();
+        return BLOCKS;
     }
 
     @Override

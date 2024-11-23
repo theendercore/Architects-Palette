@@ -1,5 +1,6 @@
 package architectspalette.core.util.model;
 
+import architectspalette.core.registry.util.BlockNode;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
@@ -16,7 +17,11 @@ import static net.minecraft.data.models.BlockModelGenerators.*;
 
 public interface BoardModelGenerator {
     static void makeBoards(BlockModelGenerators gen) {
-        boards.forEach(type -> type.forEach((n) -> {
+        boards.forEach(type -> processNode(gen, type));
+    }
+
+    static void processNode(BlockModelGenerators gen, BlockNode node) {
+        node.forEach((n) -> {
             Block block = n.get();
             var parent = (n.parent != null) ? n.parent.get() : null;
             switch (n.type) {
@@ -28,7 +33,7 @@ public interface BoardModelGenerator {
                 default -> {
                 }
             }
-        }));
+        });
     }
 
     static void board(BlockModelGenerators gen, Block block) {
