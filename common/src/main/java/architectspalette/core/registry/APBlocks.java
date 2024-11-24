@@ -248,7 +248,7 @@ public class APBlocks {
     public static final Supplier<Block> NETHER_BRASS_PILLAR = createBlock("nether_brass_pillar", () -> new RotatedPillarBlock(APBlockProperties.NETHER_BRASS));
     public static final StoneBlockSet SMOOTH_NETHER_BRASS = new StoneBlockSet(createBlock("smooth_nether_brass", () -> new Block(APBlockProperties.NETHER_BRASS)), NO_WALLS);
     public static final Supplier<Block> NETHER_BRASS_FIRE = createBlockNoItem("nether_brass_fire", () -> new GreenFireBlock(APBlockProperties.GREEN_FIRE));
-    public static final Supplier<Block> NETHER_BRASS_CHAIN = createBlock("nether_brass_chain", () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.CHAIN)));
+    public static final Supplier<Block> NETHER_BRASS_CHAIN = createBlock("nether_brass_chain", () -> new ChainBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.CHAIN).noOcclusion().forceSolidOn()));
     public static final Supplier<Block> NETHER_BRASS_LANTERN = createBlock("nether_brass_lantern", () -> new LanternBlock(BlockBehaviour.Properties.ofFullCopy(NETHER_BRASS.get()).sound(SoundType.LANTERN).lightLevel((a) -> 13)), RegistryUtils.BUILDING_BLOCKS, RegistryUtils.FUNCTIONAL_BLOCKS);
     public static final Supplier<Block> NETHER_BRASS_TORCH = createBlockNoItem("nether_brass_torch", () -> new CustomTorchBlock(APBlockProperties.BRASS_TORCH, ParticleRegistry.GREEN_FLAME));
     public static final Supplier<Block> NETHER_BRASS_WALL_TORCH = createBlockNoItem("nether_brass_wall_torch", () -> new CustomWallTorchBlock(APBlockProperties.BRASS_TORCH.dropsLike(NETHER_BRASS_TORCH.get()), ParticleRegistry.GREEN_FLAME));
