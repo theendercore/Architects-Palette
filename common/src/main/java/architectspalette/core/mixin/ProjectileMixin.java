@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static architectspalette.core.events.ProjectileImpactEvent.projectileImpact;
 
-@Debug(export = true)
 @Mixin(Projectile.class)
 public abstract class ProjectileMixin {
 
