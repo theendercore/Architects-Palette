@@ -30,7 +30,7 @@ public class APVerticalSlabsCondition implements ICondition {
      * Original logic from Abnormals Core
      * https://github.com/team-abnormals/abnormals-core/blob/264b7ca6df505743f1c969547dbf2bc8e71b04d5/src/main/java/com/minecraftabnormals/abnormals_core/core/api/conditions/QuarkFlagRecipeCondition.java
      */
-    // (ender) so this is no longer just stolen from Abnormals Core, like I took the original code and re-wrote it, so IDK
+    // (ender) This code has been heavily modified from the original Abnormals Core version
     @Override
     public boolean test(@NotNull IContext context) {
         if (APConfig.VERTICAL_SLABS_FORCED.get()) return true;

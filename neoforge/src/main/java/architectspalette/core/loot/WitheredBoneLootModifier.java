@@ -42,16 +42,9 @@ public class WitheredBoneLootModifier extends LootModifier {
         this.boneItem = boneItem;
     }
 
-    // (ender) I put this here since there is no reason to make a file if its only one condition
-    public static void register(final IEventBus modBus) {
-        var LOOT = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
-        LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
-        LOOT.register(modBus);
-    }
-
     @Nonnull
     @Override
-    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+    protected ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         Entity t = context.getParamOrNull(LootContextParams.THIS_ENTITY);
         if (t == null) return generatedLoot;
         if (t instanceof WitherSkeleton) {
@@ -71,5 +64,12 @@ public class WitheredBoneLootModifier extends LootModifier {
     @Override
     public @NotNull MapCodec<? extends IGlobalLootModifier> codec() {
         return CODEC.get();
+    }
+
+    // (ender) I put this here since there is no reason to make a file if its only one modifier
+    public static void register(final IEventBus modBus) {
+        var LOOT = DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MOD_ID);
+        LOOT.register("wither_skeleton_bones", WitheredBoneLootModifier.CODEC);
+        LOOT.register(modBus);
     }
 }

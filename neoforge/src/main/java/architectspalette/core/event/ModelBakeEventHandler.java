@@ -37,7 +37,7 @@ public class ModelBakeEventHandler {
     }
 
     // Convenience function for EveryCompat. Sets up the board model and the Sprite Shift
-    @Deprecated()// (ender) Use the wrapped models instead please
+    @Deprecated() // (ender) Use the wrapped models instead please
     public static void registerBoardModel(Supplier<Block> supplier, ResourceLocation blockToRegister, ResourceLocation baseBoardBlock) {
         var inBlockFolder = baseBoardBlock.withPrefix("block/");
         var odd = inBlockFolder.withSuffix("_odd");
