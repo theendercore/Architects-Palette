@@ -76,11 +76,6 @@ public class NubBlock extends WaterloggableDirectionalBlock {
         public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
             return APWeatheringCopper.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
-
-        @Override
-        public Block getStripToBlock() {
-            return null;
-        }
     }
 
 }

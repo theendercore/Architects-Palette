@@ -2,22 +2,15 @@ package architectspalette.content.blocks;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 
-import java.util.Map;
+import javax.annotation.Nonnull;
 
 public interface StrippableBlock {
-    //(ender) shut up java, "oh that's not safe 🤓". yeah, right I know what im doing
-    @SuppressWarnings("unchecked")
-    default <T extends Comparable<T>> BlockState getStripedBlockState(Map<Property<?>, Comparable<?>> oldState) {
-        BlockState block = getStripToBlock().defaultBlockState();
-        for (Map.Entry<Property<?>, Comparable<?>> entry : oldState.entrySet()) {
-            if (block.hasProperty(entry.getKey()))
-                block = block.setValue((Property<T>) entry.getKey(), (T) entry.getValue());
-        }
-        return block;
+    default BlockState getStripedBlockState(BlockState state) {
+        return getStripToBlock().withPropertiesOf(state);
     }
 
+    @Nonnull
     Block getStripToBlock();
 
     default boolean shouldCopyProperties() {

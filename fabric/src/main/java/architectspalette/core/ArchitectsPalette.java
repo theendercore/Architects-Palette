@@ -36,6 +36,7 @@ public class ArchitectsPalette implements ModInitializer, ClientModInitializer, 
         CreativeModeTabEventHandler.modifyTabs();
         TradingEventHandler.registerTrades();
         ModifyLootTableEventHandler.modify();
+        OxidizableEventHandler.init();
 
         APBiomeModifications.init();
 

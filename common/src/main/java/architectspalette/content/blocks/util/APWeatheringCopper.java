@@ -1,6 +1,5 @@
 package architectspalette.content.blocks.util;
 
-import architectspalette.content.blocks.StrippableBlock;
 import architectspalette.core.registry.APBlocks;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
@@ -25,7 +24,7 @@ import java.util.function.Supplier;
 
 
 //If you can't beat 'em, join 'em. (Vanilla Copper interface isn't extendable.)
-public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState>, StrippableBlock {
+public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper.WeatherState> {
     Supplier<BiMap<Block, Block>> NEXT_BY_BLOCK = Suppliers.memoize(() ->
     {
         ImmutableBiMap.Builder<Block, Block> builder = ImmutableBiMap.builder();
@@ -53,6 +52,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     static Optional<Block> getPrevious(Block block) {
         return Optional.ofNullable(PREVIOUS_BY_BLOCK.get().get(block));
     }
+
     static Optional<BlockState> getPrevious(BlockState stateIn) {
         return getPrevious(stateIn.getBlock()).map((block) -> block.withPropertiesOf(stateIn));
     }
@@ -60,6 +60,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     static Optional<Block> getNext(Block block) {
         return Optional.ofNullable(NEXT_BY_BLOCK.get().get(block));
     }
+
     default Optional<BlockState> getNext(BlockState state) {
         return getNext(state.getBlock()).map((block) -> block.withPropertiesOf(state));
     }
@@ -67,6 +68,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     static Optional<Block> getWaxed(Block block) {
         return Optional.ofNullable(WAXED_BY_BLOCK.get().get(block));
     }
+
     static Optional<BlockState> getWaxed(BlockState state) {
         return getWaxed(state.getBlock()).map((block) -> block.withPropertiesOf(state));
     }
@@ -74,6 +76,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     static Optional<Block> getUnWaxed(Block block) {
         return Optional.ofNullable(UNWAXED_BY_BLOCK.get().get(block));
     }
+
     static Optional<BlockState> getUnWaxed(BlockState state) {
         return getUnWaxed(state.getBlock()).map((block) -> block.withPropertiesOf(state));
     }
@@ -81,7 +84,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
     static Block getFirst(Block baseBlock) {
         Block block = baseBlock;
 
-        for(Block block1 = PREVIOUS_BY_BLOCK.get().get(block); block1 != null; block1 = PREVIOUS_BY_BLOCK.get().get(block1)) {
+        for (Block block1 = PREVIOUS_BY_BLOCK.get().get(block); block1 != null; block1 = PREVIOUS_BY_BLOCK.get().get(block1)) {
             block = block1;
         }
 
@@ -97,7 +100,7 @@ public interface APWeatheringCopper extends ChangeOverTimeBlock<WeatheringCopper
             Optional<BlockState> waxed = APWeatheringCopper.getWaxed(state);
             if (waxed.isPresent()) {
                 if (player instanceof ServerPlayer) {
-                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, pos, stack);
+                    CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, stack);
                 }
                 if (!player.isCreative()) stack.shrink(1);
                 //idk what these flags are

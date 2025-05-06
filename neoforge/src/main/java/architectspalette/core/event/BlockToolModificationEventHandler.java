@@ -8,20 +8,16 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 public class BlockToolModificationEventHandler {
     public static void addCustomStripping(BlockEvent.BlockToolModificationEvent event) {
         var state = event.getFinalState();
-        if (!(state.getBlock() instanceof StrippableBlock block)) return;
-        var isCopper = block instanceof APWeatheringCopper;
-
+        var block = state.getBlock();
         var ability = event.getItemAbility();
-        if (isCopper) {
+        if (block instanceof APWeatheringCopper) {
             if (ability == ItemAbilities.AXE_WAX_OFF) {
-                var oBlock = APWeatheringCopper.getUnWaxed(state);
-                oBlock.ifPresent(event::setFinalState);
+                APWeatheringCopper.getUnWaxed(state).ifPresent(event::setFinalState);
             } else if (ability == ItemAbilities.AXE_SCRAPE) {
-                var oBlock = APWeatheringCopper.getPrevious(state);
-                oBlock.ifPresent(event::setFinalState);
+                APWeatheringCopper.getPrevious(state).ifPresent(event::setFinalState);
             }
-        } else if (ability == ItemAbilities.AXE_STRIP) {
-            event.setFinalState(block.getStripedBlockState(state.getValues()));
+        } else if (state.getBlock() instanceof StrippableBlock strippable && ability == ItemAbilities.AXE_STRIP) {
+            event.setFinalState(strippable.getStripedBlockState(state));
         }
     }
 }
