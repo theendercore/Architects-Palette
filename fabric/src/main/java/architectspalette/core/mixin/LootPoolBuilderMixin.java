@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.ArrayList;
 
 @Mixin(LootPool.Builder.class)
-public abstract class LootPoolBuilderAccessor implements ItemReplacer {
+public abstract class LootPoolBuilderMixin implements ItemReplacer {
 
     @Mutable
     @Shadow

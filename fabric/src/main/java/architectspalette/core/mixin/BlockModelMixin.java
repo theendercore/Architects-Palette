@@ -1,7 +1,8 @@
 package architectspalette.core.mixin;
 
-import architectspalette.core.api.CustomModelLoader;
 import architectspalette.core.api.APCustomModelDataAccessor;
+import architectspalette.core.api.CustomModelLoader;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -11,8 +12,6 @@ import net.minecraft.client.resources.model.ModelState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Function;
 
@@ -20,24 +19,26 @@ import java.util.function.Function;
 public abstract class BlockModelMixin implements APCustomModelDataAccessor {
 
     @Unique
-    private CustomModelLoader.APCustomModelData ap$customModelData = null;
+    private CustomModelLoader.APCustomModelData architects_palette$customModelData = null;
 
     @Override
-    public CustomModelLoader.APCustomModelData ap$getCustomModelData() {
-        return ap$customModelData;
+    public CustomModelLoader.APCustomModelData architects_palette$getCustomModelData() {
+        return architects_palette$customModelData;
     }
 
     @Override
-    public void ap$setCustomModelData(CustomModelLoader.APCustomModelData ap$customModelData) {
-        this.ap$customModelData = ap$customModelData;
+    public void architects_palette$setCustomModelData(CustomModelLoader.APCustomModelData customModelData) {
+        this.architects_palette$customModelData = customModelData;
     }
 
-    @Inject(method = "bake(Lnet/minecraft/client/resources/model/ModelBaker;Ljava/util/function/Function;Lnet/minecraft/client/resources/model/ModelState;)Lnet/minecraft/client/resources/model/BakedModel;", at = @At("RETURN"), cancellable = true)
-    void ap$customBake(ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, CallbackInfoReturnable<BakedModel> cir) {
-        if (ap$customModelData != null) {
-            var loader = CustomModelLoader.getLoader(ap$customModelData.getLoader());
-            if (loader != null)
-                cir.setReturnValue(loader.bake(modelBaker, spriteGetter, modelState, cir.getReturnValue(), (BlockModel) (Object) this));
+    @ModifyReturnValue(method = "bake(Lnet/minecraft/client/resources/model/ModelBaker;Ljava/util/function/Function;Lnet/minecraft/client/resources/model/ModelState;)Lnet/minecraft/client/resources/model/BakedModel;", at = @At("RETURN"))
+    BakedModel ap$customBake(BakedModel original, ModelBaker modelBaker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState) {
+        if (architects_palette$customModelData != null) {
+            var loader = CustomModelLoader.getLoader(architects_palette$customModelData.getLoader());
+            if (loader != null) {
+                return loader.bake(modelBaker, spriteGetter, modelState, original, (BlockModel) (Object) this);
+            }
         }
+        return original;
     }
 }

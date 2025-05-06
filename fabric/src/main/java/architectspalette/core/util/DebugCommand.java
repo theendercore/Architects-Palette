@@ -18,10 +18,10 @@ public interface DebugCommand {
     static void registerDebugCommand() {
         if (Services.PLATFORM.isDevelopmentEnvironment())
             CommandRegistrationCallback.EVENT.register((dispatcher, bCtx, env) ->
-                    dispatcher.register(literal("ap_block").executes(DebugCommand::funnyPlace)));
+                    dispatcher.register(literal("ap_block").executes(DebugCommand::placeAllModBlocks)));
     }
 
-    static int funnyPlace(CommandContext<CommandSourceStack> ctx) {
+    static int placeAllModBlocks(CommandContext<CommandSourceStack> ctx) {
         var world = ctx.getSource().getLevel();
         var origin = Objects.requireNonNull(ctx.getSource().getEntity()).blockPosition();
 

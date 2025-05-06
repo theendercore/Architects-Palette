@@ -1,5 +1,6 @@
 package architectspalette.core.mixin;
 
+import architectspalette.core.APConstants;
 import architectspalette.core.api.CustomModelLoader;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
@@ -15,13 +16,18 @@ import java.lang.reflect.Type;
 
 @Mixin(BlockModel.Deserializer.class)
 public class BlockModelDeserializerMixin {
-    @Inject(method = "deserialize(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/BlockModel;", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/model/BlockModel$Deserializer;getElements(Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/List;", ordinal = 0), cancellable = true)
+    @Inject(method = "deserialize(Lcom/google/gson/JsonElement;Ljava/lang/reflect/Type;Lcom/google/gson/JsonDeserializationContext;)Lnet/minecraft/client/renderer/block/model/BlockModel;",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/model/BlockModel$Deserializer;getElements(Lcom/google/gson/JsonDeserializationContext;Lcom/google/gson/JsonObject;)Ljava/util/List;", ordinal = 0), cancellable = true)
     void ap$customModelWrapper(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext, CallbackInfoReturnable<BlockModel> cir,
                                @Local JsonObject obj) {
         if (obj.has("loader")) {
-            var loader = CustomModelLoader.getLoader(obj.get("loader").getAsString());
-            if (loader != null) {
-                cir.setReturnValue(loader.read(obj, type, jsonDeserializationContext));
+            try {
+                var loader = CustomModelLoader.getLoader(obj.get("loader").getAsString());
+                if (loader != null) {
+                    cir.setReturnValue(loader.read(obj, type, jsonDeserializationContext));
+                }
+            } catch (UnsupportedOperationException error) {
+                APConstants.LOGGER.error("Failed to parse \"loader\" in model!");
             }
         }
     }
