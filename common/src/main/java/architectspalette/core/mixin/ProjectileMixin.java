@@ -4,7 +4,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.phys.HitResult;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +16,7 @@ import static architectspalette.core.events.ProjectileImpactEvent.projectileImpa
 public abstract class ProjectileMixin {
 
     @Shadow
-    protected abstract boolean canHitEntity(Entity p_37250_);
+    protected abstract boolean canHitEntity(Entity entity);
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void bounce(CallbackInfo ci) {
@@ -25,7 +24,6 @@ public abstract class ProjectileMixin {
         HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(projectile, this::canHitEntity);
         if (projectileImpact(projectile, hitresult)) {
             ci.cancel();
-            return;
         }
     }
 }

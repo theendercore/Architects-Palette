@@ -13,10 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerWorldMixin {
 
     @Inject(method = "addDuringTeleport", at = @At("HEAD"))
-    public void warpingCheck(Entity entity, CallbackInfo callbackInfo) {
-        ServerLevel world = (ServerLevel) (Object) this;
-        if (entity instanceof ItemEntity) {
-            WarpingHandler.warpItem((ItemEntity) entity, world);
+    public void warpingCheck(Entity entity, CallbackInfo ignored) {
+        if (entity instanceof ItemEntity item) {
+            WarpingHandler.warpItem(item, (ServerLevel) (Object) this);
         }
     }
 }

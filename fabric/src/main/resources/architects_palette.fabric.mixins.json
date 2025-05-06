@@ -8,8 +8,7 @@
     "AxeItemMixin",
     "FabricDataGenHelperMixin",
     "LootItemAccessor",
-    "LootPoolBuilderAccessor",
-    "ModelTemplateAccessor"
+    "LootPoolBuilderAccessor"
   ],
   "client": [
     "BlockModelDeserializerMixin",
