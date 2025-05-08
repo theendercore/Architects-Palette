@@ -11,8 +11,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-// (ender) I used SingleRecipeInput since I didn't think it needs to have mor then one item input,
+// (ender) I used SingleRecipeInput since I didn't think it needs to have more than one item input,
 // but you can blame me if this breaks stuff
 public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     private final Ingredient input;
@@ -39,11 +40,11 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public boolean matches(SingleRecipeInput input, Level level) {
+    public boolean matches(SingleRecipeInput input, @NotNull Level level) {
         return this.input.test(input.getItem(0)) && (this.dimension.compareTo(level.dimension().location()) == 0);
     }
 
-    public ItemStack assemble(SingleRecipeInput input, HolderLookup.Provider provider) {
+    public @NotNull ItemStack assemble(@NotNull SingleRecipeInput input, HolderLookup.@NotNull Provider provider) {
         return this.getResultItem(provider).copy();
     }
 
@@ -53,7 +54,7 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider provider) {
+    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider provider) {
         return this.output;
     }
 
@@ -62,17 +63,17 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
+    public @NotNull NonNullList<Ingredient> getIngredients() {
         return NonNullList.of(this.input);
     }
 
     @Override
-    public RecipeType<?> getType() {
+    public @NotNull RecipeType<?> getType() {
         return APRecipes.WARPING.get();
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<?> getSerializer() {
         return APRecipes.WARPING_SERIALIZER.get();
     }
 
@@ -96,12 +97,12 @@ public class WarpingRecipe implements Recipe<SingleRecipeInput> {
         );
 
         @Override
-        public MapCodec<WarpingRecipe> codec() {
+        public @NotNull MapCodec<WarpingRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> streamCodec() {
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, WarpingRecipe> streamCodec() {
             return STREAM_CODEC;
         }
     }

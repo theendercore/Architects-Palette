@@ -8,13 +8,14 @@ import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
 public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.TriggerInstance> {
 
     @Override
-    public Codec<TriggerInstance> codec() {
+    public @NotNull Codec<TriggerInstance> codec() {
         return TriggerInstance.CODEC;
     }
 
@@ -24,13 +25,13 @@ public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.
 
 
     public record TriggerInstance(Optional<ContextAwarePredicate> player) implements SimpleInstance {
-        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create((p_325204_) -> {
-            return p_325204_.group(
-                    EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player)
-            ).apply(p_325204_, TriggerInstance::new);
-        });
+        public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create((p_325204_) ->
+                p_325204_.group(
+                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(TriggerInstance::player)
+                ).apply(p_325204_, TriggerInstance::new)
+        );
 
-        public static Criterion<TriggerInstance> simple(){
+        public static Criterion<TriggerInstance> simple() {
             return APCriterion.CARVE_TOTEM.get().createCriterion(new TriggerInstance(Optional.empty()));
         }
 
@@ -39,7 +40,7 @@ public class CarveTotemTrigger extends SimpleCriterionTrigger<CarveTotemTrigger.
         }
 
         @Override
-        public Optional<ContextAwarePredicate> player() {
+        public @NotNull Optional<ContextAwarePredicate> player() {
             return this.player;
         }
     }

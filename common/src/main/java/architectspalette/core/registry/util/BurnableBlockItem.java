@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 
 public class BurnableBlockItem extends BlockItem {
-    private Integer burnTime = -1;
+    private Integer burnTime = 0;
 
     public BurnableBlockItem(Block blockIn, Properties builder) {
         super(blockIn, builder);
@@ -18,6 +18,7 @@ public class BurnableBlockItem extends BlockItem {
     }
 
     // (ender) this is here for forge other is for fabric
+    @SuppressWarnings("unused")
     public int getBurnTime(ItemStack itemStack, RecipeType<?> type) {
         return this.burnTime;
     }

@@ -20,7 +20,7 @@ import static architectspalette.core.registry.APBlocks.boards;
 import static architectspalette.core.util.KeyMaker.vanillaTab;
 
 public class RegistryUtils {
-    // (ender) yes forge AT's the Tab reg keys, and not im not doing that, this ref is fine
+    // (ender) yes forge and fabric Transform the Tab reg keys, and not im not doing that, this ref is fine
     public static final ResourceKey<CreativeModeTab> INGREDIENTS_TAB = vanillaTab("ingredients");
     public static final ResourceKey<CreativeModeTab> BUILDING_BLOCKS = vanillaTab("building_blocks");
     public static final ResourceKey<CreativeModeTab> FUNCTIONAL_BLOCKS = vanillaTab("functional_blocks");
@@ -65,10 +65,9 @@ public class RegistryUtils {
         ResourceLocation id = Services.REGISTRY.getId(plant);
         if (id == null) throw new IllegalStateException("Plant is not registered " + plant.get());
         String name = id.getPath();
-        Supplier<Block> pot = createBlockNoItem("potted_" + name, () ->
+        return createBlockNoItem("potted_" + name, () ->
                 new FlowerPotBlock(plant.get(), Block.Properties.ofFullCopy(Blocks.POTTED_AZURE_BLUET))
         );
-        return pot;
     }
 
     public static Supplier<Block> makeNub(String name, Block block_to_copy) {

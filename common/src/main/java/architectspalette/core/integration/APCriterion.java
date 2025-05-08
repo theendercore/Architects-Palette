@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 
 public class APCriterion {
-    public static Supplier<CarveTotemTrigger> CARVE_TOTEM = Services.REGISTRY.registerCriterion("carve_totem", () -> new CarveTotemTrigger());
+    public static Supplier<CarveTotemTrigger> CARVE_TOTEM = Services.REGISTRY.registerCriterion("carve_totem", CarveTotemTrigger::new);
 
     // (ender) this is here to just initialize things
     public static void init() {

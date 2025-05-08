@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
@@ -35,23 +36,23 @@ public class WarpingRecipeBuilder implements RecipeBuilder {
     }
 
 
-    public WarpingRecipeBuilder unlockedBy(String p_176810_, Criterion<?> p_298188_) {
+    public @NotNull WarpingRecipeBuilder unlockedBy(@NotNull String p_176810_, @NotNull Criterion<?> p_298188_) {
         this.criteria.put(p_176810_, p_298188_);
         return this;
     }
 
     @Override
-    public RecipeBuilder group(@Nullable String p_176495_) {
+    public @NotNull RecipeBuilder group(@Nullable String p_176495_) {
         return this;
     }
 
     @Override
-    public Item getResult() {
+    public @NotNull Item getResult() {
         return this.output;
     }
 
     @Override
-    public void save(RecipeOutput output, ResourceLocation name) {
+    public void save(RecipeOutput output, @NotNull ResourceLocation name) {
         this.ensureValid(name);
         Advancement.Builder advancement$builder = output.advancement()
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(name))
