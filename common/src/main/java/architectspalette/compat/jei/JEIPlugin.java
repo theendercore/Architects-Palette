@@ -1,5 +1,6 @@
 package architectspalette.compat.jei;
 
+import architectspalette.compat.BlockInfoBuilder;
 import architectspalette.content.blocks.BigBrickBlock;
 import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.content.blocks.VerticalSlabBlock;
@@ -7,8 +8,6 @@ import architectspalette.core.crafting.WarpingRecipe;
 import architectspalette.core.integration.VerticalSlabs;
 import architectspalette.core.platform.Services;
 import architectspalette.core.registry.APRecipes;
-import architectspalette.core.registry.util.BlockNode;
-import architectspalette.core.registry.util.StoneBlockSet;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -17,19 +16,13 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.APBlocks.*;
 
@@ -51,8 +44,10 @@ public class JEIPlugin implements IModPlugin {
         register.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
     }*/
 
-    protected static BlockListBuilder builder() {
-        return new BlockListBuilder();
+    protected static BlockInfoBuilder builder(IRecipeRegistration register) {
+        return new BlockInfoBuilder((ingredients, text, id) ->
+                register.addIngredientInfo(ingredients, VanillaTypes.ITEM_STACK, text)
+        );
     }
 
     @Override
@@ -83,75 +78,38 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipes(WARPING.get(), Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(APRecipes.WARPING.get()));
 
         //Register item info
-        builder()
+        builder(registration)
                 .add(CHISELED_ABYSSALINE_BRICKS, CHISELED_HADALINE_BRICKS)
-                .registerInfo(registration, "chiseled_chargeable");
-        builder()
+                .registerInfo("chiseled_chargeable");
+        builder(registration)
                 .add(ABYSSALINE, ABYSSALINE_PILLAR, ABYSSALINE_LAMP_BLOCK, ABYSSALINE_PLATING)
                 .add(ABYSSALINE_BRICKS, ABYSSALINE_TILES)
                 .add(HADALINE, HADALINE_PILLAR, HADALINE_LAMP_BLOCK, HADALINE_PLATING)
                 .add(HADALINE_BRICKS, HADALINE_TILES)
-                .registerInfo(registration, "chargeable");
-        builder()
+                .registerInfo("chargeable");
+        builder(registration)
                 .add(PLACID_ACACIA_TOTEM, GRINNING_ACACIA_TOTEM, SHOCKED_ACACIA_TOTEM, BLANK_ACACIA_TOTEM)
-                .registerInfo(registration, "totem_carving");
-        builder()
+                .registerInfo("totem_carving");
+        builder(registration)
                 .add(FLINT_BLOCK, FLINT_PILLAR)
                 .add(FLINT_TILES)
-                .registerInfo(registration, "flint_damage");
-        builder()
+                .registerInfo("flint_damage");
+        builder(registration)
                 .add(MOONSTONE, SUNSTONE)
-                .registerInfo(registration, "celestial_stones");
-        builder()
+                .registerInfo("celestial_stones");
+        builder(registration)
                 .add(NETHER_BRASS, CUT_NETHER_BRASS, SMOOTH_NETHER_BRASS)
                 .add(NETHER_BRASS_PILLAR)
-                .registerInfo(registration, "nether_brass");
-        builder()
+                .registerInfo("nether_brass");
+        builder(registration)
                 .add(block -> block instanceof BigBrickBlock)
-                .registerInfo(registration, "heavy_bricks");
-        builder()
+                .registerInfo("heavy_bricks");
+        builder(registration)
                 .add(block -> block instanceof CageLanternBlock)
-                .registerInfo(registration, "cage_lanterns");
-        builder()
+                .registerInfo("cage_lanterns");
+        builder(registration)
                 .add(WARDSTONE, WARDSTONE_BRICKS)
                 .add(WARDSTONE_PILLAR, CHISELED_WARDSTONE, WARDSTONE_LAMP)
-                .registerInfo(registration, "wardstone");
-    }
-
-    protected static class BlockListBuilder {
-        protected final List<Block> blocks = new ArrayList<>();
-
-        protected BlockListBuilder add(BlockNode... nodes) {
-            for (BlockNode node : nodes)
-                node.forEach((n) -> blocks.add(n.get()));
-            return this;
-        }
-
-        protected BlockListBuilder add(StoneBlockSet... sets) {
-            for (StoneBlockSet set : sets) {
-                set.forEach(blocks::add);
-            }
-            return this;
-        }
-
-        protected BlockListBuilder add(Predicate<Block> filter) {
-            for (Block entry : Services.REGISTRY.getModBlocks()) {
-                if (filter.test(entry)) blocks.add(entry);
-            }
-            return this;
-        }
-
-        @SafeVarargs
-        private BlockListBuilder add(Supplier<? extends Block>... blockList) {
-            for (Supplier<? extends Block> block : blockList) {
-                blocks.add(block.get());
-            }
-            return this;
-        }
-
-        protected void registerInfo(IRecipeRegistration register, String infoString) {
-            register.addIngredientInfo(blocks.stream().filter(VerticalSlabs::isVisible).map(ItemStack::new).toList(), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
-            blocks.clear();
-        }
+                .registerInfo("wardstone");
     }
 }
