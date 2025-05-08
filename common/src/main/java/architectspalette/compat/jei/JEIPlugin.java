@@ -1,4 +1,4 @@
-package architectspalette.compat;
+package architectspalette.compat.jei;
 
 import architectspalette.content.blocks.BigBrickBlock;
 import architectspalette.content.blocks.CageLanternBlock;

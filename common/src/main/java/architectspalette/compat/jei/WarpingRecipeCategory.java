@@ -1,4 +1,4 @@
-package architectspalette.compat;
+package architectspalette.compat.jei;
 
 import architectspalette.core.crafting.WarpingRecipe;
 import architectspalette.core.registry.APBlocks;
