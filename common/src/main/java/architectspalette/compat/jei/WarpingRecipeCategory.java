@@ -10,8 +10,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -24,52 +23,19 @@ import java.util.Arrays;
 import static architectspalette.core.APConstants.MOD_ID;
 import static architectspalette.core.APConstants.rl;
 
-public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<WarpingRecipe>> {
-
-    public static final ResourceLocation UID = rl("warping");
-
-    private final Component title;
+public class WarpingRecipeCategory extends AbstractRecipeCategory<RecipeHolder<WarpingRecipe>> {
     private final IDrawable background;
-    private final IDrawable icon;
+    public static int WIDTH = 117;
+    public static int HEIGHT = 57;
 
     public WarpingRecipeCategory(IGuiHelper helper) {
-        title = Component.translatable(MOD_ID + ".info.warping_recipe_title");
-        background = helper.createDrawable(rl("textures/gui/warping_recipe.png"), 0, 0, 117, 57);
-        icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get()));
-    }
-
-    private static boolean pointInBox(double x, double y, double left, double top, double width, double height) {
-        return (x >= left && x <= left + width && y >= top && y <= top + height);
-    }
-
-    @Override
-    public @NotNull RecipeType<RecipeHolder<WarpingRecipe>> getRecipeType() {
-        return JEIPlugin.WARPING.get();
-    }
-
-    @Override
-    public @NotNull Component getTitle() {
-        return title;
-    }
-
-    @Override
-    public int getWidth() {
-        return background.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return background.getHeight();
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
+        super(JEIPlugin.WARPING.get(), Component.translatable(MOD_ID + ".info.warping_recipe_title"), helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(APBlocks.WARPSTONE.get())), WIDTH, HEIGHT);
+        background = helper.createDrawable(rl("textures/gui/warping_recipe.png"), 0, 0, WIDTH, HEIGHT);
     }
 
     @Override
     public void draw(@NotNull RecipeHolder<WarpingRecipe> recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
+        super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
         background.draw(guiGraphics, 0, 0);
     }
 
@@ -83,12 +49,16 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
 
     @Override
     public void getTooltip(@NotNull ITooltipBuilder tooltip, @NotNull RecipeHolder<WarpingRecipe> recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        IRecipeCategory.super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
+        super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
         if (pointInBox(mouseX, mouseY, 49, 12, 18, 35)) {
             ResourceLocation targetDimension = recipe.value().getDimension();
             Component dimensionName = Component.translatable(MOD_ID + ".info.dimension." + targetDimension.toString().replace(":", "."));
             Component tossPrompt = Component.translatable(MOD_ID + ".info.warping_toss_description", dimensionName);
             tooltip.add(tossPrompt);
         }
+    }
+
+    private static boolean pointInBox(double x, double y, double left, double top, double width, double height) {
+        return (x >= left && x <= left + width && y >= top && y <= top + height);
     }
 }
