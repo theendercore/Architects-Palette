@@ -21,8 +21,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class JEIPlugin implements IModPlugin {
     public static final Supplier<RecipeType<RecipeHolder<WarpingRecipe>>> WARPING = () -> RecipeType.createFromVanilla(APRecipes.WARPING.get());
     protected static final ResourceLocation PLUGIN_ID = rl("jei_plugin");
 
-    protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
+  /*  protected static void addItemInfo(IRecipeRegistration register, Supplier<? extends ItemLike> item, String infoString) {
         addItemInfo(register, item.get(), infoString);
     }
 
@@ -49,14 +49,14 @@ public class JEIPlugin implements IModPlugin {
 
     protected static void addItemInfo(IRecipeRegistration register, ItemLike item, String infoString) {
         register.addIngredientInfo(new ItemStack(item), VanillaTypes.ITEM_STACK, Component.translatable(MOD_ID + ".info." + infoString));
-    }
+    }*/
 
     protected static BlockListBuilder builder() {
         return new BlockListBuilder();
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return PLUGIN_ID;
     }
 
@@ -66,12 +66,12 @@ public class JEIPlugin implements IModPlugin {
     }
 
     @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+    public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
 //        registration.addRecipeCatalyst(new ItemStack(Blocks.NETHER_PORTAL.asItem()), WarpingRecipeCategory.UID);
     }
 
     @Override
-    public void registerRecipes(IRecipeRegistration registration) {
+    public void registerRecipes(@NotNull IRecipeRegistration registration) {
         if (!VerticalSlabs.areVisible()) {
             registration.getIngredientManager().removeIngredientsAtRuntime(
                     VanillaTypes.ITEM_STACK,
@@ -79,6 +79,7 @@ public class JEIPlugin implements IModPlugin {
             );
         }
         //Register recipes
+        assert Minecraft.getInstance().level != null;
         registration.addRecipes(WARPING.get(), Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(APRecipes.WARPING.get()));
 
         //Register item info

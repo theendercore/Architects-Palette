@@ -17,6 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -42,12 +43,12 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
     }
 
     @Override
-    public RecipeType<RecipeHolder<WarpingRecipe>> getRecipeType() {
+    public @NotNull RecipeType<RecipeHolder<WarpingRecipe>> getRecipeType() {
         return JEIPlugin.WARPING.get();
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return title;
     }
 
@@ -67,13 +68,13 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
     }
 
     @Override
-    public void draw(RecipeHolder<WarpingRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull RecipeHolder<WarpingRecipe> recipe, @NotNull IRecipeSlotsView recipeSlotsView, @NotNull GuiGraphics guiGraphics, double mouseX, double mouseY) {
         IRecipeCategory.super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
         background.draw(guiGraphics, 0, 0);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<WarpingRecipe> recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<WarpingRecipe> recipe, @NotNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 16, 22)
                 .addItemStacks(Arrays.asList(recipe.value().getInput().getItems()));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 87, 22)
@@ -81,7 +82,7 @@ public class WarpingRecipeCategory implements IRecipeCategory<RecipeHolder<Warpi
     }
 
     @Override
-    public void getTooltip(ITooltipBuilder tooltip, RecipeHolder<WarpingRecipe> recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(@NotNull ITooltipBuilder tooltip, @NotNull RecipeHolder<WarpingRecipe> recipe, @NotNull IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         IRecipeCategory.super.getTooltip(tooltip, recipe, recipeSlotsView, mouseX, mouseY);
         if (pointInBox(mouseX, mouseY, 49, 12, 18, 35)) {
             ResourceLocation targetDimension = recipe.value().getDimension();
