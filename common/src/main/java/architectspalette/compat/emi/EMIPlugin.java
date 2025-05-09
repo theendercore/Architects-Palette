@@ -6,6 +6,7 @@ import architectspalette.content.blocks.CageLanternBlock;
 import architectspalette.core.integration.VerticalSlabs;
 import architectspalette.core.registry.APBlocks;
 import architectspalette.core.registry.APRecipes;
+import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
@@ -20,6 +21,7 @@ import java.util.List;
 import static architectspalette.core.APConstants.rl;
 import static architectspalette.core.registry.APBlocks.*;
 
+@EmiEntrypoint
 public class EMIPlugin implements EmiPlugin {
     static final EmiStack ICON = EmiStack.of(APBlocks.WARPSTONE.get());
     public static final EmiRecipeCategory WARPING_CATEGORY = new EmiRecipeCategory(rl("warping"), ICON, ICON);
