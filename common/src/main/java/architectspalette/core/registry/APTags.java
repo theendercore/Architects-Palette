@@ -18,6 +18,7 @@ public class APTags {
     public static final TagKey<Block> ABYSSALINE = blockTag("abyssaline");
     public static final TagKey<Block> HADALINE = blockTag("hadaline");
     public static final TagKey<Block> CAGE_LANTERNS = blockTag("cage_lanterns");
+    public static final TagKey<Block> BOARDS = blockTag("boards");
 
     public static final TagKey<Item> NUBS_ITEM = itemTag("nubs");
     public static final TagKey<Item> COPPER_NUBS_ITEM = itemTag("copper_nubs");
@@ -25,6 +26,7 @@ public class APTags {
     public static final TagKey<Item> ABYSSALINE_ITEM = itemTag("abyssaline");
     public static final TagKey<Item> HADALINE_ITEM = itemTag("hadaline");
     public static final TagKey<Item> WITHERED_BONES = itemTag("withered_bones");
+    public static final TagKey<Item> BOARDS_ITEM = itemTag("boards");
 
 
 

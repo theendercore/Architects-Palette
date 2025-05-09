@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -17,7 +16,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import static architectspalette.core.registry.APItems.WITHERED_BONE;
-import static architectspalette.core.util.KeyMaker.stringTag;
 
 public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     public APItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, APBlockTagProvider btp) {
@@ -51,8 +49,11 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
         copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
         copy(BlockTags.LEAVES, ItemTags.LEAVES);
 
+        // AP Tags
         copy(APTags.TWISTED_LOGS, APTags.TWISTED_LOGS_ITEM);
         copy(BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN);
+
+        copy(APTags.BOARDS, APTags.BOARDS_ITEM);
 
         copy(APTags.NUBS, APTags.NUBS_ITEM);
         copy(APTags.COPPER_NUBS, APTags.COPPER_NUBS_ITEM);
@@ -70,7 +71,7 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
     }
 
     private void miscModTags() {
-        getOrCreateTag(APTags.WITHERED_BONES).addOptionalTag(sTag("forge:bones/wither"));
+        getOrCreateTag(APTags.WITHERED_BONES, WITHERED_BONE).addOptionalTag(ModdedTags.BONES_WITHER);
     }
 
     private void compatabilityTags() {
@@ -83,9 +84,5 @@ public class APItemTagProvider extends FabricTagProvider.ItemTagProvider {
         var tag = getOrCreateTagBuilder(tagKey);
         Arrays.stream(suppliers).map(Supplier::get).forEach(tag::add);
         return tag;
-    }
-
-    private TagKey<Item> sTag(String string) {
-        return stringTag(Registries.ITEM, string);
     }
 }

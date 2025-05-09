@@ -63,8 +63,9 @@ public class APBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 case SLAB -> BlockTags.WOODEN_SLABS;
                 case VERTICAL_SLAB -> null; //(ender) does quark have wooden vertical slabs tag?
                 case STAIRS -> BlockTags.WOODEN_STAIRS;
-                case WALL -> null; //(ender) this is here for later
+                case WALL -> null; //(ender) this is here for later (I don't remember why this is here)
                 case FENCE -> BlockTags.WOODEN_FENCES;
+                case BASE-> APTags.BOARDS;
                 default -> null;
             };
             if (tag == null) return;

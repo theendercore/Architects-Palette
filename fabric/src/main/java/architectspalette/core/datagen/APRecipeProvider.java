@@ -1091,9 +1091,10 @@ public class APRecipeProvider extends FabricRecipeProvider {
         netherWarpingRecipe(exporter, UNOBTANIUM.get(), Items.NETHERITE_INGOT);
 
         netherWarpingRecipe(exporter, TWISTED_SAPLING.get(), ItemTags.SAPLINGS);
-        netherWarpingRecipe(exporter, TWISTED_PLANKS.get(), ItemTags.PLANKS);
-        netherWarpingRecipe(exporter, TWISTED_LOG.get(), ItemTags.LOGS);
         netherWarpingRecipe(exporter, TWISTED_LEAVES.get(), ItemTags.LEAVES);
+        netherWarpingRecipe(exporter, TWISTED_LOG.get(), ItemTags.LOGS);
+        netherWarpingRecipe(exporter, TWISTED_PLANKS.get(), ItemTags.PLANKS);
+        netherWarpingRecipe(exporter, TWISTED_BOARDS.get(), APTags.BOARDS_ITEM);
 
         netherWarpingRecipe(exporter, MOONSTONE.get(), SUNSTONE.get());
 

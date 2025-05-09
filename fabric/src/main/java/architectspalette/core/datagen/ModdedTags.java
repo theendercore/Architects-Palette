@@ -13,7 +13,7 @@ public interface ModdedTags {
     TagKey<Block> QUARK_VERTICAL_SLAB = blockTag("quark:vertical_slab");
     TagKey<Item> QUARK_VERTICAL_SLAB_ITEM = itemTag("quark:vertical_slab");
 
-    //Forge compatibility
+    //Neo compatibility
     TagKey<Block> STORAGE_BLOCKS_ENDER_PEARLS = blockTag("c:storage_blocks/ender_pearls");
     TagKey<Item> STORAGE_BLOCKS_ENDER_PEARLS_ITEM = itemTag("c:storage_blocks/ender_pearls");
     TagKey<Item> BONES_WITHER = itemTag("c:bones/wither");
