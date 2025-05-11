@@ -27,7 +27,7 @@ public class AbyssalineLampBlock extends RotatedPillarBlock implements IAbyssali
     }
 
     public static int getLightValue(BlockState state) {
-        return state.getValue(CHARGED) ? 16 : 0;
+        return state.getValue(CHARGED) ? 15 : 0;
     }
 
     @Override

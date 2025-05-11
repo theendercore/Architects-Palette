@@ -20,7 +20,8 @@ import static architectspalette.core.registry.APBlocks.*;
 public class APBlockProperties {
     public static final Block.Properties ABYSSALINE = AbyssalineBase();
     public static final Block.Properties ABYSSALINE_LAMP = AbyssalineBase()
-            .lightLevel(AbyssalineLampBlock::getLightValue);
+            .lightLevel(AbyssalineLampBlock::getLightValue)
+            .sound(SoundType.GLASS);
     public static final Block.Properties CHISELED_ABYSSALINE = AbyssalineBase()
             .lightLevel(ChiseledAbyssalineBlock::getLightValue);
     public static final Block.Properties ABYSSALINE_NUB = AbyssalineBase()
@@ -84,7 +85,7 @@ public class APBlockProperties {
             .sound(SoundType.STONE);
     public static final BlockBehaviour.Properties ORACLE_LAMP = BlockBehaviour.Properties.ofFullCopy(Blocks.PURPUR_BLOCK)
             .sound(SoundType.STONE)
-            .lightLevel((state) -> 16);
+            .lightLevel((state) -> 15);
     public static final BlockBehaviour.Properties CEREBRAL = BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE_BRICKS)
             .sound(SoundType.DEEPSLATE_TILES);
     public static final BlockBehaviour.Properties SUNSTONE = BlockBehaviour.Properties.ofFullCopy(Blocks.BASALT)
